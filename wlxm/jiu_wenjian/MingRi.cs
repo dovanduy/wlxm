@@ -8,7 +8,7 @@ using LuciferSrcipt;
 using System.Threading;
 namespace fuzhu
 {
-    public class MingRi:youxi
+    public class MingRi
     {
         private myDm mf;
         private int dqinx;

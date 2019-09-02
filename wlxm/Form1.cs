@@ -21,7 +21,7 @@ namespace wlxm
         /// <summary>
         /// 辅助的版本
         /// </summary>
-        private static int fuzhuBanben =2;
+        private static int fuzhuBanben =3;
         
         /// <summary>
         /// dict 游戏名称和包名存储
@@ -158,7 +158,7 @@ namespace wlxm
             //int t = MyLdcmd.addSimulator();
             myDm mf = new myDm();
             Jingjie ln = new Jingjie(mf, dqinx);
-            ln.zhuxian();
+            ln.zhuxian("");
             MyFuncUtil.mylogandxianshi("结束");
             
         }
@@ -311,7 +311,7 @@ namespace wlxm
                 mf.captureBmp(jubing, @"c:\mypic_save\", filename, x1, y1, x2, y2);
                 if (mf.IsFileExist(@"c:\mypic_save\" + filename) == 1)
                 {
-                    string r = yq.generalBasicDemo(1, @"c:\mypic_save\" + filename);
+                    string r = yq.generalBasicShuziDemo(1, @"c:\mypic_save\" + filename);
                     if (r != null && r != "")
                     {
                         qushu = int.Parse(r);
@@ -387,10 +387,10 @@ namespace wlxm
                 
                 myDm dm = new myDm();
                 MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "降低cpu");
-                MyLdcmd.myDownCpu(dqinx, 50);
+                //MyLdcmd.myDownCpu(dqinx, 50);
                 Jingjie yq = new Jingjie(dm, dqinx, dizhi);
                 
-                yq.zhuxian();
+                yq.zhuxian("");
                 Thread.Sleep(1000 * 60 * 60);
                 
                 var js = MyFuncUtil.GetTimestamp();
@@ -575,14 +575,15 @@ namespace wlxm
                 Thread.Sleep(1000 * 10); 
                 myDm dm = new myDm();
                 Jingjie yq = new Jingjie(dm, dqinx, dizhi);
-                tmpBool = yq.denglu(15);
+                string name = "";
+                tmpBool = yq.denglu(15,out name);
                 if (!tmpBool)
                 {
                     tmpBoolString.Append("登录环节出错");
                     Thread.Sleep(1000 * 60 * 3);
                     continue;
                 }                
-                yq.zhuxian();
+                yq.zhuxian(name);
                 //yq.quitdq();
                 Thread.Sleep(1000 * 60*60);//停住1小时
                 cishu++;

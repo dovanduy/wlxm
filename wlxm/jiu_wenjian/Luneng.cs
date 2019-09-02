@@ -1442,7 +1442,7 @@ namespace fuzhu1
                 }
             }
             ZhangHao zhanghao = new ZhangHao();
-            zhanghao.tuichusaveNameAndPas(this._dqinx, WriteLog.getMachineName(),dengji,zuanshi,qiangzhequan);
+            zhanghao.tuichusaveNameAndPas("",this._dqinx, WriteLog.getMachineName(),dengji,zuanshi,qiangzhequan);
         }
 
         private void quqiangzhequan(out int qzs,FuHeSanDian qz){

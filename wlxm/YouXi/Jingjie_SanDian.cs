@@ -327,7 +327,7 @@ namespace fuzhu
 	            {  422,   14, 0xe3b76e},
 	            {  646,   44, 0xf1c362},
             });
-            ktfh1 = new FuHeSanDian("福利-升级有礼", ktsd1, 111, 195, "  471,  161, 0xc48141  470,  244, 0xc38545");
+            ktfh1 = new FuHeSanDian("福利-升级有礼", ktsd1, 111, 195, "  471,  161, 0xc48141  470,  244, 0xc38545  642,   43");
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
@@ -407,6 +407,82 @@ namespace fuzhu
             ktfh1 = new FuHeSanDian("引导-明日登录送第3天送啥", ktsd1, 600, 126);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
+
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  371,  157, 0xfe9634},
+	{  304,  291, 0xffeb83},
+	{  450,   58, 0xbababa},
+});
+            ktfh1 = new FuHeSanDian("引导-关卡3-5", ktsd1, 373, 191);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  295,   96, 0xdee4ef},
+	{  211,  251, 0x709fec},
+	{  470,  247, 0xbbd0e5},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-战斗失败", ktsd1, 350, 365);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  370,  240, 0xd6c7b5},
+	{  501,  250, 0xa49f5a},
+	{  473,   48, 0xfe9435},
+});
+            ktfh1 = new FuHeSanDian("引导-进入精英关卡", ktsd1, 645, 353);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{   80,  188, 0xf7e3cf},
+	{  203,  199, 0xcebf49},
+	{  170,  134, 0x000810},
+});
+            ktfh1 = new FuHeSanDian("引导-进入精英关卡1", ktsd1, 170, 130);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{   72,    8, 0x90a4b6},
+	{  452,  247, 0xf8d8c6},
+	{  572,  338, 0xe2e2e3},
+});
+            ktfh1 = new FuHeSanDian("引导-进入精英关卡1开始", ktsd1, 641, 337);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  473,  129, 0xe7d747},
+	{  390,  126, 0x292829},
+	{  188,  117, 0xffba52},
+});
+            ktfh1 = new FuHeSanDian("引导-精英关获得材料", ktsd1, 648, 14);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  143,  276, 0x292829},
+	{  194,  271, 0xb0a84c},
+	{  276,  279, 0xe6d543},
+});
+            ktfh1 = new FuHeSanDian("引导-黑猫提示获得材料", ktsd1, 648, 14);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  180,  148, 0xd1c3bb},
+	{  311,  227, 0x010911},
+	{  561,  356, 0x213356},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-精英关卡2或打普通关卡", ktsd1, 648, 14);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+
+
 
 
 
@@ -1192,7 +1268,7 @@ namespace fuzhu
 	            {  629,  379, 0xffffa6},
 	            {  651,  336, 0x191d22},
             });
-            ss = new FuHeSanDian("引导-进击--目的开启每日奖励", ktsd1, 641, 344);
+            ss = new FuHeSanDian("特殊引导-进击--目的开启每日奖励", ktsd1, 641, 344);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ss);
 

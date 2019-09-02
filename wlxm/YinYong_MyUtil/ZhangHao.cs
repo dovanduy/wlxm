@@ -204,22 +204,20 @@ namespace MyUtil
             }
         }
 
-        public void tuichusaveNameAndPas(int dqindex,string pcname,int dengji,int zuanshi,int qiangzhequan)
+        public void tuichusaveNameAndPas(string name,int dqindex,string pcname,int dengji,int zuanshi,int qiangzhequan)
         {
             SqlHelp sqh = SqlHelp.GetInstance();
             lock (obj)
             {
                 try
                 {
-                    DataTable dt = sqh.getAll("select top 1 name from zhanghao where dqindex = " + dqindex
-                        + " and dengluzhong='Y' and pcname='"
-                        + pcname + "'");
+                    DataTable dt = sqh.getAll("select top 1 name from zhanghao where name = '" + name+
+                         "'");
                     if (dt.Rows.Count > 0)
                     {
-                        string name = (string)dt.Rows[0][0];
                         sqh.update("update zhanghao set dengluzhong='N' , xgsj='"
                         + DateTime.Now.ToString("yyyy-MM-dd") + "' , dengji="
-                        +dengji+", zuanshi ="+zuanshi+" , qiangzhequan="+qiangzhequan
+                        +dengji+", zuanshi ="+zuanshi+" , qiangzhequan="+qiangzhequan+" , dengluzhong='N' "
                         +" where name='"+ name+"'");
                     }
                     else

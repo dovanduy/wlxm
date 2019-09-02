@@ -9,7 +9,7 @@ using System.Threading;
 using Newtonsoft.Json.Linq;
 namespace fuzhu
 {
-    public class MingRi_Sort:youxi
+    public class MingRi_Sort
     {
         private myDm mf;
         private int dqinx;

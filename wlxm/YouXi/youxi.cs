@@ -7,10 +7,10 @@ namespace fuzhu
 {
     interface youxi
     {
-        Boolean denglu(int fenzhong);
+        Boolean denglu(int fenzhong,out string name);
         Boolean zhuce(int fz);
         void ceshi();
-        void zhuxian();
+        void zhuxian(string name);
         void richang();
         void jiangli();
         void fuben();
