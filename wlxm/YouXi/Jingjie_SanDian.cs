@@ -369,6 +369,32 @@ namespace fuzhu
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
+            ktsd1 = new SanDian(new int[3, 3]{
+	            {  444,  252, 0xce964a},
+	            {  483,  110, 0xaecdd9},
+	            {  509,   84, 0x664520},
+            });
+            ktfh1 = new FuHeSanDian("引导-上阵人数不足", ktsd1, 283, 250);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  506,  179, 0xf7d7ce},
+	{  509,  184, 0xedd7ca},
+	{  536,  165, 0xbbc4e3},
+});
+            ktfh1 = new FuHeSanDian("引导-4角色上阵", ktsd1, 511, 171);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+
+
+
+
+
+
+
             //志拓
             ktsd1 = new SanDian(new int[3, 3]{
 	            {  152,   88, 0xffc559},
