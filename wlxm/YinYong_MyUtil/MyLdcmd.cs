@@ -582,6 +582,18 @@ namespace MyUtil
             }
         }
 
+        public static void myDownCpu(int index, int rate, string dizhi = @"d:\ChangZhi\dnplayer2\")
+        {
+            MyLdcmd myldcmd = MyLdcmd.GetObject(dizhi);
+            myldcmd.SimulatorPath = ld.SimulatorPath;
+            string a="";
+            lock (obj)
+            {
+                a=ld.Downcpu(index, rate);
+            }
+            WriteLog.WriteLogFile(index + "", a);
+        }
+
         public static void myRemoveAll(string dizhi)
         {
             MyLdcmd myldcmd = MyLdcmd.GetObject(dizhi);

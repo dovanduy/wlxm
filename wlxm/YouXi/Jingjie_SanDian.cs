@@ -314,20 +314,58 @@ namespace fuzhu
             _list_yqfhsandian.Add(ktfh1);
 
             ktsd1 = new SanDian(new int[3, 3]{
-	            {   67,   15, 0x99afc3},
-	            {  163,  328, 0xbe7f46},
-	            {  496,  297, 0xfbc371},
-            });
+	{  185,  338, 0xc69466},
+	{  386,  209, 0x252e5e},
+	{  506,  267, 0xbc7588},
+});
             ktfh1 = new FuHeSanDian("邮件-搞邮件", ktsd1, 185, 335, "一键领取");
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
             ktsd1 = new SanDian(new int[3, 3]{
-	            {   32,   41, 0x8a4b35},
-	            {  645,   45, 0xefc25d},
-	            {  112,  196, 0x606b90},
+	            {   36,   41, 0xd9a177},
+	            {  422,   14, 0xe3b76e},
+	            {  646,   44, 0xf1c362},
             });
-            ktfh1 = new FuHeSanDian("福利-升级有礼", ktsd1, -1, -1, "  471,  161, 0xc48141  470,  244, 0xc38545");
+            ktfh1 = new FuHeSanDian("福利-升级有礼", ktsd1, 111, 195, "  471,  161, 0xc48141  470,  244, 0xc38545");
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	            {   24,  212, 0xe17539},
+	            {   48,  202, 0xb6b7c0},
+	            {  648,   13, 0xc5d8f7},
+            });
+            ktfh1 = new FuHeSanDian("引导-第一次出现花", ktsd1, 645, 12);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	            {  187,  206, 0xfe9435},
+	            {  130,  193, 0xfcdf68},
+	            {  290,  294, 0x21284a},
+            });
+            ktfh1 = new FuHeSanDian("引导-主线3-3", ktsd1, 206, 241);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	            {  323,  105, 0xb3cafb},
+	            {  299,  101, 0xbbd2f7},
+	            {  383,  108, 0xa7c3f7},
+            });
+            ktfh1 = new FuHeSanDian("引导-获取物品", ktsd1, 359, 360);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{   75,   86, 0xe77539},
+	{  419,   67, 0xffe46f},
+	{  190,   69, 0xffd55d},
+});
+            ktfh1 = new FuHeSanDian("引导-停在角色界面四个角色", ktsd1, 649, 12);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
@@ -972,7 +1010,7 @@ namespace fuzhu
 	{   46,  357, 0x92acca},
 
             });
-            ss = new FuHeSanDian("引导-升5级", ktsd1, 559, 342);
+            ss = new FuHeSanDian("特殊引导-升5级", ktsd1, 559, 342);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ss);
 
@@ -1131,6 +1169,15 @@ namespace fuzhu
 	{  504,  187, 0x50c2af},
             });
             ss = new FuHeSanDian("引导-已上阵---开战", ktsd1, 567, 361);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ss);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	            {  498,  121, 0xfbd567},
+	            {  666,  114, 0x21c7ad},
+	            {  527,  174, 0x22bdab},
+            });
+            ss = new FuHeSanDian("引导-已上阵---开战2", ktsd1, 567, 361);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ss);
 

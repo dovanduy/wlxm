@@ -1215,13 +1215,15 @@ namespace xDM
                     rs = true;
                     break;
                 }
-                if ((mohuByLei(sd) != 1) && ((js - ks) / 1000 > 2))
+                if (mohuByLei(sd) != 1)
                 {
                     break;
                 }
             }
             return rs;
         }
+
+        
 
         public int jingque(int mx1, int my1, int myanse1, int mx2=-1, int my2=-1, int myanse2=-1, int mx3=-1, int my3=-1, int myanse3=-1)
         {

@@ -238,14 +238,14 @@ namespace fuzhu
                     if (mf.mohuByLeiBool(xq.Sd))
                     {
                         WriteLog.WriteLogFile(this._mnqName, xq.Name);
-                        mf.mytap(this._jubing, 87, 141);
+                        mf.mytap(this._jubing, 87, 178);
                     }
                 }
                 FuHeSanDian xq1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-服务器选区界面");
                 if (xuanqu == 1 && mf.mohuByLeiBool(xq1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, xq1.Name);
-                    mf.mytap(this._jubing, 87, 141);
+                    mf.mytap(this._jubing, 87, 178);
                     mf.mydelay(2000, 4000);
                 }
                 FuHeSanDian qu1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-服务器选1区");
@@ -442,14 +442,14 @@ namespace fuzhu
                     if (mf.mohuByLeiBool(xq.Sd))
                     {
                         WriteLog.WriteLogFile(this._mnqName, xq.Name);
-                        mf.mytap(this._jubing, 87, 141);
+                        mf.mytap(this._jubing, 87, 178);
                     }
                 }
                 FuHeSanDian xq1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-服务器选区界面2");
                 if (xuanqu == 1 && mf.mohuByLeiBool(xq1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, xq1.Name);
-                    mf.mytap(this._jubing, 87, 141);
+                    mf.mytap(this._jubing, 87, 178);
                     mf.mydelay(2000, 4000);
                 }
                 FuHeSanDian qu1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-服务器选1区2");
@@ -504,6 +504,8 @@ namespace fuzhu
         private void zhituozhuxian() {
             long ks = MyFuncUtil.GetTimestamp();
             int yici = 0;
+            int youjian = 0;
+            int fuli = 0;
             while (true)
             {
                 if (yici == 0) {
@@ -556,29 +558,53 @@ namespace fuzhu
                     WriteLog.WriteLogFile(this._mnqName, sz.Name + x + " " + y);
                     mf.mytap(this._jubing, x, y);
                 }
-
+                sz = Jingjie_DuoDian.GetObject().findFuHeDuodianByName("跳过2");
+                mf.myqudianqusezuobiaoByLeiWuJubing(sz.Dz, out x, out y);
+                if (x != -1 && y != -1)
+                {
+                    WriteLog.WriteLogFile(this._mnqName, sz.Name + x + " " + y);
+                    mf.mytap(this._jubing, x, y);
+                }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面");
-                if (mf.mohuXunHuanJianChi(ktsd1.Sd,20))
+                if (youjian==0 && mf.mohuXunHuanJianChi(ktsd1.Sd, 20))
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
                     mf.mytap(this._jubing,661,173);
-                    mf.mydelay(200, 400);
+                    mf.mydelay(2000, 4000);
                     ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("邮件-搞邮件");
                     if (mf.mohuXunHuanJianChi(ktsd1.Sd, 20))
                     {
-                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                        compareSandianAndtap(ktsd1, 2000, () => mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy),
+                        () =>
+                        {
+                            mf.mytap(this._jubing, 646, 16);
+                            youjian++;
+                        }); 
                     }
+                    
                 }
-
-                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面");
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("邮件-搞邮件");
                 if (mf.mohuXunHuanJianChi(ktsd1.Sd, 20))
+                {
+                    compareSandianAndtap(ktsd1, 2000, () => mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy),
+                        () =>
+                        {
+                            mf.mytap(this._jubing, 646, 16);
+                            youjian++;
+                        });                    
+                    
+                }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面");
+                if (fuli<2 && mf.mohuXunHuanJianChi(ktsd1.Sd, 20))
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
                     mf.mytap(this._jubing, 569,48);
-                    mf.mydelay(200, 400);
+                    mf.mydelay(2000, 4000);
                     ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("福利-升级有礼");
                     if (mf.mohuXunHuanJianChi(ktsd1.Sd, 20))
                     {
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                        mf.mydelay(2000, 3000);
                         if (mf.mohu(471, 161, 0xc48141) == 1)
                         {
                             mf.mytap(this._jubing, 471, 161);
@@ -587,8 +613,33 @@ namespace fuzhu
                         {
                             mf.mytap(this._jubing, 470, 244);
                         }
+                        fuli++;
                     }
                 }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("福利-升级有礼");
+                if (mf.mohuXunHuanJianChi(ktsd1.Sd, 20))
+                {
+                    mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                    mf.mydelay(2000, 3000);
+                    if (mf.mohu(471, 161, 0xc48141) == 1)
+                    {
+                        mf.mytap(this._jubing, 471, 161);
+                    }
+                    if (mf.mohu(470, 244, 0xc38545) == 1)
+                    {
+                        mf.mytap(this._jubing, 470, 244);
+                    }
+                    fuli++;
+                }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-升5级");
+                if (mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    compareSandianAndtap(ktsd1, 2000, () => mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy),
+                        () =>
+                        {
+                           mf.mytap(this._jubing, 646, 16);
+                        });
+                };
             }
         }
 
@@ -720,6 +771,10 @@ namespace fuzhu
         {
             WriteLog.WriteLogFile(this._mnqName, "比较画面 "+fhsd.Name);
             thentap1();
+            if (!mf.mohuByLeiBool(fhsd.Sd))
+            {
+                return;
+            }
             mf.mydelay(ms, ms + 1000);
             if (mf.mohuByLeiBool(fhsd.Sd))
             {

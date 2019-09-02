@@ -158,10 +158,7 @@ namespace wlxm
             //int t = MyLdcmd.addSimulator();
             myDm mf = new myDm();
             Jingjie ln = new Jingjie(mf, dqinx);
-            Process p = new Process();
-            p.StartInfo.FileName = @"C:\Windows\System32\msiexec.exe";
-            p.StartInfo.Arguments = "/x {80AA2884-73FE-438A-9DDF-70DA32D20416} /quiet /norestart";
-            p.Start(); 
+            ln.zhuxian();
             MyFuncUtil.mylogandxianshi("结束");
             
         }
@@ -326,12 +323,20 @@ namespace wlxm
         private void ceshi_button_Click(object sender, EventArgs e)
         {
             apkName = dict["一拳超人"];
-            int[] yunxingIndex = new int[] {0,1,2,3};            
+            int[] yunxingIndex = null;
+            if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
+            {
+                yunxingIndex = new int[] { 1, 2, 3, 4, 5 };//, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19
+            }
+            else
+            {
+                yunxingIndex = new int[] { 1, 2, 3, };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
+            } 
             string dizhi = null;
             string path = null;
             string seed = null;
             string a_b = "d";
-            MyLdcmd.RunDuokaiqi(a_b);
+            //MyLdcmd.RunDuokaiqi(a_b);
             MyFuncUtil.myqiehuancd(a_b, out dizhi, out path, out seed);            
             MyFuncUtil.mylogandxianshi("准备多线程测试");
             for (int j = 0; j < 5; j++)
@@ -378,54 +383,13 @@ namespace wlxm
             for (int cs = 0; cs < xhcishu; cs++)
             {
                 var ks = MyFuncUtil.GetTimestamp();
-                bool temp = MyFuncUtil.myQuit(dqinx, dizhi);//关闭指定模拟器 dqinx
-                if (!temp)
-                {
-                    MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "关闭失败");
-                    Thread.Sleep(20000);
-                    continue;
-                }
-                //MyFuncUtil.mylogandxianshi("模拟器" + dqinx +"复原");
-                //MyLdcmd.myRestore(dqinx, seed, dizhi);
-                MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "改名");
-                MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
-                temp = MyFuncUtil.Launch(dqinx, dizhi);
-                if (!temp)
-                {
-                    MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "打开失败");
-                    Thread.Sleep(20000);
-                    continue;
-                }
-                Thread.Sleep(10000);
-                int i = MyFuncUtil.QiDongWanChengInx(a_b, dqinx, apkName);
-                if (i == -1)
-                {
-                    MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "打开app" + apkName + "失败");
-                    Thread.Sleep(20000);
-                    continue;
-                }
-                int width = -1, height = -1;
-                MyFuncUtil.myReSize(dqinx, out width, out height);
-                Thread.Sleep(1000 * 10);
+                
                 
                 myDm dm = new myDm();
+                MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "降低cpu");
+                MyLdcmd.myDownCpu(dqinx, 50);
                 Jingjie yq = new Jingjie(dm, dqinx, dizhi);
-                tmpBool = yq.denglu(10);
-                if (!tmpBool)
-                {
-                    tmpBoolString.Append("登录环节出错");
-                    Thread.Sleep(1000 * 60 * 5);
-                    continue;
-                }
-                int dengji = -1, xuanqu = -1;
-                tmpBool = yq.zhuce(10, out dengji, out xuanqu);
-                if (!tmpBool)
-                {
-                    tmpBoolString.Append("注册环节出错");
-                    continue;
-                }
-                //myDm dm = new myDm();
-                //YiQuan_Xin yq = new YiQuan_Xin(dm, dqinx, dizhi);
+                
                 yq.zhuxian();
                 Thread.Sleep(1000 * 60 * 60);
                 
@@ -446,9 +410,9 @@ namespace wlxm
             int dqinx = int.Parse(this.textBox1.Text);
             myDm mf = new myDm();
             Jingjie yq = new Jingjie(mf, dqinx, dizhi);
-            for (int i = 0; i < 0; i++)
+            for (int i = 0; i < 20; i++)
             {
-                /*foreach (FuHeDuoDian f in YiQuan_DuoDian.List_yqfhduodian)
+                foreach (FuHeDuoDian f in Jingjie_DuoDian.List_yqfhduodian)
                 {
                     int x = -1, y = -1;
                     mf.myqudianqusezuobiaoByLeiWuJubing(f.Dz, out x, out y);
@@ -459,7 +423,7 @@ namespace wlxm
                         mf.mydelay(1000, 2000);
                     }
                 }               
-                mf.mydelay(10, 200);*/
+                mf.mydelay(10, 200);
             }
             for (int i = 0; i < 10; i++)
             {
@@ -487,9 +451,9 @@ namespace wlxm
         {
             int[] yunxingIndex = null;
             if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong")) {
-                yunxingIndex = new int[] { 1, 2, 3, 4, 5 };//, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19
+                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };//, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19
             }else{
-                yunxingIndex = new int[] { 1, 2, 3, };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
+                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
             }
             string a_b = "d";            
             //qdinit(a_b);
@@ -536,7 +500,7 @@ namespace wlxm
         private void duoxiand(object dqind)
         {
             int a = (int)dqind;
-            duoxianxunhuan("d", a,20);
+            duoxianxunhuan("d", a,200);
             return;
         }
 
@@ -606,6 +570,8 @@ namespace wlxm
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + ",resize没成功");
                     continue;
                 }
+                MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "降低cpu");
+                MyLdcmd.myDownCpu(dqinx, 50);
                 Thread.Sleep(1000 * 10); 
                 myDm dm = new myDm();
                 Jingjie yq = new Jingjie(dm, dqinx, dizhi);

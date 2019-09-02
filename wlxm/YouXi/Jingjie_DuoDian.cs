@@ -50,6 +50,11 @@ namespace fuzhu
             FuHeDuoDian sz1 = new FuHeDuoDian("跳过", sz, -1, -1);
             _list_yqduodian.Add(sz);
             _list_yqfhduodian.Add(sz1);
+
+            sz = new DuoDianZhaoSe(0xb5d2e8, "-13|3|0xc3d6ea,-3|-3|0xbed7e9,0|6|0xb1d6e6,12|1|0xd1dee2,-18|5|0xc3d9e9,17|0|0xcad0d6", 90, 617, 1, 678, 23);
+            sz1 = new FuHeDuoDian("跳过2", sz, -1, -1);
+            _list_yqduodian.Add(sz);
+            _list_yqfhduodian.Add(sz1);
         }
         /// <summary>
         /// 单例模式====双层互锁
