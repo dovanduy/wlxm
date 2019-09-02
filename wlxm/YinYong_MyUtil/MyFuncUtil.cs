@@ -202,8 +202,8 @@ namespace MyUtil
         public static void myReSize(int index, out int width,out int height,string dizhi = @"d:\ChangZhi\dnplayer2\", string youxi = "luneng")
         {
             mylogandxianshi("模拟器" + index + "开始改位置");
-            int dqwidth = 1920;//1920 1024
-            int dqheight = 1080;//1080 768
+            int dqwidth = 2560;//1920 1024
+            int dqheight = 1440;//1080 768
             int yiquanw = 601;
             int yiquany = 338;
             if (youxi.Equals("luneng")) {
