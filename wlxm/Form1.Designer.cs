@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.gaotupian = new System.Windows.Forms.Button();
             this.lrzh = new System.Windows.Forms.Button();
             this.resizebutton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -42,7 +43,7 @@
             this.quanliucheng = new System.Windows.Forms.Button();
             this.ceshi_button = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.gaotupian = new System.Windows.Forms.Button();
+            this.chongfusandian = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +60,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.chongfusandian);
             this.tabPage1.Controls.Add(this.gaotupian);
             this.tabPage1.Controls.Add(this.lrzh);
             this.tabPage1.Controls.Add(this.resizebutton);
@@ -79,6 +81,16 @@
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // gaotupian
+            // 
+            this.gaotupian.Location = new System.Drawing.Point(196, 317);
+            this.gaotupian.Name = "gaotupian";
+            this.gaotupian.Size = new System.Drawing.Size(75, 23);
+            this.gaotupian.TabIndex = 16;
+            this.gaotupian.Text = "搞Pic图片";
+            this.gaotupian.UseVisualStyleBackColor = true;
+            this.gaotupian.Click += new System.EventHandler(this.gaotupian_Click);
+            // 
             // lrzh
             // 
             this.lrzh.Location = new System.Drawing.Point(22, 303);
@@ -91,7 +103,7 @@
             // 
             // resizebutton
             // 
-            this.resizebutton.Location = new System.Drawing.Point(285, 214);
+            this.resizebutton.Location = new System.Drawing.Point(292, 165);
             this.resizebutton.Name = "resizebutton";
             this.resizebutton.Size = new System.Drawing.Size(63, 23);
             this.resizebutton.TabIndex = 13;
@@ -101,7 +113,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(295, 166);
+            this.textBox1.Location = new System.Drawing.Point(382, 165);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(35, 21);
             this.textBox1.TabIndex = 12;
@@ -199,15 +211,15 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // gaotupian
+            // chongfusandian
             // 
-            this.gaotupian.Location = new System.Drawing.Point(196, 317);
-            this.gaotupian.Name = "gaotupian";
-            this.gaotupian.Size = new System.Drawing.Size(75, 23);
-            this.gaotupian.TabIndex = 16;
-            this.gaotupian.Text = "搞Pic图片";
-            this.gaotupian.UseVisualStyleBackColor = true;
-            this.gaotupian.Click += new System.EventHandler(this.gaotupian_Click);
+            this.chongfusandian.Location = new System.Drawing.Point(292, 214);
+            this.chongfusandian.Name = "chongfusandian";
+            this.chongfusandian.Size = new System.Drawing.Size(63, 23);
+            this.chongfusandian.TabIndex = 17;
+            this.chongfusandian.Text = "命名重复";
+            this.chongfusandian.UseVisualStyleBackColor = true;
+            this.chongfusandian.Click += new System.EventHandler(this.chongfusandian_Click);
             // 
             // Form1
             // 
@@ -241,6 +253,7 @@
         private System.Windows.Forms.Button resizebutton;
         private System.Windows.Forms.Button lrzh;
         private System.Windows.Forms.Button gaotupian;
+        private System.Windows.Forms.Button chongfusandian;
     }
 }
 

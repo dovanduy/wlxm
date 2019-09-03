@@ -656,12 +656,10 @@ namespace fuzhu
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
                     mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                 }
-                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-精英关卡2或打普通关卡");
-                if (mf.mohuByLeiBool(ktsd1.Sd))
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-关卡3-7");
+                if ((shibai == 0 || shibai == 1) && mf.mohuByLeiBool(ktsd1.Sd))
                 {
-                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name+" 此处退出了");
-                    mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
-                    jinji = 1;
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
                     break;
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-战斗失败");
@@ -671,8 +669,27 @@ namespace fuzhu
                     mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                     shibai++;
                 }
-                if (shibai >= 2) {
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面");
+                if (jinji == 1 && mf.mohuXunHuanJianChi(ktsd1.Sd, 20)) {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name + " "+jinji+" 此处退出了");
+                    break;
+                }
+                if (shibai >= 2)
+                {
                     WriteLog.WriteLogFile(this._mnqName, "失败两次,退出");
+                    break;
+                }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-关卡界面关闭");
+                if (shibai >= 2 && mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name + " " + jinji + " 此处退出了");
+                    jinji = 1;
+                    mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-账号被顶");
+                if (mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
                     break;
                 }
             }
@@ -899,13 +916,35 @@ namespace fuzhu
         
         public void quitdq(string name)
         {
+            WriteLog.WriteLogFile(this._mnqName, "进入到准备保存退出阶段");
+            long ks = MyFuncUtil.GetTimestamp();
+            FuHeSanDian fh = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面");
+            while (true) {
+                //mf.mytap(this._jubing, 466, 366);
+                long js = MyFuncUtil.GetTimestamp();
+                if ((js - ks) > 1000 * 20) {
+                    break;
+                }
+                fh = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面");
+                if (mf.mohuXunHuanJianChi(fh.Sd, 15)) {
+                    break;
+                }
+                fh = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-关卡界面");
+                if (mf.mohuXunHuanJianChi(fh.Sd, 15))
+                {
+                    break;
+                }
+            }
             int dengji = -1;
             int zuanshi = -1;
             int qiangzhequan = -1;
-            FuHeSanDian fh=Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面");
-            qushufrombaidu(out zuanshi,fh,531, 5, 574, 19);
-            if (!mf.mohuByLeiBool(fh.Sd)) {
-                string filename=this._dqinx+"退出时"+mf.GetTime()+".bmp";
+            fh=Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面");
+            qushufrombaidu(out zuanshi,fh,531, 5, 574, 19);            
+            FuHeSanDian fh2 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-关卡界面");
+            qushufrombaidu(out zuanshi, fh, 531, 5, 574, 19);
+            if (!mf.mohuByLeiBool(fh.Sd) && !mf.mohuByLeiBool(fh2.Sd))
+            {
+                string filename = this._dqinx + "退出时" + mf.GetTime() + ".bmp";
                 mf.captureBmp(this._jubing, @"c:\mypic_save", filename);
             }
             ZhangHao zhanghao = new ZhangHao();

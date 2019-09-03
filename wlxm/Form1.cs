@@ -326,7 +326,7 @@ namespace wlxm
             int[] yunxingIndex = null;
             if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
             {
-                yunxingIndex = new int[] { 1, 2, 3, 4, 5 };//, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19
+                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };//, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19
             }
             else
             {
@@ -451,7 +451,7 @@ namespace wlxm
         {
             int[] yunxingIndex = null;
             if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong")) {
-                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };//, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19
+                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };//, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19
             }else{
                 yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
             }
@@ -799,6 +799,18 @@ namespace wlxm
             
             var js = MyFuncUtil.GetTimestamp();
             MyFuncUtil.mylogandxianshi("初始化完毕,耗时" + MyFuncUtil.SecondToHour(js - ks));
+        }
+
+        private void chongfusandian_Click(object sender, EventArgs e)
+        {
+            WriteLog.WriteLogFile("", "测试开始");
+            List<string> a = Jingjie_SanDian.GetObject().findListShiFouChongMing();
+            foreach (string f in a)
+            {
+                WriteLog.WriteLogFile("",f);
+            }
+
+            WriteLog.WriteLogFile("", "测试结束");
         }
 
         
