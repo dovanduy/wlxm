@@ -25,11 +25,20 @@ namespace fuzhu
             _list_yqfhsandian.Add(ktfh1);
 
             ktsd1 = new SanDian(new int[3, 3]{
-	            {  166,  105, 0xf4c51f},
-	            {   91,   83, 0x4096e8},
-	            {  469,   38, 0xcbcdd0},
+	            {  134,  150, 0xf8ce21},
+	            {  119,  205, 0xd2d3d4},
+	            {  338,   14, 0xffffff},
             });
-            ktfh1 = new FuHeSanDian("雷电首页截图-路人", ktsd1);
+            ktfh1 = new FuHeSanDian("雷电首页截图-路人", ktsd1,-1,-1,"最小手机模式用");
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	            {  316,  152, 0xf4c51f},
+	            {  143,  155, 0x20739a},
+	            {  873,   69, 0x9ca0a6},
+            });
+            ktfh1 = new FuHeSanDian("雷电首页截图-平板", ktsd1, -1, -1, "新建平板模式用");
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
         }

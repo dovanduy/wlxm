@@ -162,35 +162,53 @@ namespace fuzhu
                     int yici0 = 0;
                     long ks0 = MyFuncUtil.GetTimestamp();
                     int jci = 0;
+                    int tiaoci = 0;
                     while (true)
                     {
                         if (yici0 == 0)
                         {
                             WriteLog.WriteLogFile(this._mnqName, yk.Name + " 识别换为自己录入");
                             yici0 = 1;
-                        }                        
-                        zh.generateNameAndPas(this._dqinx, 7, out zhanghao, out pwd);
-                        mf.mydelay(2000, 4000);
-                        mf.mytap(this._jubing, 489, 127);//账号需要回退
-                        mf.mydelay(300, 600);
-                        mf.mytap(this._jubing, 386, 130);//点击两次
-                        mf.mydelay(100, 300);
-                        mf.mytap(this._jubing, 386, 130);
-                        mf.mydelay(100, 300);
-                        zh.shuruqianhuitui(mf, this._dqinx, this._jubing);
-                        mf.mydelay(2000, 4000);
-                        mf.mytap(this._jubing, 386, 130);
-                        mf.mydelay(100, 300);
-                        mf.SendString(this._jubing,zhanghao);
-                        mf.mydelay(2000, 4000);
-                        mf.myKeyPressChar(this._jubing, "tab");
-                        mf.mydelay(2000, 4000);
-                        mf.mytap(this._jubing, 420, 197);//点击密码框
-                        mf.SendString(this._jubing, pwd);
-                        mf.mydelay(2000, 4000);                        
-                        mf.mytap(this._jubing, 346, 263);//点击注册
-                        mf.mydelay(4000, 6000);
-                        if (!mf.mohuXunHuanJianChi(yk.Sd,60))
+                        }
+                        yk = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊存账号-用户名密码界面");
+                        if (xuanqu == 0 && mf.mohuByLeiBool(yk.Sd))
+                        {
+                            WriteLog.WriteLogFile(this._mnqName,"当前界面为"+yk.Name);
+                            zh.generateNameAndPas(this._dqinx, 7, out zhanghao, out pwd);
+                            mf.mydelay(2000, 4000);
+                            mf.mytap(this._jubing, 489, 127);//账号需要回退
+                            mf.mydelay(300, 600);
+                            mf.mytap(this._jubing, 386, 130);//点击两次
+                            mf.mydelay(100, 300);
+                            mf.mytap(this._jubing, 386, 130);
+                            mf.mydelay(100, 300);
+                            zh.shuruqianhuitui(mf, this._dqinx, this._jubing);
+                            mf.mydelay(2000, 4000);
+                            mf.mytap(this._jubing, 386, 130);
+                            mf.mydelay(100, 300);
+                            mf.SendString(this._jubing, zhanghao);
+                            mf.mydelay(2000, 4000);
+                            mf.myKeyPressChar(this._jubing, "tab");
+                            mf.mydelay(2000, 4000);
+                            mf.mytap(this._jubing, 420, 197);//点击密码框
+                            mf.SendString(this._jubing, pwd);
+                            mf.mydelay(2000, 4000);
+                            mf.mytap(this._jubing, 346, 263);//点击注册
+                            mf.mydelay(9000, 18000);
+                        }
+                        foreach (FuHeSanDian fh in ls)
+                        {
+                            if (mf.mohuByLeiBool(fh.Sd))
+                            {
+                                WriteLog.WriteLogFile(this._mnqName, fh.Name);
+                                if (fh.Zhidingx != -1 && fh.Zhidingy != -1)
+                                {
+                                    mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                                    tiaoci++;
+                                } 
+                            }
+                        }
+                        if (!mf.mohuXunHuanJianChi(yk.Sd,60) && tiaoci>1)
                         {
                             WriteLog.WriteLogFile(this._mnqName, yk.Name + "成功" + zhanghao + " " + pwd);
                             WriteLog.WriteLogFile(this._mnqName, yk.Name + "注册成功,注册页面不见");
@@ -198,7 +216,7 @@ namespace fuzhu
                             xuanqu = 1;
                             break;
                         }
-                        else
+                        if (mf.mohuXunHuanJianChi(yk.Sd, 60))
                         {
                             WriteLog.WriteLogFile(this._mnqName, "账号可能已被占用"+jci);
                         }

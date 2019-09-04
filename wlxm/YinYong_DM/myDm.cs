@@ -68,7 +68,92 @@ namespace xDM
             mydm.LeftUp();
             mydelay(10, 120);
         }
+        /// <summary>
+        /// 不受边界的限制
+        /// </summary>
+        /// <param name="sd"></param>
+        /// <param name="sim"></param>
+        /// <returns></returns>
+        public bool mohuByLeiBool_duokai(SanDian sd, int sim = 90)
+        {
+            bool tmp = false;
+            bool tmp1 = this.jingqueByLeiBool(sd);
+            if (tmp1 == true)
+            {
+                return true;
+            }
+            int ox = -1, oy = -1;
+            myqudianqudanse_duokai(sd.Myanse1, sim, sd.Mx1, sd.My1, sd.Mx1 + 1, sd.My1 + 1, out ox, out oy);
+            int rs1 = -1;
+            if (ox != -1 && oy != -1)
+            {
+                rs1 = 1;
+            }
+            int rs2 = -1;
+            if (sd.Mx2 != -1)
+            {
+                myqudianqudanse_duokai(sd.Myanse2, sim, sd.Mx2, sd.My2, sd.Mx2 + 1, sd.My2 + 1, out ox, out oy);
+                if (ox != -1 && oy != -1)
+                {
+                    rs2 = 1;
+                }
+            }
+            int rs3 = -1;
+            if (sd.Mx3 != -1)
+            {
+                myqudianqudanse_duokai(sd.Myanse3, sim, sd.Mx3, sd.My3, sd.Mx3 + 1, sd.My3 + 1, out ox, out oy);
+                if (ox != -1 && oy != -1)
+                {
+                    rs3 = 1;
+                }
+            }
+            if ((rs1 == 1) && (rs2 == 1) && (rs3 == 1))
+            {
+                return true;
+            }
+            if ((rs1 == 1) && (rs2 == 1) && (sd.Myanse3 == -1))
+            {
+                return true;
+            }
+            if ((rs1 == 1) && (sd.Myanse2 == -1) && (sd.Myanse3 == -1))
+            {
+                return true;
+            }
+            return tmp;
+        }
 
+        /// <summary>
+        /// 取点取单色直接返回坐标无句柄
+        /// </summary>
+        /// <param name="fir"></param>
+        /// <param name="off"></param>
+        /// <param name="sim"></param>
+        /// <param name="x0"></param>
+        /// <param name="y0"></param>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <returns></returns>
+        public void myqudianqudanse_duokai(Int32 fir, int sim, int x0, int y0, int x1, int y1, out int ox, out int oy)
+        {
+
+            string result = "-1|-1";
+            string firstColor = fir.ToString("X");
+            double isim = sim * 0.01;
+            ox = -1;
+            oy = -1;           
+            result = mydm.FindColorE(x0, y0, x1, y1, firstColor, isim, 1);
+            string[] a1 = result.Split('|');
+
+            if (int.Parse(a1[0]) == -1)
+            {
+                return;
+            }
+            if (int.Parse(a1[0]) != -1)
+            {
+                ox = int.Parse(a1[0]);
+                oy = int.Parse(a1[1]);
+            }
+        }
         /// <summary>
         /// 鼠标左键点击 x y坐标
         /// </summary>

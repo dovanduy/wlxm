@@ -93,26 +93,24 @@ namespace MyUtil
         }
  
         public static void createDirIfNotExist(string a="d") {
-            if (a.ToLower().Equals("c")) {
-                if (!Directory.Exists(@"c:\mypic_save\"))//如果不存在就创建file文件夹　　             　　              
-                {
-                    Directory.CreateDirectory(@"c:\mypic_save\");
-                }
-            }
-            if (a.ToLower().Equals("d"))
+            
+            if (!Directory.Exists(@"c:\mypic_save\"))//如果不存在就创建file文件夹　　             　　              
             {
-                if (!Directory.Exists(@"d:\mypic_save\"))//如果不存在就创建file文件夹　　             　　              
-                {
-                    Directory.CreateDirectory(@"d:\mypic_save\");
-                }
+                Directory.CreateDirectory(@"c:\mypic_save\");
             }
-            if (a.ToLower().Equals("d"))
+           
+            
+            if (!Directory.Exists(@"d:\mypic_save\"))//如果不存在就创建file文件夹　　             　　              
             {
-                if (!Directory.Exists(@"d:\lunengpic\"))//如果不存在就创建file文件夹　　             　　              
-                {
-                    Directory.CreateDirectory(@"d:\lunengpic\");
-                }
+                Directory.CreateDirectory(@"d:\mypic_save\");
             }
+           
+            
+            if (!Directory.Exists(@"d:\lunengpic\"))//如果不存在就创建file文件夹　　             　　              
+            {
+                Directory.CreateDirectory(@"d:\lunengpic\");
+            }
+            
             if (a.ToLower().Equals("d"))
             {
                 if (!Directory.Exists(@"c:\mypic_save\"))//如果不存在就创建file文件夹　　             　　              
@@ -291,6 +289,7 @@ namespace MyUtil
 
         public static bool lurenResizeOk(int index)
         {
+            WriteLog.WriteLogFile(index + "", "改变窗口位置--开始");
             string dizhi = @"d:\ChangZhi\dnplayer2\";
             bool t = false;
             long ksjs = GetTimestamp();
@@ -311,7 +310,7 @@ namespace MyUtil
             WriteLog.WriteLogFile(index + "", "当前width,height" + width + "," + height + " 改变位置外框" + (lprect.Right - lprect.Left) + " " + (lprect.Bottom - lprect.Top) + "，内框" + (rprect.Right - rprect.Left) + " " + (rprect.Bottom - rprect.Top));
             if ((lprect.Right - lprect.Left) == width && (lprect.Bottom - lprect.Top) == height)
             {
-                WriteLog.WriteLogFile(index + "", "改变位置外框" + (lprect.Right - lprect.Left) + " " + (lprect.Bottom - lprect.Top) + "，内框" + (rprect.Right - rprect.Left) + " " + (rprect.Bottom - rprect.Top));
+                WriteLog.WriteLogFile(index + "", "改变位置外框成功" + (lprect.Right - lprect.Left) + " " + (lprect.Bottom - lprect.Top) + "，内框" + (rprect.Right - rprect.Left) + " " + (rprect.Bottom - rprect.Top));
                 t = true;
                 return t;
             }
@@ -336,6 +335,7 @@ namespace MyUtil
                         myReSize(index, out width, out height);
                     }
                     ksjs = GetTimestamp();
+                    WriteLog.WriteLogFile(index + "", "30s resize一次");
                 }
                 if ((js - ks) > 10 * 60 * 1000)
                 {
@@ -344,6 +344,24 @@ namespace MyUtil
                 }
             }
             return t;
+        }
+
+        public static void getWindowSize(int index,out int width,out int height)
+        {
+            string dizhi = @"d:\ChangZhi\dnplayer2\";
+            width = -1;
+            height = -1;
+            int jubing = MyLdcmd.getDqmoniqiWaiCengJuBingByIndex(index, dizhi);
+            if (jubing <= 0)
+            {
+                WriteLog.WriteLogFile(index + "", "改变窗口位置，句柄绑定错误");
+                return;
+            }
+            Rect lprect = new Rect();
+            GetWindowRect(new IntPtr(jubing), out lprect);            
+            WriteLog.WriteLogFile(index + "", "当前width,height" + width + "," + height + " 改变位置外框" + (lprect.Right - lprect.Left) + " " + (lprect.Bottom - lprect.Top) );
+            width = lprect.Right - lprect.Left;
+            height = lprect.Bottom - lprect.Top;
         }
 
         public static bool lureninstallOk(int dqinx)
@@ -674,8 +692,23 @@ namespace MyUtil
                 WriteLog.WriteLogFile(dqinx + "", "游戏判断启动，句柄绑定错误");
                 return false;
             }
-            Entity.FuHeSanDian tysd = fuzhu.TongYong_SanDian.GetObject().findFuHeSandianByName("雷电首页截图-路人");
-            if (dm.mohuByLeiBool(tysd.Sd))
+            dm.bindWindow(jubing);
+            Entity.FuHeSanDian tysd =null;
+            int w=-1,h=-1;
+            getWindowSize(dqinx,out w,out h);
+            WriteLog.WriteLogFile(dqinx + "", w + " " + h);
+            int a = 0;
+            if (w == 489 && h == 840)
+            {
+                a = 1;
+                tysd = fuzhu.TongYong_SanDian.GetObject().findFuHeSandianByName("雷电首页截图-路人");
+            }
+            if (w == 1318 && h == 758)
+            {
+                a = 1;
+                tysd = fuzhu.TongYong_SanDian.GetObject().findFuHeSandianByName("雷电首页截图-平板");
+            }
+            if (a==1 && dm.mohuByLeiBool_duokai(tysd.Sd))
             {
                 WriteLog.WriteLogFile(dqinx + "", "游戏启动不成功，界面有雷电游戏 " + x1 + " " + y1);
                 return false;
@@ -685,6 +718,7 @@ namespace MyUtil
 
         public static int QiDongWanChengLurenzhanghao(string a_b, int dqinx, string app)
         {
+            WriteLog.WriteLogFile(dqinx + "", "尝试打开app" + dqinx);
             bool qidongcg = true;
             long ks = GetTimestamp();
             int i = 1;
@@ -707,7 +741,7 @@ namespace MyUtil
                 }
                 if ((js - ks) > 1000 * 60 * 5)
                 {
-                    MyFuncUtil.mylogandxianshi("打开app很久5分钟也没打开" + dqinx);
+                    WriteLog.WriteLogFile(dqinx + "", "打开app很久5分钟也没打开" + dqinx);
                     qidongcg = false;
                     break;
                 }
