@@ -154,6 +154,9 @@ namespace fuzhu
                         }
                     }
                 }
+                if (!mf.mohuXunHuanJianChi(Jingjie_SanDian.GetObject().findFuHeSandianByName("存账号-跳过绑定手机2").Sd,10)) {
+                    xuanqu = 0;
+                }
                 FuHeSanDian yk = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊存账号-用户名密码界面");
                 if (xuanqu == 0 && mf.mohuByLeiBool(yk.Sd))
                 {
@@ -198,7 +201,7 @@ namespace fuzhu
                         }
                         foreach (FuHeSanDian fh in ls)
                         {
-                            if (mf.mohuByLeiBool(fh.Sd))
+                            if (!fh.Name.Equals("存账号-跳过绑定手机2") && mf.mohuByLeiBool(fh.Sd))
                             {
                                 WriteLog.WriteLogFile(this._mnqName, fh.Name);
                                 if (fh.Zhidingx != -1 && fh.Zhidingy != -1)
@@ -820,7 +823,7 @@ namespace fuzhu
         {
             WriteLog.WriteLogFile(this._mnqName, "进入到主线任务");
             zhituozhuxian();
-            quitdq("name");
+            quitdq(name);
             WriteLog.WriteLogFile(this._mnqName, "主线退出");
         }
 

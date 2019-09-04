@@ -21,7 +21,7 @@ namespace wlxm
         /// <summary>
         /// 辅助的版本
         /// </summary>
-        private static int fuzhuBanben =4;
+        private static int fuzhuBanben =5;
         
         /// <summary>
         /// dict 游戏名称和包名存储
@@ -621,8 +621,7 @@ namespace wlxm
                     continue;
                 }                
                 yq.zhuxian(name);
-                //yq.quitdq();
-                Thread.Sleep(1000 * 60*60);//停住1小时
+                //Thread.Sleep(1000 * 60*60);//停住1小时
                 cishu++;
                 var js = MyFuncUtil.GetTimestamp();
                 MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "循环"+cishu+"次数");
