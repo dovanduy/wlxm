@@ -23,6 +23,12 @@ namespace wlxm
         /// </summary>
         private static int fuzhuBanben =5;
         
+
+        /// <summary>
+        /// 全局button 点了就不自动运行
+        /// </summary>
+        private static int quanjubutton = 0;
+
         /// <summary>
         /// dict 游戏名称和包名存储
         /// </summary>
@@ -113,6 +119,7 @@ namespace wlxm
 
             var ks = MyFuncUtil.GetTimestamp();
             var i = 1;
+            var yici = 0;
             while (true)
             {
                 Thread.Sleep(1000);
@@ -121,9 +128,15 @@ namespace wlxm
                 //MyFuncUtil.SecondToHour(+i + (js - ks) / 1000+" "
                 CalcFinished("程序已运行:" + MyFuncUtil.SecondToHour(js - ks) );
                 this.label2.ForeColor = Color.Red;
-                if (1!=1)
+                if (quanjubutton==0 && yici == 0 && (js - ks) > 1000 * 10)
                 {
-                    //break;
+                    quanjubutton = 1;
+                    yici = 1;
+                    //dpanduoxiancheng.PerformClick();
+                    ThreadStart threadStart = new ThreadStart(duoxianzongtou);//通过ThreadStart委托告诉子线程执行什么方法　
+                    Thread thread = new Thread(threadStart);
+                    thread.Name = "wodedpanduoxian";
+                    thread.Start();
                 }
             }
 
@@ -157,6 +170,7 @@ namespace wlxm
 
         private void button1_Click(object sender, EventArgs e)
         {
+            quanjubutton = 1;
             MyFuncUtil.mylogandxianshi("开始");
             string dizhi = null;
             string path = null;
@@ -275,6 +289,7 @@ namespace wlxm
 
         private void lrzh_Click(object sender, EventArgs e)
         {
+            quanjubutton = 1;
             ThreadStart threadStart = new ThreadStart(gaozhanghaotou);//通过ThreadStart委托告诉子线程执行什么方法　
             Thread thread = new Thread(threadStart);
             thread.Name = "wodegaozhanghao";
@@ -346,6 +361,7 @@ namespace wlxm
         }
         private void ceshi_button_Click(object sender, EventArgs e)
         {
+            quanjubutton = 1;
             apkName = dict["一拳超人"];
             int[] yunxingIndex = null;
             if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
@@ -426,6 +442,7 @@ namespace wlxm
 
         private void quanliucheng_Click(object sender, EventArgs e)
         {
+            quanjubutton = 1;
             MyFuncUtil.mylogandxianshi("开始-已取点");
             string dizhi = null;
             string path = null;
@@ -473,6 +490,7 @@ namespace wlxm
         
         private void dpanduoxiancheng_Click(object sender, EventArgs e)
         {
+            quanjubutton = 1;
             ThreadStart threadStart = new ThreadStart(duoxianzongtou);//通过ThreadStart委托告诉子线程执行什么方法　
             Thread thread = new Thread(threadStart);
             thread.Name = "wodedpanduoxian";
