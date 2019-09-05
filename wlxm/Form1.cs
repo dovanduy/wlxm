@@ -21,7 +21,7 @@ namespace wlxm
         /// <summary>
         /// 辅助的版本
         /// </summary>
-        private static int fuzhuBanben =7;
+        private static int fuzhuBanben = 8;
         
 
         /// <summary>
@@ -540,9 +540,9 @@ namespace wlxm
             string path = null;
             string seed = null;
             MyFuncUtil.myqiehuancd(a_b, out dizhi, out path, out seed);
-            //所有账号置为dengluzhong N
-            ZhangHao zh = new ZhangHao();
-            zh.zhiweidengluzhongN("jingjie", WriteLog.getMachineName());
+            //所有账号置为dengluzhong N 多个机器的话 会有麻烦
+            //ZhangHao zh = new ZhangHao();
+            //zh.zhiweidengluzhongN("jingjie", WriteLog.getMachineName());
             for (int j = 1; j < 1000; j++)
             {
                 WriteLog.WriteLogFile("", "序号" + j + ",开始");
