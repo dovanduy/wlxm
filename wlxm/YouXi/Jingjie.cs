@@ -119,6 +119,7 @@ namespace fuzhu
             long ks = MyFuncUtil.GetTimestamp();
             long kstiaoguo = MyFuncUtil.GetTimestamp();
             ZhangHao zh = new ZhangHao();
+            bool t1 = false;
             while (true)
             {
                 long js = MyFuncUtil.GetTimestamp();
@@ -312,14 +313,14 @@ namespace fuzhu
                 FuHeSanDian qu2 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊游戏-开始战斗");
                 if (xuanhao == 1 && mf.mohuByLeiBool(qu2.Sd))
                 {
-                    t = true;
+                    t1 = true;
                 }
                 qu2 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊游戏-进入任务");
                 if (xuanhao == 1 && mf.mohuByLeiBool(qu2.Sd))
                 {
-                    t = true;
+                    t1 = true;
                 }
-                if (t)
+                if (t1)
                 {
                     WriteLog.WriteLogFile(this._mnqName, "账号保存游戏阶段结束");
                     break;
