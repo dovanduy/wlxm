@@ -351,7 +351,7 @@ namespace fuzhu
                 WriteLog.WriteLogFile(this._mnqName, "当前没有找到需要练级的账号");
                 return false;
             }
-            WriteLog.WriteLogFile(this._mnqName, "找到需要练级的账号"+name+" "+pwd+"xuanqu "+xuanqu);
+            WriteLog.WriteLogFile(this._mnqName, "找到需要练级的账号"+name+" "+pwd+",xuanqu "+xuanqu+",置为登陆中");
             zhanghao.zhiweidengluzhong(this._dqinx, "jingjie",name, WriteLog.getMachineName()); ;
             long ks = MyFuncUtil.GetTimestamp();
             long kstiaoguo = MyFuncUtil.GetTimestamp();
@@ -428,9 +428,7 @@ namespace fuzhu
                         //当前没有找到需要练级的账号
                         WriteLog.WriteLogFile(this._mnqName, "换账号，但没有找到需要练级的账号");
                         break;
-                    }
-                    WriteLog.WriteLogFile(this._mnqName, "找到需要练级的账号" + name + " " + pwd + "xuanqu " + xuanqu);
-                    zhanghao.zhiweidengluzhong(this._dqinx, "jingjie", name, WriteLog.getMachineName());
+                    }                    
                 }
                 List<FuHeSanDian> ls = Jingjie_SanDian.GetObject().findListFuHeSandianByName("存账号");
                 if (xuanqu == 1 && ls != null && ls.Count > 0)

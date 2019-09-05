@@ -274,6 +274,24 @@ namespace MyUtil
             }
         }
 
+        public void zhiweidengluzhongN(string youxi, string pcname)
+        {
+            //服务器上有登录账号后置为登陆中
+            SqlHelp sqh = SqlHelp.GetInstance();
+            lock (obj)
+            {
+                try
+                {
+                    sqh.update("update zhanghao set dengluzhong='N'  where yxbz='Y' and youxi='" + youxi + "'");
+                }
+                catch (Exception ex)
+                {
+                    WriteLog.WriteLogFile("", "所有账号置为N更新失败");
+                    throw ex;
+                }
+            }
+        }
+
         public void zhiweiwuxiao(int dqinx, string youxi, string name, string pcname)
         {
             //服务器上有登录账号后置为登陆中

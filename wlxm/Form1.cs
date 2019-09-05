@@ -530,6 +530,9 @@ namespace wlxm
             string path = null;
             string seed = null;
             MyFuncUtil.myqiehuancd(a_b, out dizhi, out path, out seed);
+            //所有账号置为dengluzhong N
+            ZhangHao zh = new ZhangHao();
+            zh.zhiweidengluzhongN("jingjie", WriteLog.getMachineName());
             for (int j = 1; j < 1000; j++)
             {
                 WriteLog.WriteLogFile("", "序号" + j + ",开始");
