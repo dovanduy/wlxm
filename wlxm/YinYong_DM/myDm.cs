@@ -443,10 +443,11 @@ namespace xDM
 
         public Boolean myGetColor(int jubing, int x, int y, string color)
         {
-            int res = mydm.IsBind(jubing);
-            if (res != 1)
+            if ((x < 0) || (y < 0) ||
+                (x > xianzhi_x) || (y > xianzhi_y))
             {
-                bindWindow(jubing);
+                WriteLog.WriteLogFile("", "myGetColor出边界了..");
+                return false;
             }
             bool tmp = false;
             String tmpcolor = mydm.GetColor(x, y);
@@ -493,6 +494,12 @@ namespace xDM
         {
             List<String> mycolor = new List<string>();
             foreach (ZuoBiao z in lb) {
+                if ((z.X < 0) || (z.Y < 0) ||
+                (z.X > xianzhi_x) || (z.Y > xianzhi_y))
+                {
+                    WriteLog.WriteLogFile("", "myGetColorWuJbList出边界了..");
+                    break;
+                }
                 String tmpcolor = mydm.GetColor(z.X, z.Y);
                 mycolor.Add(tmpcolor);
             }
@@ -506,11 +513,14 @@ namespace xDM
 
         public Boolean myGetColorWuJuBing(int x, int y, string color)
         {
-            
+            if ((x < 0) || (y < 0) ||
+                (x > xianzhi_x) || (y > xianzhi_y))
+            {
+                WriteLog.WriteLogFile("", "myGetColorWuJuBing出边界了..");
+                return false;
+            }
             bool tmp = false;
             String tmpcolor = mydm.GetColor(x, y);
-            //MyFuncUtil.mylogandxianshi(tmpcolor);
-            //if ("ffffff".Equals(tmpcolor))
             if (color.ToLower().Equals(tmpcolor.ToLower()))
             {
                 tmp = true;

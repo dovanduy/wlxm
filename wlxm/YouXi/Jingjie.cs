@@ -541,9 +541,11 @@ namespace fuzhu
             List<ZuoBiao> kpzb = new List<ZuoBiao>();
             kpzb.Add(new ZuoBiao(220, 48));
             kpzb.Add(new ZuoBiao(407, 136));
-
             string[] kapingyanse1 = mf.myGetColorWuJbList(kpzb);
             string[] kapingyanse2 = mf.myGetColorWuJbList(kpzb);
+
+            //2小时结束
+            long kstime1 = MyFuncUtil.GetTimestamp();
             while (true)
             {
                 if (yici == 0) {
@@ -556,6 +558,11 @@ namespace fuzhu
                     //20分钟重新计时
                     kstime = MyFuncUtil.GetTimestamp();
                     WriteLog.WriteLogFile(this._mnqName, "20分钟重新计时");
+                }
+                if ((jstime - kstime1) > 60 * 1000 * 60*2)
+                {
+                    WriteLog.WriteLogFile(this._mnqName, "2小时结束");
+                    break;
                 }
                 if ((jstime - kpjishi) > 30 * 1000 && compareColor(kapingyanse1, kapingyanse2))
                 {

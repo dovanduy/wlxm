@@ -21,7 +21,7 @@ namespace wlxm
         /// <summary>
         /// 辅助的版本
         /// </summary>
-        private static int fuzhuBanben = 9;
+        private static int fuzhuBanben = 10;
         
 
         /// <summary>
