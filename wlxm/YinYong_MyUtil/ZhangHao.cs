@@ -215,7 +215,7 @@ namespace MyUtil
                          "'");
                     if (dt.Rows.Count > 0)
                     {
-                        sqh.update("update zhanghao set dengluzhong='N' , xgsj='"
+                        sqh.update("update zhanghao set xgsj='"
                         + DateTime.Now.ToString("yyyy-MM-dd") + "' , dengji="
                         +dengji+", zuanshi ="+zuanshi+" , qiangzhequan="+qiangzhequan+" , dengluzhong='N' "
                         +" where name='"+ name+"'");

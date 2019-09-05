@@ -21,7 +21,7 @@ namespace wlxm
         /// <summary>
         /// 辅助的版本
         /// </summary>
-        private static int fuzhuBanben =5;
+        private static int fuzhuBanben =6;
         
 
         /// <summary>
@@ -120,19 +120,26 @@ namespace wlxm
             var ks = MyFuncUtil.GetTimestamp();
             var i = 1;
             var yici = 0;
+            string zidong = "";
             while (true)
             {
                 Thread.Sleep(1000);
                 var js = MyFuncUtil.GetTimestamp();
                 i++;
+
                 //MyFuncUtil.SecondToHour(+i + (js - ks) / 1000+" "
-                CalcFinished("程序已运行:" + MyFuncUtil.SecondToHour(js - ks) );
+                CalcFinished("程序已运行:" + MyFuncUtil.SecondToHour(js - ks) + zidong);
                 this.label2.ForeColor = Color.Red;
-                if (quanjubutton==0 && yici == 0 && (js - ks) > 1000 * 10)
+                if (quanjubutton == 0 && yici == 0 && (js - ks) > 1000 * 10 && (js - ks) <= 1000 * 20)
+                {
+                    WriteLog.WriteLogFile("", "程序搞自动倒计时 " + (20-(js - ks)/1000)+"秒");
+                }
+                if (quanjubutton==0 && yici == 0 && (js - ks) > 1000 * 20)
                 {
                     quanjubutton = 1;
                     yici = 1;
                     //dpanduoxiancheng.PerformClick();
+                    zidong = ",自动运行中";
                     ThreadStart threadStart = new ThreadStart(duoxianzongtou);//通过ThreadStart委托告诉子线程执行什么方法　
                     Thread thread = new Thread(threadStart);
                     thread.Name = "wodedpanduoxian";
@@ -256,6 +263,14 @@ namespace wlxm
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开app" + apkName + "失败");
                     Thread.Sleep(20000);
+                    return;
+                }
+                int w = -1, h = -1;
+                MyFuncUtil.getWindowSize(dqinx, out w, out h);
+                if (w != -1 && h != -1 && w < h) {
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "w h不对"+w+" "+h);
+                    Thread.Sleep(20000);
+                    return;
                 }
                 temp = MyFuncUtil.lurenResizeOk(dqinx);
                 if (temp == false)
@@ -617,6 +632,15 @@ namespace wlxm
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开app" + apkName + "失败");
                     Thread.Sleep(20000);
+                    return;
+                }
+                int w = -1, h = -1;
+                MyFuncUtil.getWindowSize(dqinx, out w, out h);
+                if (w != -1 && h != -1 && w < h)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "w h不对" + w + " " + h);
+                    Thread.Sleep(20000);
+                    return;
                 }
                 Thread.Sleep(20000);
                 temp = MyFuncUtil.lurenResizeOk(dqinx);
