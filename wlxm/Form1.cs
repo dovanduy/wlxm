@@ -200,12 +200,7 @@ namespace wlxm
             myDm mf = new myDm();
             Jingjie ln = new Jingjie(mf, dqinx);
             //ln.zhuxian("");
-            int i = MyFuncUtil.QiDongWanChengLurenzhanghao("d", dqinx, apkName);
-            if (i == -1)
-            {
-                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开app" + apkName + "失败");
-                Thread.Sleep(20000);
-            }
+            ln.jingjiecunhao();
             MyFuncUtil.mylogandxianshi("结束");
             
         }
@@ -824,6 +819,7 @@ namespace wlxm
 
         private void resizebutton_Click(object sender, EventArgs e)
         {
+            quanjubutton = 1;
             string dizhi = null;
             string path = null;
             string seed = null;
@@ -836,6 +832,7 @@ namespace wlxm
 
         private void gaotupian_Click(object sender, EventArgs e)
         {
+            quanjubutton = 1;
             MyFuncUtil.mylogandxianshi("系统开始识别Pic图片");
             var ks = MyFuncUtil.GetTimestamp();
             string mydir1 = @"d:\pic1\";
@@ -894,6 +891,7 @@ namespace wlxm
 
         private void chongfusandian_Click(object sender, EventArgs e)
         {
+            quanjubutton = 1;
             WriteLog.WriteLogFile("", "测试开始");
             List<string> a = Jingjie_SanDian.GetObject().findListShiFouChongMing();
             foreach (string f in a)

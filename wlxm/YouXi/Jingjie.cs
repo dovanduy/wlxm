@@ -121,6 +121,7 @@ namespace fuzhu
             ZhangHao zh = new ZhangHao();
             while (true)
             {
+                WriteLog.WriteLogFile(this._mnqName, "daxunhuan "+xuanqu);
                 long js = MyFuncUtil.GetTimestamp();
                 FuHeSanDian kt = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊存账号-新号首界面");
                 if (xuanqu == 0 && mf.mohuByLeiBool(kt.Sd))
@@ -142,6 +143,7 @@ namespace fuzhu
                 List<FuHeSanDian> ls = Jingjie_SanDian.GetObject().findListFuHeSandianByName("存账号");
                 if (xuanqu == 1 && ls != null && ls.Count > 0)
                 {
+                    
                     foreach (FuHeSanDian fh in ls)
                     {
                         if (mf.mohuByLeiBool(fh.Sd))
@@ -154,7 +156,8 @@ namespace fuzhu
                         }
                     }
                 }
-                if (!mf.mohuXunHuanJianChi(Jingjie_SanDian.GetObject().findFuHeSandianByName("存账号-跳过绑定手机2").Sd,10)) {
+                if (mf.mohuXunHuanJianChi(Jingjie_SanDian.GetObject().findFuHeSandianByName("存账号-跳过绑定手机2").Sd,60)) {
+                    WriteLog.WriteLogFile(this._mnqName, "存账号-跳过绑定手机2 xuanqu重置为0");
                     xuanqu = 0;
                 }
                 FuHeSanDian yk = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊存账号-用户名密码界面");
@@ -825,9 +828,9 @@ namespace fuzhu
             {
                 
             }
-            if ((kp2 - kp1) > 1000 * 60*5)
+            if ((kp2 - kp1) > 1000 * 60*10)
             {
-                WriteLog.WriteLogFile(this._mnqName,"卡屏5分钟");
+                WriteLog.WriteLogFile(this._mnqName,"卡屏10分钟");
                 string path = @"c:\mypic_save\";
                 string name=this._dqinx+"_"+mf.GetTime()+".bmp";
                 mf.captureBmp(this._jubing, path, name);
