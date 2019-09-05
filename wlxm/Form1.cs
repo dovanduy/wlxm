@@ -21,7 +21,7 @@ namespace wlxm
         /// <summary>
         /// 辅助的版本
         /// </summary>
-        private static int fuzhuBanben =6;
+        private static int fuzhuBanben =7;
         
 
         /// <summary>
@@ -140,10 +140,20 @@ namespace wlxm
                     yici = 1;
                     //dpanduoxiancheng.PerformClick();
                     zidong = ",自动运行中";
-                    ThreadStart threadStart = new ThreadStart(duoxianzongtou);//通过ThreadStart委托告诉子线程执行什么方法　
-                    Thread thread = new Thread(threadStart);
-                    thread.Name = "wodedpanduoxian";
-                    thread.Start();
+                    if (WriteLog.getMachineName().ToUpper().Equals("1HAO"))
+                    {
+                        ThreadStart threadStart = new ThreadStart(gaozhanghaotou);//通过ThreadStart委托告诉子线程执行什么方法　
+                        Thread thread = new Thread(threadStart);
+                        thread.Name = "wodegaozhanghao";
+                        thread.Start();
+                    }
+                    else
+                    {
+                        ThreadStart threadStart = new ThreadStart(duoxianzongtou);//通过ThreadStart委托告诉子线程执行什么方法　
+                        Thread thread = new Thread(threadStart);
+                        thread.Name = "wodedpanduoxian";
+                        thread.Start();
+                    }
                 }
             }
 

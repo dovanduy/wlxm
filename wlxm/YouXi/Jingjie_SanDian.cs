@@ -122,6 +122,15 @@ namespace fuzhu
             _list_yqfhsandian.Add(ktfh1);
 
             ktsd1 = new SanDian(new int[3, 3]{
+	            {  624,  241, 0xeeccaa},
+	            {  177,   38, 0x555c99},
+	            {  588,  334, 0xffc86d},
+            });
+            ktfh1 = new FuHeSanDian("存账号-关闭公告3", ktsd1, 587, 69);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
 	            {  317,  300, 0xf8f9fa},
 	            {  317,  305, 0xf8f9fa},
 	            {  353,  302, 0xd1d3de},

@@ -35,10 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AipSdk">
-      <HintPath>C:\Users\Administrator\Downloads\net40\AipSdk.dll</HintPath>
+      <HintPath>..\..\BaiduNetdiskDownload\net40\AipSdk.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>C:\Users\Administrator\Downloads\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\BaiduNetdiskDownload\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
