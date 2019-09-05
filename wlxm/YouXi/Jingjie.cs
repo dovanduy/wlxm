@@ -359,7 +359,8 @@ namespace fuzhu
             int denglu = 0;
             int yici = 0;
             int kaishidian = 0;
-            int lurucishu = 0;
+            int tiaochuci = 0;
+            List<FuHeSanDian> ls = Jingjie_SanDian.GetObject().findListFuHeSandianByName("存账号");
             while (true)
             {
                 if (yici == 0) {
@@ -388,7 +389,7 @@ namespace fuzhu
                 }
                 kt = Jingjie_SanDian.GetObject().findFuHeSandianByName("登录-输入账号");
                 FuHeSanDian kt1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊存账号-用户名密码重新录2");
-                if (mf.mohuByLeiBool(kt.Sd) || (mf.mohuByLeiBool(kt1.Sd)))
+                if (denglu==0 && (mf.mohuByLeiBool(kt.Sd) || (mf.mohuByLeiBool(kt1.Sd))))
                 {
                     WriteLog.WriteLogFile(this._mnqName, kt.Name);
                     mf.mytap(this._jubing, 437, 129);//点击两次
@@ -411,14 +412,13 @@ namespace fuzhu
                     mf.mydelay(2000, 4000);
                     mf.mytap(this._jubing, kt.Zhidingx, kt.Zhidingy);
                     mf.mydelay(4000, 6000);
-                    if (!mf.mohuByLeiBool(kt.Sd))
-                    {
-                        WriteLog.WriteLogFile(this._mnqName, kt.Name + "登录成功");
-                        denglu = 1;
-                    }
-                    lurucishu++;
                 }
-                if (lurucishu > 2) {
+                if (denglu==0 && tiaochuci > 0 && !mf.mohuXunHuanJianChi(kt.Sd, 20) && !mf.mohuXunHuanJianChi(kt1.Sd, 20))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, kt.Name + " 登录成功");
+                    denglu = 1;
+                }
+                if (denglu == 0 &&(mf.mohuXunHuanJianChi(kt.Sd,20) || mf.mohuXunHuanJianChi(kt1.Sd,20))) {
                     WriteLog.WriteLogFile(this._mnqName, "当前账号无法登陆,置为无效同时换号");
                     zhanghao.zhiweiwuxiao(this._dqinx, "jingjie", name, WriteLog.getMachineName());
                     youxi = "jingjie";
@@ -428,9 +428,10 @@ namespace fuzhu
                         //当前没有找到需要练级的账号
                         WriteLog.WriteLogFile(this._mnqName, "换账号，但没有找到需要练级的账号");
                         break;
-                    }                    
+                    }
+                    denglu = 0;
                 }
-                List<FuHeSanDian> ls = Jingjie_SanDian.GetObject().findListFuHeSandianByName("存账号");
+                
                 if (xuanqu == 1 && ls != null && ls.Count > 0)
                 {
                     foreach (FuHeSanDian fh in ls)
@@ -441,6 +442,7 @@ namespace fuzhu
                             if (fh.Zhidingx != -1 && fh.Zhidingy != -1)
                             {
                                 mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                                tiaochuci++;
                             }
                         }
                     }
@@ -449,9 +451,9 @@ namespace fuzhu
                 bool t = mf.mohuXunHuanJianChi(dlxf.Sd, 60);
                 if (denglu == 0 && t)
                 {
-                    WriteLog.WriteLogFile(this._mnqName, dlxf.Name);
-                    mf.mytap(this._jubing, 563, 26);
-                    mf.mydelay(2000, 4000);
+                    WriteLog.WriteLogFile(this._mnqName, dlxf.Name+"选择切换账号");
+                    //mf.mytap(this._jubing, 563, 26);
+                    //mf.mydelay(2000, 4000);
                 }
                 if (denglu == 1 && t)
                 {
@@ -522,19 +524,58 @@ namespace fuzhu
         }
 
         private void zhituozhuxian() {
-            long ks = MyFuncUtil.GetTimestamp();
+            long kstime = MyFuncUtil.GetTimestamp();
             int yici = 0;
             int youjian = 0;
             int fuli = 0;
             int shibai = 0;
             int jinji = 0;
+
+            //设置卡屏相关
+            long kp1 = MyFuncUtil.GetTimestamp();
+            long kpjishi = MyFuncUtil.GetTimestamp();
+            long kp10sjishi = MyFuncUtil.GetTimestamp();
+            List<ZuoBiao> kpzb = new List<ZuoBiao>();
+            kpzb.Add(new ZuoBiao(220, 48));
+            kpzb.Add(new ZuoBiao(407, 136));
+
+            string[] kapingyanse1 = mf.myGetColorWuJbList(kpzb);
+            string[] kapingyanse2 = mf.myGetColorWuJbList(kpzb);
             while (true)
             {
                 if (yici == 0) {
                     yici = 1;
                     WriteLog.WriteLogFile(this._mnqName, "进入开局号,开始练级");
                 }
-                long js = MyFuncUtil.GetTimestamp();
+                var jstime = MyFuncUtil.GetTimestamp();
+                if ((jstime - kstime) > 60 * 1000 * 20)
+                {
+                    //20分钟重新计时
+                    kstime = MyFuncUtil.GetTimestamp();
+                    WriteLog.WriteLogFile(this._mnqName, "20分钟重新计时");
+                }
+                if ((jstime - kpjishi) > 30 * 1000 && compareColor(kapingyanse1, kapingyanse2))
+                {
+                    //调用卡屏函数                   
+                    if (panduankaping(kp1))
+                    {
+                        break;
+                    }
+                }
+                if ((jstime - kp10sjishi) > 10 * 1000)
+                {
+                    kp10sjishi = MyFuncUtil.GetTimestamp();
+                    kapingyanse2 = mf.myGetColorWuJbList(kpzb);
+                    //WriteLog.WriteLogFile(this._mnqName, "10秒颜色 " + kapingyanse1[0] + " " + kapingyanse2[0] + "  " + kapingyanse1[1] + " " + kapingyanse2[1]);
+                }
+                if ((jstime - kpjishi) > 30 * 1000 && !compareColor(kapingyanse1, kapingyanse2))
+                {
+                    //颜色不等 30秒更新颜色 更新计时
+                    WriteLog.WriteLogFile(this._mnqName, "30秒颜色不等时,更新颜色" + kapingyanse1[0] + " " + kapingyanse2[0] + "  " + kapingyanse1[1] + " " + kapingyanse2[1]);
+                    kapingyanse1 = mf.myGetColorWuJbList(kpzb);
+                    kpjishi = MyFuncUtil.GetTimestamp();
+                    kp1 = MyFuncUtil.GetTimestamp();
+                }
                 List<FuHeSanDian> ls = Jingjie_SanDian.GetObject().findListFuHeSandianByName("引导");
                 if (ls != null && ls.Count > 0)
                 {
