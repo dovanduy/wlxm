@@ -21,7 +21,7 @@ namespace wlxm
         /// <summary>
         /// 辅助的版本
         /// </summary>
-        private static int fuzhuBanben = 8;
+        private static int fuzhuBanben = 9;
         
 
         /// <summary>
@@ -200,7 +200,8 @@ namespace wlxm
             myDm mf = new myDm();
             Jingjie ln = new Jingjie(mf, dqinx);
             //ln.zhuxian("");
-            ln.jingjiecunhao();
+            string a = "";
+            ln.denglu(15, out  a);
             MyFuncUtil.mylogandxianshi("结束");
             
         }

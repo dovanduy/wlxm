@@ -634,6 +634,14 @@ namespace xDM
             if (x1 < 0 || x2 > width || y1 < 0 || y2 > height) {
                 return 0;
             }
+            if ((x1 < 0) || (y1 < 0) ||
+                (x1 > xianzhi_x) || (y1 > xianzhi_y) ||
+                (x2 < 0) || (y2 < 0) ||
+                (x2 > xianzhi_x) || (y2 > xianzhi_y))
+            {
+                WriteLog.WriteLogFile("", "captureBmp.." + x1 + " " + y1);
+                return 0;
+            }
             mydm.SetPath(path);
             res = mydm.Capture(x1, y1, x2, y2, fileName);
             return res;
@@ -691,6 +699,16 @@ namespace xDM
         /// <returns></returns>
         public void myqudianqusezuobiao(int jubing, Int32 fir, string off, int sim, int x0, int y0, int x1, int y1, out int ox, out int oy)
         {
+            ox = -1;
+            oy = -1;
+            if ((x0 < 0) || (y0 < 0) ||
+                (x0 > xianzhi_x) || (y0 > xianzhi_y) ||
+                (x1 < 0) || (y1 < 0) ||
+                (x1 > xianzhi_x) || (y1 > xianzhi_y))
+            {
+                WriteLog.WriteLogFile("", "myqudianqusezuobiao.." + x0 + " " + y0);
+                return;
+            }
             //适用FindMultiColor方法
             int res = mydm.IsBind(jubing);
             if (res != 1)
@@ -704,8 +722,6 @@ namespace xDM
             double isim = sim * 0.01;
             result = mydm.FindMultiColorE(x0, y0, x1, y1, firstColor, offsetColor, isim, 1);
             string[] a1 = result.Split('|');
-            ox = -1;
-            oy = -1;
             if (int.Parse(a1[0]) == -1)
             {
                 return;
@@ -731,6 +747,16 @@ namespace xDM
         public void myqudianqusezuobiaowujubing(Int32 fir, string off, int sim, int x0, int y0, int x1, int y1, out int ox, out int oy)
         {
 
+            ox = -1;
+            oy = -1;
+            if ((x0 < 0) || (y0 < 0) ||
+                (x0 > xianzhi_x) || (y0 > xianzhi_y) ||
+                (x1 < 0) || (y1 < 0) ||
+                (x1 > xianzhi_x) || (y1 > xianzhi_y))
+            {
+                WriteLog.WriteLogFile("", "myqudianqusezuobiaowujubing.." + x0 + " " + y0);
+                return;
+            }
             string result = "-1|-1";
             string firstColor = fir.ToString("X");
             //MyFuncUtil.mylogandxianshi(firstColor);
@@ -738,8 +764,6 @@ namespace xDM
             double isim = sim * 0.01;
             result = mydm.FindMultiColorE(x0, y0, x1, y1, firstColor, offsetColor, isim, 1);
             string[] a1 = result.Split('|');
-            ox = -1;
-            oy = -1;
             if (int.Parse(a1[0]) == -1)
             {
                 return;
@@ -764,12 +788,20 @@ namespace xDM
         /// <returns></returns>
         public void myqudianqudanse(Int32 fir, int sim, int x0, int y0, int x1, int y1, out int ox, out int oy)
         {
-
+            ox = -1;
+            oy = -1;
+            if ((x0 < 0) || (y0 < 0) ||
+                (x0 > xianzhi_x) || (y0 > xianzhi_y) ||
+                (x1< 0) || (y1 < 0) ||
+                (x1 > xianzhi_x) || (y1 > xianzhi_y))
+            {
+                WriteLog.WriteLogFile("", "mohumyqudianqudanse.." + x0 + " " + y0);
+                return;
+            }
             string result = "-1|-1";
             string firstColor = fir.ToString("X");
             double isim = sim * 0.01;
-            ox = -1;
-            oy = -1;
+            
             if ((x0 < 0) || (y0 < 0) ||
                 (x0 > xianzhi_x) || (y0 > xianzhi_y) ||
                 (x1 < 0) || (y1 < 0) ||
@@ -1048,6 +1080,14 @@ namespace xDM
         }
         public int mohu(int mx1, int my1, int myanse1, int mx2=-1, int my2=-1, int myanse2=-1, int mx3=-1, int my3=-1, int myanse3=-1,int sim=90)
         {
+            if ((mx1 < 0) || (my1 < 0) ||
+                (mx1 > xianzhi_x) || (my1 > xianzhi_y) ||
+                (mx1 + 1 < 0) || (my1 + 1 < 0) ||
+                (mx1 + 1 > xianzhi_x) || (my1 + 1 > xianzhi_y))
+            {
+                WriteLog.WriteLogFile("", "mohu无句柄出边界了.." + mx1 + " " + my1);
+                return 0;
+            }
             
             int ox = -1, oy = -1;
             int rs1 = -1;
@@ -1095,6 +1135,14 @@ namespace xDM
 
         public int mohuByLei(SanDian sd,int sim=90)
         {
+            if ((sd.Mx1 < 0) || (sd.My1 < 0) ||
+                (sd.Mx1 > xianzhi_x) || (sd.My1 > xianzhi_y) ||
+                (sd.Mx1 + 1 < 0) || (sd.My1 + 1 < 0) ||
+                (sd.My1 + 1 > xianzhi_x) || (sd.My1 + 1 > xianzhi_y))
+            {
+                WriteLog.WriteLogFile("", "mohuByLei无句柄出边界了.." + sd.Mx1 + " " + sd.My1);
+                return 0;
+            }
             int ox = -1, oy = -1;
             myqudianqudanse(sd.Myanse1, sim, sd.Mx1, sd.My1, sd.Mx1 + 1, sd.My1 + 1, out ox, out oy);
             int rs1 = -1;
@@ -1146,7 +1194,7 @@ namespace xDM
             int ox = -1, oy = -1;
             if ((sd.Mx1 < 0) || (sd.My1 < 0) ||
                 (sd.Mx1 > xianzhi_x) || (sd.My1 > xianzhi_y) ||
-                (sd.Mx1 + 1 < 0) || (sd.Mx1+1 < 0) ||
+                (sd.Mx1 + 1 < 0) || (sd.My1+1 < 0) ||
                 (sd.My1 + 1 > xianzhi_x) || (sd.My1+1 > xianzhi_y))
             {
                 WriteLog.WriteLogFile("", "mohuByLeiBool无句柄出边界了.."+sd.Mx1+" "+sd.My1);

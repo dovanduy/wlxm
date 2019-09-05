@@ -121,7 +121,6 @@ namespace fuzhu
             ZhangHao zh = new ZhangHao();
             while (true)
             {
-                WriteLog.WriteLogFile(this._mnqName, "daxunhuan "+xuanqu);
                 long js = MyFuncUtil.GetTimestamp();
                 FuHeSanDian kt = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊存账号-新号首界面");
                 if (xuanqu == 0 && mf.mohuByLeiBool(kt.Sd))
