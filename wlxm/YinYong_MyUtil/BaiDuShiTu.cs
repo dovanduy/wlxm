@@ -35,9 +35,9 @@ namespace MyUtil
             var image = File.ReadAllBytes(path);
             var options = new Dictionary<string, object>{
 	            //{"language_type", "CHN_ENG"},
-	            {"detect_direction", "true"},
+	            //{"detect_direction", "true"},
 	            //{"detect_language", "true"},
-	            {"probability", "true"}
+	            //{"probability", "true"}
 	        };
             // 数字识别
             var result = client.Numbers(image, options);

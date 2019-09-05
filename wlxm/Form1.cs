@@ -200,8 +200,7 @@ namespace wlxm
             myDm mf = new myDm();
             Jingjie ln = new Jingjie(mf, dqinx);
             //ln.zhuxian("");
-            string a = "";
-            ln.denglu(15, out  a);
+            ln.generalBasicShuziDemo(1, @"c:\mypic_save\11_89879937.bmp");
             MyFuncUtil.mylogandxianshi("结束");
             
         }

@@ -1277,6 +1277,7 @@ namespace fuzhu
             BaiDuShiTu bd = new BaiDuShiTu();
             JObject rs = bd.Number(path);
             if (rs.Root["words_result"] == null) {
+                WriteLog.WriteLogFile(ind + "", "啥也识别不出来" + " " + path);       
                 return null;
             }
             var txts = (from obj in (JArray)rs.Root["words_result"]
