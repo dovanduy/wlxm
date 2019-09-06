@@ -374,7 +374,16 @@ namespace fuzhu
 	            {  483,  110, 0xaecdd9},
 	            {  509,   84, 0x664520},
             });
-            ktfh1 = new FuHeSanDian("引导-上阵人数不足", ktsd1, 283, 250);
+            ktfh1 = new FuHeSanDian("特殊引导-上阵人数不足", ktsd1, 283, 250);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  572,  173, 0xf3c9a9},
+	{  508,   83, 0xffab4e},
+	{  566,   86, 0xe1763c},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-第五个人数", ktsd1, -1, -1);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
@@ -383,7 +392,7 @@ namespace fuzhu
 	{  148,   80, 0xffccaa},
 	{  495,   84, 0xf06395},
 });
-            ktfh1 = new FuHeSanDian("引导-第3天送啥", ktsd1, 631, 39);
+            ktfh1 = new FuHeSanDian("特殊引导-第3天送啥", ktsd1, 287, 317);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
@@ -1485,7 +1494,7 @@ namespace fuzhu
 	{  339,   41, 0x697bf1},
 	{  268,  317, 0xbd7542},
             });
-            ss = new FuHeSanDian("引导-每日奖励开启----可以换号", ktsd1, 291, 324);
+            ss = new FuHeSanDian("特殊引导-每日奖励开启----可以换号", ktsd1, 291, 324);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ss);
 
