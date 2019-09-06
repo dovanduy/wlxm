@@ -120,6 +120,7 @@ namespace fuzhu
             long kstiaoguo = MyFuncUtil.GetTimestamp();
             ZhangHao zh = new ZhangHao();
             bool t1 = false;
+            int tiaoguo = 0;
             while (true)
             {
                 long js = MyFuncUtil.GetTimestamp();
@@ -307,12 +308,18 @@ namespace fuzhu
                             {
                                 mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
                             }
+                            if (fh.Name.Equals("游戏-跳过")) {
+                                tiaoguo++;
+                            }
                         }
                     }
                 }
                 FuHeSanDian qu2 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊游戏-开始战斗");
                 if (xuanhao == 1 && mf.mohuByLeiBool(qu2.Sd))
                 {
+                    t1 = true;
+                }
+                if (tiaoguo > 10) {
                     t1 = true;
                 }
                 qu2 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊游戏-进入任务");
