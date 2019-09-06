@@ -355,7 +355,7 @@ namespace fuzhu
                 return false;
             }
             WriteLog.WriteLogFile(this._mnqName, "找到需要练级的账号"+name+" "+pwd+",xuanqu "+xuanqu+",置为登陆中");
-            zhanghao.zhiweidengluzhong(this._dqinx, "jingjie",name, WriteLog.getMachineName()); ;
+            zhanghao.zhiweidengluzhong(this._dqinx, "jingjie",name, WriteLog.getMachineName());
             long ks = MyFuncUtil.GetTimestamp();
             long kstiaoguo = MyFuncUtil.GetTimestamp();
             bool t1 = false;
@@ -511,6 +511,8 @@ namespace fuzhu
                 }
                 if ((js - ks) > 1000 * 60 * fenzhong) {
                     WriteLog.WriteLogFile(this._mnqName, "登录阶段超时");
+                    WriteLog.WriteLogFile(this._mnqName, "找到需要练级的账号" + name + " " + pwd + ",xuanqu " + xuanqu + ",恢复为不登录");
+                    zhanghao.zhiweidengluzhongN("jingjie", name, WriteLog.getMachineName());
                     break;
                 }
             }

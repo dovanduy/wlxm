@@ -292,7 +292,7 @@ namespace MyUtil
             }
         }
 
-        public void zhiweidengluzhongN(string youxi, string pcname)
+        public void zhiweidengluzhongN(string youxi, string name, string pcname)
         {
             //服务器上有登录账号后置为登陆中
             SqlHelp sqh = SqlHelp.GetInstance();
@@ -300,7 +300,7 @@ namespace MyUtil
             {
                 try
                 {
-                    sqh.update("update zhanghao set dengluzhong='N'  where yxbz='Y' and youxi='" + youxi + "'");
+                    sqh.update("update zhanghao set dengluzhong='N' where name='" + name + "' and youxi='" + youxi + "'");
                 }
                 catch (Exception ex)
                 {

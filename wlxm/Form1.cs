@@ -657,7 +657,7 @@ namespace wlxm
                 if (temp == false)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + ",resize没成功");
-                    continue;
+                    return;
                 }
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "降低cpu");
                 MyLdcmd.myDownCpu(dqinx, 50);
@@ -670,7 +670,7 @@ namespace wlxm
                 {
                     tmpBoolString.Append("登录环节出错");
                     Thread.Sleep(1000 * 60 * 3);
-                    continue;
+                    return;
                 }                
                 yq.zhuxian(name);
                 //Thread.Sleep(1000 * 60*60);//停住1小时
