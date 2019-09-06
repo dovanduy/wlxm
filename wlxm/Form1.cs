@@ -199,8 +199,10 @@ namespace wlxm
             //int t = MyLdcmd.addSimulator();
             myDm mf = new myDm();
             Jingjie ln = new Jingjie(mf, dqinx);
-            //ln.zhuxian("");
-            ln.generalBasicShuziDemo(1, @"c:\mypic_save\11_89879937.bmp");
+            string name = "";
+            ln.denglu(10, out name);
+            ln.zhuxian(name);
+            //ln.generalBasicShuziDemo(1, @"c:\mypic_save\11_89879937.bmp");
             MyFuncUtil.mylogandxianshi("结束");
             
         }
@@ -390,7 +392,7 @@ namespace wlxm
             }
             else
             {
-                yunxingIndex = new int[] { 1, 2, 3, };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
+                yunxingIndex = new int[] { 1, 2, 3, 4, 5, };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
             } 
             string dizhi = null;
             string path = null;
@@ -407,7 +409,7 @@ namespace wlxm
                 foreach (int inx in yunxingIndex)
                 {
                     ThreadPool.QueueUserWorkItem(new WaitCallback(duoxian_cs), inx);//线程池指定线程执行Auto方法
-                    Thread.Sleep(1000);
+                    Thread.Sleep(1000*20);
                 }
                 long ks = MyFuncUtil.GetTimestamp();
                 while (true)
@@ -449,8 +451,8 @@ namespace wlxm
                 MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "降低cpu");
                 //MyLdcmd.myDownCpu(dqinx, 50);
                 Jingjie yq = new Jingjie(dm, dqinx, dizhi);
-                
-                yq.zhuxian("");
+                yq.denglu(15, out a_b);
+                yq.zhuxian(a_b);
                 Thread.Sleep(1000 * 60 * 60);
                 
                 var js = MyFuncUtil.GetTimestamp();
@@ -553,7 +555,7 @@ namespace wlxm
                 foreach (int inx in yunxingIndex)
                 {
                     ThreadPool.QueueUserWorkItem(new WaitCallback(duoxiand), inx);//线程池指定线程执行Auto方法
-                    Thread.Sleep(20000);
+                    Thread.Sleep(1000 * 40);
                 }
                 var ks = MyFuncUtil.GetTimestamp();
                 while (true)
