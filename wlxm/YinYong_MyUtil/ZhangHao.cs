@@ -215,10 +215,25 @@ namespace MyUtil
                          "'");
                     if (dt.Rows.Count > 0)
                     {
-                        sqh.update("update zhanghao set xgsj='"
-                        + DateTime.Now.ToString("yyyy-MM-dd") + "' , dengji="
-                        +dengji+", zuanshi ="+zuanshi+" , qiangzhequan="+qiangzhequan+" , dengluzhong='N' "
-                        +" where name='"+ name+"'");
+                        if (dengji != -1 && zuanshi != -1 && qiangzhequan != -1)
+                        {
+                            sqh.update("update zhanghao set xgsj='"
+                            + DateTime.Now.ToString("yyyy-MM-dd") + "' , dengji="
+                            + dengji + ", zuanshi =" + zuanshi + " , qiangzhequan=" + qiangzhequan + " , dengluzhong='N' "
+                            + " where name='" + name + "'");
+                        }
+                        else if (zuanshi != -1)
+                        {
+                            sqh.update("update zhanghao set xgsj='"
+                            + DateTime.Now.ToString("yyyy-MM-dd") + "'  zuanshi =" + zuanshi + " , dengluzhong='N' "
+                            + " where name='" + name + "'");
+                        }
+                        else
+                        {
+                            sqh.update("update zhanghao set xgsj='"
+                            + DateTime.Now.ToString("yyyy-MM-dd") + "', dengluzhong='N' "
+                            + " where name='" + name + "'");
+                        }
                     }
                     else
                     {
