@@ -197,7 +197,7 @@ namespace MyUtil
             PostMessage(p, WM_CLOSE, 0, 0);
         }
 
-        public static void myReSize(int index, out int width,out int height,string dizhi = @"d:\ChangZhi\dnplayer2\", string youxi = "luneng")
+        public static void myReSize1(int index, out int width,out int height,string dizhi = @"d:\ChangZhi\dnplayer2\", string youxi = "luneng")
         {
             mylogandxianshi("模拟器" + index + "开始改位置");
             int dqwidth = 2560;//1920 1024
@@ -287,7 +287,7 @@ namespace MyUtil
             }
         }
 
-        public static bool lurenResizeOk(int index)
+        public static bool lurenResizeOk1(int index)
         {
             WriteLog.WriteLogFile(index + "", "改变窗口位置--开始");
             string dizhi = @"d:\ChangZhi\dnplayer2\";
@@ -295,7 +295,7 @@ namespace MyUtil
             long ksjs = GetTimestamp();
             long ks = GetTimestamp();
             int width = -1, height = -1;
-            myReSize(index, out width, out height);
+            myReSize1(index, out width, out height);
             int jubing = MyLdcmd.getDqmoniqiWaiCengJuBingByIndex(index, dizhi);
             int jubing2 = MyLdcmd.getDqmoniqiJuBingByIndex(index, dizhi);
             if (jubing <= 0)
@@ -332,7 +332,7 @@ namespace MyUtil
                     }
                     if ((lprect.Right - lprect.Left) != width || (lprect.Bottom - lprect.Top) != height)
                     {
-                        myReSize(index, out width, out height);
+                        myReSize1(index, out width, out height);
                     }
                     ksjs = GetTimestamp();
                     WriteLog.WriteLogFile(index + "", "30s resize一次");
@@ -854,10 +854,10 @@ namespace MyUtil
         public static void duokaiqiAdd(string a_b)
         {
             WriteLog.WriteLogFile("", "打开模拟器,新增15个或20个");
-            int a = 3;
+            int a = 2;
             if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
             {
-                a = 4;
+                a = 2;
             }
             
             lock (obj)
@@ -1094,10 +1094,11 @@ namespace MyUtil
             mny = pgy * mn_height / pg_height;
         }
 
-        private static void cutJpgLuren() {
-            Bitmap f = ReadImageFile(@"C:\mypic\user-1566445721233.jpg");
-            Bitmap g = KiCut(f, 185, 535, 370, 130);
-            g.Save(@"C:\mypic\haha11.jpg");
+        public static void cutJpgLuren()
+        {
+            Bitmap f = ReadImageFile(@"C:\mypic_save\193739625.png");
+            Bitmap g = KiCut(f, 511, 756, 20, 60);
+            g.Save(@"C:\mypic_save\haha11.jpg");
             g.Dispose();
         }
         /// <summary>
@@ -1151,9 +1152,10 @@ namespace MyUtil
             int h = b.Height;
             if (StartX >= w || StartY >= h)
             {
+                WriteLog.WriteLogFile("", StartX +"" );
                 return null;
             }
-
+            WriteLog.WriteLogFile("", StartX + " "+iWidth+" "+w+" "+h);
             if (StartX + iWidth > w)
             {
                 iWidth = w - StartX;

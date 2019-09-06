@@ -360,9 +360,7 @@ namespace fuzhu
                 //当前没有找到需要练级的账号
                 WriteLog.WriteLogFile(this._mnqName, "当前没有找到需要练级的账号");
                 return false;
-            }
-            WriteLog.WriteLogFile(this._mnqName, "找到需要练级的账号"+name+" "+pwd+",xuanqu "+xuanqu+",置为登陆中");
-            zhanghao.zhiweidengluzhong(this._dqinx, "jingjie",name, WriteLog.getMachineName());
+            }            
             long ks = MyFuncUtil.GetTimestamp();
             long kstiaoguo = MyFuncUtil.GetTimestamp();
             bool t1 = false;
@@ -438,7 +436,7 @@ namespace fuzhu
                         //当前没有找到需要练级的账号
                         WriteLog.WriteLogFile(this._mnqName, "换账号，但没有找到需要练级的账号");
                         break;
-                    }
+                    }                    
                     denglu = 0;
                 }
                 
@@ -732,11 +730,11 @@ namespace fuzhu
                         mf.mydelay(1000, 2000);
                         mf.mytap(this._jubing, 390, 360);
                         mf.mydelay(1000, 2000);
-                        mf.mytap(this._jubing, 423, 319);
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                         mf.mydelay(1000, 2000);
                         mf.mytap(this._jubing, 390, 360);
                         mf.mydelay(1000, 2000);
-                        mf.mytap(this._jubing, 550, 322);
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                         mf.mydelay(1000, 2000);
                         mf.mytap(this._jubing, 390, 360);
                         },
@@ -755,11 +753,11 @@ namespace fuzhu
                             mf.mydelay(1000, 2000);
                             mf.mytap(this._jubing, 390, 360);
                             mf.mydelay(1000, 2000);
-                            mf.mytap(this._jubing, 423, 319);
+                            mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                             mf.mydelay(1000, 2000);
                             mf.mytap(this._jubing, 390, 360);
                             mf.mydelay(1000, 2000);
-                            mf.mytap(this._jubing, 550, 322);
+                            mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                             mf.mydelay(1000, 2000);
                             mf.mytap(this._jubing, 390, 360);
                         },
@@ -893,15 +891,24 @@ namespace fuzhu
 
         private void qushufrombaidu(out int qushu,FuHeSanDian qz,int x1,int y1,int x2,int y2)
         {
+            WriteLog.WriteLogFile(this._mnqName, qz.Name+"进入百度识别取数");
             qushu = -1;
             if (mf.mohuByLeiBool(qz.Sd))
             {
                 WriteLog.WriteLogFile(this._mnqName, qz.Name);
-                string filename = this._dqinx + "_" + mf.GetTime() + ".bmp";
-                mf.captureBmp(this._jubing, @"c:\mypic_save\", filename, x1, y1, x2, y2);
-                if (mf.IsFileExist(@"c:\mypic_save\" + filename) == 1)
+                string timestamp = mf.GetTime()+"";
+                string mydir1=@"c:\mypic_save\"+timestamp+".png";
+                MyLdcmd.myScreencap(this._dqinx, mydir1);
+                Bitmap f = MyFuncUtil.ReadImageFile(mydir1); 
+                if (f != null) {
+                    WriteLog.WriteLogFile(this._mnqName, "");
+                    Bitmap g = MyFuncUtil.KiCut(f, 511, 756, 20, 60);
+                    g.Save(@"C:\mypic_save\" + timestamp + "_1.jpg");
+                    g.Dispose();
+                }
+                if (File.Exists(@"C:\mypic_save\" + timestamp + "_1.jpg"))
                 {
-                    string r = generalBasicShuziDemo(this._dqinx, @"c:\mypic_save\" + filename);
+                    string r = generalBasicShuziDemo(this._dqinx, @"c:\mypic_save\" + timestamp + "_1.jpg");
                     if (r != null && r != "")
                     {
                         qushu = int.Parse(r);
@@ -1137,7 +1144,7 @@ namespace fuzhu
             fh=Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面");
             qushufrombaidu(out zuanshi,fh,531, 5, 574, 19);            
             FuHeSanDian fh2 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-关卡界面");
-            qushufrombaidu(out zuanshi, fh, 531, 5, 574, 19);
+            qushufrombaidu(out zuanshi, fh2, 531, 5, 574, 19);
             if (!mf.mohuByLeiBool(fh.Sd) && !mf.mohuByLeiBool(fh2.Sd))
             {
                 string filename = this._dqinx + "退出时" + name + ".bmp";

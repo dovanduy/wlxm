@@ -139,6 +139,39 @@ namespace MyUtil
             
         }
 
+        public void DoTran(string select,string update)
+        {
+
+            SqlConnection conn = getConn();
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+            SqlCommand myComm = new SqlCommand();
+            try
+            {
+                myComm.Connection = conn;
+                myComm.CommandText = "DECLARE @TranName VARCHAR(20) ";
+                myComm.CommandText = "DECLARE @myname VARCHAR(20) ";
+                myComm.CommandText += "SELECT @TranName = 'MyTransaction' ";
+                myComm.CommandText += "BEGIN TRANSACTION @TranName ";
+                myComm.CommandText += "USE yiquan ";
+                myComm.CommandText += select;//"USE yiquan ";
+                myComm.CommandText += update;// "UPDATE roysched SET royalty = royalty * 1.10 WHERE title_id LIKE 'Pc%' ";
+                myComm.CommandText += "COMMIT TRANSACTION MyTransaction ";
+                myComm.ExecuteNonQuery();
+                
+            }
+            catch (Exception err)
+            {
+                throw new ApplicationException("事务操作出错，系统信息：" + err.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         private void close(SqlConnection conn) {
             if (conn != null ) {
                 conn.Close();

@@ -252,6 +252,7 @@ namespace MyUtil
         public void zhunbeizhanghao(int dqinx,string youxi,out string name, out string pwd,out int xuanqu,out int dengji)
         {
             //服务器上有应该登录的账号则使用指定账号登录
+            WriteLog.WriteLogFile(dqinx + "", "找到需要练级的账号");
             name = null;
             pwd = null;
             xuanqu = -1;
@@ -270,14 +271,17 @@ namespace MyUtil
                     pwd = (string)dt.Rows[0][1];
                     xuanqu = (int)dt.Rows[0][2];
                     dengji = (int)dt.Rows[0][3];
+                    zhiweidengluzhong(dqinx, youxi, name);
+                    WriteLog.WriteLogFile(dqinx+"", "找到需要练级的账号" + name + " " + pwd + ",xuanqu " + xuanqu+"并置为登录中");
                 }
             }
         }
-
-        public void zhiweidengluzhong(int dqinx, string youxi, string name, string pcname)
+         
+        public void zhiweidengluzhong(int dqinx, string youxi, string name)
         {
             //服务器上有登录账号后置为登陆中
             SqlHelp sqh = SqlHelp.GetInstance();
+            WriteLog.WriteLogFile(dqinx + "", "置为登陆中" + name );
             lock (obj)
             {
                 try

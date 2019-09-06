@@ -623,7 +623,14 @@ namespace fuzhu
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
-
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  559,  338, 0xc67942},
+	{  351,  143, 0xf9f7f5},
+	{  553,   77, 0x6a85c7},
+});
+            ktfh1 = new FuHeSanDian("引导-送礼得ssr", ktsd1, 338, 354);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
 
 
 

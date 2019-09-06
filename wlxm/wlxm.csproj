@@ -83,7 +83,7 @@
     <Compile Include="YinYong_MyUtil\BaiDuShiTu.cs" />
     <Compile Include="YinYong_MyUtil\FtpHelp.cs" />
     <Compile Include="YinYong_MyUtil\MydmFunc.cs" />
-    <Compile Include="YinYong_MyUtil\MyFuncJingTai.cs" />
+    <Compile Include="YinYong_MyUtil\MyFuncJingNoTai.cs" />
     <Compile Include="YinYong_MyUtil\MyFuncUtil.cs" />
     <Compile Include="YinYong_MyUtil\MyLdcmd.cs" />
     <Compile Include="YinYong_MyUtil\SqlHelp.cs" />

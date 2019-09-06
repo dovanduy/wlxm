@@ -200,9 +200,8 @@ namespace wlxm
             myDm mf = new myDm();
             Jingjie ln = new Jingjie(mf, dqinx);
             string name = "";
-            ln.denglu(10, out name);
-            ln.zhuxian(name);
-            //ln.generalBasicShuziDemo(1, @"c:\mypic_save\11_89879937.bmp");
+            ln.quitdq("ddd");            
+            //ln.generalBasicShuziDemo(1, @"c:\mypic_save\1_192622781.bmp");
             MyFuncUtil.mylogandxianshi("结束");
             
         }
@@ -279,7 +278,8 @@ namespace wlxm
                     Thread.Sleep(20000);
                     return;
                 }
-                temp = MyFuncUtil.lurenResizeOk(dqinx);
+                MyFuncJingNoTai mno = new MyFuncJingNoTai();
+                temp = mno.lurenResizeOk(dqinx);
                 if (temp == false)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + ",resize没成功");
@@ -528,7 +528,7 @@ namespace wlxm
             }
             else
             {
-                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
+                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6 };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
             }
             string a_b = "d";
             //qdinit(a_b);
@@ -653,7 +653,8 @@ namespace wlxm
                     return;
                 }
                 Thread.Sleep(20000);
-                temp = MyFuncUtil.lurenResizeOk(dqinx);
+                MyFuncJingNoTai mno = new MyFuncJingNoTai();
+                temp = mno.lurenResizeOk(dqinx);
                 if (temp == false)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + ",resize没成功");
@@ -829,7 +830,8 @@ namespace wlxm
             int dqinx = int.Parse(this.textBox1.Text);
             int jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx, dizhi);
             int width = -1, height = -1;
-            MyFuncUtil.myReSize(dqinx, out width, out height);
+            MyFuncJingNoTai mno = new MyFuncJingNoTai();
+            mno.myReSize(dqinx, out width, out height);
         }
 
         private void gaotupian_Click(object sender, EventArgs e)

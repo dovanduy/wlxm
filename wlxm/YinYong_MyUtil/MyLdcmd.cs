@@ -673,9 +673,9 @@ namespace MyUtil
             return str[4];
         }
 
-        
 
-        public static void myScreencap(int index, string path,string dizhi)
+
+        public static void myScreencap(int index, string path, string dizhi = @"d:\ChangZhi\dnplayer2\")
         {
             MyLdcmd myldcmd = MyLdcmd.GetObject(dizhi);
             string zd = "/sdcard/screencap.png";
