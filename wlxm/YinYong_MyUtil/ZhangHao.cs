@@ -263,7 +263,7 @@ namespace MyUtil
                 DataTable dt = sqh.getAll("select top 1 name,pwd,isnull(xuanqu,-1),isnull(dengji,-1) from zhanghao "
                     + " where (xgsj < '" + dqsj
                     + "' or dengji is null) and yxbz='Y' and dengluzhong='N' "
-                    + " and yimai='N'  and youxi='" + youxi + "'");
+                    + " and yimai='N'  and youxi='" + youxi + "' with (tablockx)");
                 if (dt.Rows.Count > 0)
                 {
                     name = (string)dt.Rows[0][0];

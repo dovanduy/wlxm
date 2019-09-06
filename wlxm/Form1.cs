@@ -555,7 +555,7 @@ namespace wlxm
                 foreach (int inx in yunxingIndex)
                 {
                     ThreadPool.QueueUserWorkItem(new WaitCallback(duoxiand), inx);//线程池指定线程执行Auto方法
-                    Thread.Sleep(1000 * 40);
+                    //Thread.Sleep(1000 * 40);
                 }
                 var ks = MyFuncUtil.GetTimestamp();
                 while (true)
