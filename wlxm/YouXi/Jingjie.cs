@@ -1015,6 +1015,7 @@ namespace fuzhu
             if (!mf.mohuByLeiBool(fh.Sd) && !mf.mohuByLeiBool(fh2.Sd))
             {
                 string filename = this._dqinx + "退出时" + mf.GetTime() + ".bmp";
+                WriteLog.WriteLogFile(this._mnqName, "保存退出未能截到钻石" + filename);
                 mf.captureBmp(this._jubing, @"c:\mypic_save", filename);
             }
             ZhangHao zhanghao = new ZhangHao();
