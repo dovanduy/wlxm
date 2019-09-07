@@ -538,9 +538,19 @@ namespace fuzhu
 	{  534,  204, 0x000810},
 	{  581,  289, 0x4a2818},
 });
-            ktfh1 = new FuHeSanDian("特殊引导-关卡3-7", ktsd1, 541, 201);
+            ktfh1 = new FuHeSanDian("特殊引导-关卡3-7", ktsd1, 646, 14);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  369,  193, 0xffe984},
+	{  517,  190, 0x000810},
+	{  463,  104, 0x000810},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-关卡3-6", ktsd1, 646, 14,"小人在3-6");
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
 
             ktsd1 = new SanDian(new int[3, 3]{
 	{  436,  109, 0xffd963},
@@ -647,6 +657,25 @@ namespace fuzhu
 	{  363,  185, 0xe4c1b0},
 });
             ktfh1 = new FuHeSanDian("引导-得sr任意位置返回", ktsd1, 355, 369);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  337,  203, 0x47536f},
+	{  333,  174, 0x293454},
+	{  591,  305, 0x5e74b3},
+});
+            ktfh1 = new FuHeSanDian("引导-空邮箱返回", ktsd1, 645, 15);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  584,   94, 0xf1ca86},
+	{   55,  106, 0xfee38b},
+	{  255,  345, 0xeaba6b},
+});
+            ktfh1 = new FuHeSanDian("界面-集结石界面", ktsd1, 645, 15);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 

@@ -624,19 +624,19 @@ namespace wlxm
                 bool temp=MyFuncUtil.myQuit(dqinx, dizhi);
                 if (!temp)
                 {
-                    MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "关闭失败");
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
                     Thread.Sleep(20000);
-                    continue;
+                    return;
                 }
-                MyFuncUtil.mylogandxianshi("模拟器" + dqinx +"复原");
+                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原");
                 MyLdcmd.myRestore(dqinx, seed, dizhi);
-                MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "改名");
+                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改名");
                 MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
                 temp=MyFuncUtil.Launch(dqinx, dizhi);
                 if (!temp) {
-                    MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "打开失败");
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开失败");
                     Thread.Sleep(20000);
-                    continue;
+                    return;
                 }
                 Thread.Sleep(20000);
                 apkName = dict["境界"];
@@ -672,7 +672,7 @@ namespace wlxm
                 tmpBool = yq.denglu(15,out name);
                 if (!tmpBool)
                 {
-                    tmpBoolString.Append("登录环节出错");
+                    WriteLog.WriteLogFile(dqinx + "", "登录环节出错");
                     Thread.Sleep(1000 * 60 * 3);
                     return;
                 }                
@@ -680,8 +680,8 @@ namespace wlxm
                 //Thread.Sleep(1000 * 60*60);//停住1小时
                 cishu++;
                 var js = MyFuncUtil.GetTimestamp();
-                MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "循环"+cishu+"次数");
-                MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "循环1次耗时"+MyFuncUtil.SecondToHour(js-ks));
+                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环" + cishu + "次数");
+                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环1次耗时" + MyFuncUtil.SecondToHour(js - ks));
             }
         }
 
