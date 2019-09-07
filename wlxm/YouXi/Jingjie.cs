@@ -995,7 +995,7 @@ namespace fuzhu
             {
                 WriteLog.WriteLogFile(this._mnqName,"卡屏10分钟");
                 string path = @"c:\mypic_save\";
-                string name=this._dqinx+"_"+mf.GetTime()+".bmp";
+                string name="卡屏"+this._dqinx+"_"+mf.GetTime()+".bmp";
                 mf.captureBmp(this._jubing, path, name);
                 Thread.Sleep(10000);
                 rs = true;
@@ -1176,7 +1176,7 @@ namespace fuzhu
             }
             if (jiemian == 2)
             {
-                qushufrombaidu(out zuanshi2, fh2, 531, 5, 580, 25);
+                qushufrombaidu(out zuanshi, fh2, 531, 5, 580, 25);
             }
             if (!mf.mohuByLeiBool(fh.Sd) && !mf.mohuByLeiBool(fh2.Sd))
             {

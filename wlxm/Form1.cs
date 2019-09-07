@@ -200,9 +200,12 @@ namespace wlxm
             myDm mf = new myDm();
             Jingjie ln = new Jingjie(mf, dqinx);
 
-            ln.quitdq("cww5u7006gu");            
+            ZhangHao zh = new ZhangHao();
+            string n="",pwd="";
+            int xuanqu=-1,dengji=-1;
+            zh.zhunbeizhanghao(dqinx,"jingjie",out n,out pwd,out xuanqu,out dengji);
             //ln.generalBasicShuziDemo(1, @"c:\mypic_save\1_192622781.bmp");
-            MyFuncUtil.mylogandxianshi("结束");
+            MyFuncUtil.mylogandxianshi("结束"+n+" "+pwd);
             
         }
         private void lurenzhanghao(object inx)

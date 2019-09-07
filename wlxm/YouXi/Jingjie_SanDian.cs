@@ -641,7 +641,14 @@ namespace fuzhu
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
-
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  168,  219, 0x496957},
+	{  291,  244, 0xb8b155},
+	{  363,  185, 0xe4c1b0},
+});
+            ktfh1 = new FuHeSanDian("引导-得sr任意位置返回", ktsd1, 355, 369);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
 
 
             //志拓

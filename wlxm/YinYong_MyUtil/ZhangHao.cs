@@ -252,7 +252,7 @@ namespace MyUtil
         public void zhunbeizhanghao(int dqinx,string youxi,out string name, out string pwd,out int xuanqu,out int dengji)
         {
             //服务器上有应该登录的账号则使用指定账号登录
-            WriteLog.WriteLogFile(dqinx + "", "找到需要练级的账号");
+            WriteLog.WriteLogFile(dqinx + "", "开始找需要练级的账号");
             name = null;
             pwd = null;
             xuanqu = -1;
@@ -261,17 +261,22 @@ namespace MyUtil
             string dqsj = DateTime.Now.ToString("yyyy-MM-dd");
             lock (obj)
             {
-                DataTable dt = sqh.getAll("select top 1 name,pwd,isnull(xuanqu,-1),isnull(dengji,-1) from zhanghao  with (tablockx)"
+                string updatesql="update zhanghao with (UPDLOCK) set dengluzhong='Y',pcname='"+WriteLog.getMachineName()+"', dqindex="+dqinx
+                +" where name=(select top 1 name from zhanghao "
                     + " where (xgsj < '" + dqsj
                     + "' or dengji is null) and yxbz='Y' and dengluzhong='N' "
-                    + " and yimai='N'  and youxi='" + youxi + "'");
+                    + " and yimai='N'  and youxi='" + youxi + "')";
+                sqh.update(updatesql);
+                DataTable dt = sqh.getAll("select top 1 name,pwd,isnull(xuanqu,-1),isnull(dengji,-1) from zhanghao where yxbz='Y' and dengluzhong='Y' and pcname='"
+
+                    + WriteLog.getMachineName() + "' and dqindex=" + dqinx + " and youxi='" + youxi + "'")
+                    ;
                 if (dt.Rows.Count > 0)
                 {
                     name = (string)dt.Rows[0][0];
                     pwd = (string)dt.Rows[0][1];
                     xuanqu = (int)dt.Rows[0][2];
                     dengji = (int)dt.Rows[0][3];
-                    zhiweidengluzhong(dqinx, youxi, name);
                     WriteLog.WriteLogFile(dqinx+"", "找到需要练级的账号" + name + " " + pwd + ",xuanqu " + xuanqu+"并置为登录中");
                 }
             }
