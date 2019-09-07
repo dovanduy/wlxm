@@ -199,8 +199,8 @@ namespace wlxm
             //int t = MyLdcmd.addSimulator();
             myDm mf = new myDm();
             Jingjie ln = new Jingjie(mf, dqinx);
-            string name = "";
-            ln.quitdq("ddd");            
+
+            ln.quitdq("cww5u7006gu");            
             //ln.generalBasicShuziDemo(1, @"c:\mypic_save\1_192622781.bmp");
             MyFuncUtil.mylogandxianshi("结束");
             

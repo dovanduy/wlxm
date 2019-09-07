@@ -632,6 +632,14 @@ namespace fuzhu
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  484,   45, 0xf8d2c1},
+	{  486,   38, 0xeecbbf},
+	{  480,   54, 0xab6421},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-首充不打开", ktsd1, 338, 354);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
 
 
 

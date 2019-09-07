@@ -225,7 +225,7 @@ namespace MyUtil
                         else if (zuanshi != -1)
                         {
                             sqh.update("update zhanghao set xgsj='"
-                            + DateTime.Now.ToString("yyyy-MM-dd") + "'  zuanshi =" + zuanshi + " , dengluzhong='N' "
+                            + DateTime.Now.ToString("yyyy-MM-dd") + "',  zuanshi =" + zuanshi + " , dengluzhong='N' "
                             + " where name='" + name + "'");
                         }
                         else
