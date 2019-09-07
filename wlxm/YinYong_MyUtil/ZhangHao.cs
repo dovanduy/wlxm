@@ -228,6 +228,12 @@ namespace MyUtil
                             + DateTime.Now.ToString("yyyy-MM-dd") + "',  zuanshi =" + zuanshi + " , dengluzhong='N' "
                             + " where name='" + name + "'");
                         }
+                        else if (zuanshi != -1 && qiangzhequan!=-1)
+                        {
+                            sqh.update("update zhanghao set xgsj='"
+                            + DateTime.Now.ToString("yyyy-MM-dd") + "',  zuanshi =" + zuanshi + " , qiangzhequan=" + qiangzhequan + " , dengluzhong='N' "
+                            + " where name='" + name + "'");
+                        }
                         else
                         {
                             sqh.update("update zhanghao set xgsj='"

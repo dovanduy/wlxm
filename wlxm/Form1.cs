@@ -202,8 +202,16 @@ namespace wlxm
 
             ZhangHao zh = new ZhangHao();
             string n="",pwd="";
-            int xuanqu=-1,dengji=-1;
-            zh.zhunbeizhanghao(dqinx,"jingjie",out n,out pwd,out xuanqu,out dengji);
+            int xuanqu = -1, dengji = -1;
+            FuHeSanDian fh = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-集结石界面");
+            if (mf.mohuByLeiBool(fh.Sd))
+            {
+                WriteLog.WriteLogFile("", fh.Name);
+                if (mf.mohu(235, 319, 0x31b1a1) == 1)
+                {
+                    ln.qushufrombaidu(out dengji, fh, 0, 1, 10, 10, 87, 330, 20, 26);
+                }
+            }
             //ln.generalBasicShuziDemo(1, @"c:\mypic_save\1_192622781.bmp");
             MyFuncUtil.mylogandxianshi("结束"+n+" "+pwd);
             
@@ -365,25 +373,7 @@ namespace wlxm
                 MyFuncUtil.mylogandxianshi("序号" + j + ",结束");
             }
         }
-        private void qushufrombaidu(Jingjie yq,int jubing,myDm mf,out int qushu, FuHeSanDian qz, int x1, int y1, int x2, int y2)
-        {
-            qushu = -1;
-            if (mf.mohuByLeiBool(qz.Sd))
-            {
-                WriteLog.WriteLogFile("", qz.Name);
-                string filename = 1 + "_" + mf.GetTime() + ".bmp";
-                mf.captureBmp(jubing, @"c:\mypic_save\", filename, x1, y1, x2, y2);
-                if (mf.IsFileExist(@"c:\mypic_save\" + filename) == 1)
-                {
-                    string r = yq.generalBasicShuziDemo(1, @"c:\mypic_save\" + filename);
-                    if (r != null && r != "")
-                    {
-                        qushu = int.Parse(r);
-                    }
-                }
-                mf.mydelay(2000, 4000);
-            }
-        }
+        
         private void ceshi_button_Click(object sender, EventArgs e)
         {
             quanjubutton = 1;

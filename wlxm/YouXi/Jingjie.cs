@@ -915,7 +915,7 @@ namespace fuzhu
             }
         }
 
-        private void qushufrombaidu(out int qushu,FuHeSanDian qz,int x1,int y1,int x2,int y2,int x3,int y3,int x3w,int y3h)
+        public void qushufrombaidu(out int qushu,FuHeSanDian qz,int x1,int y1,int x2,int y2,int x3,int y3,int x3w,int y3h)
         {
             WriteLog.WriteLogFile(this._mnqName, qz.Name+"进入百度识别取数");
             qushu = -1;
@@ -1196,11 +1196,10 @@ namespace fuzhu
             }
             if (!mf.mohuByLeiBool(fh.Sd) && !mf.mohuByLeiBool(fh2.Sd) && zuanshi==-1)
             {
-                string filename = this._dqinx + "退出时" + name + ".bmp";
+                string filename = this._dqinx + "退出时钻石" + name + ".bmp";
                 WriteLog.WriteLogFile(this._mnqName, "保存退出未能截到钻石" + filename);
                 mf.captureBmp(this._jubing, @"c:\mypic_save", filename);           
                 WriteLog.WriteLogFile(this._mnqName, "钻石数没搞到");
-                return;
             }
             if (jiemian == 2) {
                 mf.mytap(this._jubing, 646, 14);
@@ -1215,10 +1214,20 @@ namespace fuzhu
                 if (mf.mohuByLeiBool(fh.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, fh.Name);
+                    if (mf.mohu(235, 319, 0x31b1a1) == 1)
+                    {
+                        qushufrombaidu(out qiangzhequan, fh, 219, 309, 256, 324, 87, 338, 20, 20);
+                    }
+                }
+                if (!mf.mohuByLeiBool(fh.Sd) && !mf.mohuByLeiBool(fh2.Sd) && zuanshi == -1)
+                {
+                    string filename = this._dqinx + "退出时强者" + name + ".bmp";
+                    WriteLog.WriteLogFile(this._mnqName, "保存退出未能截到强者券" + filename);
+                    mf.captureBmp(this._jubing, @"c:\mypic_save", filename);
+                    WriteLog.WriteLogFile(this._mnqName, "强者数没搞到");
+                    return;
                 }
             }
-            
-            
             ZhangHao zhanghao = new ZhangHao();
             zhanghao.tuichusaveNameAndPas(name,this._dqinx, WriteLog.getMachineName(), dengji, zuanshi, qiangzhequan);
         }
@@ -1492,6 +1501,10 @@ namespace fuzhu
             var txts = (from obj in (JArray)rs.Root["words_result"]
                         select (string)obj["words"]);
             string rt = "";
+            foreach (var r in txts)
+            {
+                WriteLog.WriteLogFile(ind + "", "原有的 " + r);                
+            }
             foreach (var r in txts)
             {
                 if (r != null && r != "")
