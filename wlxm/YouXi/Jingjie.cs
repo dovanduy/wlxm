@@ -548,6 +548,7 @@ namespace fuzhu
             int jinji = 0;
             int zdrs5 = 0;
             int meirijiangli = 0;
+            int jijieshimianfei = 0;
             //设置卡屏相关
             long kp1 = MyFuncUtil.GetTimestamp();
             long kpjishi = MyFuncUtil.GetTimestamp();
@@ -679,6 +680,53 @@ namespace fuzhu
                             mf.mytap(this._jubing, 646, 16);
                             youjian++;
                         }); 
+                }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-集结石界面");
+                if (jijieshimianfei == 0 && mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-集结石中免费");
+                    if (mf.mohuByLeiBool(ktsd1.Sd))
+                    {
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                        mf.mydelay(2000, 3000);
+                    }
+                    jijieshimianfei++;
+                }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面");
+                if (jijieshimianfei==0 && mf.mohuXunHuanJianChi(ktsd1.Sd, 15))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, "当前主界面,开始搞强者券");
+                    mf.mytap(this._jubing, 581, 357);
+                    mf.mydelay(4000, 6000);
+                    ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-集结石界面");
+                    if (mf.mohuByLeiBool(ktsd1.Sd))
+                    {
+                        if (jijieshimianfei == 0 && mf.mohuByLeiBool(ktsd1.Sd))
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                            ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-集结石中免费");
+                            if (mf.mohuByLeiBool(ktsd1.Sd))
+                            {
+                                mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                mf.mydelay(2000, 3000);                                
+                            }
+                        }
+                        jijieshimianfei++;
+                    }
+                }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-集结石界面");
+                if (jijieshimianfei>0 && mf.mohuXunHuanJianChi(ktsd1.Sd, 20))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-集结石中免费");
+                    if (mf.mohuByLeiBool(ktsd1.Sd))
+                    {
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                        mf.mydelay(2000, 3000);
+                    }
+                    jijieshimianfei++;                   
+                    mf.mytap(this._jubing, 645, 15);
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面");
                 if (fuli<2 && mf.mohuXunHuanJianChi(ktsd1.Sd, 20))

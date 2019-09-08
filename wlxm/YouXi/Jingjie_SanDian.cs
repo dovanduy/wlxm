@@ -679,6 +679,23 @@ namespace fuzhu
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  249,  317, 0x30a976},
+	{  260,  317, 0x2c8d66},
+	{  291,  332, 0xed2e3e},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-集结石中免费", ktsd1, 242, 341);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  638,   15, 0xa6c8ff},
+	{  656,   21, 0xa7bbda},
+	{  511,   13, 0xaad2fc},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-右上角关闭钮集结石", ktsd1, 645, 15);
+            //_list_yqsandian.Add(ktsd1);
+            //_list_yqfhsandian.Add(ktfh1);
 
             //志拓
             ktsd1 = new SanDian(new int[3, 3]{
