@@ -21,7 +21,7 @@ namespace wlxm
         /// <summary>
         /// 辅助的版本
         /// </summary>
-        private static int fuzhuBanben = 11;
+        private static int fuzhuBanben = 12;
         
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace wlxm
 
             ZhangHao zh = new ZhangHao();
             string n="",pwd="";
-            int xuanqu1 = -1, dengji = -1;
+            int xuanqu2 = -1, dengji = -1;
             FuHeSanDian fh = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-集结石界面");
             if (mf.mohuByLeiBool(fh.Sd))
             {

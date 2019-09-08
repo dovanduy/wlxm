@@ -431,8 +431,8 @@ namespace fuzhu
                     denglu = 1;
                 }
                 if (denglu == 0 &&(mf.mohuXunHuanJianChi(kt.Sd,20) || mf.mohuXunHuanJianChi(kt1.Sd,20))) {
-                    WriteLog.WriteLogFile(this._mnqName, "当前账号无法登陆,  不再  置为无效同时换号");
-                    //zhanghao.zhiweiwuxiao(this._dqinx, "jingjie", name, WriteLog.getMachineName());
+                    WriteLog.WriteLogFile(this._mnqName, "当前账号无法登陆,置为N,修改时间更新换号");
+                    zhanghao.zhiweidengluzhongN(this._dqinx, "jingjie", name, WriteLog.getMachineName());
                     youxi = "jingjie";
                     zhanghao.zhunbeizhanghao(this._dqinx, youxi, out name, out pwd, out xuanqu, out dengji);
                     if (name == null || name == "" || pwd == null || pwd == "")
@@ -523,7 +523,7 @@ namespace fuzhu
                 if ((js - ks) > 1000 * 60 * fenzhong) {
                     WriteLog.WriteLogFile(this._mnqName, "登录阶段超时");
                     WriteLog.WriteLogFile(this._mnqName, "找到需要练级的账号" + name + " " + pwd + ",xuanqu " + xuanqu + ",恢复为不登录");
-                    zhanghao.zhiweidengluzhongN("jingjie", name, WriteLog.getMachineName());
+                    zhanghao.zhiweidengluzhongN(this._dqinx,"jingjie", name, WriteLog.getMachineName());
                     break;
                 }
             }

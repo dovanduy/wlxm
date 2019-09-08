@@ -270,8 +270,8 @@ namespace MyUtil
             {
                 string updatesql="update zhanghao with (UPDLOCK) set dengluzhong='Y',pcname='"+WriteLog.getMachineName()+"', dqindex="+dqinx
                 +" where name=(select top 1 name from zhanghao "
-                    + " where (xgsj < '" + dqsj
-                    + "' or dengji is null) and yxbz='Y' and dengluzhong='N' "
+                    + " where xgsj < '" + dqsj
+                    + "'  and yxbz='Y' and dengluzhong='N' "
                     + " and yimai='N'  and youxi='" + youxi + "')";
                 sqh.update(updatesql);
                 DataTable dt = sqh.getAll("select top 1 name,pwd,isnull(xuanqu,-1),isnull(dengji,-1) from zhanghao where yxbz='Y' and dengluzhong='Y' and pcname='"
@@ -308,7 +308,7 @@ namespace MyUtil
             }
         }
 
-        public void zhiweidengluzhongN(string youxi, string name, string pcname)
+        public void zhiweidengluzhongN(int dqinx,string youxi, string name, string pcname)
         {
             //服务器上有登录账号后置为登陆中
             SqlHelp sqh = SqlHelp.GetInstance();
@@ -316,7 +316,8 @@ namespace MyUtil
             {
                 try
                 {
-                    sqh.update("update zhanghao set dengluzhong='N' where name='" + name + "' and youxi='" + youxi + "'");
+                    string dqsj = DateTime.Now.ToString("yyyy-MM-dd");
+                    sqh.update("update zhanghao set dengluzhong='N',xgsj='" + dqsj + "',dqindex="+dqinx+" where name='" + name + "' and youxi='" + youxi + "'");
                 }
                 catch (Exception ex)
                 {
