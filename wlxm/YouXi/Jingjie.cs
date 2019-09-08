@@ -848,6 +848,7 @@ namespace fuzhu
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
                     mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                 }
+
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-上阵人数不足");
                 if ((zdrs5 == 0) && mf.mohuByLeiBool(ktsd1.Sd))
                 {
@@ -858,6 +859,14 @@ namespace fuzhu
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
                     mf.mytap(this._jubing, 411, 251);
+                }
+
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-空邮箱返回");
+                if (mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                    youjian++;
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-第五个人数");
                 if ((zdrs5 == 0) && mf.mohuByLeiBool(ktsd1.Sd))

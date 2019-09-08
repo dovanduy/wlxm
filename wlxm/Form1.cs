@@ -202,7 +202,7 @@ namespace wlxm
 
             ZhangHao zh = new ZhangHao();
             string n="",pwd="";
-            int xuanqu = -1, dengji = -1;
+            int xuanqu1 = -1, dengji = -1;
             FuHeSanDian fh = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-集结石界面");
             if (mf.mohuByLeiBool(fh.Sd))
             {

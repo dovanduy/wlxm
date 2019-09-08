@@ -665,7 +665,7 @@ namespace fuzhu
 	{  333,  174, 0x293454},
 	{  591,  305, 0x5e74b3},
 });
-            ktfh1 = new FuHeSanDian("引导-空邮箱返回", ktsd1, 645, 15);
+            ktfh1 = new FuHeSanDian("特殊引导-空邮箱返回", ktsd1, 645, 15);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
