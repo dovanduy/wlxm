@@ -118,6 +118,7 @@ namespace wlxm
         {
 
             var ks = MyFuncUtil.GetTimestamp();
+            var ks_gxyunxing = MyFuncUtil.GetTimestamp();
             var i = 1;
             var yici = 0;
             string zidong = "";
@@ -153,6 +154,19 @@ namespace wlxm
                         Thread thread = new Thread(threadStart);
                         thread.Name = "wodedpanduoxian";
                         thread.Start();
+                    }
+                }
+                //每隔一小时由zk更新一次 测试时 每隔1分钟
+                if (WriteLog.getMachineName().ToUpper().Equals("WLZHONGKONG") && (js - ks_gxyunxing) > 1000 * 60*30)
+                {
+                    ks_gxyunxing = MyFuncUtil.GetTimestamp();
+                    ZhangHao zh = new ZhangHao();
+                    DateTime dt=zh.getYunXingQkLasttime();
+                    TimeSpan span = DateTime.Now.Subtract(dt);
+                    WriteLog.WriteLogFile("", "准备更新与上次统计相比,间隔 " + span.Minutes + "分钟");
+                    if (span.Minutes > 30) {
+                        WriteLog.WriteLogFile("", "与上次统计相比,间隔 " + span.Minutes + "分钟");
+                        zh.gxYunXingQk();
                     }
                 }
             }
@@ -200,20 +214,8 @@ namespace wlxm
             myDm mf = new myDm();
             Jingjie ln = new Jingjie(mf, dqinx);
 
-            ZhangHao zh = new ZhangHao();
-            string n="",pwd="";
-            int xuanqu2 = -1, dengji = -1;
-            FuHeSanDian fh = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-集结石界面");
-            if (mf.mohuByLeiBool(fh.Sd))
-            {
-                WriteLog.WriteLogFile("", fh.Name);
-                if (mf.mohu(235, 319, 0x31b1a1) == 1)
-                {
-                    ln.qushufrombaidu(out dengji, fh, 0, 1, 10, 10, 87, 330, 20, 26);
-                }
-            }
             //ln.generalBasicShuziDemo(1, @"c:\mypic_save\1_192622781.bmp");
-            MyFuncUtil.mylogandxianshi("结束"+n+" "+pwd);
+            MyFuncUtil.mylogandxianshi("结束");
             
         }
         private void lurenzhanghao(object inx)

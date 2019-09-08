@@ -83,6 +83,7 @@ namespace MyUtil
         }
 
         public DataTable getAll(string sql) {
+            WriteLog.WriteLogFile("", sql);
             DataTable dt = new DataTable();
             lock (obj)
             {
@@ -94,8 +95,7 @@ namespace MyUtil
                 try
                 {
                     conn.Open();
-                    SqlDataAdapter sqlDa = new SqlDataAdapter(sql, conn);
-                    WriteLog.WriteLogFile("", sql);
+                    SqlDataAdapter sqlDa = new SqlDataAdapter(sql, conn);                    
                     dt = new DataTable();
                     sqlDa.Fill(dt);
                 }
@@ -113,6 +113,7 @@ namespace MyUtil
         }
 
         public void update(string sql) {
+            WriteLog.WriteLogFile("", sql);
             lock (obj){
                 SqlConnection conn = getConn();
                 if (conn.State == ConnectionState.Open)
@@ -122,8 +123,7 @@ namespace MyUtil
                 try
                 {
                     conn.Open();
-                    SqlCommand sqlCmd = new SqlCommand(sql, conn);
-                    WriteLog.WriteLogFile("", sql);
+                    SqlCommand sqlCmd = new SqlCommand(sql, conn);                    
                     sqlCmd.ExecuteNonQuery();
                 }
                 catch (Exception ex)

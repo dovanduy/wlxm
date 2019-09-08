@@ -136,7 +136,10 @@ namespace MyUtil
             int width = dm.GetScreenWidth();
             int height = dm.GetScreenHeight();
             int foobar = dm.CreateFoobarRect(0, width - 210, height - 210, 200, 200);
-            var dm_ret = dm.FoobarPrintText(foobar, a, "ff0000");
+            if (a.Length > 200) {
+                a=a.Substring(0,200);
+            }
+            var dm_ret = dm.FoobarPrintText(foobar,a , "ff0000");
             dm.FoobarUpdate(foobar);
             dm.mydelay(1000, 3000);
             dm_ret = dm.FoobarClose(foobar);
