@@ -924,9 +924,9 @@ namespace fuzhu
             }
         }
 
-        public void qushufrombaidu(out int qushu,FuHeSanDian qz,int x1,int y1,int x2,int y2,int x3,int y3,int x3w,int y3h)
+        public void qushufrombaidu(out int qushu,FuHeSanDian qz,int x1,int y1,int x2,int y2,int x3,int y3,int x3w,int y3h,string a="默认")
         {
-            WriteLog.WriteLogFile(this._mnqName, qz.Name+"进入百度识别取数");
+            WriteLog.WriteLogFile(this._mnqName, qz.Name+"进入百度识别取数"+a);
             qushu = -1;
             if (mf.mohuByLeiBool(qz.Sd))
             {
@@ -939,6 +939,7 @@ namespace fuzhu
                     if (r != null && r != "")
                     {
                         qushu = int.Parse(r);
+                        WriteLog.WriteLogFile(this._mnqName," 截图取数的结果"+qushu);
                     }
                 }
             }
@@ -961,6 +962,7 @@ namespace fuzhu
                     if (r != null && r != "")
                     {
                         qushu = int.Parse(r);
+                        WriteLog.WriteLogFile(this._mnqName, " 高清取数的结果" + qushu);
                     }
                 }
                 mf.mydelay(2000, 4000);
@@ -1197,11 +1199,13 @@ namespace fuzhu
             FuHeSanDian fh2 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-关卡界面");
             if (jiemian == 1)
             {
-                qushufrombaidu(out zuanshi, fh, 531, 3, 580, 25,511, 756, 20, 60);
+                qushufrombaidu(out zuanshi, fh, 531, 3, 580, 25,511, 756, 20, 60,"主界面取数");
+                WriteLog.WriteLogFile(this._mnqName, "取数结果zuanshi=" + zuanshi);
             }
             if (jiemian == 2)
             {
-                qushufrombaidu(out zuanshi, fh2, 531, 5, 580, 25, 511, 756, 20, 60);
+                qushufrombaidu(out zuanshi, fh2, 531, 5, 580, 25, 511, 756, 20, 60,"关卡取数");
+                WriteLog.WriteLogFile(this._mnqName, "取数结果zuanshi=" + zuanshi);
             }
             if (!mf.mohuByLeiBool(fh.Sd) && !mf.mohuByLeiBool(fh2.Sd) && zuanshi==-1)
             {
@@ -1214,29 +1218,30 @@ namespace fuzhu
                 mf.mytap(this._jubing, 646, 14);
                 mf.mydelay(2000, 3000);
             }
-            if (mf.mohuByLeiBool(fh.Sd))
+            if (mf.mohuXunHuanJianChi(fh.Sd, 15))
             {
                 WriteLog.WriteLogFile(this._mnqName, "当前主界面,开始搞强者券");
                 mf.mytap(this._jubing, 581, 357);
-                mf.mydelay(2000, 3000);
+                mf.mydelay(4000, 6000);
                 fh = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-集结石界面");
                 if (mf.mohuByLeiBool(fh.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, fh.Name);
                     if (mf.mohu(235, 319, 0x31b1a1) == 1)
                     {
-                        qushufrombaidu(out qiangzhequan, fh, 219, 309, 256, 324, 87, 338, 20, 20);
+                        qushufrombaidu(out qiangzhequan, fh, 219, 309, 256, 324, 87, 338, 20, 20,"集结石取数");
+                        WriteLog.WriteLogFile(this._mnqName, "取数结果qiangzhequan=" + qiangzhequan);
                     }
                 }
-                if (!mf.mohuByLeiBool(fh.Sd) && !mf.mohuByLeiBool(fh2.Sd) && zuanshi == -1)
+                if (qiangzhequan == -1)
                 {
                     string filename = this._dqinx + "退出时强者" + name + ".bmp";
                     WriteLog.WriteLogFile(this._mnqName, "保存退出未能截到强者券" + filename);
                     mf.captureBmp(this._jubing, @"c:\mypic_save", filename);
-                    WriteLog.WriteLogFile(this._mnqName, "强者数没搞到");
-                    return;
+                    WriteLog.WriteLogFile(this._mnqName, "强者券没搞到");
                 }
             }
+            WriteLog.WriteLogFile(this._mnqName, "强者券 "+qiangzhequan+",钻石 "+zuanshi);
             ZhangHao zhanghao = new ZhangHao();
             zhanghao.tuichusaveNameAndPas(name,this._dqinx, WriteLog.getMachineName(), dengji, zuanshi, qiangzhequan);
         }

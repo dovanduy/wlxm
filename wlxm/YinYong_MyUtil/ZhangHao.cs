@@ -206,6 +206,7 @@ namespace MyUtil
 
         public void tuichusaveNameAndPas(string name,int dqindex,string pcname,int dengji,int zuanshi,int qiangzhequan)
         {
+            WriteLog.WriteLogFile(dqindex+"", "name " + name + ",pcname " + pcname+",强者券 " + qiangzhequan + ",钻石 " + zuanshi);
             SqlHelp sqh = SqlHelp.GetInstance();
             lock (obj)
             {
