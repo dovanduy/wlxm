@@ -906,7 +906,12 @@ namespace fuzhu
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
                     mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                 }
-
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-角色界面有5人");
+                if (mf.mohuXunHuanJianChi(ktsd1.Sd, 20))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-上阵人数不足");
                 if ((zdrs5 == 0) && mf.mohuByLeiBool(ktsd1.Sd))
                 {
@@ -950,6 +955,20 @@ namespace fuzhu
                 }
 
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-关卡3-6第二次");
+                if (mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    mf.mydelay(1000, 2000);
+                    break;
+                }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-关卡3-6第3次");
+                if (mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    mf.mydelay(1000, 2000);
+                    break;
+                }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-关卡3-7第二次");
                 if (mf.mohuByLeiBool(ktsd1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);

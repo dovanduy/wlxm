@@ -724,7 +724,41 @@ namespace fuzhu
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
-           
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  471,   87, 0xc56672},
+	{  356,  190, 0xffce69},
+	{  519,  190, 0x4a2818},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-关卡3-6第3次", ktsd1, 461, 97, "小人在第3-6");
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  249,  117, 0xffddc9},
+	{  521,  169, 0xd8b9fe},
+	{  507,  299, 0xc3e7ff},
+});
+            ktfh1 = new FuHeSanDian("引导-关闭领取提示露琪亚", ktsd1, 586, 135);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  548,  194, 0xdc707a},
+	{  448,   90, 0xffeb84},
+	{  579,  289, 0x000810},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-关卡3-7第二次", ktsd1, 534, 197, "小人在第3-7");
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{   27,  281, 0xf7c8ae},
+	{   27,  100, 0xe37539},
+	{   31,  156, 0x363736},
+});
+            ktfh1 = new FuHeSanDian("界面-角色界面有5人", ktsd1, 643, 13, "有5个人物时间停超过6s则关");
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
 
 
 
