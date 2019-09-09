@@ -119,6 +119,7 @@ namespace wlxm
 
             var ks = MyFuncUtil.GetTimestamp();
             var ks_gxyunxing = MyFuncUtil.GetTimestamp();
+            var ks_cqyunxing = MyFuncUtil.GetTimestamp();
             var i = 1;
             var yici = 0;
             string zidong = "";
@@ -167,6 +168,20 @@ namespace wlxm
                     if (span.Minutes > 30) {
                         WriteLog.WriteLogFile("", "与上次统计相比,间隔 " + span.Minutes + "分钟");
                         zh.gxYunXingQk();
+                    }
+                }
+
+                //每隔60分钟查看是否应该重启 测试时 每隔1分钟
+                if ((js - ks_cqyunxing) > 1000 * 60 * 60)
+                {
+                    ks_cqyunxing = MyFuncUtil.GetTimestamp();
+                    ZhangHao zh = new ZhangHao();
+                    bool t = zh.panDuanChongQi(WriteLog.getMachineName());
+                    if (t)
+                    {
+                        WriteLog.WriteLogFile("", "当前需要重启" + DateTime.Now);
+                        myDm dm = new myDm();
+                        dm.ExitOs(2);
                     }
                 }
             }
