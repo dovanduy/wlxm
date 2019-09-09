@@ -618,7 +618,7 @@ namespace wlxm
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
                     Thread.Sleep(20000);
-                    return;
+                    continue;
                 }
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原");
                 MyLdcmd.myRestore(dqinx, seed, dizhi);
@@ -628,7 +628,7 @@ namespace wlxm
                 if (!temp) {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开失败");
                     Thread.Sleep(20000);
-                    return;
+                    continue;
                 }
                 Thread.Sleep(20000);
                 apkName = dict["境界"];
@@ -637,7 +637,7 @@ namespace wlxm
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开app" + apkName + "失败");
                     Thread.Sleep(20000);
-                    return;
+                    continue;
                 }
                 int w = -1, h = -1;
                 MyFuncUtil.getWindowSize(dqinx, out w, out h);
@@ -645,7 +645,7 @@ namespace wlxm
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "w h不对" + w + " " + h);
                     Thread.Sleep(20000);
-                    return;
+                    continue;
                 }
                 Thread.Sleep(20000);
                 MyFuncJingNoTai mno = new MyFuncJingNoTai();
@@ -653,7 +653,7 @@ namespace wlxm
                 if (temp == false)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + ",resize没成功");
-                    return;
+                    continue;
                 }
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "降低cpu");
                 MyLdcmd.myDownCpu(dqinx, 50);
@@ -666,7 +666,7 @@ namespace wlxm
                 {
                     WriteLog.WriteLogFile(dqinx + "", "登录环节出错");
                     Thread.Sleep(1000 * 60 * 3);
-                    return;
+                    continue;
                 }                
                 yq.zhuxian(name);
                 //Thread.Sleep(1000 * 60*60);//停住1小时

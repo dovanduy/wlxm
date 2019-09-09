@@ -697,6 +697,37 @@ namespace fuzhu
             //_list_yqsandian.Add(ktsd1);
             //_list_yqfhsandian.Add(ktfh1);
 
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  355,  266, 0x3a4ea8},
+	{  466,  235, 0xb5c1d9},
+	{  411,  117, 0x406a9b},
+});
+            ktfh1 = new FuHeSanDian("引导-关闭购买集结石", ktsd1, 458, 116);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  426,  251, 0xca8f45},
+	{  292,  250, 0x3857ac},
+	{  364,  158, 0xa9acb6},
+});
+            ktfh1 = new FuHeSanDian("引导-不降低分辨率", ktsd1, 280, 252);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  447,  104, 0x040a14},
+	{  352,  191, 0xfcd666},
+	{  518,  188, 0x492a1c},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-关卡3-6第二次", ktsd1, 461, 97,"小人在第3-6");
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+           
+
+
+
             //志拓
             ktsd1 = new SanDian(new int[3, 3]{
 	            {  152,   88, 0xffc559},
@@ -882,7 +913,7 @@ namespace fuzhu
 	{  251,   54, 0xfefafa},
 	{  458,  315, 0xe94731},
             });
-            ss = new FuHeSanDian("引导-集结--购买1次", ktsd1, 239, 335);
+            ss = new FuHeSanDian("特殊引导-集结--购买1次", ktsd1, 239, 335);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ss);
 

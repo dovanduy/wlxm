@@ -207,7 +207,7 @@ namespace MyUtil
 
         public void tuichusaveNameAndPas(string name,int dqindex,string pcname,int dengji,int zuanshi,int qiangzhequan)
         {
-            WriteLog.WriteLogFile(dqindex+"", "name " + name + ",pcname " + pcname+",强者券 " + qiangzhequan + ",钻石 " + zuanshi);
+            WriteLog.WriteLogFile(dqindex+"", "name " + name + ",pcname " + pcname+",强者券 " + qiangzhequan + ",钻石 " + zuanshi+ ",等级 " +dengji);
             SqlHelp sqh = SqlHelp.GetInstance();
             lock (obj)
             {
@@ -224,7 +224,7 @@ namespace MyUtil
                             + dengji + ", zuanshi =" + zuanshi + " , qiangzhequan=" + qiangzhequan + " , dengluzhong='N' "
                             + " where name='" + name + "'");
                         }
-                        else if (zuanshi != -1)
+                        else if (zuanshi != -1 && qiangzhequan == -1)
                         {
                             sqh.update("update zhanghao set xgsj='"
                             + DateTime.Now.ToString("yyyy-MM-dd") + "',  zuanshi =" + zuanshi + " , dengluzhong='N' "
