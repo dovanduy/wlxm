@@ -466,7 +466,7 @@ namespace MyUtil
                     pn + " cc from yunxingqk where xh in( "
                     + "select max(xh) zd from yunxingqk)) a1,(select xh," + pn + " cc from yunxingqk "
                     + " where xh in(select max(xh)-1 cd from yunxingqk)) a2";
-                    DataTable dt = sqh.getAll("sqlsel");
+                    DataTable dt = sqh.getAll(sqlsel);
                     if (dt.Rows.Count > 0)
                     {
                         int a = (int)dt.Rows[0][0];

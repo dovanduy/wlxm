@@ -228,7 +228,8 @@ namespace wlxm
             //int t = MyLdcmd.addSimulator();
             myDm mf = new myDm();
             Jingjie ln = new Jingjie(mf, dqinx);
-            mf.ExitOs(2);
+            ZhangHao zh = new ZhangHao();
+            bool t = zh.panDuanChongQi(WriteLog.getMachineName());
             //ln.generalBasicShuziDemo(1, @"c:\mypic_save\1_192622781.bmp");
             MyFuncUtil.mylogandxianshi("结束");
             
