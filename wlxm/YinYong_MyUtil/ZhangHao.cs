@@ -471,7 +471,7 @@ namespace MyUtil
                     {
                         int a = (int)dt.Rows[0][0];
                         WriteLog.WriteLogFile("", "更新运行情况差异值 "+a);
-                        if (a <= 0)
+                        if (a == 0)
                         {
                             return true;
                         }

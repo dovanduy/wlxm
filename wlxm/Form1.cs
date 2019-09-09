@@ -122,7 +122,7 @@ namespace wlxm
             var ks_cqyunxing = MyFuncUtil.GetTimestamp();
             var i = 1;
             var yici = 0;
-            string zidong = "";
+            string zidong = "";            
             while (true)
             {
                 Thread.Sleep(1000);
@@ -172,7 +172,7 @@ namespace wlxm
                 }
 
                 //每隔60分钟查看是否应该重启 测试时 每隔1分钟
-                if ((js - ks_cqyunxing) > 1000 * 60 * 60)
+                if ((js - ks_cqyunxing) > 1000 * 60 * 90)
                 {
                     ks_cqyunxing = MyFuncUtil.GetTimestamp();
                     ZhangHao zh = new ZhangHao();
