@@ -158,14 +158,14 @@ namespace wlxm
                     }
                 }
                 //每隔一小时由zk更新一次 测试时 每隔1分钟
-                if (WriteLog.getMachineName().ToUpper().Equals("WLZHONGKONG") && (js - ks_gxyunxing) > 1000 * 60*30)
+                if (WriteLog.getMachineName().ToUpper().Equals("WLZHONGKONG") && (js - ks_gxyunxing) > 1000 * 60*20)
                 {
                     ks_gxyunxing = MyFuncUtil.GetTimestamp();
                     ZhangHao zh = new ZhangHao();
                     DateTime dt=zh.getYunXingQkLasttime();
                     TimeSpan span = DateTime.Now.Subtract(dt);
                     WriteLog.WriteLogFile("", "准备更新与上次统计相比,间隔 " + span.Minutes + "分钟");
-                    if (span.Minutes > 30) {
+                    if (span.Minutes > 60) {
                         WriteLog.WriteLogFile("", "与上次统计相比,间隔 " + span.Minutes + "分钟");
                         zh.gxYunXingQk();
                     }
@@ -539,7 +539,7 @@ namespace wlxm
             }
             else
             {
-                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
+                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
             }
             string a_b = "d";
             //qdinit(a_b);
