@@ -258,10 +258,10 @@ namespace fuzhu
             _list_yqfhsandian.Add(ktfh1);
 
             ktsd1 = new SanDian(new int[3, 3]{
-	            {   45,   45, 0xf3fbfe},
-	            {  254,  302, 0xf51919},
-	            {  622,  304, 0x94cfde},
-            });
+	{   55,   55, 0xe8231e},
+	{  557,   28, 0xdce8fa},
+	{  671,   31, 0x3f496f},
+});
             ktfh1 = new FuHeSanDian("选区-出现进入游戏", ktsd1, 617, 298);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);

@@ -12,6 +12,7 @@ namespace MyUtil
 {
     public class ZhangHao
     {
+        
         private static readonly object obj = new object();
         public void zd() {
             MyFuncUtil.mylogandxianshi("开始测试");
