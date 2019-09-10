@@ -172,7 +172,7 @@ namespace wlxm
                 }
 
                 //每隔60分钟查看是否应该重启 测试时 每隔1分钟
-                if ((js - ks_cqyunxing) > 1000 * 60 * 90)
+                if (WriteLog.getMachineName().ToUpper().Equals("WLZHONGKONG") && (js - ks_cqyunxing) > 1000 * 60 * 90)
                 {
                     ks_cqyunxing = MyFuncUtil.GetTimestamp();
                     ZhangHao zh = new ZhangHao();
@@ -229,7 +229,7 @@ namespace wlxm
             myDm mf = new myDm();
             Jingjie ln = new Jingjie(mf, dqinx);
             ZhangHao zh = new ZhangHao();
-            bool t = zh.panDuanChongQi(WriteLog.getMachineName());
+            zh.shutdown("11");
             //ln.generalBasicShuziDemo(1, @"c:\mypic_save\1_192622781.bmp");
             MyFuncUtil.mylogandxianshi("结束");
             
