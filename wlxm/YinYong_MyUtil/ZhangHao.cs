@@ -5,7 +5,7 @@ using System.Text;
 using xDM;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
+using System.Management;
 using Entity;
 
 namespace MyUtil
@@ -490,39 +490,7 @@ namespace MyUtil
 
         public void shutdown(string ip)
         {
-            Process commandProcess = new Process();
-            try
-            {
-                commandProcess.StartInfo.FileName = "cmd.exe";
-                commandProcess.StartInfo.UseShellExecute = false;
-                commandProcess.StartInfo.CreateNoWindow = true;
-                commandProcess.StartInfo.RedirectStandardError = true;
-                commandProcess.StartInfo.RedirectStandardInput = true;
-                commandProcess.StartInfo.RedirectStandardOutput = true;
-                commandProcess.Start();//net use \\192.168.0.2\ipc$ "passwotd "/usetr:admin "
-                commandProcess.StandardInput.WriteLine("shutdown /r /m "+ip+" /t 200 /f");
-                commandProcess.StandardInput.WriteLine("exit");
-                for (; !commandProcess.HasExited; )//等待cmd命令运行完毕
-                {
-                    System.Threading.Thread.Sleep(1);
-                }
-                //错误输出
-                string tmpout = commandProcess.StandardError.ReadToEnd();
-                string tmpout1 = commandProcess.StandardOutput.ReadToEnd();
-                WriteLog.WriteLogFile("", "关机错误信息 " + tmpout + " " + tmpout1);
-            }
-            catch (Exception e)
-            {
-                WriteLog.WriteLogFile("", "关机异常信息 "+e.Message);
-            }
-            finally
-            {
-                if (commandProcess != null)
-                {
-                    commandProcess.Dispose();
-                    commandProcess = null;
-                }
-            }
+           
 
         }
     }
