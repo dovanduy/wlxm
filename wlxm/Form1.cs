@@ -172,7 +172,7 @@ namespace wlxm
                 }
 
                 //每隔60分钟查看是否应该重启 测试时 每隔1分钟
-                if (WriteLog.getMachineName().ToUpper().Equals("WLZHONGKONG") && (js - ks_cqyunxing) > 1000 * 60 * 90)
+                if (WriteLog.getMachineName().ToUpper().Equals("WLZHONGKONG") && (js - ks_cqyunxing) > 1000 * 60 * 60)
                 {
                     ks_cqyunxing = MyFuncUtil.GetTimestamp();
                     ZhangHao zh = new ZhangHao();
@@ -229,7 +229,7 @@ namespace wlxm
             myDm mf = new myDm();
             Jingjie ln = new Jingjie(mf, dqinx);
             ZhangHao zh = new ZhangHao();
-            zh.shutdown("11");
+            zh.shutdown("192.168.0.10");
             //ln.generalBasicShuziDemo(1, @"c:\mypic_save\1_192622781.bmp");
             MyFuncUtil.mylogandxianshi("结束");
             
@@ -535,11 +535,11 @@ namespace wlxm
             int[] yunxingIndex = null;
             if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
             {
-                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };//, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19
+                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11, 12, 13, 14, 15, 16, };//, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19
             }
             else
             {
-                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6 };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
+                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
             }
             string a_b = "d";
             //qdinit(a_b);
@@ -627,7 +627,7 @@ namespace wlxm
             {
                 var ks = MyFuncUtil.GetTimestamp();
                 Thread.Sleep(2000);
-                MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "进入到循环当中，thread:" + Thread.CurrentThread.ManagedThreadId);
+                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "进入到循环当中，thread:" + Thread.CurrentThread.ManagedThreadId);
                 Thread.Sleep(1000);
                 bool temp=MyFuncUtil.myQuit(dqinx, dizhi);
                 if (!temp)

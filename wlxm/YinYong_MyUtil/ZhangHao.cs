@@ -499,7 +499,7 @@ namespace MyUtil
                 commandProcess.StartInfo.RedirectStandardError = true;
                 commandProcess.StartInfo.RedirectStandardInput = true;
                 commandProcess.StartInfo.RedirectStandardOutput = true;
-                commandProcess.Start();
+                commandProcess.Start();//net use \\192.168.0.2\ipc$ "passwotd "/usetr:admin "
                 commandProcess.StandardInput.WriteLine("shutdown /r /m "+ip+" /t 200 /f");
                 commandProcess.StandardInput.WriteLine("exit");
                 for (; !commandProcess.HasExited; )//等待cmd命令运行完毕

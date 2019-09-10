@@ -917,7 +917,11 @@ namespace fuzhu
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
                     mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                    mf.mydelay(3000, 4000);
+                    mf.mytap(this._jubing, 43, 344);
+                    zdrs5 = 1;
                 }
+
                 if ((zdrs5 == 1) && mf.mohuByLeiBool(ktsd1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
@@ -935,6 +939,7 @@ namespace fuzhu
                 if ((zdrs5 == 0) && mf.mohuByLeiBool(ktsd1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    mf.mytap(this._jubing, 43,344);
                     zdrs5=1;
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-关卡3-7");
