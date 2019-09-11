@@ -228,8 +228,8 @@ namespace wlxm
             //int t = MyLdcmd.addSimulator();
             myDm mf = new myDm();
             Jingjie ln = new Jingjie(mf, dqinx);
-            ZhangHao zh = new ZhangHao();
-            zh.shutdown("192.168.0.10");
+            ln.denglu(15, out apkName);
+            ln.zhuxian(apkName);
             //ln.generalBasicShuziDemo(1, @"c:\mypic_save\1_192622781.bmp");
             MyFuncUtil.mylogandxianshi("结束");
             

@@ -539,7 +539,7 @@ namespace fuzhu
             return zccg;
         }
 
-        private void zhituozhuxian() {
+        private void zhituozhuxian(string zhanghao) {
             long kstime = MyFuncUtil.GetTimestamp();
             int yici = 0;
             int youjian = 0;
@@ -561,6 +561,18 @@ namespace fuzhu
 
             //2小时结束
             long kstime1 = MyFuncUtil.GetTimestamp();
+
+            //得到账号的钻石信息 
+            ZhangHao zh = new ZhangHao();
+            int ox = -1;
+            zh.getZhanghaoXinxi(this._dqinx, "jingjie", zhanghao, "zuanshi", out ox);
+            int zuanshi = ox;
+
+            //是否开局强化
+            int kjqh = 0;
+            if (zuanshi > 0) {
+                kjqh = 1;
+            }
             while (true)
             {
                 if (yici == 0) {
@@ -653,6 +665,20 @@ namespace fuzhu
                     WriteLog.WriteLogFile(this._mnqName, sz.Name + x + " " + y);
                     mf.mytap(this._jubing, x, y);
                 }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面");
+                if (kjqh == 1 && mf.mohuXunHuanJianChi(ktsd1.Sd, 15))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name+"准备搞角色强化");
+                    mf.mytap(this._jubing, 480, 356);
+                    mf.mydelay(2000, 4000);
+                    ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-角色强化");
+                    if (mf.mohuByLeiBool(ktsd1.Sd))
+                    {
+                        qianghua();
+                    }
+                    kjqh++;
+                }
+
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-集结--购买1次");
                 if (mf.mohuByLeiBool(ktsd1.Sd))
                 {
@@ -661,6 +687,7 @@ namespace fuzhu
                     {
                         mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                         mf.mydelay(2000, 3000);
+                        jijieshimianfei++;
                     }                    
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面");
@@ -943,44 +970,72 @@ namespace fuzhu
                     zdrs5=1;
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-关卡3-7");
-                if ((shibai == 0 || shibai == 1 || shibai >= 2) && mf.mohuByLeiBool(ktsd1.Sd))
+                if (kjqh == 0 && mf.mohuByLeiBool(ktsd1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
                     mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                     mf.mydelay(1000, 2000);
                     break;
+                }
+                if (kjqh == 1 && mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    mf.mytap(this._jubing, 530, 176);
+                    mf.mydelay(1000, 2000);
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-关卡3-6");
-                if (mf.mohuByLeiBool(ktsd1.Sd))
+                if (kjqh == 0 &&  mf.mohuByLeiBool(ktsd1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
                     mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                     mf.mydelay(1000, 2000);
                     break;
                 }
-
+                if (kjqh == 1 && mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    mf.mytap(this._jubing, 470, 97);
+                    mf.mydelay(1000, 2000);
+                }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-关卡3-6第二次");
-                if (mf.mohuByLeiBool(ktsd1.Sd))
+                if (kjqh == 0 && mf.mohuByLeiBool(ktsd1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
                     mf.mydelay(1000, 2000);
                     break;
+                }
+                if (kjqh == 1 && mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    mf.mytap(this._jubing, 470, 97);
+                    mf.mydelay(1000, 2000);
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-关卡3-6第3次");
-                if (mf.mohuByLeiBool(ktsd1.Sd))
+                if (kjqh == 0 && mf.mohuByLeiBool(ktsd1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
                     mf.mydelay(1000, 2000);
                     break;
+                }
+                if (kjqh == 1 && mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    mf.mytap(this._jubing, 470, 97);
+                    mf.mydelay(1000, 2000);
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-关卡3-7第二次");
-                if (mf.mohuByLeiBool(ktsd1.Sd))
+                if (kjqh == 0 && mf.mohuByLeiBool(ktsd1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
                     mf.mydelay(1000, 2000);
                     break;
                 }
-
+                if (kjqh == 1 && mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    mf.mytap(this._jubing, 530, 176);
+                    mf.mydelay(1000, 2000);
+                }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-战斗失败");
                 if ((shibai==0 || shibai==1) && mf.mohuByLeiBool(ktsd1.Sd))
                 {
@@ -1006,6 +1061,12 @@ namespace fuzhu
                     mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-账号被顶");
+                if (mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    break;
+                }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-主关卡3-8");
                 if (mf.mohuByLeiBool(ktsd1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
@@ -1145,7 +1206,7 @@ namespace fuzhu
         public void zhuxian(string name)
         {
             WriteLog.WriteLogFile(this._mnqName, "进入到主线任务");
-            zhituozhuxian();
+            zhituozhuxian(name);
             quitdq(name);
             WriteLog.WriteLogFile(this._mnqName, "主线退出");
         }
@@ -1519,14 +1580,338 @@ namespace fuzhu
         public void qianghua()
         {
             WriteLog.WriteLogFile(this._mnqName, "进去强化");
-            
+            List<int> juesel = new List<int>();
+            for (int i = 0; i < 5; i++) {
+                if (i == 0 && mf.mohu(53, 36, 0xef3344) == 1)
+                {
+                    WriteLog.WriteLogFile(this._mnqName, "第"+(i+1)+"个角色需要强化");
+                    juesel.Add(i + 1);
+                }
+                if (i == 1 && mf.mohu(52, 91, 0xf43442) == 1)
+                {
+                    WriteLog.WriteLogFile(this._mnqName, "第" + (i + 1) + "个角色需要强化");
+                    juesel.Add(i + 1);
+                }
+                if (i == 2 && mf.mohu(52, 146, 0xf43342) == 1)
+                {
+                    WriteLog.WriteLogFile(this._mnqName, "第" + (i + 1) + "个角色需要强化");
+                    juesel.Add(i + 1);
+                }
+                if (i == 3 && mf.mohu(53, 201, 0xef3343) == 1)
+                {
+                    WriteLog.WriteLogFile(this._mnqName, "第" + (i + 1) + "个角色需要强化");
+                    juesel.Add(i + 1);
+                }
+                if (i == 4 && mf.mohu(51, 257, 0xee2d3b) == 1)
+                {
+                    WriteLog.WriteLogFile(this._mnqName, "第" + (i + 1) + "个角色需要强化");
+                    juesel.Add(i + 1);
+                }
+            }
+            foreach(int ij in juesel){
+                WriteLog.WriteLogFile(this._mnqName, "第" + ij + "个角色准备强化");
+                if (!panduanjiemian("界面-角色强化"))
+                {
+                    mf.mytap(this._jubing, 361, 357);
+                    mf.mydelay(2000, 3000);
+                }
+                if (panduanjiemian("界面-角色强化")) {
+                    mf.mytap(this._jubing, 33, 57+(ij-1)*55);
+                    mf.mydelay(2000, 3000);
+                    WriteLog.WriteLogFile(this._mnqName, "第" + ij + "个角色选定");
+                    List<int> jueseqhl = new List<int>();
+                    for (int i = 0; i < 6; i++)
+                    {
+                        if (i == 0 && mf.mohu(622, 53, 0xf43341) == 1)
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "第" + ij + "个角色需要强化升级");
+                            jueseqhl.Add(i + 1);
+                        }
+                        if (i == 1 && mf.mohu(622, 96, 0xf43341) == 1)
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "第" + ij + "个角色需要强化升品");
+                            jueseqhl.Add(i + 1);
+                        }
+                        if (i == 2 && mf.mohu(622, 139, 0xf43341) == 1)
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "第" + ij + "个角色需要强化升星");
+                            jueseqhl.Add(i + 1);
+                        }
+                        if (i == 3 && mf.mohu(622, 182, 0xf43341) == 1)
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "第" + ij + "个角色需要强化装束");
+                            jueseqhl.Add(i + 1);
+                        }
+                        if (i == 4 && mf.mohu(623, 225, 0xf23342) == 1)
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "第" + ij + "个角色需要强化技能");
+                            jueseqhl.Add(i + 1);
+                        }
+                        if (i == 5 && mf.mohu(622, 268, 0xf43341) == 1)
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "第" + ij + "个角色需要强化羁绊");
+                            jueseqhl.Add(i + 1);
+                        }
+                    }
+                    WriteLog.WriteLogFile(this._mnqName, "第" + ij + "个角色根据红点搜集情况开始强化");
+                    jutiqianghua(jueseqhl);
+                }
+            }
             WriteLog.WriteLogFile(this._mnqName, "强化完结");
+            if (!panduanjiemian("界面-角色强化"))
+            {
+                mf.mytap(this._jubing, 361, 357);
+                mf.mydelay(2000, 3000);
+                mf.mytap(this._jubing, 361, 357);
+                mf.mydelay(2000, 3000);
+            }
+            if (panduanjiemian("界面-角色强化")) {
+                mf.mytap(this._jubing, 650, 13);
+                mf.mydelay(2000, 3000);
+            }
         }
 
-       
+        public void jutiqianghua(List<int> jueseqhl)
+        {
+            foreach (int ij in jueseqhl)
+            {
+                WriteLog.WriteLogFile(this._mnqName, "角色准备强化具体项目");
+                if (!panduanjiemian("界面-角色强化"))
+                {
+                    mf.mytap(this._jubing, 361, 357);
+                    mf.mydelay(2000, 3000);
+                }
+                if (panduanjiemian("界面-角色强化"))
+                {
+                    mf.mytap(this._jubing, 645, 71 + (ij - 1) * 40);
+                    mf.mydelay(2000, 3000);
+                    WriteLog.WriteLogFile(this._mnqName, "准备强化选定的项目"+ij);
+                    long ks = MyFuncUtil.GetTimestamp();
+                    int yici = 0;
+                    int jineng = 0;
+                    while (true) {
+                        long js = MyFuncUtil.GetTimestamp();
+                        if ((js - ks) > 1000 * 60)
+                        {
+                            break;
+                        }
+                        if (ij == 1 && yici==0) {
+                            WriteLog.WriteLogFile(this._mnqName, "强化升级");
+                            yici = 1;
+                        }
+                        if (ij == 1)
+                        {
+                            mf.mytap(this._jubing, 549, 345);
+                            mf.mydelay(2000, 3000);
+                        }
+                        if (ij == 1 && mf.mohu(622, 53, 0xf43341) != 1)
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "强化升级红点不见");
+                            break;
+                        }
+                        if (ij == 2 && yici == 0)
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "强化升品");
+                            yici = 1;
+                        }
+                        if (ij == 2)
+                        {
+                            mf.mytap(this._jubing, 495, 343);
+                            mf.mydelay(2000, 3000);
+                        }
+                        if (ij == 2 && panduanjiemian("界面-角色强化") && mf.mohu(622, 96, 0xf43341) != 1)
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "强化升品红点不见");
+                            mf.mydelay(3000, 4000);
+                            mf.mytap(this._jubing, 361, 357);
+                            break;
+                        }
 
-        
+                        if (ij == 3 && yici == 0)
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "强化升星");
+                            yici = 1;
+                        }
+                        if (ij == 3 && panduanjiemian("界面-角色强化")&& mf.mohu(553, 346, 0xc38844) == 1)
+                        {
+                            mf.mytap(this._jubing, 556, 343);
+                            mf.mydelay(2000, 3000);     
+                        }
+                        if (ij == 3 && panduanjiemian("界面-角色强化") && mf.mohu(553, 346, 0xc38844) != 1)
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "强化升星完成");
+                            break;
+                        }
+                        if (ij == 3 && !panduanjiemian("界面-角色强化"))
+                        {
+                            mf.mytap(this._jubing, 361, 357);
+                            mf.mydelay(2000, 3000);
+                        } 
+                        if (ij == 4 && yici == 0)
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "强化装束");                            
+                            yici = 1;
+                        }
+                        if (ij == 4) {
+                            gaozhuangshu();
+                            break;
+                        }
 
+                        if (ij == 5 && yici == 0)
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "强化技能");
+                            yici = 1;
+                        }
+                        if (ij == 5 && mf.mohu(563, 108, 0xcf9e74)==1)
+                        {
+                            mf.mytap(this._jubing, 560, 109);
+                            mf.mydelay(1000, 3000);
+                            jineng++;
+                        }
+                        if (ij == 5 && panduanjiemian("界面-角色强化") && mf.mohu(563, 108, 0xcf9e74) != 1) {
+                            WriteLog.WriteLogFile(this._mnqName, "强化技能第一个完毕,无按钮");
+                            break;
+                        }
+                        if (ij == 5 && jineng > 10) {
+                            WriteLog.WriteLogFile(this._mnqName, "强化技能第一个超10次结束");
+                            break;
+                        }
+
+                        if (ij == 6 && yici == 0)
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "强化羁绊");
+                            yici = 1;
+                        }
+                        if (ij == 6)
+                        {
+                            //挨个点一遍
+                            mf.mytap(this._jubing, 483, 88);
+                            mf.mydelay(200, 400);
+                            mf.mytap(this._jubing, 494, 158);
+                            mf.mydelay(200, 400);
+                            mf.mytap(this._jubing, 494, 227);
+                            mf.mydelay(200, 400);
+                            mf.mytap(this._jubing, 489, 311);
+                            mf.mydelay(200, 400);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        private void gaozhuangshu() {
+            //第一件
+            mf.mytap(this._jubing, 428, 76);
+            mf.mydelay(2000, 4000);
+            FuHeSanDian fh = Jingjie_SanDian.GetObject().findFuHeSandianByName("强化-装束界面的一键强化");
+            if (mf.mohuByLeiBool(fh.Sd))
+            {
+                mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                mf.mydelay(2000, 3000);
+            }
+            if (mf.mohu(538, 336, 0xf43342) == 1)
+            {
+                mf.mytap(this._jubing, 498, 343);
+                mf.mydelay(2000, 3000);
+            }
+            if (!panduanjiemian("界面-角色强化"))
+            {
+                mf.mytap(this._jubing, 361, 357);
+                mf.mydelay(2000, 3000);
+            }
+            //第2件 数完左边数右边
+            mf.mytap(this._jubing, 447, 128);
+            mf.mydelay(2000, 4000);
+            if (mf.mohuByLeiBool(fh.Sd))
+            {
+                mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                mf.mydelay(2000, 3000);
+            }
+            if (mf.mohu(538, 336, 0xf43342) == 1)
+            {
+                mf.mytap(this._jubing, 498, 343);
+                mf.mydelay(2000, 3000);
+            }
+            if (!panduanjiemian("界面-角色强化"))
+            {
+                mf.mytap(this._jubing, 361, 357);
+                mf.mydelay(2000, 3000);
+            }
+            //第3件
+            mf.mytap(this._jubing, 423, 184);
+            mf.mydelay(2000, 4000);
+            if (mf.mohuByLeiBool(fh.Sd))
+            {
+                mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                mf.mydelay(2000, 3000);
+            }
+            if (mf.mohu(538, 336, 0xf43342) == 1)
+            {
+                mf.mytap(this._jubing, 498, 343);
+                mf.mydelay(2000, 3000);
+            }
+            if (!panduanjiemian("界面-角色强化"))
+            {
+                mf.mytap(this._jubing, 361, 357);
+                mf.mydelay(2000, 3000);
+            }
+            //第4件
+            mf.mytap(this._jubing, 574, 76);
+            mf.mydelay(2000, 4000);
+            if (mf.mohuByLeiBool(fh.Sd))
+            {
+                mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                mf.mydelay(2000, 3000);
+            }
+            if (mf.mohu(538, 336, 0xf43342) == 1)
+            {
+                mf.mytap(this._jubing, 498, 343);
+                mf.mydelay(2000, 3000);
+            }
+            if (!panduanjiemian("界面-角色强化"))
+            {
+                mf.mytap(this._jubing, 361, 357);
+                mf.mydelay(2000, 3000);
+            }
+            //第5件
+            mf.mytap(this._jubing, 550, 124);
+            mf.mydelay(2000, 4000);
+            if (mf.mohuByLeiBool(fh.Sd))
+            {
+                mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                mf.mydelay(2000, 3000);
+            }
+            if (mf.mohu(538, 336, 0xf43342) == 1)
+            {
+                mf.mytap(this._jubing, 498, 343);
+                mf.mydelay(2000, 3000);
+            }
+            if (!panduanjiemian("界面-角色强化"))
+            {
+                mf.mytap(this._jubing, 361, 357);
+                mf.mydelay(2000, 3000);
+            }
+            //第6件
+            mf.mytap(this._jubing, 572, 180);
+            mf.mydelay(2000, 4000);
+            if (mf.mohuByLeiBool(fh.Sd))
+            {
+                mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                mf.mydelay(2000, 3000);
+            }
+            if (mf.mohu(538, 336, 0xf43342) == 1)
+            {
+                mf.mytap(this._jubing, 498, 343);
+                mf.mydelay(2000, 3000);
+            }
+            if (!panduanjiemian("界面-角色强化"))
+            {
+                mf.mytap(this._jubing, 361, 357);
+                mf.mydelay(2000, 3000);
+            }
+        }
         
         
 
@@ -1536,6 +1921,14 @@ namespace fuzhu
             if (jiemian.Equals("界面-主界面")) {
                 fh = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面");
                 if (mf.mohuByLeiBool(fh.Sd)) {
+                    tmp = true;
+                }
+            }
+            if (jiemian.Equals("界面-角色强化"))
+            {
+                fh = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-角色强化");
+                if (mf.mohuByLeiBool(fh.Sd))
+                {
                     tmp = true;
                 }
             }

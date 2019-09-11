@@ -348,6 +348,34 @@ namespace MyUtil
             }
         }
 
+        public void getZhanghaoXinxi(int dqinx,string youxi, string zhanghao,string xinxi,out int ox)
+        {
+            //服务器上有登录账号后置为登陆中
+            SqlHelp sqh = SqlHelp.GetInstance();
+            ox = -1;
+            WriteLog.WriteLogFile(dqinx + "", "取到账号" + zhanghao + "相关信息");
+            lock (obj)
+            {
+                try
+                {
+                    DataTable dt = sqh.getAll("select isnull(" + xinxi + ",-1) from zhanghao where name='"
+
+                    + zhanghao + "'and youxi='" + youxi + "'")
+                    ;
+                    if (dt.Rows.Count > 0)
+                    {
+                        ox = (int)dt.Rows[0][0];
+                        WriteLog.WriteLogFile(dqinx + "", "找到需要练级的账号" + zhanghao + " " + xinxi + ", " + ox );
+                    }
+                }
+                catch (Exception ex)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "更新登录中账号失败");
+                    throw ex;
+                }
+            }
+        }
+
         public void gxYunXingQk()
         {
             //得到运行情况后存入表

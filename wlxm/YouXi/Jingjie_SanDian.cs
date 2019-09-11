@@ -760,6 +760,33 @@ namespace fuzhu
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  372,   60, 0xc0d1f8},
+	{   32,  360, 0xb5d1f1},
+	{   26,   18, 0x6dc3ff},
+});
+            ktfh1 = new FuHeSanDian("界面-角色强化", ktsd1);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  548,  342, 0xbe9f7d},
+	{  581,  344, 0xcf9449},
+	{  525,  351, 0xce8f48},
+});
+            ktfh1 = new FuHeSanDian("强化-装束界面的一键强化", ktsd1,554,343);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  520,  190, 0xffcb65},
+	{  547,  193, 0x040a14},
+	{  342,  355, 0xde9070},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-主关卡3-8", ktsd1);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
 
 
             //志拓
