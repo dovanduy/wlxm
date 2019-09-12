@@ -165,8 +165,12 @@ namespace wlxm
                     DateTime dt=zh.getYunXingQkLasttime();
                     TimeSpan span = DateTime.Now.Subtract(dt);
                     WriteLog.WriteLogFile("", "准备更新与上次统计相比,间隔 " + span.Minutes + "分钟");
+<<<<<<< HEAD
                     if (span.Hours >= 1 || span.Minutes > 45)
                     {
+=======
+                    if (span.Hours>=1 || span.Minutes > 60) {
+>>>>>>> 1394d27438c4299bf07730345b786412cfaec1f9
                         WriteLog.WriteLogFile("", "与上次统计相比,间隔 " + span.Minutes + "分钟");
                         zh.gxYunXingQk();
                     }
