@@ -784,9 +784,57 @@ namespace fuzhu
 	{  547,  193, 0x040a14},
 	{  342,  355, 0xde9070},
 });
-            ktfh1 = new FuHeSanDian("特殊引导-主关卡3-8", ktsd1);
+            ktfh1 = new FuHeSanDian("特殊引导-主关卡3-8", ktsd1,595,302);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{   48,  280, 0x674777},
+	{  149,   48, 0xb5deed},
+	{  160,   67, 0xb2e4fb},
+});
+            ktfh1 = new FuHeSanDian("引导-获得sr", ktsd1,375,367);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  241,  228, 0xd94e71},
+	{  230,   97, 0xf9d8a2},
+	{  466,  231, 0xabe4fc},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-体力终结", ktsd1, 499, 104);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  305,  290, 0xffeb85},
+	{  222,  241, 0xffe37a},
+	{  132,  192, 0xfdd06a},
+});
+            ktfh1 = new FuHeSanDian("关卡-3消耗体力", ktsd1,-1,-1,"取点已经完成3-3，3-2,3-1");
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  488,  340, 0x3860b1},
+	{  663,   55, 0xfcda63},
+	{  498,  178, 0xab2a02},
+});
+            ktfh1 = new FuHeSanDian("关卡-3具体消耗界面", ktsd1);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  222,   81, 0xf8e4b6},
+	{  427,  116, 0xbd489b},
+	{  469,  186, 0xf7b65f},
+});
+            ktfh1 = new FuHeSanDian("引导-幸运娃娃机", ktsd1,549,112);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+
+
 
 
             //志拓

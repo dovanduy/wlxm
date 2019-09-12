@@ -403,7 +403,7 @@ namespace wlxm
             }
             else
             {
-                yunxingIndex = new int[] { 1, 2, 3, 4, 5, };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
+                yunxingIndex = new int[] { 1, 2,  4, };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
             } 
             string dizhi = null;
             string path = null;
@@ -462,7 +462,7 @@ namespace wlxm
                 MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "降低cpu");
                 //MyLdcmd.myDownCpu(dqinx, 50);
                 Jingjie yq = new Jingjie(dm, dqinx, dizhi);
-                yq.denglu(15, out a_b);
+                //yq.denglu(15, out a_b);
                 yq.zhuxian(a_b);
                 Thread.Sleep(1000 * 60 * 60);
                 
