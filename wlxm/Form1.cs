@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,48 +19,48 @@ namespace wlxm
     public partial class Form1 : Form
     {
         /// <summary>
-        /// è¾…åŠ©çš„ç‰ˆæœ¬
+        /// ?§Uªºª©¥»
         /// </summary>
         private static int fuzhuBanben = 12;
         
 
         /// <summary>
-        /// å…¨å±€button ç‚¹äº†å°±ä¸è‡ªåŠ¨è¿è¡Œ
+        /// ¥ş§½button ?¤F´N¤£¦Û??¦æ
         /// </summary>
         private static int quanjubutton = 0;
 
         /// <summary>
-        /// dict æ¸¸æˆåç§°å’ŒåŒ…åå­˜å‚¨
+        /// dict ´å?¦W?©M¥]¦W¦s?
         /// </summary>
         private Dictionary<string, string> dict = new Dictionary<string, string>();
         /// <summary>
-        /// å¯åŠ¨æ¸¸æˆçš„åŒ…åå’Œæ¶æ„å
+        /// ??´å?ªº¥]¦W©M¬[ÌÛ¦W
         /// </summary>
         private string apkName = null;
         /// <summary>
-        /// å¾—åˆ°å½“å‰æ¨¡æ‹Ÿå™¨çš„index
+        /// ±o¨ì?«e¼Ò?¾¹ªºindex
         /// </summary>
         //private int dqindex = -1;
         /// <summary>
-        /// å‡ºé”™æç¤º
+        /// ¥X?´£¥Ü
         /// </summary>
         private Boolean tmpBool = false;
         /// <summary>
-        /// å‡ºé”™ä¿¡æ¯
+        /// ¥X?«H®§
         /// </summary>
         private StringBuilder tmpBoolString = new StringBuilder();
         /// <summary>
-        /// å¤šçº¿ç¨‹ çº¿ç¨‹é”
+        /// ¦h?µ{ ?µ{?
         /// </summary>
         //private object locker = new object();
         /// <summary>
-        /// ä¸»çº¿ç¨‹ å®šæ—¶æ˜¾ç¤ºè¿è¡Œæ—¶é—´
+        /// ¥D?µ{ ©w??¥Ü?¦æ??
         /// </summary>
         private Thread thread;
         private delegate void changeText(string result);
         private delegate void getduokaiqi();
         /// <summary>
-        /// è®¾ç½®å€’è®¡æ—¶æ—¶é—´
+        /// ?¸m­Ë????
         /// </summary>
         //private int DaoJiShi = 180;
         //private int jishi;
@@ -76,22 +76,22 @@ namespace wlxm
         }
         
         /// <summary>
-        /// è®°å½•å¤šçº¿ç¨‹çš„çº¿ç¨‹ID
+        /// ??¦h?µ{ªº?µ{ID
         /// </summary>
         private List<Thread> list_xc = new List<Thread>();
         /// <summary>
-        /// å•ä¾‹æ¨¡å¼å˜é‡
+        /// ?¨Ò¼Ò¦¡?¶q
         /// </summary>
         private static readonly object obj = new object();
 
         private void initPackageName()
         {
-            dict.Add("æ˜æ—¥æ–¹èˆŸ", "com.hypergryph.arknights/com.u8.sdk.U8UnityContext");
-            dict.Add("ä¸€æ‹³è¶…äºº", "com.playcrab.kos.gw/org.cocos2dx.lua.AppActivity");
-            dict.Add("è·¯äººè¶…èƒ½", "com.idreamsky.psycho100/com.yinghuochong.unity_entry.CustomUnityPlayerActivity");
-            dict.Add("å¢ƒç•Œ", "com.wk.jingjie.ewan/cn.ewan.supersdk.activity.SplashActivity");
-            this.label1.Text = "å½“å‰ç‰ˆæœ¬:" + fuzhuBanben;
-            this.label3.Text = "å½“å‰æ¸¸æˆ:" + "æš‚å®š:å¢ƒç•Œ";
+            dict.Add("©ú¤é¤è¦à", "com.hypergryph.arknights/com.u8.sdk.U8UnityContext");
+            dict.Add("¤@®±¶W¤H", "com.playcrab.kos.gw/org.cocos2dx.lua.AppActivity");
+            dict.Add("¸ô¤H¶W¯à", "com.idreamsky.psycho100/com.yinghuochong.unity_entry.CustomUnityPlayerActivity");
+            dict.Add("¹Ò¬É", "com.wk.jingjie.ewan/cn.ewan.supersdk.activity.SplashActivity");
+            this.label1.Text = "?«eª©¥»:" + fuzhuBanben;
+            this.label3.Text = "?«e´å?:" + "?©w:¹Ò¬É";
             this.label3.ForeColor = Color.Red;
             string a_b = "";
             if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
@@ -130,49 +130,51 @@ namespace wlxm
                 i++;
 
                 //MyFuncUtil.SecondToHour(+i + (js - ks) / 1000+" "
-                CalcFinished("ç¨‹åºå·²è¿è¡Œ:" + MyFuncUtil.SecondToHour(js - ks) + zidong);
+                CalcFinished("µ{§Ç¤w?¦æ:" + MyFuncUtil.SecondToHour(js - ks) + zidong);
                 this.label2.ForeColor = Color.Red;
                 if (quanjubutton == 0 && yici == 0 && (js - ks) > 1000 * 10 && (js - ks) <= 1000 * 20)
                 {
-                    WriteLog.WriteLogFile("", "ç¨‹åºæè‡ªåŠ¨å€’è®¡æ—¶ " + (20-(js - ks)/1000)+"ç§’");
+                    WriteLog.WriteLogFile("", "µ{§Ç·d¦Û?­Ë?? " + (20-(js - ks)/1000)+"¬í");
                 }
                 if (quanjubutton==0 && yici == 0 && (js - ks) > 1000 * 20)
                 {
                     quanjubutton = 1;
                     yici = 1;
                     //dpanduoxiancheng.PerformClick();
-                    zidong = ",è‡ªåŠ¨è¿è¡Œä¸­";
+                    zidong = ",¦Û??¦æ¤¤";
                     if (WriteLog.getMachineName().ToUpper().Equals("1HAO"))
                     {
-                        ThreadStart threadStart = new ThreadStart(gaozhanghaotou);//é€šè¿‡ThreadStartå§”æ‰˜å‘Šè¯‰å­çº¿ç¨‹æ‰§è¡Œä»€ä¹ˆæ–¹æ³•ã€€
+                        ThreadStart threadStart = new ThreadStart(gaozhanghaotou);//³q?ThreadStart©e¦«§i?¤l?µ{?¦æ¤°¤\¤èªk¡@
                         Thread thread = new Thread(threadStart);
                         thread.Name = "wodegaozhanghao";
                         thread.Start();
                     }
                     else
                     {
-                        ThreadStart threadStart = new ThreadStart(duoxianzongtou);//é€šè¿‡ThreadStartå§”æ‰˜å‘Šè¯‰å­çº¿ç¨‹æ‰§è¡Œä»€ä¹ˆæ–¹æ³•ã€€
+                        ThreadStart threadStart = new ThreadStart(duoxianzongtou);//³q?ThreadStart©e¦«§i?¤l?µ{?¦æ¤°¤\¤èªk¡@
                         Thread thread = new Thread(threadStart);
                         thread.Name = "wodedpanduoxian";
                         thread.Start();
                     }
                 }
-                //æ¯éš”ä¸€å°æ—¶ç”±zkæ›´æ–°ä¸€æ¬¡ æµ‹è¯•æ—¶ æ¯éš”1åˆ†é’Ÿ
+                //¨C¹j¤@¤p?¥Ñzk§ó·s¤@¦¸ ??? ¨C¹j1¤À?
                 if (WriteLog.getMachineName().ToUpper().Equals("WLZHONGKONG") && (js - ks_gxyunxing) > 1000 * 60*20)
                 {
                     ks_gxyunxing = MyFuncUtil.GetTimestamp();
                     ZhangHao zh = new ZhangHao();
                     DateTime dt=zh.getYunXingQkLasttime();
                     TimeSpan span = DateTime.Now.Subtract(dt);
-                    WriteLog.WriteLogFile("", "å‡†å¤‡æ›´æ–°ä¸ä¸Šæ¬¡ç»Ÿè®¡ç›¸æ¯”,é—´éš” " + span.Minutes + "åˆ†é’Ÿ");
+                    WriteLog.WriteLogFile("", "­ã?§ó·sÉO¤W¦¸??¬Û¤ñ,?¹j " + span.Minutes + "¤À?");
+                    
                     if (span.Hours >= 1 || span.Minutes > 45)
+                    
                     {
-                        WriteLog.WriteLogFile("", "ä¸ä¸Šæ¬¡ç»Ÿè®¡ç›¸æ¯”,é—´éš” " + span.Minutes + "åˆ†é’Ÿ");
+                        WriteLog.WriteLogFile("", "ÉO¤W¦¸??¬Û¤ñ,?¹j " + span.Minutes + "¤À?");
                         zh.gxYunXingQk();
                     }
                 }
 
-                //æ¯éš”60åˆ†é’ŸæŸ¥çœ‹æ˜¯å¦åº”è¯¥é‡å¯ æµ‹è¯•æ—¶ æ¯éš”1åˆ†é’Ÿ
+                //¨C¹j60¤À?¬d¬İ¬O§_??­«? ??? ¨C¹j1¤À?
                 if (WriteLog.getMachineName().ToUpper().Equals("WLZHONGKONG") && (js - ks_cqyunxing) > 1000 * 60 * 60)
                 {
                     ks_cqyunxing = MyFuncUtil.GetTimestamp();
@@ -180,7 +182,7 @@ namespace wlxm
                     bool t = zh.panDuanChongQi(WriteLog.getMachineName());
                     if (t)
                     {
-                        WriteLog.WriteLogFile("", "å½“å‰éœ€è¦é‡å¯" + DateTime.Now);
+                        WriteLog.WriteLogFile("", "?«e»İ­n­«?" + DateTime.Now);
                         myDm dm = new myDm();
                         dm.ExitOs(2);
                     }
@@ -218,7 +220,7 @@ namespace wlxm
         private void button1_Click(object sender, EventArgs e)
         {
             quanjubutton = 1;
-            MyFuncUtil.mylogandxianshi("å¼€å§‹");
+            MyFuncUtil.mylogandxianshi("?©l");
             string dizhi = null;
             string path = null;
             string seed = null;
@@ -232,20 +234,20 @@ namespace wlxm
             ln.denglu(15, out apkName);
             ln.zhuxian(apkName);
             //ln.generalBasicShuziDemo(1, @"c:\mypic_save\1_192622781.bmp");
-            MyFuncUtil.mylogandxianshi("ç»“æŸ");
+            MyFuncUtil.mylogandxianshi("?§ô");
             
         }
         private void lurenzhanghao(object inx)
         {
-            /*å•çº¿ç¨‹æ¨¡å¼ï¼š
-             *1ã€æ–°å»ºæˆåŠŸåæ‰“å¼€è¯¥æ¨¡æ‹Ÿå™¨ å®‰è£…å¯ä»¥åœ¨æ¨¡æ‹Ÿå™¨æœªæ‰“å¼€æƒ…å†µä¸‹è¿›è¡Œ
-             *2ã€æ¨¡æ‹Ÿå™¨æ‰“å¼€åå®‰è£…apk
-             *3ã€å®‰è£…æˆåŠŸåæ‰“å¼€æ¸¸æˆ
-             *4ã€æ¸¸æˆæ›´æ–°æˆåŠŸåé€‰æ‹©æ¸¸å®¢ç™»å½•å¹¶ä¿å­˜
-             *5ã€ä¿å­˜åæˆªå–è¦ä¿å­˜çš„å›¾å¹¶è¯†å›¾
-             *6ã€è¯†å›¾åå­˜å…¥sql
-             *7ã€å…³é—­æ¨¡æ‹Ÿå™¨
-             *8ã€reloadå­˜ç›˜æ–‡ä»¶
+            /*??µ{¼Ò¦¡¡G
+             *1¡B·s«Ø¦¨¥\¦Z¥´??¼Ò?¾¹ ¦w?¥i¥H¦b¼Ò?¾¹¥¼¥´?±¡?¤U?¦æ
+             *2¡B¼Ò?¾¹¥´?¦Z¦w?apk
+             *3¡B¦w?¦¨¥\¦Z¥´?´å?
+             *4¡B´å?§ó·s¦¨¥\¦Z??´å«Èµn?¦}«O¦s
+             *5¡B«O¦s¦ZºI¨ú­n«O¦sªº?¦}??
+             *6¡B??¦Z¦s¤Jsql
+             *7¡B??¼Ò?¾¹
+             *8¡Breload¦s?¤å¥ó
              */
             //for (int cs = 0; cs < 20; cs++)
             {
@@ -260,51 +262,51 @@ namespace wlxm
                 {
                     return;
                 }
-                WriteLog.WriteLogFile(dqinx + "", "å‡†å¤‡æ“ä½œ" + dqinx + "å·æ¨¡æ‹Ÿå™¨");
-                bool temp = MyFuncUtil.myQuit(dqinx, dizhi);//å…³é—­æŒ‡å®šæ¨¡æ‹Ÿå™¨ dqinx
+                WriteLog.WriteLogFile(dqinx + "", "­ã?¾Ş§@" + dqinx + "?¼Ò?¾¹");
+                bool temp = MyFuncUtil.myQuit(dqinx, dizhi);//??«ü©w¼Ò?¾¹ dqinx
                 if (!temp)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "å…³é—­å¤±è´¥");
+                    WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "??¥¢?");
                     Thread.Sleep(20000);
                     return;
                 }
-                WriteLog.WriteLogFile(dqinx + "", "å‡†å¤‡æ“ä½œ" + dqinx + "å·æ¨¡æ‹Ÿå™¨");
-                MyLdcmd.installApp(dqinx, @"C:\è¿…é›·ä¸‹è½½\jjlydj_ew100224700.apk");
+                WriteLog.WriteLogFile(dqinx + "", "­ã?¾Ş§@" + dqinx + "?¼Ò?¾¹");
+                MyLdcmd.installApp(dqinx, @"C:\¨³¹p¤U?\jjlydj_ew100224700.apk");
                 bool t = MyFuncUtil.lureninstallOk(dqinx);
                 if (t == false)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "å®‰è£…appæ²¡æˆåŠŸ");
+                    WriteLog.WriteLogFile(dqinx + "", "¦w?app?¦¨¥\");
                     return;
                 }
-                t = MyFuncUtil.myQuit(dqinx, dizhi);//å…³é—­æŒ‡å®šæ¨¡æ‹Ÿå™¨ dqinx
+                t = MyFuncUtil.myQuit(dqinx, dizhi);//??«ü©w¼Ò?¾¹ dqinx
                 if (!t)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "å…³é—­å¤±è´¥");
+                    WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "??¥¢?");
                     Thread.Sleep(20000);
                     return;
                 }
-                WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "æ”¹å");
-                MyLdcmd.myRename(dqinx, "é›·ç”µ" + dqinx, dizhi);                
+                WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "§ï¦W");
+                MyLdcmd.myRename(dqinx, "¹p?" + dqinx, dizhi);                
                 temp = MyFuncUtil.LaunchQiHao(dqinx);
                 if (!temp)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "æ‰“å¼€å¤±è´¥");
+                    WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "¥´?¥¢?");
                     Thread.Sleep(20000);
                     return;
                 }
                 Thread.Sleep(20000);
-                apkName = dict["å¢ƒç•Œ"];
+                apkName = dict["¹Ò¬É"];
                 int i = MyFuncUtil.QiDongWanChengLurenzhanghao(a_b, dqinx, apkName);
                 if (i == -1)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "æ‰“å¼€app" + apkName + "å¤±è´¥");
+                    WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "¥´?app" + apkName + "¥¢?");
                     Thread.Sleep(20000);
                     return;
                 }
                 int w = -1, h = -1;
                 MyFuncUtil.getWindowSize(dqinx, out w, out h);
                 if (w != -1 && h != -1 && w < h) {
-                    WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "w hä¸å¯¹"+w+" "+h);
+                    WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "w h¤£?"+w+" "+h);
                     Thread.Sleep(20000);
                     return;
                 }
@@ -312,37 +314,37 @@ namespace wlxm
                 temp = mno.lurenResizeOk(dqinx);
                 if (temp == false)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + ",resizeæ²¡æˆåŠŸ");
+                    WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + ",resize?¦¨¥\");
                     return;
                 }
                 myDm mf = new myDm();
                 Jingjie jn = new Jingjie(mf, dqinx);
                 if (jn.Jubing <= 0)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "å¥æŸ„æœ‰é—®é¢˜");
+                    WriteLog.WriteLogFile(dqinx + "", "¥y¬`¦³??");
                     Thread.Sleep(20000);
                     return;
                 }
                 jn.jingjiecunhao();
-                temp = MyFuncUtil.myQuit(dqinx, dizhi);//å…³é—­æŒ‡å®šæ¨¡æ‹Ÿå™¨ dqinx
+                temp = MyFuncUtil.myQuit(dqinx, dizhi);//??«ü©w¼Ò?¾¹ dqinx
                 if (!temp)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "å…³é—­å¤±è´¥");
+                    WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "??¥¢?");
                     Thread.Sleep(20000);
                     return;
                 }
                 Thread.Sleep(10000);
-                WriteLog.WriteLogFile(dqinx + "", "ä¸€æ¬¡å¾ªç¯ç»“æŸ");
+                WriteLog.WriteLogFile(dqinx + "", "¤@¦¸´`??§ô");
                 var js = MyFuncUtil.GetTimestamp();
-                WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "å¾ªç¯å®Œæˆ");
-                WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "å¾ªç¯1æ¬¡è€—æ—¶" + MyFuncUtil.SecondToHour(js - ks));
+                WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "´`?§¹¦¨");
+                WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "´`?1¦¸¯Ó?" + MyFuncUtil.SecondToHour(js - ks));
             }
         }
 
         private void lrzh_Click(object sender, EventArgs e)
         {
             quanjubutton = 1;
-            ThreadStart threadStart = new ThreadStart(gaozhanghaotou);//é€šè¿‡ThreadStartå§”æ‰˜å‘Šè¯‰å­çº¿ç¨‹æ‰§è¡Œä»€ä¹ˆæ–¹æ³•ã€€
+            ThreadStart threadStart = new ThreadStart(gaozhanghaotou);//³q?ThreadStart©e¦«§i?¤l?µ{?¦æ¤°¤\¤èªk¡@
             Thread thread = new Thread(threadStart);
             thread.Name = "wodegaozhanghao";
             thread.Start();
@@ -356,12 +358,12 @@ namespace wlxm
             string seed = null;
             string a_b = "d";
             MyFuncUtil.myqiehuancd(a_b, out dizhi, out path, out seed);
-            MyFuncUtil.mylogandxianshi("å‡†å¤‡æè´¦å·");
+            MyFuncUtil.mylogandxianshi("­ã?·d??");
             MyFuncUtil.createDirIfNotExist();
             Thread.Sleep(2000);
             for (int j = 0; j < 10000; j++)
             {
-                MyFuncUtil.mylogandxianshi("åºå·" + j + ",å¼€å§‹");
+                MyFuncUtil.mylogandxianshi("§Ç?" + j + ",?©l");
                 MyLdcmd.myQuitAll(dizhi);
                 Thread.Sleep(2000);
                 MyLdcmd.myRemoveAll(dizhi);
@@ -369,34 +371,34 @@ namespace wlxm
                 MyLdcmd.RunDuokaiqi(a_b);
                 MyFuncUtil.duokaiqiAdd();
                 Thread.Sleep(2000);
-                ThreadPool.SetMaxThreads(yunxingIndex.Length, yunxingIndex.Length); //è®¾ç½®æœ€å¤§çº¿ç¨‹æ•°
+                ThreadPool.SetMaxThreads(yunxingIndex.Length, yunxingIndex.Length); //?¸m³Ì¤j?µ{?
                 foreach (int inx in yunxingIndex)
                 {
-                    ThreadPool.QueueUserWorkItem(new WaitCallback(lurenzhanghao), inx);//çº¿ç¨‹æ± æŒ‡å®šçº¿ç¨‹æ‰§è¡ŒAutoæ–¹æ³•
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(lurenzhanghao), inx);//?µ{¦À«ü©w?µ{?¦æAuto¤èªk
                     Thread.Sleep(1000);
                 }
                 long ks = MyFuncUtil.GetTimestamp();
                 while (true)
                 {
-                    Thread.Sleep(1000);//è¿™å¥å†™ç€ï¼Œä¸»è¦æ˜¯æ²¡å¿…è¦å¾ªç¯é‚£ä¹ˆå¤šæ¬¡ã€‚å»æ‰ä¹Ÿå¯ä»¥ã€‚
+                    Thread.Sleep(1000);//?¥y??¡A¥D­n¬O?¥²­n´`?¨º¤\¦h¦¸¡C¥h±¼¤]¥i¥H¡C
                     int maxWorkerThreads, workerThreads;
                     int portThreads;
                     ThreadPool.GetMaxThreads(out maxWorkerThreads, out portThreads);
                     ThreadPool.GetAvailableThreads(out workerThreads, out portThreads);
                     if (maxWorkerThreads - workerThreads == 0)
                     {
-                        Console.WriteLine("ç»“æŸäº†");
+                        Console.WriteLine("?§ô¤F");
                         break;
                     }
                 }
-                MyFuncUtil.mylogandxianshi("åºå·" + j + ",ç»“æŸ");
+                MyFuncUtil.mylogandxianshi("§Ç?" + j + ",?§ô");
             }
         }
         
         private void ceshi_button_Click(object sender, EventArgs e)
         {
             quanjubutton = 1;
-            apkName = dict["ä¸€æ‹³è¶…äºº"];
+            apkName = dict["¤@®±¶W¤H"];
             int[] yunxingIndex = null;
             if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
             {
@@ -412,32 +414,32 @@ namespace wlxm
             string a_b = "d";
             //MyLdcmd.RunDuokaiqi(a_b);
             MyFuncUtil.myqiehuancd(a_b, out dizhi, out path, out seed);            
-            MyFuncUtil.mylogandxianshi("å‡†å¤‡å¤šçº¿ç¨‹æµ‹è¯•");
+            MyFuncUtil.mylogandxianshi("­ã?¦h?µ{??");
             for (int j = 0; j < 5; j++)
             {
-                MyFuncUtil.mylogandxianshi("åºå·" + j + ",å¼€å§‹");
+                MyFuncUtil.mylogandxianshi("§Ç?" + j + ",?©l");
 
-                ThreadPool.SetMaxThreads(yunxingIndex.Length, yunxingIndex.Length); //è®¾ç½®æœ€å¤§çº¿ç¨‹æ•°
+                ThreadPool.SetMaxThreads(yunxingIndex.Length, yunxingIndex.Length); //?¸m³Ì¤j?µ{?
                 foreach (int inx in yunxingIndex)
                 {
-                    ThreadPool.QueueUserWorkItem(new WaitCallback(duoxian_cs), inx);//çº¿ç¨‹æ± æŒ‡å®šçº¿ç¨‹æ‰§è¡ŒAutoæ–¹æ³•
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(duoxian_cs), inx);//?µ{¦À«ü©w?µ{?¦æAuto¤èªk
                     Thread.Sleep(1000*20);
                 }
                 long ks = MyFuncUtil.GetTimestamp();
                 while (true)
                 {
-                    Thread.Sleep(1000);//è¿™å¥å†™ç€ï¼Œä¸»è¦æ˜¯æ²¡å¿…è¦å¾ªç¯é‚£ä¹ˆå¤šæ¬¡ã€‚å»æ‰ä¹Ÿå¯ä»¥ã€‚
+                    Thread.Sleep(1000);//?¥y??¡A¥D­n¬O?¥²­n´`?¨º¤\¦h¦¸¡C¥h±¼¤]¥i¥H¡C
                     int maxWorkerThreads, workerThreads;
                     int portThreads;
                     ThreadPool.GetMaxThreads(out maxWorkerThreads, out portThreads);
                     ThreadPool.GetAvailableThreads(out workerThreads, out portThreads);
                     if (maxWorkerThreads - workerThreads == 0)
                     {
-                        Console.WriteLine("ç»“æŸäº†");
+                        Console.WriteLine("?§ô¤F");
                         break;
                     }                    
                 }
-                MyFuncUtil.mylogandxianshi("åºå·" + j + ",ç»“æŸ");
+                MyFuncUtil.mylogandxianshi("§Ç?" + j + ",?§ô");
             }
         }
         private void duoxian_cs(object dqind)
@@ -460,7 +462,7 @@ namespace wlxm
                 
                 
                 myDm dm = new myDm();
-                MyFuncUtil.mylogandxianshi("æ¨¡æ‹Ÿå™¨" + dqinx + "é™ä½cpu");
+                MyFuncUtil.mylogandxianshi("¼Ò?¾¹" + dqinx + "­°§Ccpu");
                 //MyLdcmd.myDownCpu(dqinx, 50);
                 Jingjie yq = new Jingjie(dm, dqinx, dizhi);
                 //yq.denglu(15, out a_b);
@@ -468,8 +470,8 @@ namespace wlxm
                 Thread.Sleep(1000 * 60 * 60);
                 
                 var js = MyFuncUtil.GetTimestamp();
-                MyFuncUtil.mylogandxianshi("æ¨¡æ‹Ÿå™¨" + dqinx + "å¾ªç¯" + cishu + "æ¬¡æ•°");
-                MyFuncUtil.mylogandxianshi("æ¨¡æ‹Ÿå™¨" + dqinx + "å¾ªç¯1æ¬¡è€—æ—¶" + MyFuncUtil.SecondToHour(js - ks));
+                MyFuncUtil.mylogandxianshi("¼Ò?¾¹" + dqinx + "´`?" + cishu + "¦¸?");
+                MyFuncUtil.mylogandxianshi("¼Ò?¾¹" + dqinx + "´`?1¦¸¯Ó?" + MyFuncUtil.SecondToHour(js - ks));
             }
         }
 
@@ -477,7 +479,7 @@ namespace wlxm
         private void quanliucheng_Click(object sender, EventArgs e)
         {
             quanjubutton = 1;
-            MyFuncUtil.mylogandxianshi("å¼€å§‹-å·²å–ç‚¹");
+            MyFuncUtil.mylogandxianshi("?©l-¤w¨ú?");
             string dizhi = null;
             string path = null;
             string seed = null;
@@ -506,26 +508,26 @@ namespace wlxm
                 {
                     if (mf.mohuByLeiBool(f.Sd))
                     {
-                        MyFuncUtil.mylogandxianshi(f.Name+"æ¨¡ç³Šå–åˆ°");
+                        MyFuncUtil.mylogandxianshi(f.Name+"¼Ò½k¨ú¨ì");
                         //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
                         mf.mydelay(1000, 2000);
                     }
                     if (mf.jingqueByLeiBool(f.Sd))
                     {
-                        MyFuncUtil.mylogandxianshi(f.Name + "ç²¾ç¡®å–åˆ°");
+                        MyFuncUtil.mylogandxianshi(f.Name + "ºëÚÌ¨ú¨ì");
                         mf.mydelay(1000, 2000);
                     }
                 }
                 mf.mydelay(10, 200);
 
             }
-            MyFuncUtil.mylogandxianshi("ç»“æŸ-å·²å–ç‚¹");
+            MyFuncUtil.mylogandxianshi("?§ô-¤w¨ú?");
         }
         
         private void dpanduoxiancheng_Click(object sender, EventArgs e)
         {
             quanjubutton = 1;
-            ThreadStart threadStart = new ThreadStart(duoxianzongtou);//é€šè¿‡ThreadStartå§”æ‰˜å‘Šè¯‰å­çº¿ç¨‹æ‰§è¡Œä»€ä¹ˆæ–¹æ³•ã€€
+            ThreadStart threadStart = new ThreadStart(duoxianzongtou);//³q?ThreadStart©e¦«§i?¤l?µ{?¦æ¤°¤\¤èªk¡@
             Thread thread = new Thread(threadStart);
             thread.Name = "wodedpanduoxian";
             thread.Start();
@@ -549,12 +551,12 @@ namespace wlxm
             string path = null;
             string seed = null;
             MyFuncUtil.myqiehuancd(a_b, out dizhi, out path, out seed);
-            //æ‰€æœ‰è´¦å·ç½®ä¸ºdengluzhong N å¤šä¸ªæœºå™¨çš„è¯ ä¼šæœ‰éº»çƒ¦
+            //©Ò¦³??¸m?dengluzhong N ¦h?Éó¾¹ªº? ?¦³³Â?
             //ZhangHao zh = new ZhangHao();
             //zh.zhiweidengluzhongN("jingjie", WriteLog.getMachineName());
             for (int j = 1; j < 1000; j++)
             {
-                WriteLog.WriteLogFile("", "åºå·" + j + ",å¼€å§‹");
+                WriteLog.WriteLogFile("", "§Ç?" + j + ",?©l");
                 MyLdcmd.myQuitAll(dizhi);
                 Thread.Sleep(2000);
                 MyLdcmd.myRemoveAll(dizhi);
@@ -563,16 +565,16 @@ namespace wlxm
                 Thread.Sleep(2000);
                 MyFuncUtil.duokaiqiAdd(a_b);
                 Thread.Sleep(2000);
-                ThreadPool.SetMaxThreads(yunxingIndex.Length, yunxingIndex.Length); //è®¾ç½®æœ€å¤§çº¿ç¨‹æ•°
+                ThreadPool.SetMaxThreads(yunxingIndex.Length, yunxingIndex.Length); //?¸m³Ì¤j?µ{?
                 foreach (int inx in yunxingIndex)
                 {
-                    ThreadPool.QueueUserWorkItem(new WaitCallback(duoxiand), inx);//çº¿ç¨‹æ± æŒ‡å®šçº¿ç¨‹æ‰§è¡ŒAutoæ–¹æ³•
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(duoxiand), inx);//?µ{¦À«ü©w?µ{?¦æAuto¤èªk
                     //Thread.Sleep(1000 * 40);
                 }
                 var ks = MyFuncUtil.GetTimestamp();
                 while (true)
                 {
-                    Thread.Sleep(10000);//è¿™å¥å†™ç€ï¼Œä¸»è¦æ˜¯æ²¡å¿…è¦å¾ªç¯é‚£ä¹ˆå¤šæ¬¡ã€‚å»æ‰ä¹Ÿå¯ä»¥ã€‚
+                    Thread.Sleep(10000);//?¥y??¡A¥D­n¬O?¥²­n´`?¨º¤\¦h¦¸¡C¥h±¼¤]¥i¥H¡C
                     int maxWorkerThreads, workerThreads;
                     int portThreads;
                     ThreadPool.GetMaxThreads(out maxWorkerThreads, out portThreads);
@@ -583,7 +585,7 @@ namespace wlxm
                     }
                 }
 
-                WriteLog.WriteLogFile("", "åºå·" + j + ",ç»“æŸ");
+                WriteLog.WriteLogFile("", "§Ç?" + j + ",?§ô");
             }
         }
 
@@ -596,7 +598,7 @@ namespace wlxm
 
         
         /// <summary>
-        /// å¯åŠ¨é›·ç”µå¤šå¼€å™¨ åˆ é™¤æ¨¡æ‹Ÿå™¨ å»ºæ–‡ä»¶å¤¹ å¤åˆ¶æ¨¡æ‹Ÿå™¨
+        /// ??¹p?¦h?¾¹ ?°£¼Ò?¾¹ «Ø¤å¥ó? Î`¨î¼Ò?¾¹
         /// </summary>
         /// <param name="a_b"></param>
         private void qdinit(string a_b) {
@@ -622,37 +624,37 @@ namespace wlxm
             {
                 return;
             }
-            WriteLog.WriteLogFile(dqinx + "", "å‡†å¤‡æ“ä½œ" + dqinx + "å·æ¨¡æ‹Ÿå™¨");            
+            WriteLog.WriteLogFile(dqinx + "", "­ã?¾Ş§@" + dqinx + "?¼Ò?¾¹");            
             var cishu = 0;
             for (int cs = 0; cs < xhcishu; cs++)
             {
                 var ks = MyFuncUtil.GetTimestamp();
                 Thread.Sleep(2000);
-                WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "è¿›å…¥åˆ°å¾ªç¯å½“ä¸­ï¼Œthread:" + Thread.CurrentThread.ManagedThreadId);
+                WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "?¤J¨ì´`??¤¤¡Athread:" + Thread.CurrentThread.ManagedThreadId);
                 Thread.Sleep(1000);
                 bool temp=MyFuncUtil.myQuit(dqinx, dizhi);
                 if (!temp)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "å…³é—­å¤±è´¥");
+                    WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "??¥¢?");
                     Thread.Sleep(20000);
                     continue;
                 }
-                WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "å¤åŸ");
+                WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "Î`­ì");
                 MyLdcmd.myRestore(dqinx, seed, dizhi);
-                WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "æ”¹å");
-                MyLdcmd.myRename(dqinx, "é›·" + dqinx + "-" + cishu, dizhi);
+                WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "§ï¦W");
+                MyLdcmd.myRename(dqinx, "¹p" + dqinx + "-" + cishu, dizhi);
                 temp=MyFuncUtil.Launch(dqinx, dizhi);
                 if (!temp) {
-                    WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "æ‰“å¼€å¤±è´¥");
+                    WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "¥´?¥¢?");
                     Thread.Sleep(20000);
                     continue;
                 }
                 Thread.Sleep(20000);
-                apkName = dict["å¢ƒç•Œ"];
+                apkName = dict["¹Ò¬É"];
                 int i = MyFuncUtil.QiDongWanChengLurenzhanghao(a_b, dqinx, apkName);
                 if (i == -1)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "æ‰“å¼€app" + apkName + "å¤±è´¥");
+                    WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "¥´?app" + apkName + "¥¢?");
                     Thread.Sleep(20000);
                     continue;
                 }
@@ -660,7 +662,7 @@ namespace wlxm
                 MyFuncUtil.getWindowSize(dqinx, out w, out h);
                 if (w != -1 && h != -1 && w < h)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "w hä¸å¯¹" + w + " " + h);
+                    WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "w h¤£?" + w + " " + h);
                     Thread.Sleep(20000);
                     continue;
                 }
@@ -669,10 +671,10 @@ namespace wlxm
                 temp = mno.lurenResizeOk(dqinx);
                 if (temp == false)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + ",resizeæ²¡æˆåŠŸ");
+                    WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + ",resize?¦¨¥\");
                     continue;
                 }
-                WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "é™ä½cpu");
+                WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "­°§Ccpu");
                 MyLdcmd.myDownCpu(dqinx, 50);
                 Thread.Sleep(1000 * 10); 
                 myDm dm = new myDm();
@@ -681,27 +683,27 @@ namespace wlxm
                 tmpBool = yq.denglu(15,out name);
                 if (!tmpBool)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "ç™»å½•ç¯èŠ‚å‡ºé”™");
+                    WriteLog.WriteLogFile(dqinx + "", "µn???¥X?");
                     Thread.Sleep(1000 * 60 * 3);
                     continue;
                 }                
                 yq.zhuxian(name);
-                //Thread.Sleep(1000 * 60*60);//åœä½1å°æ—¶
+                //Thread.Sleep(1000 * 60*60);//°±¦í1¤p?
                 cishu++;
                 var js = MyFuncUtil.GetTimestamp();
-                WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "å¾ªç¯" + cishu + "æ¬¡æ•°");
-                WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "å¾ªç¯1æ¬¡è€—æ—¶" + MyFuncUtil.SecondToHour(js - ks));
+                WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "´`?" + cishu + "¦¸?");
+                WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "´`?1¦¸¯Ó?" + MyFuncUtil.SecondToHour(js - ks));
             }
         }
 
         private void oldquanqd() {
-            apkName = dict["æ˜æ—¥æ–¹èˆŸ"];
+            apkName = dict["©ú¤é¤è¦à"];
             int[] yunxingIndex = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
             string a_b = "d";
             qdinit(a_b);
             for (int j = 1; j < 1000; j++)
             {
-                WriteLog.WriteLogFile("", "åºå·" + j + ",å¼€å§‹");
+                WriteLog.WriteLogFile("", "§Ç?" + j + ",?©l");
                 MyFuncUtil.LaunchAll(yunxingIndex.Length);
                 Thread.Sleep(10000);
                 List<int> newinx = new List<int>();
@@ -716,16 +718,16 @@ namespace wlxm
                 }
                 MyLdcmd.mySort(a_b);
                 Thread.Sleep(2000);
-                ThreadPool.SetMaxThreads(newinx.Count, newinx.Count); //è®¾ç½®æœ€å¤§çº¿ç¨‹æ•°
+                ThreadPool.SetMaxThreads(newinx.Count, newinx.Count); //?¸m³Ì¤j?µ{?
                 foreach (int inx in newinx)
                 {
-                    ThreadPool.QueueUserWorkItem(new WaitCallback(duoxiand), inx);//çº¿ç¨‹æ± æŒ‡å®šçº¿ç¨‹æ‰§è¡ŒAutoæ–¹æ³•
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(duoxiand), inx);//?µ{¦À«ü©w?µ{?¦æAuto¤èªk
                     Thread.Sleep(20000);
                 }
 
                 while (true)
                 {
-                    Thread.Sleep(10000);//è¿™å¥å†™ç€ï¼Œä¸»è¦æ˜¯æ²¡å¿…è¦å¾ªç¯é‚£ä¹ˆå¤šæ¬¡ã€‚å»æ‰ä¹Ÿå¯ä»¥ã€‚
+                    Thread.Sleep(10000);//?¥y??¡A¥D­n¬O?¥²­n´`?¨º¤\¦h¦¸¡C¥h±¼¤]¥i¥H¡C
                     int maxWorkerThreads, workerThreads;
                     int portThreads;
                     ThreadPool.GetMaxThreads(out maxWorkerThreads, out portThreads);
@@ -736,7 +738,7 @@ namespace wlxm
                     }
                 }
 
-                WriteLog.WriteLogFile("", "åºå·" + j + ",ç»“æŸ");
+                WriteLog.WriteLogFile("", "§Ç?" + j + ",?§ô");
             }
         }
 
@@ -748,11 +750,11 @@ namespace wlxm
             MyFuncUtil.myqiehuancd(a_b, out dizhi, out path, out seed);
             //MyLdcmd.mySort(dizhi);
             Thread.Sleep(2000);
-            WriteLog.WriteLogFile(dqinx + "", "æ¨¡æ‹Ÿå™¨" + dqinx + "è¿›å…¥åˆ°å¾ªç¯å½“ä¸­");
+            WriteLog.WriteLogFile(dqinx + "", "¼Ò?¾¹" + dqinx + "?¤J¨ì´`??¤¤");
             /*var r = MyFuncUtil.Launch(a, dizhi);
             if (r == 0)
             {
-                WriteLog.WriteLogFile(a + "", "æ¨¡æ‹Ÿå™¨" + a + "æ‰“å¼€å¤±è´¥");
+                WriteLog.WriteLogFile(a + "", "¼Ò?¾¹" + a + "¥´?¥¢?");
                 Thread.Sleep(20000);
                 return;
             }
@@ -761,17 +763,17 @@ namespace wlxm
             lock (dm)
             {
                 MingRi_Sort mr = new MingRi_Sort(dm, dqinx, dizhi);
-                //ç™»å½• è¦ä¸‹è½½æ–‡ä»¶ æš‚å®šååˆ†é’Ÿ å‘ç°startæŒ‰é’®åˆ™ç«‹åˆ»è·³å‡º
+                //µn? ­n¤U?¤å¥ó ?©w¤Q¤À? ??start«ö??¥ß¨è¸õ¥X
                 tmpBool = mr.denglu(10);
                 if (!tmpBool)
                 {
-                    tmpBoolString.Append("ç™»å½•ç¯èŠ‚å‡ºé”™");
+                    tmpBoolString.Append("µn???¥X?");
                     return;
                 }
                 tmpBool = mr.zhuce(3);
                 if (!tmpBool)
                 {
-                    tmpBoolString.Append("æ³¨å†Œç¯èŠ‚å‡ºé”™");
+                    tmpBoolString.Append("ª`???¥X?");
                     return;
                 }
                 string bmpname = dqinx + "_" + dm.GetTime();
@@ -804,18 +806,18 @@ namespace wlxm
             while (true)
             {
                 i++;
-                //continue;//ç»å¯¹çš„æ­»å¾ªç¯
+                //continue;//??ªº¦º´`?
                 if (i == 3)
                 {
-                    continue;//ä¸€ç›´å¾ªç¯ï¼Œå¾ªç¯çš„æ˜¯æœ€é‡Œé¢çš„ifåˆ¤æ–­ï¼ä¸æ˜¯whileï¼Œä¸€èˆ¬ä¼šè¿›å…¥æ­»å¾ªç¯
+                    continue;//¤@ª½´`?¡A´`?ªº¬O³Ì¨½­±ªºif§P?¡I¤£¬Owhile¡A¤@¯ë??¤J¦º´`?
                 }
                 if (i == 21)
                 {
-                    return;//è·Ÿreturnä¸€æ ·ï¼Œç»“æŸæ–¹æ³•ä½“ï¼Œåé¢ä»£ç å…¨éƒ¨ä¸å†æ‰§è¡Œç›´æ¥è¿”å›
+                    return;//¸òreturn¤@?¡A?§ô¤èªkÊ^¡A¦Z­±¥N?¥ş³¡¤£¦A?¦æª½±µªğ¦^
                 }
                 if (i == 9)
                 {
-                    break;//è·Ÿreturnä¸€æ ·ï¼Œç»“æŸæ–¹æ³•ä½“ï¼Œåé¢ä»£ç å…¨éƒ¨ä¸å†æ‰§è¡Œç›´æ¥è¿”å›
+                    break;//¸òreturn¤@?¡A?§ô¤èªkÊ^¡A¦Z­±¥N?¥ş³¡¤£¦A?¦æª½±µªğ¦^
                 }                
                 WriteLog.WriteLogFile("",i+"");
             }
@@ -825,11 +827,11 @@ namespace wlxm
         {
             var ks = MyFuncUtil.GetTimestamp();
             Thread.Sleep(2000);
-            MyFuncUtil.mylogandxianshi("ç³»ç»Ÿå¼€å§‹åˆå§‹åŒ–,åšå¥½ç§å­");
+            MyFuncUtil.mylogandxianshi("¨t??©lªì©l¤Æ,°µ¦nÏú¤l");
             MyFuncUtil.createDirIfNotExist("d");
             MyLdcmd.ClearAndCopySimulator("d");
             var js = MyFuncUtil.GetTimestamp();
-            MyFuncUtil.mylogandxianshi("åˆå§‹åŒ–å®Œæ¯•,è€—æ—¶" + MyFuncUtil.SecondToHour(js - ks));
+            MyFuncUtil.mylogandxianshi("ªì©l¤Æ§¹?,¯Ó?" + MyFuncUtil.SecondToHour(js - ks));
         }
 
         private void resizebutton_Click(object sender, EventArgs e)
@@ -849,7 +851,7 @@ namespace wlxm
         private void gaotupian_Click(object sender, EventArgs e)
         {
             quanjubutton = 1;
-            MyFuncUtil.mylogandxianshi("ç³»ç»Ÿå¼€å§‹è¯†åˆ«Picå›¾ç‰‡");
+            MyFuncUtil.mylogandxianshi("¨t??©l??Pic?¤ù");
             var ks = MyFuncUtil.GetTimestamp();
             string mydir1 = @"d:\pic1\";
             string dizhi = null;
@@ -863,7 +865,7 @@ namespace wlxm
             int i = 1;
             foreach (System.IO.FileInfo myfile in TheFolder.GetFiles())
             {
-                MyFuncUtil.mylogandxianshi("å½“å‰ç¬¬"+i+"ä¸ªæ–‡ä»¶");
+                MyFuncUtil.mylogandxianshi("?«e²Ä"+i+"?¤å¥ó");
                 f = MyFuncUtil.ReadImageFile(mydir1 + "//" + myfile);
                 if (f != null)
                 {
@@ -880,13 +882,13 @@ namespace wlxm
                             string zhanghao = "", pwd = "";
                             foreach (string r in rs)
                             {
-                                if (r.IndexOf("è´¦å·") >= 0 && r.Substring(r.IndexOf("è´¦å·")).Length > 2)
+                                if (r.IndexOf("??") >= 0 && r.Substring(r.IndexOf("??")).Length > 2)
                                 {
-                                    zhanghao = r.Substring(r.IndexOf("è´¦å·")+2).Trim().ToLower();
+                                    zhanghao = r.Substring(r.IndexOf("??")+2).Trim().ToLower();
                                 }
-                                if (r.IndexOf("å¯†ç ") >= 0 && r.Substring(r.IndexOf("å¯†ç ")).Length > 2)
+                                if (r.IndexOf("±K?") >= 0 && r.Substring(r.IndexOf("±K?")).Length > 2)
                                 {
-                                    pwd = r.Substring(r.IndexOf("å¯†ç ")+2).Trim().ToLower();
+                                    pwd = r.Substring(r.IndexOf("±K?")+2).Trim().ToLower();
                                 }                                
                             }
                             if (zhanghao != "" && pwd != "")
@@ -902,20 +904,20 @@ namespace wlxm
             
             
             var js = MyFuncUtil.GetTimestamp();
-            MyFuncUtil.mylogandxianshi("åˆå§‹åŒ–å®Œæ¯•,è€—æ—¶" + MyFuncUtil.SecondToHour(js - ks));
+            MyFuncUtil.mylogandxianshi("ªì©l¤Æ§¹?,¯Ó?" + MyFuncUtil.SecondToHour(js - ks));
         }
 
         private void chongfusandian_Click(object sender, EventArgs e)
         {
             quanjubutton = 1;
-            WriteLog.WriteLogFile("", "æµ‹è¯•å¼€å§‹");
+            WriteLog.WriteLogFile("", "???©l");
             List<string> a = Jingjie_SanDian.GetObject().findListShiFouChongMing();
             foreach (string f in a)
             {
                 WriteLog.WriteLogFile("",f);
             }
 
-            WriteLog.WriteLogFile("", "æµ‹è¯•ç»“æŸ");
+            WriteLog.WriteLogFile("", "???§ô");
         }
 
         
