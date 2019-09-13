@@ -676,7 +676,7 @@ namespace fuzhu
                     {
                         qianghua();
                     }
-                    kjqh++;
+                    //kjqh++;
                 }
 
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-集结--购买1次");
