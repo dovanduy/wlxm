@@ -1082,6 +1082,22 @@ namespace fuzhu
                     mf.mydelay(3000, 5000);
                     break;
                 }
+
+                if (panduanjiemian("界面-战斗界面"))
+                {
+                    ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("引导-战斗打开X2");
+                    if (mf.mohuByLeiBool(ktsd1.Sd))
+                    {
+                        WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);                       
+                    }
+                    ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("引导-战斗打开自动");
+                    if (mf.mohuByLeiBool(ktsd1.Sd))
+                    {
+                        WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);                        
+                    }
+                }
             }
         }
 
@@ -2002,6 +2018,14 @@ namespace fuzhu
             if (jiemian.Equals("界面-角色强化"))
             {
                 fh = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-角色强化");
+                if (mf.mohuByLeiBool(fh.Sd))
+                {
+                    tmp = true;
+                }
+            }
+            if (jiemian.Equals("界面-战斗界面"))
+            {
+                fh = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-战斗界面");
                 if (mf.mohuByLeiBool(fh.Sd))
                 {
                     tmp = true;

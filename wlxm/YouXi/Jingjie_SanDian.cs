@@ -834,6 +834,37 @@ namespace fuzhu
             _list_yqfhsandian.Add(ktfh1);
 
 
+            ktsd1 = new SanDian(new int[3, 3]{
+	{   20,  366, 0xbfc8d8},
+	{  318,  377, 0x40bd51},
+	{  318,  381, 0xfae03c},
+});
+            ktfh1 = new FuHeSanDian("引导-战斗打开自动", ktsd1, 24, 362);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{   28,  331, 0xa9bcd5},
+	{  318,  377, 0x40bd51},
+	{  318,  381, 0xfae03c},
+});
+            ktfh1 = new FuHeSanDian("引导-战斗打开X2", ktsd1, 24, 327);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  318,  377, 0x40bd51},
+	{  391,  376, 0x3cb84d},
+	{  318,  382, 0xffde3b},
+});
+            ktfh1 = new FuHeSanDian("界面-战斗界面", ktsd1);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+
+
+
 
 
 
