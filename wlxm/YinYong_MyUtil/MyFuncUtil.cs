@@ -857,10 +857,10 @@ namespace MyUtil
         public static void duokaiqiAdd(string a_b)
         {
             WriteLog.WriteLogFile("", "打开模拟器,新增15个或20个");
-            int a = 3;
+            int a = 4;
             if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
             {
-                a = 2;
+                a = 3;
             }
             
             lock (obj)
