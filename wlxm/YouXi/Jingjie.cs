@@ -17,6 +17,7 @@ namespace fuzhu
 {
     public class Jingjie:youxi
     {
+        public static int YOUXIBANBEN = 13;
         private myDm mf;
         private int _dqinx;
 

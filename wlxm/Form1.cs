@@ -21,7 +21,7 @@ namespace wlxm
         /// <summary>
         /// 辅助的版本
         /// </summary>
-        private static int fuzhuBanben = 12;
+        private static int fuzhuBanben = Jingjie.YOUXIBANBEN;
         
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace wlxm
                 }
 
                 //每隔60分钟查看是否应该重启 测试时 每隔1分钟
-                if (WriteLog.getMachineName().ToUpper().Equals("WLZHONGKONG") && (js - ks_cqyunxing) > 1000 * 60 * 60)
+                if ((js - ks_cqyunxing) > 1000 * 60 * 60)
                 {
                     ks_cqyunxing = MyFuncUtil.GetTimestamp();
                     ZhangHao zh = new ZhangHao();
@@ -234,7 +234,8 @@ namespace wlxm
             //ln.zhuxian(apkName);
             //ln.generalBasicShuziDemo(1, @"c:\mypic_save\1_192622781.bmp");
             ZhangHao zh = new ZhangHao();
-            zh.gxYunXingQk();
+            
+                  
             MyFuncUtil.mylogandxianshi("结束");
             
         }
@@ -539,11 +540,11 @@ namespace wlxm
             int[] yunxingIndex = null;
             if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
             {
-                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, };//, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19
+                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, };//, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19
             }
             else
             {
-                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
+                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
             }
             string a_b = "d";
             //qdinit(a_b);

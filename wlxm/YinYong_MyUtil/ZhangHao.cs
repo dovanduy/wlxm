@@ -485,7 +485,7 @@ namespace MyUtil
                         case "3HAO":
                             pn = "hao3xiugai";
                             break;
-                        case "WLZHONGKKONG":
+                        case "WLZHONGKONG":
                             pn = "zkxiugai";
                             break;
                         default:
