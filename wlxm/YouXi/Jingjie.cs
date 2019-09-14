@@ -1370,70 +1370,85 @@ namespace fuzhu
                 }
             }
             if (jiemian == 2) {
-                //消耗完所有体力
-                FuHeSanDian fh11 = Jingjie_SanDian.GetObject().findFuHeSandianByName("关卡-3消耗体力");
-                if (mf.mohuByLeiBool(fh11.Sd)) {
+                //一键领取
+                FuHeSanDian fh11 = Jingjie_SanDian.GetObject().findFuHeSandianByName("引导-关卡一件领取");
+                if (mf.mohuByLeiBool(fh11.Sd))
+                {
                     WriteLog.WriteLogFile(this._mnqName, fh11.Name);
-                    mf.mytap(this._jubing, 210, 218);//搞3-3
+                    mf.mytap(this._jubing, fh11.Zhidingx, fh11.Zhidingy);
                     mf.mydelay(2000, 4000);
-                    fh11 = Jingjie_SanDian.GetObject().findFuHeSandianByName("关卡-3具体消耗界面");
-                    if (mf.mohuByLeiBool(fh11.Sd))
-                    {
-                        long ks1 = MyFuncUtil.GetTimestamp();
-                        int z = 0;
-                        while (true)
-                        {
-                            long js1 = MyFuncUtil.GetTimestamp();
-                            if ((js1 - ks1) > 1000 * 60 * 5)
-                            {
-                                break;
-                            }
-                            mf.mytap(this._jubing, 463, 336);
-                            mf.mydelay(300, 600);
-                            FuHeSanDian ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-体力终结");
-                            if (mf.mohuByLeiBool(ktsd1.Sd))
-                            {
-                                WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
-                                mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
-                                z = 1;
-                            }
-                            if (z == 1) {
-                                mf.mytap(this._jubing, 649, 15);
-                            }
-                            if (mf.mohuXunHuanJianChi(Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-关卡界面").Sd, 15))
-                            {
-                                break;
-                            }
-                            if (mf.mohuXunHuanJianChi(Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面").Sd, 15))
-                            {
-                                break;
-                            }
-                        }
-                    }
-                }                
-            }
-            jiemian = 0;
-            while (true)
-            {
-                //mf.mytap(this._jubing, 466, 366);
-                long js = MyFuncUtil.GetTimestamp();
-                if ((js - ks) > 1000 * 20)
-                {
-                    break;
-                }
-                fh = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面");
-                if (mf.mohuXunHuanJianChi(fh.Sd, 15))
-                {
-                    jiemian = 1;
-                    break;
                 }
                 fh = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-关卡界面");
-                if (mf.mohuXunHuanJianChi(fh.Sd, 15))
+                long ksgk = MyFuncUtil.GetTimestamp();
+                while (true)
                 {
-                    jiemian = 2;
-                    break;
+                    List<FuHeSanDian> fhh = Jingjie_SanDian.GetObject().findListFuHeSandianByName("引导-关卡一件");
+                    if (!mf.mohuXunHuanJianChi(fh.Sd, 15))
+                    {
+                        foreach (FuHeSanDian f in fhh)
+                        {
+                            if (!mf.mohuXunHuanJianChi(fh.Sd, 15) && !f.Name.Equals("引导-关卡一件领取"))
+                            {
+                                WriteLog.WriteLogFile(this._mnqName, f.Name);
+                                mf.mytap(this._jubing, f.Zhidingx, f.Zhidingy);
+                                mf.mydelay(2000, 4000);
+                            }
+                        }
+                        mf.mytap(this._jubing, 463, 336);
+                    }
+                    if (mf.mohuXunHuanJianChi(fh.Sd, 15))
+                    {
+                        break;
+                    }
+                    long jsgk = MyFuncUtil.GetTimestamp();
+                    if ((jsgk - ksgk) > 1000 * 60 *3)
+                    {
+                        break;
+                    }
                 }
-            }
+                //消耗完所有体力
+                fh11 = Jingjie_SanDian.GetObject().findFuHeSandianByName("关卡-3消耗体力");
+                if (mf.mohuByLeiBool(fh11.Sd)) {
+                    WriteLog.WriteLogFile(this._mnqName, fh11.Name);
+                    long ks1 = MyFuncUtil.GetTimestamp();
+                    int z = 0;
+                    int jin=0;
+                    while (true)
+                    {
+                        if(jin==0){
+                            mf.mytap(this._jubing, 210, 218);//搞3-3
+                            mf.mydelay(2000, 4000);
+                        }
+                        fh11 = Jingjie_SanDian.GetObject().findFuHeSandianByName("关卡-3具体消耗界面");
+                        if (mf.mohuByLeiBool(fh11.Sd))
+                        {
+                            jin=1;
+                        }
+                        long js1 = MyFuncUtil.GetTimestamp();
+                        if ((js1 - ks1) > 1000 * 60 * 5)
+                        {
+                            break;
+                        }
+                        mf.mytap(this._jubing, 463, 336);
+                        mf.mydelay(300, 600);
+                        FuHeSanDian ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-体力终结");
+                        if (mf.mohuByLeiBool(ktsd1.Sd))
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                            mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                            z = 1;
+                        }
+                        if (z == 1) {
+                            mf.mytap(this._jubing, 649, 15);
+                        }
+                        if (mf.mohuXunHuanJianChi(Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面").Sd, 15))
+                        {
+                            jiemian = 1;
+                            break;
+                        }
+                    }                    
+                }                
+            }            
             int dengji = -1;
             int zuanshi = -1;
             int qiangzhequan = -1;
@@ -1462,8 +1477,9 @@ namespace fuzhu
                 WriteLog.WriteLogFile(this._mnqName, "钻石数没搞到");
             }
             if (jiemian == 2) {
+                WriteLog.WriteLogFile(this._mnqName, "退出到主界面搞强者");
                 mf.mytap(this._jubing, 646, 14);
-                mf.mydelay(2000, 3000);
+                mf.mydelay(6000, 8000);
             }
             fh = Jingjie_SanDian.GetObject().findFuHeSandianByName("引导-不降低分辨率");
             if (mf.mohuByLeiBool(fh.Sd)){

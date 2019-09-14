@@ -397,7 +397,8 @@ namespace MyUtil
                         "sum(case when z.zuanshi>0  then 1 else 0 end)  zuanshidayu0,"+
                         "sum(case when z.zuanshi>1000  then 1 else 0 end)  zuanshidayu1000,"+
                         "sum(case when z.zuanshi>3000  then 1 else 0 end)  zuanshidayu3000,"+
-                        "sum(case when z.qiangzhequan>0  then 1 else 0 end)  qiangzhedayu0"+
+                        "sum(case when z.qiangzhequan>0  then 1 else 0 end)  qiangzhedayu0,"+
+                        "sum(case when z.xgsj>=convert(varchar(10),getdate(),120) then 1 else 0 end)  zxiugai" +
                         " from zhanghao z";
 
                     DataTable dt = sqh.getAll(selsql);
@@ -426,14 +427,15 @@ namespace MyUtil
                         jqqk.Zuanshidayu3000 = (int)dt.Rows[0][9];
                         jqqk.Qiangzhedayu0 = (int)dt.Rows[0][10];
                         jqqk.Xgsj = DateTime.Now;
-                        WriteLog.WriteLogFile("", "当前运行机器的出产情况" + jqqk.Jqyx["hao1"].Chuchan + " " + jqqk.Jqyx["hao2"].Chuchan + "  " + jqqk.Jqyx["hao3"].Chuchan + " " + jqqk.Jqyx["zk"].Chuchan);
+                        jqqk.Zongxiugai = (int)dt.Rows[0][11];
+                        WriteLog.WriteLogFile("", "当前运行机器的出产情况" + jqqk.Zongxiugai+"单独:"+jqqk.Jqyx["hao1"].Chuchan + " " + jqqk.Jqyx["hao2"].Chuchan + "  " + jqqk.Jqyx["hao3"].Chuchan + " " + jqqk.Jqyx["zk"].Chuchan);
                     }
-                    string inssql = "insert into yunxingqk (hao1chanchu,hao2xiugai,hao2chanchu,hao3xiugai,hao3chanchu,zkxiugai,zkchanchu,zuanshidayu0,zuanshidayu1000,zuanshidayu3000,qiangzhedayu0,gxsj) values("
+                    string inssql = "insert into yunxingqk (hao1chanchu,hao2xiugai,hao2chanchu,hao3xiugai,hao3chanchu,zkxiugai,zkchanchu,zuanshidayu0,zuanshidayu1000,zuanshidayu3000,qiangzhedayu0,gxsj,zxiugai) values("
                         +jqqk.Jqyx["hao1"].Chuchan+","+jqqk.Jqyx["hao2"].Xiugai+","+jqqk.Jqyx["hao2"].Chuchan 
                         +","+jqqk.Jqyx["hao3"].Xiugai+","+jqqk.Jqyx["hao3"].Chuchan 
                         +","+jqqk.Jqyx["zk"].Xiugai+","+jqqk.Jqyx["zk"].Chuchan 
                         +","+jqqk.Zuanshidayu0+","+jqqk.Zuanshidayu1000 
-                        +","+jqqk.Zuanshidayu3000+","+jqqk.Qiangzhedayu0+",'"+ jqqk.Xgsj+"')";
+                        +","+jqqk.Zuanshidayu3000+","+jqqk.Qiangzhedayu0+",'"+ jqqk.Xgsj+"',"+jqqk.Zongxiugai+")";
                     sqh.update(inssql);
                 }
                 catch (Exception ex)
@@ -519,8 +521,35 @@ namespace MyUtil
 
         public void shutdown(string ip)
         {
-           
 
+            ConnectionOptions options = new ConnectionOptions();
+            options.Username = "administrator";
+            options.Password = "";
+            ManagementScope scope = new ManagementScope("\\\\" + ip + "\\root\\cimv2", options);
+            try
+            {
+                //用给定管理者用户名和口令连接远程的计算机
+                scope.Connect();
+                ObjectQuery oq = new ObjectQuery("select * from win32_OperatingSystem");
+                ManagementObjectSearcher query1 = new ManagementObjectSearcher(scope, oq);
+                ManagementObjectCollection queryCollection1 = query1.Get();
+                foreach (ManagementObject mo in queryCollection1)
+                {
+                    string[] ss = { "" };
+                    
+                    mo.InvokeMethod("Reboot", ss);
+                    WriteLog.WriteLogFile("", "连接" + ip + "出错");
+                    
+                }
+            }
+            catch (Exception er)
+            {
+                WriteLog.WriteLogFile("", "连接" + ip + "出错，出错信息为：" + er.Message);
+
+            }
+
+
+            
         }
     }
 }

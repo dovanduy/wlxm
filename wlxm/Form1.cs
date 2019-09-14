@@ -144,7 +144,8 @@ namespace wlxm
                     zidong = ",自动运行中";
                     if (WriteLog.getMachineName().ToUpper().Equals("1HAO"))
                     {
-                        ThreadStart threadStart = new ThreadStart(gaozhanghaotou);//通过ThreadStart委托告诉子线程执行什么方法　
+                        //gaozhanghaotou
+                        ThreadStart threadStart = new ThreadStart(duoxianzongtou);//通过ThreadStart委托告诉子线程执行什么方法　
                         Thread thread = new Thread(threadStart);
                         thread.Name = "wodegaozhanghao";
                         thread.Start();
@@ -230,8 +231,10 @@ namespace wlxm
             myDm mf = new myDm();
             Jingjie ln = new Jingjie(mf, dqinx);
             //ln.denglu(15, out apkName);
-            ln.zhuxian(apkName);
+            //ln.zhuxian(apkName);
             //ln.generalBasicShuziDemo(1, @"c:\mypic_save\1_192622781.bmp");
+            ZhangHao zh = new ZhangHao();
+            zh.gxYunXingQk();
             MyFuncUtil.mylogandxianshi("结束");
             
         }

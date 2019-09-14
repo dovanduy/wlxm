@@ -57,5 +57,12 @@ namespace Entity
             get { return _zuanshidayu3000; }
             set { _zuanshidayu3000 = value; }
         }
+        private int _zongxiugai;
+
+        public int Zongxiugai
+        {
+            get { return _zongxiugai; }
+            set { _zongxiugai = value; }
+        }
     }
 }
