@@ -863,11 +863,11 @@ namespace fuzhu
             _list_yqfhsandian.Add(ktfh1);
 
             ktsd1 = new SanDian(new int[3, 3]{
-	{  423,  279, 0xdfa55c},
-	{  611,  174, 0xf03142},
-	{  132,  177, 0xb5efff},
+	{  113,  132, 0xb8e1fc},
+	{  536,  321, 0xb2cff2},
+	{  229,  325, 0xf5f1ef},
 });
-            ktfh1 = new FuHeSanDian("引导-领取满月礼", ktsd1,415,278);
+            ktfh1 = new FuHeSanDian("特殊引导-领取满月礼", ktsd1,415,278);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
