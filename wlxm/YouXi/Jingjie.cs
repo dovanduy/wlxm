@@ -865,12 +865,14 @@ namespace fuzhu
                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                                 mf.mydelay(1000, 2000);
                                 mf.mytap(this._jubing, 390, 360);
+                                mf.mydelay(4000, 6000);
                             },
                             () =>
                             {
                                 mf.mytap(this._jubing, 633, 40);
+                                meirijiangli = 1;
                             });
-                            meirijiangli = 1;
+                            
                         }
                     }
                     ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-第3天送啥");
@@ -889,12 +891,14 @@ namespace fuzhu
                             mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                             mf.mydelay(1000, 2000);
                             mf.mytap(this._jubing, 390, 360);
+                            mf.mydelay(4000, 6000);
                         },
                         () =>
                         {
                             mf.mytap(this._jubing, 633, 40);
+                            meirijiangli = 1;
                         });
-                        meirijiangli = 1;
+                       
                     }                    
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-每日奖励开启----可以换号");
@@ -913,12 +917,14 @@ namespace fuzhu
                         mf.mytap(this._jubing, 550, 322);
                         mf.mydelay(1000, 2000);
                         mf.mytap(this._jubing, 390, 360);
+                        mf.mydelay(4000, 6000);
                     },
                         () =>
                         {
                             mf.mytap(this._jubing, 633, 40);
+                            meirijiangli = 1;
                         });
-                    meirijiangli = 1;
+                    
                 }
                 
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-第3天送啥");
@@ -937,12 +943,13 @@ namespace fuzhu
                         mf.mytap(this._jubing, 550, 322);
                         mf.mydelay(1000, 2000);
                         mf.mytap(this._jubing, 390, 360);
+                        mf.mydelay(4000, 6000);
                     },
                         () =>
                         {
                             mf.mytap(this._jubing, 633, 40);
-                        });
-                    meirijiangli = 1;
+                            meirijiangli = 1;
+                        });                    
                 }
 
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-升5级");
