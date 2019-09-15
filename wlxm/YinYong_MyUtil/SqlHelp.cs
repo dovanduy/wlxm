@@ -53,19 +53,16 @@ namespace MyUtil
             {
                 lock (obj)
                 {
-                    if (mysql == null)
+                    mysql = new SqlHelp();
+                    string connString = null;
+                    if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong") || WriteLog.getMachineName().ToLower().Equals("wlbgs"))
                     {
-                        mysql = new SqlHelp();
-                        string connString = null;
-                        if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong") || WriteLog.getMachineName().ToLower().Equals("wlbgs"))
-                        {
-                            connString = "Data Source="+WriteLog.getMachineName().ToLower()+@"\SQLEXPRESS;Initial Catalog=yiquan;User ID=sa;Password=123456";
-                        }
-                        else {
-                            connString = @"Data Source=192.168.4.44;Initial Catalog=yiquan;User ID=sa;Password=123456";
-                        }
-                        conn = new SqlConnection(connString);
+                        connString = "Data Source="+WriteLog.getMachineName().ToLower()+@"\SQLEXPRESS;Initial Catalog=yiquan;User ID=sa;Password=123456";
                     }
+                    else {
+                        connString = @"Data Source=192.168.4.44;Initial Catalog=yiquan;User ID=sa;Password=123456";
+                    }
+                    conn = new SqlConnection(connString);
                 }
             }
             return mysql;

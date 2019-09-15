@@ -431,9 +431,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Setup11"
+        "ProductName" = "8:Setup10"
         "ProductCode" = "8:{80AA2884-73FE-438A-9DDF-70DA32D20416}"
-        "PackageCode" = "8:{C0FA8D38-1380-49B1-9980-C7E6B24DD9B5}"
+        "PackageCode" = "8:{5F645B33-0745-4AA8-A5F8-30319D895AD0}"
         "UpgradeCode" = "8:{FACFA2C3-4470-4489-A3A3-FF11CA18C2B9}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"

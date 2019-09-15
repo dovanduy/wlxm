@@ -17,7 +17,7 @@ namespace fuzhu
 {
     public class Jingjie:youxi
     {
-        public static int YOUXIBANBEN = 13;
+        public static int YOUXIBANBEN = 14;
         private myDm mf;
         private int _dqinx;
 
@@ -595,7 +595,7 @@ namespace fuzhu
                 if ((jstime - kpjishi) > 30 * 1000 && compareColor(kapingyanse1, kapingyanse2))
                 {
                     //调用卡屏函数                   
-                    if (panduankaping(kp1))
+                    if (panduankaping(kp1,zhanghao))
                     {
                         break;
                     }
@@ -1221,7 +1221,7 @@ namespace fuzhu
         public void richang()
         {
         }
-        private bool panduankaping(long kp1)
+        private bool panduankaping(long kp1,string zhanghao)
         {
             bool rs = false;
             long kp2 = MyFuncUtil.GetTimestamp();
@@ -1237,12 +1237,48 @@ namespace fuzhu
             {
                 WriteLog.WriteLogFile(this._mnqName,"卡屏10分钟");
                 string path = @"c:\mypic_save\";
-                string name="卡屏"+this._dqinx+"_"+mf.GetTime()+".bmp";
+                string name = "卡屏" + this._dqinx + "_" + mf.GetTime() + ".bmp";
                 mf.captureBmp(this._jubing, path, name);
                 Thread.Sleep(10000);
+                int res = panduankasiqudian();
+                if (res == 0) {
+                    WriteLog.WriteLogFile(this._mnqName, "卡屏且无任何已取点");
+                    path = @"d:\mypic_save\";
+                    name = "卡屏" + this._dqinx + "_" + zhanghao + ".bmp";
+                    if (!File.Exists(path + name)) {
+                        mf.captureBmp(this._jubing, path, name);
+                    }
+                    ZhangHao zh = new ZhangHao();
+                    zh.zhiweiwuxiao(this._dqinx, "jingjie", zhanghao, WriteLog.getMachineName());
+                }
                 rs = true;
             }
             return rs;
+        }
+
+        private int panduankasiqudian() {
+            int res = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                foreach (FuHeSanDian f in Jingjie_SanDian.List_yqfhsandian)
+                {
+                    if (mf.mohuByLeiBool(f.Sd))
+                    {
+                        MyFuncUtil.mylogandxianshi(f.Name + "模糊取到");
+                        //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                        mf.mydelay(1000, 2000);
+                        res++;
+                    }
+                    if (mf.jingqueByLeiBool(f.Sd))
+                    {
+                        MyFuncUtil.mylogandxianshi(f.Name + "精确取到");
+                        mf.mydelay(1000, 2000);
+                        res++;
+                    }
+                }
+                mf.mydelay(10, 200);
+            }
+            return res;
         }
 
 
@@ -1350,7 +1386,7 @@ namespace fuzhu
                 if ((jstime - kpjishi) > 30 * 1000 && compareColor(kapingyanse1, kapingyanse2))
                 { 
                     //调用卡屏函数                   
-                    if (panduankaping(kp1))
+                    if (panduankaping(kp1,""))
                     {
                         break;
                     }
@@ -1533,6 +1569,34 @@ namespace fuzhu
                 if (mf.mohuByLeiBool(fh.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, fh.Name);
+                    FuHeSanDian ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-集结石中免费");
+                    if (mf.mohuByLeiBool(ktsd1.Sd))
+                    {
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                        mf.mydelay(2000, 3000);
+                        long ksjijie = MyFuncUtil.GetTimestamp();
+                        while (true) {
+                            long jsjijie = MyFuncUtil.GetTimestamp();
+                            if ((jsjijie - ksjijie) > 1000 * 30) {
+                                break;
+                            }
+                            ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-集结石中免费");
+                            if (mf.mohuByLeiBool(ktsd1.Sd))
+                            {
+                                mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                mf.mydelay(1000, 2000);
+                            }
+                            if (!mf.mohuByLeiBool(fh.Sd))
+                            {
+                                mf.mytap(this._jubing, 646, 13);
+                                mf.mydelay(1000, 2000);
+                            }                            
+                            if (mf.mohuXunHuanJianChi(fh.Sd,12))
+                            {
+                                break;
+                            }
+                        }
+                    }                    
                     if (mf.mohu(235, 319, 0x31b1a1) == 1)
                     {
                         qushufrombaidu(out qiangzhequan, fh, 219, 309, 256, 324, 87, 338, 20, 20,"集结石取数");
