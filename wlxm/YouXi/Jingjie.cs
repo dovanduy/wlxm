@@ -17,7 +17,7 @@ namespace fuzhu
 {
     public class Jingjie:youxi
     {
-        public static int YOUXIBANBEN = 14;
+        public static int YOUXIBANBEN = 15;
         private myDm mf;
         private int _dqinx;
 
@@ -264,14 +264,14 @@ namespace fuzhu
                     if (mf.mohuByLeiBool(xq.Sd))
                     {
                         WriteLog.WriteLogFile(this._mnqName, xq.Name);
-                        mf.mytap(this._jubing, 87, 178);
+                        mf.mytap(this._jubing, 77, 213);//增加新区要改
                     }
                 }
                 FuHeSanDian xq1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-服务器选区界面");
                 if (xuanqu == 1 && mf.mohuByLeiBool(xq1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, xq1.Name);
-                    mf.mytap(this._jubing, 87, 178);
+                    mf.mytap(this._jubing, 87, 213);//增加新区要改
                     mf.mydelay(2000, 4000);
                 }
                 FuHeSanDian qu1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-服务器选1区");
@@ -477,14 +477,14 @@ namespace fuzhu
                     if (mf.mohuByLeiBool(xq.Sd))
                     {
                         WriteLog.WriteLogFile(this._mnqName, xq.Name);
-                        mf.mytap(this._jubing, 87, 178);
+                        mf.mytap(this._jubing, 77, 213);//增加新区要改
                     }
                 }
                 FuHeSanDian xq1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-服务器选区界面2");
                 if (xuanqu == 1 && mf.mohuByLeiBool(xq1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, xq1.Name);
-                    mf.mytap(this._jubing, 87, 178);
+                    mf.mytap(this._jubing, 77, 213);//增加新区要改
                     mf.mydelay(2000, 4000);
                 }
                 FuHeSanDian qu1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-服务器选1区2");
