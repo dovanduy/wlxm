@@ -41,10 +41,6 @@ namespace wlsh
                     ks = my.GetTimestamp();
                     ShouHu s = new ShouHu();
                     s.wohaihuozhe();
-                    bool t = s.panDuanChongQi(MyFuncUtil.getMachineName());
-                    if (t) {
-                        System.Diagnostics.Process.Start("shutdown.exe", "-r -f -t 15");
-                    }
                 }
                 if ((js - ks2) > 1000 * 60 * 60)
                 {
