@@ -24,7 +24,7 @@ namespace SH_MyUtil
                     switch (pcname)
                     {
                         case "1HAO":
-                            pn = "hao1chanshu";
+                            pn = "hao1chanchu";
                             break;
                         case "2HAO":
                             pn = "hao2xiugai";
