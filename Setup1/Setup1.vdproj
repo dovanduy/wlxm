@@ -21,12 +21,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_0D2189AB35EA8775C12A7161F5397EF8"
-        "OwnerKey" = "8:_57EFD32F1125A85C7BEDA50775B37117"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_16CF4E18AA577B7FA89B935A52C40992"
         "OwnerKey" = "8:_216C71C3844A4C168C39C19BA6F02E41"
         "MsmSig" = "8:_UNDEFINED"
@@ -41,12 +35,6 @@
         {
         "MsmKey" = "8:_50586A7C563940C09D84060389E06DC4"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_57EFD32F1125A85C7BEDA50775B37117"
-        "OwnerKey" = "8:_AD90347EB16E4B67BE032A3E3DE4C837"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -70,7 +58,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_57EFD32F1125A85C7BEDA50775B37117"
+        "OwnerKey" = "8:_AD90347EB16E4B67BE032A3E3DE4C837"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -303,37 +291,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_57EFD32F1125A85C7BEDA50775B37117"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AipSdk, Version=3.6.11.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_57EFD32F1125A85C7BEDA50775B37117"
-                    {
-                    "Name" = "8:AipSdk.DLL"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:AipSdk.DLL"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_F050675239654F5CB3297918411E41BE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AD90347EB16E4B67BE032A3E3DE4C837"
             {
             "AssemblyRegister" = "3:1"
@@ -433,7 +390,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Setup10"
         "ProductCode" = "8:{80AA2884-73FE-438A-9DDF-70DA32D20416}"
-        "PackageCode" = "8:{5F645B33-0745-4AA8-A5F8-30319D895AD0}"
+        "PackageCode" = "8:{8D6FE3EC-1002-4B83-8084-5BA5FA2D02F9}"
         "UpgradeCode" = "8:{FACFA2C3-4470-4489-A3A3-FF11CA18C2B9}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
@@ -553,9 +510,9 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_49E6F0F5957B4149A04B3A2B41E099F4"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_E082979D97FB4A98BC30D3750DFAEC0A"
             {
-            "Name" = "8:wlxm.exe"
+            "Name" = "8:wlxm.exe 的快捷方式"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"

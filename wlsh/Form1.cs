@@ -33,6 +33,7 @@ namespace wlsh
         }
         private void shzhong() {
             long ks = MyFuncUtil.GetTimestamp();
+            long ks2 = MyFuncUtil.GetTimestamp();
             while (true) {
                 long js = MyFuncUtil.GetTimestamp();
                 if ((js - ks) > 1000 * 60 * 5) {
@@ -41,6 +42,16 @@ namespace wlsh
                     s.wohaihuozhe();
                     bool t = s.panDuanChongQi(MyFuncUtil.getMachineName());
                     if (t) {
+                        System.Diagnostics.Process.Start("shutdown.exe", "-r -f -t 15");
+                    }
+                }
+                if ((js - ks2) > 1000 * 60 * 60)
+                {
+                    ks2 = MyFuncUtil.GetTimestamp();
+                    ShouHu s = new ShouHu();                    
+                    bool t = s.panDuanChongQi(MyFuncUtil.getMachineName());
+                    if (!MyFuncUtil.getMachineName().ToLower().Equals("wlzhongkong") && t)
+                    {
                         System.Diagnostics.Process.Start("shutdown.exe", "-r -f -t 15");
                     }
                 }

@@ -880,7 +880,23 @@ namespace fuzhu
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  251,   41, 0x6f7ef4},
+	{  341,   92, 0xec765d},
+	{  160,   93, 0xffccaa},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-2天送礼", ktsd1, 633, 38);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
 
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  337,  201, 0x37c1b2},
+	{  458,  229, 0x112255},
+	{  265,  274, 0xce4859},
+});
+            ktfh1 = new FuHeSanDian("引导-2天送礼后提醒", ktsd1, 508, 113);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
 
             //志拓
             ktsd1 = new SanDian(new int[3, 3]{

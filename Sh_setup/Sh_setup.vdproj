@@ -58,7 +58,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FD3B2F74BE178E7E3BDD08990C584E6D"
+        "OwnerKey" = "8:_45610271171842378D3FDB4170615DD3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -76,7 +76,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_45610271171842378D3FDB4170615DD3"
+        "OwnerKey" = "8:_FD3B2F74BE178E7E3BDD08990C584E6D"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -97,6 +97,27 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -113,6 +134,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -383,7 +412,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Sh_setup"
         "ProductCode" = "8:{7B68AE41-8F52-441B-B64C-C344F3430834}"
-        "PackageCode" = "8:{CD819C18-51C1-4FFC-B4B7-687CC792185D}"
+        "PackageCode" = "8:{259E6664-8DD4-4214-8707-CBF11A0F9CBE}"
         "UpgradeCode" = "8:{1760B552-4FAE-48E7-A6B2-4EBD62D29106}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -503,6 +532,20 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_E4B08FFB5B4249119E8E57CA9E8DC3AC"
+            {
+            "Name" = "8:wlsh.exe 的快捷方式"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_45610271171842378D3FDB4170615DD3"
+            "Folder" = "8:_9B5E8C613576487884972AD602ADE5AB"
+            "WorkingFolder" = "8:_7232A3EE8F304155B6B2CBC7D5118C55"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
