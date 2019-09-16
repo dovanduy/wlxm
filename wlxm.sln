@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wlshouhuleiku", "wlshouhule
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wlsh", "wlsh\wlsh.csproj", "{7B6FE688-1169-485D-B1CF-272E88A1BA59}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Sh_setup", "Sh_setup\Sh_setup.vdproj", "{BE780CB0-D9CB-4294-BC8A-01FAE18E5C2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,12 @@ Global
 		{7B6FE688-1169-485D-B1CF-272E88A1BA59}.Release|Mixed Platforms.Build.0 = Release|x86
 		{7B6FE688-1169-485D-B1CF-272E88A1BA59}.Release|x86.ActiveCfg = Release|x86
 		{7B6FE688-1169-485D-B1CF-272E88A1BA59}.Release|x86.Build.0 = Release|x86
+		{BE780CB0-D9CB-4294-BC8A-01FAE18E5C2D}.Debug|Any CPU.ActiveCfg = Debug
+		{BE780CB0-D9CB-4294-BC8A-01FAE18E5C2D}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{BE780CB0-D9CB-4294-BC8A-01FAE18E5C2D}.Debug|x86.ActiveCfg = Debug
+		{BE780CB0-D9CB-4294-BC8A-01FAE18E5C2D}.Release|Any CPU.ActiveCfg = Release
+		{BE780CB0-D9CB-4294-BC8A-01FAE18E5C2D}.Release|Mixed Platforms.ActiveCfg = Release
+		{BE780CB0-D9CB-4294-BC8A-01FAE18E5C2D}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
