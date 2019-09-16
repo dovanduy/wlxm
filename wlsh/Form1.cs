@@ -32,12 +32,13 @@ namespace wlsh
             this.thread.Start();
         }
         private void shzhong() {
-            long ks = MyFuncUtil.GetTimestamp();
-            long ks2 = MyFuncUtil.GetTimestamp();
+            MyFuncUtilNoJingTai my = new MyFuncUtilNoJingTai();
+            long ks = my.GetTimestamp();
+            long ks2 = my.GetTimestamp();
             while (true) {
-                long js = MyFuncUtil.GetTimestamp();
+                long js = my.GetTimestamp();
                 if ((js - ks) > 1000 * 60 * 5) {
-                    ks = MyFuncUtil.GetTimestamp();
+                    ks = my.GetTimestamp();
                     ShouHu s = new ShouHu();
                     s.wohaihuozhe();
                     bool t = s.panDuanChongQi(MyFuncUtil.getMachineName());
@@ -47,7 +48,7 @@ namespace wlsh
                 }
                 if ((js - ks2) > 1000 * 60 * 60)
                 {
-                    ks2 = MyFuncUtil.GetTimestamp();
+                    ks2 = my.GetTimestamp();
                     ShouHu s = new ShouHu();                    
                     bool t = s.panDuanChongQi(MyFuncUtil.getMachineName());
                     if (!MyFuncUtil.getMachineName().ToLower().Equals("wlzhongkong") && t)
@@ -70,14 +71,9 @@ namespace wlsh
                 Thread.Sleep(1000);
                 var js = MyFuncUtil.GetTimestamp();
                 i++;
-
                 //MyFuncUtil.SecondToHour(+i + (js - ks) / 1000+" "
                 CalcFinished("程序已运行:" + MyFuncUtil.SecondToHour(js - ks) + zidong);
-                this.label1.ForeColor = Color.Red;
-                if ((js - ks) > 1000 * 10 && (js - ks) <= 1000 * 20)
-                {
-                    WriteLog.WriteLogFile("程序搞自动倒计时 " + (20 - (js - ks) / 1000) + "秒");
-                }
+                this.label1.ForeColor = Color.Red;                
             }
         }
         private void CalcFinished(string result)
