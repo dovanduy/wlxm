@@ -284,7 +284,80 @@ namespace fuzhu
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
-            
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  343,   90, 0x1eb9ee},
+	{  392,  152, 0x8cbf1f},
+	{  386,  206, 0xe99200},
+});
+            ktfh1 = new FuHeSanDian("登录-选择登录注册", ktsd1, 346, 204, "344,  256 ");
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  344,   75, 0x7ad5f5},
+	{  257,  252, 0x1eb9ee},
+	{  364,  305, 0xea9200},
+});
+            ktfh1 = new FuHeSanDian("登录-注册账号", ktsd1, 425, 142, "434,  225, 0x1eb9ee");
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  206,  197, 0xf8b551},
+	{  208,  231, 0xf8b551},
+	{  180,  138, 0xe79941},
+});
+            ktfh1 = new FuHeSanDian("登录-实名认证", ktsd1, 258, 291);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  576,  211, 0xeeccaa},
+	{  613,  256, 0xbf7788},
+	{  575,   47, 0x555699},
+});
+            ktfh1 = new FuHeSanDian("登录-公告", ktsd1, 588, 68);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  621,  301, 0xa6d1de},
+	{  664,   24, 0xffffff},
+	{   46,   53, 0xd6535d},
+});
+            ktfh1 = new FuHeSanDian("登录-进入游戏", ktsd1, 622, 306, "选区 429,  303 ");
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  276,  358, 0xfa2625},
+	{  360,  357, 0xf7d34a},
+	{  444,  357, 0x52ed94},
+});
+            ktfh1 = new FuHeSanDian("选区-选区界面", ktsd1,-1,-1," 84, 140");
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  250,  100, 0xc1e6fc},
+	{  250,  105, 0xc1e6fc},
+	{  259,  102, 0x9bbcd8},
+});
+            ktfh1 = new FuHeSanDian("选区-选区界面中的1区", ktsd1, 283, 103);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+
+
+
+
+
+
+
+
+
+
             //新加的
            // ktsd1 = new SanDian(new int[3, 3]{
 	         //   {   29,  360, 0x6b93df},
@@ -785,6 +858,15 @@ namespace fuzhu
 	{  342,  355, 0xde9070},
 });
             ktfh1 = new FuHeSanDian("特殊引导-主关卡3-8", ktsd1,595,302);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  605,  304, 0x000810},
+	{  520,  190, 0xffca63},
+	{  474,   91, 0xffd55d},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-主关卡3-8-2次", ktsd1, 595, 302);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 

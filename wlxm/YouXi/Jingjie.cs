@@ -125,7 +125,7 @@ namespace fuzhu
             while (true)
             {
                 long js = MyFuncUtil.GetTimestamp();
-                FuHeSanDian kt = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊存账号-新号首界面");
+                FuHeSanDian kt = Jingjie_SanDian.GetObject().findFuHeSandianByName("登录-选择登录注册");
                 if (xuanqu == 0 && mf.mohuByLeiBool(kt.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, kt.Name);
@@ -142,27 +142,7 @@ namespace fuzhu
                     mf.mytap(this._jubing, 654, 346);
                     kstiaoguo = MyFuncUtil.GetTimestamp();
                 }
-                List<FuHeSanDian> ls = Jingjie_SanDian.GetObject().findListFuHeSandianByName("存账号");
-                if (xuanqu == 1 && ls != null && ls.Count > 0)
-                {
-                    
-                    foreach (FuHeSanDian fh in ls)
-                    {
-                        if (mf.mohuByLeiBool(fh.Sd))
-                        {
-                            WriteLog.WriteLogFile(this._mnqName, fh.Name);
-                            if (fh.Zhidingx != -1 && fh.Zhidingy != -1)
-                            {
-                                mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
-                            }
-                        }
-                    }
-                }
-                if (mf.mohuXunHuanJianChi(Jingjie_SanDian.GetObject().findFuHeSandianByName("存账号-跳过绑定手机2").Sd,60)) {
-                    WriteLog.WriteLogFile(this._mnqName, "存账号-跳过绑定手机2 xuanqu重置为0");
-                    xuanqu = 0;
-                }
-                FuHeSanDian yk = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊存账号-用户名密码界面");
+                FuHeSanDian yk = Jingjie_SanDian.GetObject().findFuHeSandianByName("登录-注册账号");
                 if (xuanqu == 0 && mf.mohuByLeiBool(yk.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, yk.Name);
@@ -178,43 +158,68 @@ namespace fuzhu
                             WriteLog.WriteLogFile(this._mnqName, yk.Name + " 识别换为自己录入");
                             yici0 = 1;
                         }
-                        yk = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊存账号-用户名密码界面");
+                        yk = Jingjie_SanDian.GetObject().findFuHeSandianByName("登录-注册账号");
                         if (xuanqu == 0 && mf.mohuByLeiBool(yk.Sd))
                         {
                             WriteLog.WriteLogFile(this._mnqName,"当前界面为"+yk.Name);
-                            zh.generateNameAndPas(this._dqinx, 7, out zhanghao, out pwd);
-                            mf.mydelay(2000, 4000);
-                            mf.mytap(this._jubing, 489, 127);//账号需要回退
+                            zh.generateNameAndPas(this._dqinx, 7, out zhanghao, out pwd);                            
                             mf.mydelay(300, 600);
-                            mf.mytap(this._jubing, 386, 130);//点击两次
-                            mf.mydelay(100, 300);
-                            mf.mytap(this._jubing, 386, 130);
-                            mf.mydelay(100, 300);
-                            zh.shuruqianhuitui(mf, this._dqinx, this._jubing);
-                            mf.mydelay(2000, 4000);
-                            mf.mytap(this._jubing, 386, 130);
-                            mf.mydelay(100, 300);
-                            mf.SendString(this._jubing, zhanghao);
-                            mf.mydelay(2000, 4000);
-                            mf.myKeyPressChar(this._jubing, "tab");
-                            mf.mydelay(2000, 4000);
-                            mf.mytap(this._jubing, 420, 197);//点击密码框
-                            mf.SendString(this._jubing, pwd);
-                            mf.mydelay(2000, 4000);
-                            mf.mytap(this._jubing, 346, 263);//点击注册
-                            mf.mydelay(9000, 18000);
-                        }
-                        foreach (FuHeSanDian fh in ls)
-                        {
-                            if (!fh.Name.Equals("存账号-跳过绑定手机2") && mf.mohuByLeiBool(fh.Sd))
+                            mf.mytap(this._jubing, yk.Zhidingx, yk.Zhidingy);//点击两次
+                            mf.mydelay(4000, 6000);
+                            if (mf.mohu(504, 27, 0xffffff) == 1)
                             {
-                                WriteLog.WriteLogFile(this._mnqName, fh.Name);
-                                if (fh.Zhidingx != -1 && fh.Zhidingy != -1)
-                                {
-                                    mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
-                                    tiaoci++;
-                                } 
+                                WriteLog.WriteLogFile(this._mnqName, "搞账号");
+                                mf.mytap(this._jubing, 504, 27);
+                                mf.mydelay(2000, 4000);
+                                zh.shuruqianhuitui(mf, this._dqinx, this._jubing);
+                                mf.mydelay(2000, 4000);
+                                mf.SendString(this._jubing, zhanghao);
+                                mf.mydelay(2000, 4000);
+                                mf.myKeyPressChar(this._jubing, "tab");
+                                mf.mydelay(2000, 4000);
                             }
+                            mf.mydelay(2000, 4000);
+                            mf.mytap(this._jubing, 325, 183);//点击密码
+                            mf.mydelay(4000, 6000);
+                            if (mf.mohu(504, 27, 0xffffff) == 1)
+                            {
+                                WriteLog.WriteLogFile(this._mnqName, "搞密码");
+                                mf.mytap(this._jubing, 504, 27);
+                                mf.mydelay(2000, 4000);
+                                zh.shuruqianhuitui(mf, this._dqinx, this._jubing);
+                                mf.mydelay(2000, 4000);
+                                mf.SendString(this._jubing, pwd);
+                                mf.mydelay(2000, 4000);
+                                mf.myKeyPressChar(this._jubing, "tab");
+                                mf.mydelay(2000, 4000);                                
+                            }                             
+                            if (mf.mohu(434, 225, 0x1eb9ee) == 1)
+                            {
+                                mf.mydelay(2000, 4000);
+                                mf.mytap(this._jubing, 436, 228);//去掉手机绑定
+                                mf.mydelay(2000, 4000);
+                            }
+                            mf.mydelay(4000, 6000);
+                            if (mf.mohu(365, 309, 0xe99100) == 1)
+                            {
+                                WriteLog.WriteLogFile(this._mnqName, "搞注册");
+                                mf.mydelay(2000, 4000);
+                                mf.mytap(this._jubing, 365, 309);//点击注册
+                                mf.mydelay(9000, 18000);
+                            }                            
+                        }
+                        kt = Jingjie_SanDian.GetObject().findFuHeSandianByName("登录-实名认证");
+                        if (mf.mohuByLeiBool(kt.Sd)) {
+                            WriteLog.WriteLogFile(this._mnqName, kt.Name);
+                            mf.mytap(this._jubing, kt.Zhidingx, kt.Zhidingy);
+                            tiaoci++;
+                        }
+                        kt = Jingjie_SanDian.GetObject().findFuHeSandianByName("登录-公告");
+                        if (mf.mohuByLeiBool(kt.Sd))
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, kt.Name);
+                            mf.mytap(this._jubing, kt.Zhidingx, kt.Zhidingy);
+                            tiaoci++;
                         }
                         if (!mf.mohuXunHuanJianChi(yk.Sd,60) && tiaoci>1)
                         {
@@ -246,11 +251,17 @@ namespace fuzhu
                     WriteLog.WriteLogFile(this._mnqName, yk.Name + "账号注册不成功");
                     break;
                 }
-                yk = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊存账号-用户名密码界面");
-                if (xuanqu == 1 && mf.mohuByLeiBool(yk.Sd))
+                kt = Jingjie_SanDian.GetObject().findFuHeSandianByName("登录-实名认证");
+                if (mf.mohuByLeiBool(kt.Sd))
                 {
-                    WriteLog.WriteLogFile(this._mnqName, yk.Name+"注册"+shibiechu);
-                    mf.mytap(this._jubing, yk.Zhidingx, yk.Zhidingy);
+                    WriteLog.WriteLogFile(this._mnqName, kt.Name);
+                    mf.mytap(this._jubing, kt.Zhidingx, kt.Zhidingy);
+                }
+                kt = Jingjie_SanDian.GetObject().findFuHeSandianByName("登录-公告");
+                if (mf.mohuByLeiBool(kt.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, kt.Name);
+                    mf.mytap(this._jubing, kt.Zhidingx, kt.Zhidingy);
                 }
                 //出现登录-出现选服信息 超过10s
                 FuHeSanDian dlxf = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-出现进入游戏");
@@ -260,21 +271,21 @@ namespace fuzhu
                     WriteLog.WriteLogFile(this._mnqName, dlxf.Name);
                     mf.mytap(this._jubing, 425, 303);
                     mf.mydelay(2000, 4000);
-                    FuHeSanDian xq = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-服务器选区界面");
+                    FuHeSanDian xq = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-选区界面");
                     if (mf.mohuByLeiBool(xq.Sd))
                     {
                         WriteLog.WriteLogFile(this._mnqName, xq.Name);
-                        mf.mytap(this._jubing, 77, 213);//增加新区要改
+                        mf.mytap(this._jubing, 84, 140);//增加新区要改
                     }
                 }
                 FuHeSanDian xq1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-服务器选区界面");
                 if (xuanqu == 1 && mf.mohuByLeiBool(xq1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, xq1.Name);
-                    mf.mytap(this._jubing, 87, 213);//增加新区要改
+                    mf.mytap(this._jubing, 84, 140);//增加新区要改
                     mf.mydelay(2000, 4000);
                 }
-                FuHeSanDian qu1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-服务器选1区");
+                FuHeSanDian qu1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-选区界面中的1区");
                 if (xuanqu == 1 && mf.mohuByLeiBool(qu1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, qu1.Name);
@@ -320,7 +331,7 @@ namespace fuzhu
                 {
                     t1 = true;
                 }
-                if (tiaoguo > 10) {
+                if (tiaoguo > 25) {
                     t1 = true;
                 }
                 qu2 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊游戏-进入任务");
@@ -344,7 +355,7 @@ namespace fuzhu
                 return;
             }
             zh = new ZhangHao();
-            zh.lurenSaveNameAndPas(zhanghao, pwd, this._dqinx, "jingjie");
+            zh.lurenSaveNameAndPas(zhanghao, pwd, this._dqinx, "jingjieguanfang");
             WriteLog.WriteLogFile(this._mnqName, "结束了境界存账号阶段");
         }
 
@@ -1153,6 +1164,12 @@ namespace fuzhu
                     break;
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-主关卡3-8");
+                if (mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    break;
+                }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-主关卡3-8-2次");
                 if (mf.mohuByLeiBool(ktsd1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);

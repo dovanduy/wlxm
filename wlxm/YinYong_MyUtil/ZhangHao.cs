@@ -389,7 +389,7 @@ namespace MyUtil
             }
         }
 
-        public void gxYunXingQk()
+        public void gxYunXingQk(string youxi)
         {
             //得到运行情况后存入表
             WriteLog.WriteLogFile("", "得到运行情况后存入表");
@@ -412,7 +412,7 @@ namespace MyUtil
                         "sum(case when z.zuanshi>3000  then 1 else 0 end)  zuanshidayu3000,"+
                         "sum(case when z.qiangzhequan>0  then 1 else 0 end)  qiangzhedayu0,"+
                         "sum(case when z.xgsj>=convert(varchar(10),getdate(),120) then 1 else 0 end)  zxiugai" +
-                        " from zhanghao z";
+                        " from zhanghao z where youxi='"+youxi+"'";
 
                     DataTable dt = sqh.getAll(selsql);
                     int a = dt.Rows.Count;

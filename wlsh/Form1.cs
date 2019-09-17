@@ -30,6 +30,9 @@ namespace wlsh
             ThreadStart threadStart2 = new ThreadStart(foo);
             this.thread = new Thread(threadStart2);
             this.thread.Start();
+
+            this.label2.ForeColor = Color.Red;
+            this.label2.Text = "版本1";   
         }
         private void shzhong() {
             MyFuncUtilNoJingTai my = new MyFuncUtilNoJingTai();
@@ -83,5 +86,6 @@ namespace wlsh
                 this.label1.Text = result.ToString();
             }
         }
+        
     }
 }
