@@ -23,7 +23,8 @@ namespace wlsh
             qicheng();
         }
         private void qicheng(){
-            ThreadStart threadStart = new ThreadStart(shzhong);//通过ThreadStart委托告诉子线程执行什么方法　
+            ShouHu sh = new ShouHu();
+            ThreadStart threadStart = new ThreadStart(sh.shouhuzhong);//通过ThreadStart委托告诉子线程执行什么方法　
             Thread thread = new Thread(threadStart);
             thread.Name = "wodegaozhanghao";
             thread.Start();
@@ -32,31 +33,9 @@ namespace wlsh
             this.thread.Start();
 
             this.label2.ForeColor = Color.Red;
-            this.label2.Text = "版本1";   
+            this.label2.Text = ShouHu.BanBenHao.ToString();   
         }
-        private void shzhong() {
-            MyFuncUtilNoJingTai my = new MyFuncUtilNoJingTai();
-            long ks = my.GetTimestamp();
-            long ks2 = my.GetTimestamp();
-            while (true) {
-                long js = my.GetTimestamp();
-                if ((js - ks) > 1000 * 60 * 5) {
-                    ks = my.GetTimestamp();
-                    ShouHu s = new ShouHu();
-                    s.wohaihuozhe();
-                }
-                if ((js - ks2) > 1000 * 60 * 60)
-                {
-                    ks2 = my.GetTimestamp();
-                    ShouHu s = new ShouHu();                    
-                    bool t = s.panDuanChongQi(MyFuncUtil.getMachineName());
-                    if (!MyFuncUtil.getMachineName().ToLower().Equals("wlzhongkong") && t)
-                    {
-                        System.Diagnostics.Process.Start("shutdown.exe", "-r -f -t 15");
-                    }
-                }
-            }
-        }
+       
         private void foo()
         {
 

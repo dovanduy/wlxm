@@ -107,7 +107,7 @@ namespace MyUtil
             for (int i = 0; i < i1; i++)
             {
                 mf.myKeyPressChar(jubing, "back");
-                mf.mydelay(800, 1200);
+                mf.mydelay(2, 5);
             }            
             mf.mydelay(800, 1600);
         }

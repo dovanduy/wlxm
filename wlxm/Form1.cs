@@ -172,7 +172,7 @@ namespace wlxm
                     if (span.Hours >= 1 || span.Minutes > 45)
                     {
                         WriteLog.WriteLogFile("", "与上次统计相比,间隔 " + span.Minutes + "分钟");
-                        zh.gxYunXingQk("jingjieguanfang");
+                        //zh.gxYunXingQk("jingjieguanfang");
                     }
                 }
 
@@ -254,6 +254,7 @@ namespace wlxm
              */
             int cishu = 0;
             int maxcishu = 100;
+            MyFuncJingNoTai mno = new MyFuncJingNoTai();
             for (int cs = 0; cs < maxcishu; cs++)
             {
                 var ks = MyFuncUtil.GetTimestamp();
@@ -268,7 +269,7 @@ namespace wlxm
                     continue;
                 }
                 WriteLog.WriteLogFile(dqinx + "", "准备操作" + dqinx + "号模拟器");
-                bool temp = MyFuncUtil.myQuit(dqinx, dizhi);//关闭指定模拟器 dqinx
+                bool temp = mno.myQuit(dqinx, dizhi);//关闭指定模拟器 dqinx
                 if (!temp)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
@@ -304,7 +305,7 @@ namespace wlxm
                     continue;
                 }
                 Thread.Sleep(1000*60*2);
-                MyFuncJingNoTai mno = new MyFuncJingNoTai();
+               
                 temp = mno.lurenResizeOk(dqinx);
                 if (temp == false)
                 {
@@ -323,7 +324,7 @@ namespace wlxm
                     continue;
                 }
                 jn.jingjiecunhao();
-                temp = MyFuncUtil.myQuit(dqinx, dizhi);//关闭指定模拟器 dqinx
+                temp = mno.myQuit(dqinx, dizhi);//关闭指定模拟器 dqinx
                 if (!temp)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
@@ -350,6 +351,7 @@ namespace wlxm
              *7、关闭模拟器
              *8、reload存盘文件
              */
+            MyFuncJingNoTai mno = new MyFuncJingNoTai();
             //for (int cs = 0; cs < 20; cs++)
             {
                 var ks = MyFuncUtil.GetTimestamp();
@@ -364,7 +366,7 @@ namespace wlxm
                     return;
                 }
                 WriteLog.WriteLogFile(dqinx + "", "准备操作" + dqinx + "号模拟器");
-                bool temp = MyFuncUtil.myQuit(dqinx, dizhi);//关闭指定模拟器 dqinx
+                bool temp = mno.myQuit(dqinx, dizhi);//关闭指定模拟器 dqinx
                 if (!temp)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
@@ -379,7 +381,7 @@ namespace wlxm
                     WriteLog.WriteLogFile(dqinx + "", "安装app没成功");
                     return;
                 }
-                t = MyFuncUtil.myQuit(dqinx, dizhi);//关闭指定模拟器 dqinx
+                t = mno.myQuit(dqinx, dizhi);//关闭指定模拟器 dqinx
                 if (!t)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
@@ -411,7 +413,6 @@ namespace wlxm
                     Thread.Sleep(20000);
                     return;
                 }
-                MyFuncJingNoTai mno = new MyFuncJingNoTai();
                 temp = mno.lurenResizeOk(dqinx);
                 if (temp == false)
                 {
@@ -427,7 +428,7 @@ namespace wlxm
                     return;
                 }
                 jn.jingjiecunhao();
-                temp = MyFuncUtil.myQuit(dqinx, dizhi);//关闭指定模拟器 dqinx
+                temp = mno.myQuit(dqinx, dizhi);//关闭指定模拟器 dqinx
                 if (!temp)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
@@ -735,13 +736,14 @@ namespace wlxm
             }
             WriteLog.WriteLogFile(dqinx + "", "准备操作" + dqinx + "号模拟器");            
             var cishu = 0;
+            MyFuncJingNoTai mno = new MyFuncJingNoTai();
             for (int cs = 0; cs < xhcishu; cs++)
             {
                 var ks = MyFuncUtil.GetTimestamp();
                 Thread.Sleep(2000);
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "进入到循环当中，thread:" + Thread.CurrentThread.ManagedThreadId);
                 Thread.Sleep(1000);
-                bool temp=MyFuncUtil.myQuit(dqinx, dizhi);
+                bool temp = mno.myQuit(dqinx, dizhi);
                 if (!temp)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
@@ -775,8 +777,7 @@ namespace wlxm
                     Thread.Sleep(20000);
                     continue;
                 }
-                Thread.Sleep(20000);
-                MyFuncJingNoTai mno = new MyFuncJingNoTai();
+                Thread.Sleep(20000);                
                 temp = mno.lurenResizeOk(dqinx);
                 if (temp == false)
                 {

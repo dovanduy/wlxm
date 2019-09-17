@@ -391,7 +391,7 @@ namespace wlxm
                 Thread.Sleep(2000);
                 MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "进入到循环当中");
                 Thread.Sleep(1000);
-                bool temp=MyFuncUtil.myQuit(dqinx, dizhi);
+                bool temp=false;
                 if (!temp)
                 {
                     MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "关闭失败");

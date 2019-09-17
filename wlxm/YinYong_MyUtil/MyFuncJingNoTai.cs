@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Microsoft.Win32;
 namespace MyUtil
 {
@@ -158,6 +159,65 @@ namespace MyUtil
             }
 
             return productGuid;
+        }
+
+        public bool myQuit(int index, string dizhi)
+        {
+            var res = false;            
+            int jubing = MyLdcmd.getDqmoniqiWaiCengJuBingByIndex(index, dizhi);
+            IntPtr p = new IntPtr(jubing);
+            PostMessage(p, WM_CLOSE, 0, 0);
+            Thread.Sleep(5000);
+            MyLdcmd myldcmd = MyLdcmd.GetObject(dizhi);
+            long kstime = MyFuncUtil.GetTimestamp();
+            long kstime2 = MyFuncUtil.GetTimestamp();
+            int[] abc = MyLdcmd.getDqmoniqiHuodongIndex(dizhi);
+            if (abc.Contains(index))
+            {
+                MyLdcmd.getLdCmd().Quit(index);
+                Thread.Sleep(5000);
+                MyFuncUtil.zaiciguanbi();
+            }
+            abc = MyLdcmd.getDqmoniqiHuodongIndex(dizhi);
+            if (!abc.Contains(index))
+            {
+                return true;
+            }
+            int shi = 0;
+            while (true)
+            {
+                long jstime = MyFuncUtil.GetTimestamp();
+                if ((jstime - kstime2) > 1000 * 30)
+                {
+                    abc = MyLdcmd.getDqmoniqiHuodongIndex(dizhi);
+                    kstime2 = MyFuncUtil.GetTimestamp();
+                }
+                if (shi == 0 && abc.Contains(index))
+                {
+                    MyLdcmd.getLdCmd().Quit(index);
+                    Thread.Sleep(5000);
+                    MyFuncUtil.zaiciguanbi();
+                    shi = 1;
+                }
+                if (shi == 1 && abc.Contains(index))
+                {
+                    PostMessage(p, WM_CLOSE, 0, 0);
+                    Thread.Sleep(5000);
+                    shi = 0;
+                }
+                if (!abc.Contains(index))
+                {
+                    res = true;
+                    break;
+                }
+                if ((jstime - kstime) > 1000 * 60 * 5)
+                {
+                    MyFuncUtil.mylogandxianshi("循环很久5分钟也没有关闭" + index);
+                    break;
+                }
+            }
+            
+        return res;
         }
     }
 }

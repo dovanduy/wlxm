@@ -44,8 +44,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="wlshouhuleiku, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="wlshouhuleiku">
       <HintPath>..\wlshouhuleiku\bin\Debug\wlshouhuleiku.dll</HintPath>
     </Reference>
   </ItemGroup>

@@ -130,6 +130,7 @@ namespace fuzhu
                 {
                     WriteLog.WriteLogFile(this._mnqName, kt.Name);
                     mf.mytap(this._jubing, kt.Zhidingx, kt.Zhidingy);
+                    mf.mydelay(2000, 4000);
                 }
                 kt = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊存账号-用户下载");
                 if (xuanqu == 0 && mf.mohuByLeiBool(kt.Sd))

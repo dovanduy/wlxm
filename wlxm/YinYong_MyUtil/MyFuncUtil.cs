@@ -399,7 +399,7 @@ namespace MyUtil
             return t;
         }
 
-        public static bool myQuit(int index, string dizhi)
+        private static bool myQuit(int index, string dizhi)
         {
             var res = false;
             lock (obj)
