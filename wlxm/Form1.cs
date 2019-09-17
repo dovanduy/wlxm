@@ -476,7 +476,7 @@ namespace wlxm
                 MyLdcmd.myRemoveAll(dizhi);
                 Thread.Sleep(2000);
                 MyLdcmd.RunDuokaiqi(a_b);
-                MyFuncUtil.duokaiqiAdd();
+                MyFuncUtil.duokaiqiAdd(a_b);
                 Thread.Sleep(2000);
                 ThreadPool.SetMaxThreads(yunxingIndex.Length, yunxingIndex.Length); //设置最大线程数
                 foreach (int inx in yunxingIndex)

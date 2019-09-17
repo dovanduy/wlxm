@@ -322,6 +322,7 @@ namespace fuzhu
                             }
                             if (fh.Name.Equals("游戏-跳过")) {
                                 tiaoguo++;
+                                mf.mydelay(1000, 3000);
                             }
                         }
                     }

@@ -897,7 +897,7 @@ namespace MyUtil
             }
         }
 
-        public static void duokaiqiAdd()
+        private static void duokaiqiAdd()
         {
             WriteLog.WriteLogFile("", "打开模拟器,新增9个,搞账号");
             lock (obj)
