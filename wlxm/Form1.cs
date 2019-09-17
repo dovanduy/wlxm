@@ -59,6 +59,8 @@ namespace wlxm
         private Thread thread;
         private delegate void changeText(string result);
         private delegate void getduokaiqi();
+
+        private Thread zidongthread;
         /// <summary>
         /// 设置倒计时时间
         /// </summary>
@@ -147,16 +149,16 @@ namespace wlxm
                     {
                         //gaozhanghaotou duoxianzongtou
                         ThreadStart threadStart = new ThreadStart(gaozhanghaotou);//通过ThreadStart委托告诉子线程执行什么方法　
-                        Thread thread = new Thread(threadStart);
-                        thread.Name = "wodegaozhanghao";
-                        thread.Start();
+                        this.zidongthread = new Thread(threadStart);
+                        this.zidongthread.Name = "wodegaozhanghao";
+                        this.zidongthread.Start();
                     }
                     else
                     {
                         ThreadStart threadStart = new ThreadStart(gaozhanghaotou);//通过ThreadStart委托告诉子线程执行什么方法　
-                        Thread thread = new Thread(threadStart);
-                        thread.Name = "wodedpanduoxian";
-                        thread.Start();
+                        this.zidongthread = new Thread(threadStart);
+                        this.zidongthread.Name = "wodedpanduoxian";
+                        this.zidongthread.Start();
                     }
                 }
                 //每隔一小时由zk更新一次 测试时 每隔1分钟
@@ -1025,6 +1027,17 @@ namespace wlxm
             }
 
             WriteLog.WriteLogFile("", "测试结束");
+        }
+
+        private void guanbixiancheng_Click(object sender, EventArgs e)
+        {
+            quanjubutton = 1;
+            MyFuncUtil.killProcess("wlxm");
+            if (this.zidongthread!=null && this.zidongthread.ThreadState == System.Threading.ThreadState.Running)
+            {
+                this.zidongthread.Abort();
+            }
+            Application.Exit();       
         }
 
         

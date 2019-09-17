@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.chongfusandian = new System.Windows.Forms.Button();
             this.gaotupian = new System.Windows.Forms.Button();
             this.lrzh = new System.Windows.Forms.Button();
             this.resizebutton = new System.Windows.Forms.Button();
@@ -43,7 +44,7 @@
             this.quanliucheng = new System.Windows.Forms.Button();
             this.ceshi_button = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.chongfusandian = new System.Windows.Forms.Button();
+            this.guanbixiancheng = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +61,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.guanbixiancheng);
             this.tabPage1.Controls.Add(this.chongfusandian);
             this.tabPage1.Controls.Add(this.gaotupian);
             this.tabPage1.Controls.Add(this.lrzh);
@@ -80,6 +82,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // chongfusandian
+            // 
+            this.chongfusandian.Location = new System.Drawing.Point(292, 214);
+            this.chongfusandian.Name = "chongfusandian";
+            this.chongfusandian.Size = new System.Drawing.Size(63, 23);
+            this.chongfusandian.TabIndex = 17;
+            this.chongfusandian.Text = "命名重复";
+            this.chongfusandian.UseVisualStyleBackColor = true;
+            this.chongfusandian.Click += new System.EventHandler(this.chongfusandian_Click);
             // 
             // gaotupian
             // 
@@ -211,15 +223,15 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // chongfusandian
+            // guanbixiancheng
             // 
-            this.chongfusandian.Location = new System.Drawing.Point(292, 214);
-            this.chongfusandian.Name = "chongfusandian";
-            this.chongfusandian.Size = new System.Drawing.Size(63, 23);
-            this.chongfusandian.TabIndex = 17;
-            this.chongfusandian.Text = "命名重复";
-            this.chongfusandian.UseVisualStyleBackColor = true;
-            this.chongfusandian.Click += new System.EventHandler(this.chongfusandian_Click);
+            this.guanbixiancheng.Location = new System.Drawing.Point(292, 317);
+            this.guanbixiancheng.Name = "guanbixiancheng";
+            this.guanbixiancheng.Size = new System.Drawing.Size(75, 23);
+            this.guanbixiancheng.TabIndex = 18;
+            this.guanbixiancheng.Text = "关闭线程";
+            this.guanbixiancheng.UseVisualStyleBackColor = true;
+            this.guanbixiancheng.Click += new System.EventHandler(this.guanbixiancheng_Click);
             // 
             // Form1
             // 
@@ -254,6 +266,7 @@
         private System.Windows.Forms.Button lrzh;
         private System.Windows.Forms.Button gaotupian;
         private System.Windows.Forms.Button chongfusandian;
+        private System.Windows.Forms.Button guanbixiancheng;
     }
 }
 
