@@ -155,24 +155,16 @@ namespace MyUtil
         /// </summary>
         private void restore(int ind, string seed)
         {
-            try
+            
+            lock (obj)
             {
-                LogWriteLock.EnterWriteLock();
-                lock (obj)
-                {
 
-                    ImplementCmd(
-                        string.Format("{0}ldconsole restore --index {1} --file {2}",
-                        SimulatorPath, ind, seed + ".ldbk"));
-                    WriteLog.WriteLogFile("", string.Format("{0}ldconsole restore --index {1} --file {2}",
-                        SimulatorPath, ind, seed + ".ldbk"));
+                ImplementCmd(
+                    string.Format("{0}ldconsole restore --index {1} --file {2}",
+                    SimulatorPath, ind, seed + ".ldbk"));
+                WriteLog.WriteLogFile("", string.Format("{0}ldconsole restore --index {1} --file {2}",
+                    SimulatorPath, ind, seed + ".ldbk"));
 
-                }
-            }
-            catch { }
-            finally
-            {
-                LogWriteLock.ExitWriteLock();
             }
         }
 
@@ -578,7 +570,8 @@ namespace MyUtil
             MyLdcmd myldcmd = MyLdcmd.GetObject(dizhi);
             myldcmd.SimulatorPath = ld.SimulatorPath;
             lock(obj){
-                myldcmd.restore(index, seed);           
+                myldcmd.restore(index, seed);
+                Thread.Sleep(1000*60*2);
             }
         }
 
