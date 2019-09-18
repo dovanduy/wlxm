@@ -18,6 +18,8 @@ namespace fuzhu
     public class Jingjie:youxi
     {
         public static int YOUXIBANBEN = 16;
+
+        public static string DANGQIAN_YOUXI = "jingjieguanfang";
         private myDm mf;
         private int _dqinx;
 
@@ -362,7 +364,7 @@ namespace fuzhu
                 return;
             }
             zh = new ZhangHao();
-            zh.lurenSaveNameAndPas(zhanghao, pwd, this._dqinx, "jingjieguanfang");
+            zh.lurenSaveNameAndPas(zhanghao, pwd, this._dqinx, DANGQIAN_YOUXI);
             WriteLog.WriteLogFile(this._mnqName, "结束了境界存账号阶段");
         }
 
@@ -373,7 +375,7 @@ namespace fuzhu
             name = "";
             string pwd = "";
             int xuanqu = -1, dengji = -1;
-            string youxi="jingjieguanfang";
+            string youxi=DANGQIAN_YOUXI;
             zhanghao.zhunbeizhanghao(this._dqinx,youxi, out name, out pwd, out xuanqu, out dengji);
             if (name==null || name == "" || pwd==null || pwd == "") {
                 //当前没有找到需要练级的账号
@@ -461,8 +463,7 @@ namespace fuzhu
                 }
                 if (denglu == 0 &&(mf.mohuXunHuanJianChi(kt.Sd,20))) {
                     WriteLog.WriteLogFile(this._mnqName, "当前账号无法登陆,置为N,修改时间更新换号");
-                    zhanghao.zhiweidengluzhongN(this._dqinx, "jingjieguanfang", name, WriteLog.getMachineName());
-                    youxi = "jingjieguanfang";
+                    zhanghao.zhiweidengluzhongN(this._dqinx, DANGQIAN_YOUXI, name, WriteLog.getMachineName());
                     zhanghao.zhunbeizhanghao(this._dqinx, youxi, out name, out pwd, out xuanqu, out dengji);
                     if (name == null || name == "" || pwd == null || pwd == "")
                     {
@@ -551,7 +552,7 @@ namespace fuzhu
                 if ((js - ks) > 1000 * 60 * fenzhong) {
                     WriteLog.WriteLogFile(this._mnqName, "登录阶段超时");
                     WriteLog.WriteLogFile(this._mnqName, "找到需要练级的账号" + name + " " + pwd + ",xuanqu " + xuanqu + ",恢复为不登录");
-                    zhanghao.zhiweidengluzhongN(this._dqinx,"jingjieguanfang", name, WriteLog.getMachineName());
+                    zhanghao.zhiweidengluzhongN(this._dqinx,DANGQIAN_YOUXI, name, WriteLog.getMachineName());
                     break;
                 }
             }
@@ -593,7 +594,7 @@ namespace fuzhu
             //得到账号的钻石信息 
             ZhangHao zh = new ZhangHao();
             int ox = -1;
-            zh.getZhanghaoXinxi(this._dqinx, "jingjieguanfang", zhanghao, "zuanshi", out ox);
+            zh.getZhanghaoXinxi(this._dqinx, DANGQIAN_YOUXI, zhanghao, "zuanshi", out ox);
             int zuanshi = ox;
 
             //是否开局强化
@@ -1331,7 +1332,7 @@ namespace fuzhu
                         mf.captureBmp(this._jubing, path, name);
                     }
                     ZhangHao zh = new ZhangHao();
-                    zh.zhiweiwuxiao(this._dqinx, "jingjieguanfang", zhanghao, WriteLog.getMachineName());
+                    zh.zhiweiwuxiao(this._dqinx, DANGQIAN_YOUXI, zhanghao, WriteLog.getMachineName());
                 }
                 rs = true;
             }

@@ -762,7 +762,7 @@ namespace wlxm
                     continue;
                 }
                 Thread.Sleep(20000);
-                apkName = dict["境界"];
+                apkName = dict["境界官方"];
                 int i = MyFuncUtil.QiDongWanChengLurenzhanghao(a_b, dqinx, apkName);
                 if (i == -1)
                 {

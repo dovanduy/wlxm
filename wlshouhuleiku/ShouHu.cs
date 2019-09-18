@@ -172,7 +172,7 @@ namespace SH_MyUtil
                     ShouHu s = new ShouHu();
                     s.wohaihuozhe();
                 }
-                if ((js - ks2) > 1000 * 60 * 90)
+                if ((js - ks2) > 1000 * 60 * 180)
                 {
                     ks2 = my.GetTimestamp();
                     ShouHu s = new ShouHu();
@@ -189,7 +189,7 @@ namespace SH_MyUtil
                     DateTime dt = getYunXingQkLasttime();
                     TimeSpan span = DateTime.Now.Subtract(dt);
                     WriteLog.WriteLogFile("准备更新与上次统计相比,间隔 " + span.Minutes + "分钟");
-                    if (span.Hours >= 1 || span.Minutes > 45)
+                    if (span.Hours >= 1)
                     {
                         WriteLog.WriteLogFile("与上次统计相比,间隔 " + span.Minutes + "分钟");
                         gxYunXingQk("jingjieguanfang");
