@@ -155,7 +155,7 @@ namespace wlxm
                     }
                     else
                     {
-                        ThreadStart threadStart = new ThreadStart(gaozhanghaotou);//通过ThreadStart委托告诉子线程执行什么方法　
+                        ThreadStart threadStart = new ThreadStart(duoxianzongtou);//通过ThreadStart委托告诉子线程执行什么方法　
                         this.zidongthread = new Thread(threadStart);
                         this.zidongthread.Name = "wodedpanduoxian";
                         this.zidongthread.Start();
@@ -233,10 +233,11 @@ namespace wlxm
             //int t = MyLdcmd.addSimulator();
             myDm mf = new myDm();
             Jingjie ln = new Jingjie(mf, dqinx);
-            ln.jingjiecunhao();
+            string name = "";
+            ln.denglu(15,out name);
             
                   
-            MyFuncUtil.mylogandxianshi("结束");
+            MyFuncUtil.mylogandxianshi("结束"+name);
             
         }
 
