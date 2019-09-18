@@ -10,7 +10,7 @@ namespace fuzhu
         Boolean denglu(int fenzhong,out string name);
         Boolean zhuce(int fz);
         void ceshi();
-        void zhuxian(string name);
+        void zhuxian(string name,long myhourhaomiao);
         void richang();
         void jiangli();
         void fuben();

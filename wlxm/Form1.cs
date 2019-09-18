@@ -577,7 +577,7 @@ namespace wlxm
                 //MyLdcmd.myDownCpu(dqinx, 50);
                 Jingjie yq = new Jingjie(dm, dqinx, dizhi);
                 //yq.denglu(15, out a_b);
-                yq.zhuxian(a_b);
+                yq.zhuxian("aa",1000);
                 Thread.Sleep(1000 * 60 * 60);
                 
                 var js = MyFuncUtil.GetTimestamp();
@@ -798,7 +798,7 @@ namespace wlxm
                     Thread.Sleep(1000 * 60 * 3);
                     continue;
                 }                
-                yq.zhuxian(name);
+                yq.zhuxian(name,1000*60*60*3);
                 //Thread.Sleep(1000 * 60*60);//停住1小时
                 cishu++;
                 var js = MyFuncUtil.GetTimestamp();

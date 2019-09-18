@@ -17,7 +17,7 @@ namespace fuzhu
 {
     public class Jingjie:youxi
     {
-        public static int YOUXIBANBEN = 15;
+        public static int YOUXIBANBEN = 16;
         private myDm mf;
         private int _dqinx;
 
@@ -551,7 +551,7 @@ namespace fuzhu
                 if ((js - ks) > 1000 * 60 * fenzhong) {
                     WriteLog.WriteLogFile(this._mnqName, "登录阶段超时");
                     WriteLog.WriteLogFile(this._mnqName, "找到需要练级的账号" + name + " " + pwd + ",xuanqu " + xuanqu + ",恢复为不登录");
-                    zhanghao.zhiweidengluzhongN(this._dqinx,"jingjie", name, WriteLog.getMachineName());
+                    zhanghao.zhiweidengluzhongN(this._dqinx,"jingjieguanfang", name, WriteLog.getMachineName());
                     break;
                 }
             }
@@ -567,7 +567,7 @@ namespace fuzhu
             return zccg;
         }
 
-        private void zhituozhuxian(string zhanghao) {
+        private void zhituozhuxian(string zhanghao,long myhourhaomiao) {
             long kstime = MyFuncUtil.GetTimestamp();
             int yici = 0;
             int youjian = 0;
@@ -593,7 +593,7 @@ namespace fuzhu
             //得到账号的钻石信息 
             ZhangHao zh = new ZhangHao();
             int ox = -1;
-            zh.getZhanghaoXinxi(this._dqinx, "jingjie", zhanghao, "zuanshi", out ox);
+            zh.getZhanghaoXinxi(this._dqinx, "jingjieguanfang", zhanghao, "zuanshi", out ox);
             int zuanshi = ox;
 
             //是否开局强化
@@ -614,9 +614,9 @@ namespace fuzhu
                     kstime = MyFuncUtil.GetTimestamp();
                     WriteLog.WriteLogFile(this._mnqName, "20分钟重新计时");
                 }
-                if ((jstime - kstime1) > 60 * 1000 * 60*2)
+                if ((jstime - kstime1) > myhourhaomiao)
                 {
-                    WriteLog.WriteLogFile(this._mnqName, "2小时结束");
+                    WriteLog.WriteLogFile(this._mnqName, "指定小时后结束");
                     break;
                 }
                 if ((jstime - kpjishi) > 30 * 1000 && compareColor(kapingyanse1, kapingyanse2))
@@ -1331,7 +1331,7 @@ namespace fuzhu
                         mf.captureBmp(this._jubing, path, name);
                     }
                     ZhangHao zh = new ZhangHao();
-                    zh.zhiweiwuxiao(this._dqinx, "jingjie", zhanghao, WriteLog.getMachineName());
+                    zh.zhiweiwuxiao(this._dqinx, "jingjieguanfang", zhanghao, WriteLog.getMachineName());
                 }
                 rs = true;
             }
@@ -1384,10 +1384,10 @@ namespace fuzhu
         }
 
 
-        public void zhuxian(string name)
+        public void zhuxian(string name,long myhourhaomiao)
         {
             WriteLog.WriteLogFile(this._mnqName, "进入到主线任务");
-            zhituozhuxian(name);
+            zhituozhuxian(name,myhourhaomiao);
             quitdq(name);
             WriteLog.WriteLogFile(this._mnqName, "主线退出");
         }
