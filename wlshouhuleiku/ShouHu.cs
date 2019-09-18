@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
+
+
 namespace SH_MyUtil
 {
     public class ShouHu
@@ -163,6 +166,7 @@ namespace SH_MyUtil
             long ks = my.GetTimestamp();
             long ks2 = my.GetTimestamp();
             long ks3 = my.GetTimestamp();
+            long ks4 = my.GetTimestamp();
             while (true)
             {
                 long js = my.GetTimestamp();
@@ -193,6 +197,32 @@ namespace SH_MyUtil
                     {
                         WriteLog.WriteLogFile("与上次统计相比,间隔 " + span.Minutes + "分钟");
                         gxYunXingQk("jingjieguanfang");
+                    }
+                }
+                if ((js - ks4) > 1000 * 60 * 10)
+                {
+                    ks4 = MyFuncUtil.GetTimestamp();
+                    Process current = Process.GetCurrentProcess();
+                    string appname = "wlxm";
+                    bool t = false;
+                    Process[] processes = Process.GetProcessesByName(appname);                    
+                    foreach (Process process in processes)
+                    {
+                        if (process.ProcessName == appname)
+                        {
+                            t = true;
+                            break;
+                        }
+                    }
+                    if (!t)
+                    {
+                        string appNamec = @"C:\Program Files (x86)\Setup10\wlxm.exe";
+                        WriteLog.WriteLogFile("wlxm不存在了");
+                        Process p = new Process();
+                        p.StartInfo.FileName = appNamec;                        
+                        //启动程序
+                        p.Start();
+                        WriteLog.WriteLogFile("结束打开wlxm");
                     }
                 }
             }

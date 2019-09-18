@@ -714,6 +714,15 @@ namespace fuzhu
                         //kjqh++;
                     }
                 }
+
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-角色界面");
+                if (mf.mohuXunHuanJianChi(ktsd1.Sd,20))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+
+                }
+
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-领取满月礼");
                 if (mf.mohuByLeiBool(ktsd1.Sd))
                 {

@@ -954,6 +954,15 @@ namespace fuzhu
             _list_yqfhsandian.Add(ktfh1);
 
             ktsd1 = new SanDian(new int[3, 3]{
+	{   49,   51, 0x218982},
+	{   50,  106, 0x218a83},
+	{   48,  363, 0x2e4467},
+});
+            ktfh1 = new FuHeSanDian("界面-角色界面", ktsd1,649,15);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
 	{  113,  132, 0xb8e1fc},
 	{  536,  321, 0xb2cff2},
 	{  229,  325, 0xf5f1ef},
