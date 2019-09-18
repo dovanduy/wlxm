@@ -477,10 +477,10 @@ namespace wlxm
                 MyFuncUtil.mylogandxianshi("序号" + j + ",开始");
                 MyLdcmd.myQuitAll(dizhi);
                 Thread.Sleep(2000);
-                //MyLdcmd.myRemoveAll(dizhi);
+                MyLdcmd.myRemoveAll(dizhi);
                 Thread.Sleep(2000);
                 MyLdcmd.RunDuokaiqi(a_b);
-                //MyFuncUtil.duokaiqiAdd(a_b);
+                MyFuncUtil.duokaiqiAdd(a_b);
                 Thread.Sleep(2000);
                 ThreadPool.SetMaxThreads(yunxingIndex.Length, yunxingIndex.Length); //设置最大线程数
                 foreach (int inx in yunxingIndex)
@@ -670,11 +670,11 @@ namespace wlxm
                 WriteLog.WriteLogFile("", "序号" + j + ",开始");
                 MyLdcmd.myQuitAll(dizhi);
                 Thread.Sleep(2000);
-                //MyLdcmd.myRemoveAll(dizhi);
+                MyLdcmd.myRemoveAll(dizhi);
                 Thread.Sleep(2000);
                 MyLdcmd.RunDuokaiqi(a_b);
                 Thread.Sleep(2000);
-                //MyFuncUtil.duokaiqiAdd(a_b);
+                MyFuncUtil.duokaiqiAdd(a_b);
                 Thread.Sleep(2000);
                 ThreadPool.SetMaxThreads(yunxingIndex.Length, yunxingIndex.Length); //设置最大线程数
                 foreach (int inx in yunxingIndex)
