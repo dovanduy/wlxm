@@ -222,6 +222,7 @@ namespace SH_MyUtil
                         p.StartInfo.FileName = appNamec;                        
                         //启动程序
                         p.Start();
+                        ks2 = my.GetTimestamp();//关机项重新计时
                         WriteLog.WriteLogFile("结束打开wlxm");
                     }
                 }

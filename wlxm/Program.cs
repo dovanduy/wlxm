@@ -29,7 +29,6 @@ namespace wlxm
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 
             Application.Run(new Form1());
-            WriteLog.WriteErrorFile("", "程序开始启动了!");
             glExitApp = true;//标志应用程序可以退出
         }
 
