@@ -67,7 +67,7 @@ namespace wlsh
         static void CmdStartCTIProc(string sExePath, string sArguments)
         {
             Process p = new Process();
-            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.FileName = @"C:\Program Files (x86)\默认公司名称\Sh_setup\wlsh.exe"; 
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardInput = true;
             p.StartInfo.RedirectStandardOutput = true;

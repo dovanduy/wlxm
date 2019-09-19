@@ -65,6 +65,12 @@ namespace wlsh
                 this.label1.Text = result.ToString();
             }
         }
+
+        private void wodeceshi_Click(object sender, EventArgs e)
+        {
+            UpdateCaoZuo sh = new UpdateCaoZuo();
+            sh.updateWlxm();
+        }
         
     }
 }

@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		开发计划.txt = 开发计划.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpdate", "AutoUpdate\AutoUpdate.csproj", "{9A09B67B-6D29-47A8-9A36-BAF8C73347CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +76,16 @@ Global
 		{EA006782-6E4F-46FE-88E4-BB9F9283A2D6}.Release|Mixed Platforms.Build.0 = Release
 		{EA006782-6E4F-46FE-88E4-BB9F9283A2D6}.Release|x86.ActiveCfg = Release
 		{EA006782-6E4F-46FE-88E4-BB9F9283A2D6}.Release|x86.Build.0 = Release
+		{9A09B67B-6D29-47A8-9A36-BAF8C73347CD}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{9A09B67B-6D29-47A8-9A36-BAF8C73347CD}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{9A09B67B-6D29-47A8-9A36-BAF8C73347CD}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{9A09B67B-6D29-47A8-9A36-BAF8C73347CD}.Debug|x86.ActiveCfg = Debug|x86
+		{9A09B67B-6D29-47A8-9A36-BAF8C73347CD}.Debug|x86.Build.0 = Debug|x86
+		{9A09B67B-6D29-47A8-9A36-BAF8C73347CD}.Release|Any CPU.ActiveCfg = Release|x86
+		{9A09B67B-6D29-47A8-9A36-BAF8C73347CD}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{9A09B67B-6D29-47A8-9A36-BAF8C73347CD}.Release|Mixed Platforms.Build.0 = Release|x86
+		{9A09B67B-6D29-47A8-9A36-BAF8C73347CD}.Release|x86.ActiveCfg = Release|x86
+		{9A09B67B-6D29-47A8-9A36-BAF8C73347CD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

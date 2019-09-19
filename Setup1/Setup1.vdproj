@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_0D2189AB35EA8775C12A7161F5397EF8"
+        "OwnerKey" = "8:_57EFD32F1125A85C7BEDA50775B37117"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_16CF4E18AA577B7FA89B935A52C40992"
         "OwnerKey" = "8:_216C71C3844A4C168C39C19BA6F02E41"
         "MsmSig" = "8:_UNDEFINED"
@@ -34,6 +40,18 @@
         "Entry"
         {
         "MsmKey" = "8:_50586A7C563940C09D84060389E06DC4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_57EFD32F1125A85C7BEDA50775B37117"
+        "OwnerKey" = "8:_AD90347EB16E4B67BE032A3E3DE4C837"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7EA67624E31B47669595E9644D7CEEFC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -58,7 +76,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AD90347EB16E4B67BE032A3E3DE4C837"
+        "OwnerKey" = "8:_57EFD32F1125A85C7BEDA50775B37117"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -291,6 +309,57 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_57EFD32F1125A85C7BEDA50775B37117"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:AipSdk, Version=3.6.11.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_57EFD32F1125A85C7BEDA50775B37117"
+                    {
+                    "Name" = "8:AipSdk.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:AipSdk.DLL"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_F050675239654F5CB3297918411E41BE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7EA67624E31B47669595E9644D7CEEFC"
+            {
+            "SourcePath" = "8:..\\wlxm\\bin\\Debug\\update.xml"
+            "TargetName" = "8:update.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_F050675239654F5CB3297918411E41BE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AD90347EB16E4B67BE032A3E3DE4C837"
             {
             "AssemblyRegister" = "3:1"
@@ -390,7 +459,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Setup10"
         "ProductCode" = "8:{80AA2884-73FE-438A-9DDF-70DA32D20416}"
-        "PackageCode" = "8:{8D6FE3EC-1002-4B83-8084-5BA5FA2D02F9}"
+        "PackageCode" = "8:{0E6FC4EF-187B-4CA5-A81C-E1F3AA913225}"
         "UpgradeCode" = "8:{FACFA2C3-4470-4489-A3A3-FF11CA18C2B9}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"

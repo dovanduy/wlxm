@@ -9,7 +9,9 @@ using System.Reflection;
 using COMMON;
 using System.Threading;
 using System.Windows.Forms;
-namespace Update
+
+
+namespace SH_MyUtil
 {
     /// <summary>  
     /// 更新完成触发的事件  
@@ -185,14 +187,11 @@ namespace Update
                         foreach (XmlNode xml in node)
                         {
                             if (xml.Name == "Verson")
-                                versons = xml.InnerText;
-                            else
-                                download = xml.InnerText;
+                                versons = xml.InnerText;                            
                         }
                     }
                 }
-                Version verson = new Version(versons);
-                MessageBox.Show(versons);                
+                Version verson = new Version(versons);  
                 int tm = verson.CompareTo(ver);
                 if (tm >= 0)
                     isUpdate = false;

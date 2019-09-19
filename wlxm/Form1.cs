@@ -14,6 +14,7 @@ using System.Diagnostics;
 using MyUtil;
 using fuzhu;
 using Entity;
+using System.Xml;
 namespace wlxm
 {
     public partial class Form1 : Form
@@ -93,7 +94,7 @@ namespace wlxm
             dict.Add("路人超能", "com.idreamsky.psycho100/com.yinghuochong.unity_entry.CustomUnityPlayerActivity");
             dict.Add("境界", "com.wk.jingjie.ewan/cn.ewan.supersdk.activity.SplashActivity");
             dict.Add("境界官方","com.ourpalm.bleach.gw/com.ourpalm.gamesdk.MainActivity");
-            this.label1.Text = "当前版本:" + fuzhuBanben;
+            
             this.label3.Text = "当前游戏:" + "暂定:境界官方";
             this.label3.ForeColor = Color.Red;
             string a_b = "";
@@ -106,6 +107,21 @@ namespace wlxm
                 a_b = "c";
             }
             MyFuncUtil.createDirIfNotExist(a_b);
+
+            XmlDocument xmlDoc2 = new XmlDocument();
+            xmlDoc2.Load(Application.StartupPath + "\\" + "update.xml");
+            XmlNode list = xmlDoc2.SelectSingleNode("Update");
+            foreach (XmlNode node in list)
+            {
+                if (node.Name == "Soft" && node.Attributes["Name"].Value.ToLower() == "ExceTransforCsv".ToLower())
+                {
+                    foreach (XmlNode xml in node)
+                    {
+                        if (xml.Name == "Verson")
+                            this.label1.Text = xml.InnerText;
+                    }
+                }
+            }
 
         }
         public Form1()
@@ -670,11 +686,11 @@ namespace wlxm
                 WriteLog.WriteLogFile("", "序号" + j + ",开始");
                 MyLdcmd.myQuitAll(dizhi);
                 Thread.Sleep(2000);
-                MyLdcmd.myRemoveAll(dizhi);
+                //MyLdcmd.myRemoveAll(dizhi);
                 Thread.Sleep(2000);
                 MyLdcmd.RunDuokaiqi(a_b);
                 Thread.Sleep(2000);
-                MyFuncUtil.duokaiqiAdd(a_b);
+                //MyFuncUtil.duokaiqiAdd(a_b);
                 Thread.Sleep(2000);
                 ThreadPool.SetMaxThreads(yunxingIndex.Length, yunxingIndex.Length); //设置最大线程数
                 foreach (int inx in yunxingIndex)

@@ -73,7 +73,7 @@ namespace wlxm
         static void CmdStartCTIProc(string sExePath, string sArguments)
         {
             Process p = new Process();
-            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.FileName = @"C:\Program Files (x86)\Setup10\wlxm.exe"; 
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardInput = true;
             p.StartInfo.RedirectStandardOutput = true;
