@@ -10,6 +10,21 @@ namespace wlxm
         /*
          * 运行 Control userpasswords2
          * netsh winsock reset 模拟器连不上 重置socket
+         * 
+         *   #region 防止多开
+            {
+                Process[] processCollection;  //AutoUpdater进程集合
+ 
+                processCollection = Process.GetProcessesByName("AutoUpdater");
+                // 如果该程序进程数量大于，则说明该程序已经运行，则弹出提示信息并提出本次操作，否则就创建该程序
+                if (processCollection.Length > 1)
+                {
+                    //关闭后打开的
+                    System.Environment.Exit(1);
+                }
+            }
+
+#endregion
          * USE [yiquan]
 CREATE TABLE [dbo].[zhanghao](
     [name] [varchar](50) NULL,
