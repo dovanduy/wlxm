@@ -985,7 +985,7 @@ namespace fuzhu
 	{  341,   92, 0xec765d},
 	{  160,   93, 0xffccaa},
 });
-            ktfh1 = new FuHeSanDian("特殊引导-2天送礼", ktsd1, 633, 38);
+            ktfh1 = new FuHeSanDian("特殊引导-2天送礼", ktsd1, 295, 319);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
@@ -1008,8 +1008,32 @@ namespace fuzhu
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  347,  197, 0x216e74},
+	{  481,  297, 0x6bccfd},
+	{  173,  261, 0x222d55},
+});
+            ktfh1 = new FuHeSanDian("引导-1天送礼后提醒2", ktsd1, 509, 114);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
 
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  129,  219, 0xbb8aee},
+	{  317,  133, 0xff444a},
+	{  544,  267, 0xeaf3fb},
+});
+            ktfh1 = new FuHeSanDian("引导-版本热点", ktsd1, 551, 112);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
 
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  539,   47, 0xef6349},
+	{  502,   83, 0xe54466},
+	{  155,   84, 0xffccaa},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-2天送礼2", ktsd1, 291, 321);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
 
             //志拓
             ktsd1 = new SanDian(new int[3, 3]{

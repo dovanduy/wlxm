@@ -1038,6 +1038,32 @@ namespace fuzhu
                     });
 
                 }
+
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-2天送礼2");
+                if (meirijiangli == 0 && mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    compareSandianAndtap(ktsd1, 2000, () =>
+                    {
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                        mf.mydelay(1000, 2000);
+                        mf.mytap(this._jubing, 390, 360);
+                        mf.mydelay(1000, 2000);
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                        mf.mydelay(1000, 2000);
+                        mf.mytap(this._jubing, 390, 360);
+                        mf.mydelay(1000, 2000);
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                        mf.mydelay(1000, 2000);
+                        mf.mytap(this._jubing, 390, 360);
+                        mf.mydelay(4000, 6000);
+                    },
+                    () =>
+                    {
+                        mf.mytap(this._jubing, 633, 40);
+                        meirijiangli = 1;
+                    });
+
+                }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-升5级");
                 if (mf.mohuByLeiBool(ktsd1.Sd))
                 {
