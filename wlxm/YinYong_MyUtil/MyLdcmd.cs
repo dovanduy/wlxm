@@ -571,7 +571,7 @@ namespace MyUtil
             myldcmd.SimulatorPath = ld.SimulatorPath;
             lock(obj){
                 myldcmd.restore(index, seed);
-                Thread.Sleep(1000*60*4);
+                Thread.Sleep(1000*20);
             }
         }
 

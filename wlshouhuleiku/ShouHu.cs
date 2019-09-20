@@ -167,6 +167,7 @@ namespace SH_MyUtil
             long ks2 = my.GetTimestamp();
             long ks3 = my.GetTimestamp();
             long ks4 = my.GetTimestamp();
+            long ks5 = my.GetTimestamp();
             while (true)
             {
                 long js = my.GetTimestamp();
@@ -176,7 +177,18 @@ namespace SH_MyUtil
                     ShouHu s = new ShouHu();
                     s.wohaihuozhe();
                 }
-                if ((js - ks2) > 1000 * 60 * 180)
+                if (!MyFuncUtil.getMachineName().ToUpper().Equals("1HAO") && (js - ks2) > 1000 * 60 * 180)
+                {
+                    ks2 = my.GetTimestamp();
+                    ShouHu s = new ShouHu();
+                    bool t = s.panDuanChongQi(MyFuncUtil.getMachineName());
+                    if (!MyFuncUtil.getMachineName().ToLower().Equals("wlzhongkong") && t)
+                    {
+                        WriteLog.WriteLogFile("重启啦!!!");
+                        System.Diagnostics.Process.Start("shutdown.exe", "-r -f -t 15");
+                    }
+                }
+                if (MyFuncUtil.getMachineName().ToUpper().Equals("1HAO") && (js - ks2) > 1000 * 90)
                 {
                     ks2 = my.GetTimestamp();
                     ShouHu s = new ShouHu();
@@ -224,6 +236,29 @@ namespace SH_MyUtil
                         p.Start();
                         ks2 = my.GetTimestamp();//关机项重新计时
                         WriteLog.WriteLogFile("结束打开wlxm");
+                    }
+                }
+                if ((js - ks5) > 1000 * 60 * 30)
+                {
+                    ks5 = MyFuncUtil.GetTimestamp();
+                    Process current = Process.GetCurrentProcess();
+                    string appname = "dnmultiplayer";
+                    bool t = false;
+                    Process[] processes = Process.GetProcessesByName(appname);
+                    foreach (Process process in processes)
+                    {
+                        if (process.ProcessName == appname)
+                        {
+                            t = true;
+                            break;
+                        }
+                    }
+                    if (!t)
+                    {
+                        WriteLog.WriteLogFile("dnmultiplayer不存在了");
+                        WriteLog.WriteLogFile("重启啦!!!");
+                        System.Diagnostics.Process.Start("shutdown.exe", "-r -f -t 15");
+                        WriteLog.WriteLogFile("结束打开dnmultiplayer");
                     }
                 }
             }

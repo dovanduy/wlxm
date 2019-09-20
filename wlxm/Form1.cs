@@ -767,8 +767,10 @@ namespace wlxm
                     Thread.Sleep(20000);
                     continue;
                 }
-                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原");
-                MyLdcmd.myRestore(dqinx, seed, dizhi);
+                if(cs==0){
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原");
+                    MyLdcmd.myRestore(dqinx, seed, dizhi);
+                }
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改名");
                 MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
                 temp=MyFuncUtil.Launch(dqinx, dizhi);

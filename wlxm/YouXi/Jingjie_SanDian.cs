@@ -313,6 +313,24 @@ namespace fuzhu
             _list_yqfhsandian.Add(ktfh1);
 
             ktsd1 = new SanDian(new int[3, 3]{
+	{  442,  211, 0x1eb0e3},
+	{  334,  280, 0x96c62d},
+	{  442,  279, 0xf39800},
+});
+            ktfh1 = new FuHeSanDian("登录-登录账号2", ktsd1, 346, 225, "368,  229, 0x1daddf");
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  430,  208, 0x8bbe1e},
+	{  430,  258, 0x1daddf},
+	{  256,  156, 0x707070},
+});
+            ktfh1 = new FuHeSanDian("登录-选择新账号", ktsd1, 346, 261);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
 	{  206,  197, 0xf8b551},
 	{  208,  231, 0xf8b551},
 	{  180,  138, 0xe79941},
