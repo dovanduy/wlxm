@@ -253,7 +253,7 @@ namespace SH_MyUtil
                             break;
                         }
                     }
-                    if (!t)
+                    if (!MyFuncUtil.getMachineName().ToLower().Equals("wlzhongkong") && !t)
                     {
                         WriteLog.WriteLogFile("dnmultiplayer不存在了");
                         WriteLog.WriteLogFile("重启啦!!!");
