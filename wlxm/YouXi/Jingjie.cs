@@ -374,7 +374,6 @@ namespace fuzhu
             WriteLog.WriteLogFile(this._mnqName, "检测是否已进入游戏");
             long ksp = MyFuncUtil.GetTimestamp();
             StringBuilder rt = new StringBuilder();
-            int res = 0;
             string rr = "";
             StringBuilder zhuxianrt = new StringBuilder();
             string yijinruzhuxian = "";
@@ -392,24 +391,28 @@ namespace fuzhu
                 {
                     foreach (Entity.FuHeSanDian f in ls)
                     {
-                        if (mf.mohuByLeiBool(f.Sd))
+                        if (f != Jingjie_SanDian.GetObject().findFuHeSandianByName("游戏-跳过") && mf.mohuByLeiBool(f.Sd))
                         {
                             WriteLog.WriteLogFile(this._mnqName, f.Name + "模糊取到需要登录");
                             mf.mydelay(1000, 2000);
                             rt.Append(f.Name);
-                            res++;
+                            break;
                         }
                     }
                     foreach (Entity.FuHeSanDian f in Jingjie_SanDian.List_yqfhsandian)
                     {
-                        if (!ls.Contains(f) && mf.mohuByLeiBool(f.Sd))
+                        if (f != Jingjie_SanDian.GetObject().findFuHeSandianByName("游戏-跳过") && !ls.Contains(f) && mf.mohuByLeiBool(f.Sd))
                         {
                             WriteLog.WriteLogFile(this._mnqName, f.Name + "模糊取到不需要登录");
                             //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
                             mf.mydelay(1000, 2000);
                             zhuxianrt.Append(f.Name);
-                            res++;
+                            break;
                         }
+                    }
+                    if ((rt != null && rt.Length > 0) || (zhuxianrt != null && zhuxianrt.Length > 0))
+                    {
+                        break;
                     }
                     mf.mydelay(10, 200);
                 }
@@ -432,8 +435,9 @@ namespace fuzhu
                     break;
                 }
             }
-            if (rr == "") {
-                WriteLog.WriteLogFile(this._mnqName, "找不到登录标志点,不再搞登录");
+            if (rr.Equals("") && !yijinruzhuxian.Equals(""))
+            {
+                WriteLog.WriteLogFile(this._mnqName, "找不到登录标志点,找到其他点,不再搞登录");
                 return true;
             }
             WriteLog.WriteLogFile(this._mnqName, "进入到登录环节  " + this._jubing + "，thread:" + Thread.CurrentThread.ManagedThreadId);

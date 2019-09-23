@@ -986,6 +986,7 @@ namespace wlxm
                         return;
                     }
                 }
+                zhanghao.zhiweidengluzhongN(dqinx, Jingjie.DANGQIAN_YOUXI, name, WriteLog.getMachineName());
                 var js = MyFuncUtil.GetTimestamp();
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环" + cishu + "次数");
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环1次耗时" + MyFuncUtil.SecondToHour(js - ks));
