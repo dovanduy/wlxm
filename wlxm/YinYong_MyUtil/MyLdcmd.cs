@@ -187,6 +187,24 @@ namespace MyUtil
         }
 
         /// <summary>
+        /// 指定模拟器改名
+        /// </summary>
+        private void reboot(int ind)
+        {
+
+            lock (obj)
+            {
+
+                ImplementCmd(
+                    string.Format("{0}ldconsole reboot --index {1}",
+                    SimulatorPath, ind));
+                WriteLog.WriteLogFile(""+ind, string.Format("{0}ldconsole reboot --index {1}",
+                    SimulatorPath, ind));
+
+            }
+        }
+
+        /// <summary>
         /// 传出文件
         /// </summary>
         private void pullFile(int ind, string path,string mnqname)
@@ -303,7 +321,7 @@ namespace MyUtil
         /// </summary>
         /// <param name="ldcmd"></param>
         /// <returns></returns>
-        public static string[] getDqmoniqiJuBing(string dizhi)
+        public static string[] getDqmoniqiJuBing(string dizhi = @"d:\ChangZhi\dnplayer2\")
         {
 
             List<string> slist = MyLdcmd.GetListSimulator(dizhi);
@@ -319,6 +337,10 @@ namespace MyUtil
             return result;
 
         }
+
+       
+
+
         /// <summary>
         /// 根据索引值得到句柄
         /// </summary>
@@ -586,6 +608,16 @@ namespace MyUtil
             }
             WriteLog.WriteLogFile(index + "", a);
         }
+
+        public static void myReboot(int index, string dizhi = @"d:\ChangZhi\dnplayer2\")
+        {
+            MyLdcmd myldcmd = MyLdcmd.GetObject(dizhi);
+            myldcmd.SimulatorPath = ld.SimulatorPath;
+
+            myldcmd.reboot(index);
+            
+        }
+
 
         public static void myRemoveAll(string dizhi)
         {
@@ -894,7 +926,7 @@ namespace MyUtil
             foreach (string a in ab)
             {
                 //WriteLog.WriteLogFile("", a);
-                //WriteLog.WriteLogFile("", a.Equals("package:com.idreamsky.psycho100")+"");
+                //WriteLog.WriteLogFile("", a.Equals(package) + "");
             }
             if (ab.Contains(package))
             {

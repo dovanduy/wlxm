@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using Microsoft.Win32;
+using xDM;
 namespace MyUtil
 {
     public class MyFuncJingNoTai
@@ -218,6 +219,141 @@ namespace MyUtil
             }
             
         return res;
+        }
+
+        public bool PanDuan_QidongLurenzhanghao(int dqinx)
+        {
+
+            myDm dm = new myDm();
+            int x1 = -1;
+            int y1 = -1;
+            int jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx);
+            if (jubing <= 0)
+            {
+                WriteLog.WriteLogFile(dqinx + "", "游戏判断启动，句柄绑定错误");
+                return false;
+            }
+            dm.bindWindow(jubing);
+            Entity.FuHeSanDian tysd = null;
+            int w = -1, h = -1;
+            getWindowSize(dqinx, out w, out h);
+            WriteLog.WriteLogFile(dqinx + "", w + " " + h);
+            int a = 0;
+            if (w == 489 && h == 840)
+            {
+                a = 1;
+                tysd = fuzhu.TongYong_SanDian.GetObject().findFuHeSandianByName("雷电首页截图-路人");
+            }
+            if (w == 1318 && h == 758)
+            {
+                a = 1;
+                tysd = fuzhu.TongYong_SanDian.GetObject().findFuHeSandianByName("雷电首页截图-平板");
+            }
+            if (a == 1 && dm.mohuByLeiBool_duokai(tysd.Sd))
+            {
+                WriteLog.WriteLogFile(dqinx + "", "游戏启动不成功，界面有雷电游戏 " + x1 + " " + y1);
+                return false;
+            }
+            return true;
+        }
+
+
+        public void getWindowSize(int index, out int width, out int height)
+        {
+            string dizhi = @"d:\ChangZhi\dnplayer2\";
+            width = -1;
+            height = -1;
+            int jubing = MyLdcmd.getDqmoniqiWaiCengJuBingByIndex(index, dizhi);
+            if (jubing <= 0)
+            {
+                WriteLog.WriteLogFile(index + "", "改变窗口位置，句柄绑定错误");
+                return;
+            }
+            Rect lprect = new Rect();
+            GetWindowRect(new IntPtr(jubing), out lprect);
+            WriteLog.WriteLogFile(index + "", "当前width,height" + width + "," + height + " 改变位置外框" + (lprect.Right - lprect.Left) + " " + (lprect.Bottom - lprect.Top));
+            width = lprect.Right - lprect.Left;
+            height = lprect.Bottom - lprect.Top;
+        }
+
+
+        public bool PanDuan_QidongByYiQuDian(int dqinx, int haomiao, myDm mf, int jubing, out string yiqudian)
+        {
+            WriteLog.WriteLogFile(dqinx + "", "模拟器发现已取点-开始判断"+haomiao);
+            long ks = MyFuncUtil.GetTimestamp();
+            var rt = false;
+            string oyiqudian = "";
+            while (true) {
+                long js = MyFuncUtil.GetTimestamp();
+                if ((js - ks) > haomiao) {
+                    break;
+                }
+                int r = panduankasiqudian(dqinx, mf, jubing, out oyiqudian);
+                if (r >= 1) {
+                    rt = true;
+                    break;
+                }
+            }
+            yiqudian = oyiqudian;
+            return rt;
+        }
+
+        private int panduankasiqudian(int dqinx,myDm mf,int jubing,out string yiqudian)
+        {
+            
+            StringBuilder rt = new StringBuilder();
+            int res = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                foreach (Entity.FuHeSanDian f in fuzhu.Jingjie_SanDian.List_yqfhsandian)
+                {
+                    if (mf.mohuByLeiBool(f.Sd))
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", f.Name + "模糊取到");
+                        //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                        mf.mydelay(1000, 2000);
+                        rt.Append(f.Name);
+                        res++;
+                    }
+                    if (res > 0) {
+                        break;
+                    }
+                }
+                if (res > 0)
+                {
+                    break;
+                }
+                mf.mydelay(10, 200);
+            }
+            string rr = "";
+            if (rt != null && rt.Length > 0) {
+                rr = rt.ToString();
+            }
+            yiqudian = rr;
+            return res;
+        }
+
+        public bool PanDuan_QidongBySize(int dqinx, int haomiao,int wid=727,int hei=425)
+        {
+            long ks = MyFuncUtil.GetTimestamp();
+            var rt = false;
+            while (true)
+            {
+                long js = MyFuncUtil.GetTimestamp();
+                if ((js - ks) > haomiao)
+                {
+                    break;
+                }
+                int w = -1, h = -1;
+                getWindowSize(dqinx, out w, out h);
+                if (w==wid && h==hei)
+                {
+                    rt = true;
+                    break;
+                }
+                Thread.Sleep(3000);
+            }
+            return rt;
         }
     }
 }

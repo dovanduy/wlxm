@@ -60,11 +60,11 @@ namespace fuzhu
 
 
 
-        public Jingjie(xDm mydm, int dqinx, string dizhi = @"d:\ChangZhi\dnplayer2\")
+        public Jingjie(xDm mydm, int dqinx, int jubing,string dizhi = @"d:\ChangZhi\dnplayer2\")
         {
             this.mf = (myDm)mydm;
             this._dqinx = dqinx;
-            this._jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx,dizhi);            
+            this._jubing = jubing;            
             //模拟器的名字 取值有问题 改为index
             this._mnqName = dqinx + "";
             int r = 0;
@@ -368,20 +368,77 @@ namespace fuzhu
             WriteLog.WriteLogFile(this._mnqName, "结束了境界存账号阶段");
         }
 
-        public Boolean denglu(int fenzhong,out string name)
+        public Boolean denglu(int fenzhong,ref string name,ref string pwd)
         {
+            //循环90秒判断是否已经进入
+            WriteLog.WriteLogFile(this._mnqName, "检测是否已进入游戏");
+            long ksp = MyFuncUtil.GetTimestamp();
+            StringBuilder rt = new StringBuilder();
+            int res = 0;
+            string rr = "";
+            StringBuilder zhuxianrt = new StringBuilder();
+            string yijinruzhuxian = "";
+            List<FuHeSanDian> ls = Jingjie_SanDian.GetObject().findListFuHeSandianByName("登录");
+            ls.AddRange(Jingjie_SanDian.GetObject().findListFuHeSandianByName("选区"));
+            ls.AddRange(Jingjie_SanDian.GetObject().findListFuHeSandianByName("存账号"));
+            ls.AddRange(Jingjie_SanDian.GetObject().findListFuHeSandianByName("特殊存账号"));
+            while (true) {
+                long jsp = MyFuncUtil.GetTimestamp();
+                if ((jsp - ksp) > 1000 * 90)
+                {
+                    break;
+                }                
+                for (int i = 0; i < 10; i++)
+                {
+                    foreach (Entity.FuHeSanDian f in ls)
+                    {
+                        if (mf.mohuByLeiBool(f.Sd))
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, f.Name + "模糊取到需要登录");
+                            mf.mydelay(1000, 2000);
+                            rt.Append(f.Name);
+                            res++;
+                        }
+                    }
+                    foreach (Entity.FuHeSanDian f in Jingjie_SanDian.List_yqfhsandian)
+                    {
+                        if (!ls.Contains(f) && mf.mohuByLeiBool(f.Sd))
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, f.Name + "模糊取到不需要登录");
+                            //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                            mf.mydelay(1000, 2000);
+                            zhuxianrt.Append(f.Name);
+                            res++;
+                        }
+                    }
+                    mf.mydelay(10, 200);
+                }
+                if (rt != null && rt.Length > 0)
+                {
+                    rr = rt.ToString();
+                }
+                if (zhuxianrt != null && zhuxianrt.Length > 0)
+                {
+                    yijinruzhuxian = rt.ToString();
+                }
+                if ((jsp - ksp) > 1000 * 30 && rt != null && rt.Length > 0)
+                {
+                    MyFuncUtil.mylogandxianshi("搞登录,取到点" + rr);
+                    break;
+                }
+                if ((jsp - ksp) > 1000 * 30 && zhuxianrt != null && zhuxianrt.Length > 0)
+                {
+                    MyFuncUtil.mylogandxianshi("不搞登录,取到点" + yijinruzhuxian);
+                    break;
+                }
+            }
+            if (rr == "") {
+                WriteLog.WriteLogFile(this._mnqName, "找不到登录标志点,不再搞登录");
+                return true;
+            }
             WriteLog.WriteLogFile(this._mnqName, "进入到登录环节  " + this._jubing + "，thread:" + Thread.CurrentThread.ManagedThreadId);
             ZhangHao zhanghao = new ZhangHao();
-            name = "";
-            string pwd = "";
-            int xuanqu = -1, dengji = -1;
-            string youxi=DANGQIAN_YOUXI;
-            zhanghao.zhunbeizhanghao(this._dqinx,youxi, out name, out pwd, out xuanqu, out dengji);
-            if (name==null || name == "" || pwd==null || pwd == "") {
-                //当前没有找到需要练级的账号
-                WriteLog.WriteLogFile(this._mnqName, "当前没有找到需要练级的账号");
-                return false;
-            }            
+            int xuanqu = 1;       
             long ks = MyFuncUtil.GetTimestamp();
             long kstiaoguo = MyFuncUtil.GetTimestamp();
             bool t1 = false;
@@ -389,7 +446,6 @@ namespace fuzhu
             int yici = 0;
             int kaishidian = 0;
             int tiaochuci = 0;
-            List<FuHeSanDian> ls = Jingjie_SanDian.GetObject().findListFuHeSandianByName("存账号");
             while (true)
             {
                 if (yici == 0) {
@@ -520,7 +576,8 @@ namespace fuzhu
                 if (denglu == 0 &&(mf.mohuXunHuanJianChi(kt.Sd,20))) {
                     WriteLog.WriteLogFile(this._mnqName, "当前账号无法登陆,置为N,修改时间更新换号");
                     zhanghao.zhiweidengluzhongN(this._dqinx, DANGQIAN_YOUXI, name, WriteLog.getMachineName());
-                    zhanghao.zhunbeizhanghao(this._dqinx, youxi, out name, out pwd, out xuanqu, out dengji);
+                    int dengji = -1;
+                    zhanghao.zhunbeizhanghao(this._dqinx, DANGQIAN_YOUXI, out name, out pwd, out xuanqu, out dengji);
                     if (name == null || name == "" || pwd == null || pwd == "")
                     {
                         //当前没有找到需要练级的账号
@@ -1279,6 +1336,12 @@ namespace fuzhu
                     mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-账号被顶");
+                if (mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    break;
+                }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-断线重连");
                 if (mf.mohuByLeiBool(ktsd1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);

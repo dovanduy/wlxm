@@ -55,7 +55,7 @@
             // 
             // wodeceshi
             // 
-            this.wodeceshi.Location = new System.Drawing.Point(354, 119);
+            this.wodeceshi.Location = new System.Drawing.Point(365, 21);
             this.wodeceshi.Name = "wodeceshi";
             this.wodeceshi.Size = new System.Drawing.Size(75, 23);
             this.wodeceshi.TabIndex = 2;
@@ -67,7 +67,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(463, 154);
+            this.ClientSize = new System.Drawing.Size(745, 444);
             this.Controls.Add(this.wodeceshi);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

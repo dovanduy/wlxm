@@ -56,6 +56,7 @@
     <Compile Include="Entity\DuoDianZhaoSe.cs" />
     <Compile Include="Entity\FuHeDuoDian.cs" />
     <Compile Include="Entity\JiQiYunXing.cs" />
+    <Compile Include="Entity\LeiDianCanShu.cs" />
     <Compile Include="Entity\YunXingQK.cs" />
     <Compile Include="Entity\ZuoBiao.cs" />
     <Compile Include="Entity\SanDian.cs" />

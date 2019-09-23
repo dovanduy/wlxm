@@ -367,7 +367,7 @@ namespace MyUtil
             height = lprect.Bottom - lprect.Top;
         }
 
-        public static bool lureninstallOk(int dqinx)
+        public static bool lureninstallOk(int dqinx,string apppackage,Action myinstall)
         {
             WriteLog.WriteLogFile(dqinx + "", "检测安装是否成功");
             bool t = false;
@@ -375,13 +375,19 @@ namespace MyUtil
             long ksjs = MyFuncUtil.GetTimestamp();
             long ks = MyFuncUtil.GetTimestamp();
             bool luren = false;
+            int yici = 0;
             while (true)
             {
+                if (yici == 0) {
+                    yici = 1;
+                    WriteLog.WriteLogFile(dqinx + "", "开头要检测安装一次");
+                    luren = MyLdcmd.jingjieisok(dqinx, apppackage);
+                }
                 long js = MyFuncUtil.GetTimestamp();
                 if ((js - ks) > 30 * 1000)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "30s检测安装一次");
-                    luren = MyLdcmd.jingjieisok(dqinx, "package:com.wk.jingjie.ewan");
+                    luren = MyLdcmd.jingjieisok(dqinx, apppackage);
                     ks = MyFuncUtil.GetTimestamp();
                 }
                 if ((js - ksjs) > 10 * 60 * 1000)
@@ -394,6 +400,11 @@ namespace MyUtil
                     WriteLog.WriteLogFile(dqinx + "", "安装app成功");
                     t = true;
                     break;
+                }
+                if (!luren)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "准备安装app，restore或者install");
+                    myinstall();
                 }
             }
             return t;
@@ -569,6 +580,17 @@ namespace MyUtil
                 Thread.Sleep(2000);
                 zaiciguanbi();
             }            
+        }
+
+        public static bool isLaunch(int index, string dizhi = @"d:\ChangZhi\dnplayer2\")
+        {
+            var res = false;
+            int[] abc = MyLdcmd.getDqmoniqiHuodongIndex(dizhi);
+            if (abc.Contains(index))
+            {
+                res = true;
+            }
+            return res;
         }
 
         public static bool Launch(int index, string dizhi = @"d:\ChangZhi\dnplayer2\")

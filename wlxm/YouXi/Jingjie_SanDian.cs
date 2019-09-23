@@ -1053,6 +1053,16 @@ namespace fuzhu
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  418,  154, 0xebedf2},
+	{  376,  195, 0xd9ad62},
+	{  262,  148, 0xd1d6e2},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-断线重连", ktsd1, 344, 187);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+
             //志拓
             ktsd1 = new SanDian(new int[3, 3]{
 	            {  152,   88, 0xffc559},

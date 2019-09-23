@@ -168,15 +168,18 @@ namespace SH_MyUtil
             long ks3 = my.GetTimestamp();
             long ks4 = my.GetTimestamp();
             long ks5 = my.GetTimestamp();
+            int duokai = 0;
             while (true)
             {
                 long js = my.GetTimestamp();
+                //只是说明还活着
                 if ((js - ks) > 1000 * 60 * 5)
                 {
                     ks = my.GetTimestamp();
                     ShouHu s = new ShouHu();
                     s.wohaihuozhe();
                 }
+                //长时间没有数则重启 1号机之外的机器 3个小时
                 if (!MyFuncUtil.getMachineName().ToUpper().Equals("1HAO") && (js - ks2) > 1000 * 60 * 180)
                 {
                     ks2 = my.GetTimestamp();
@@ -188,6 +191,7 @@ namespace SH_MyUtil
                         System.Diagnostics.Process.Start("shutdown.exe", "-r -f -t 15");
                     }
                 }
+                //长时间没有数则重启 1号机 1个半小时
                 if (MyFuncUtil.getMachineName().ToUpper().Equals("1HAO") && (js - ks2) > 1000 * 90)
                 {
                     ks2 = my.GetTimestamp();
@@ -199,6 +203,7 @@ namespace SH_MyUtil
                         System.Diagnostics.Process.Start("shutdown.exe", "-r -f -t 15");
                     }
                 }
+                //定时更新运行情况
                 if ( (js - ks3) > 1000 * 60 * 20)
                 {
                     ks3 = MyFuncUtil.GetTimestamp();
@@ -211,6 +216,7 @@ namespace SH_MyUtil
                         gxYunXingQk("jingjieguanfang");
                     }
                 }
+                //检测wlxm
                 if ((js - ks4) > 1000 * 60 * 10)
                 {
                     ks4 = MyFuncUtil.GetTimestamp();
@@ -238,7 +244,9 @@ namespace SH_MyUtil
                         WriteLog.WriteLogFile("结束打开wlxm");
                     }
                 }
-                if ((js - ks5) > 1000 * 60 * 30)
+
+                //检测多开器
+                if ((js - ks5) > 1000 * 60 * 20)
                 {
                     ks5 = MyFuncUtil.GetTimestamp();
                     Process current = Process.GetCurrentProcess();
@@ -250,10 +258,33 @@ namespace SH_MyUtil
                         if (process.ProcessName == appname)
                         {
                             t = true;
+                            duokai = 0;
                             break;
                         }
                     }
-                    if (!MyFuncUtil.getMachineName().ToLower().Equals("wlzhongkong") && !t)
+                    if (!t) {
+                        System.Threading.Thread.Sleep(30000);
+                        Process p = new Process();
+                        p.StartInfo.FileName = @"D:\ChangZhi\dnplayer2\dnmultiplayer.exe";                        
+                        //启动程序
+                        p.Start();
+                        WriteLog.WriteLogFile("结束打开多开器2");
+                        System.Threading.Thread.Sleep(10000);
+                    }
+                    processes = Process.GetProcessesByName(appname);
+                    foreach (Process process in processes)
+                    {
+                        if (process.ProcessName == appname)
+                        {
+                            t = true;
+                            duokai = 0;
+                            break;
+                        }
+                    }
+                    if (!t) {
+                        duokai++;
+                    }
+                    if (!MyFuncUtil.getMachineName().ToLower().Equals("wlzhongkong") && duokai>1)
                     {
                         WriteLog.WriteLogFile("dnmultiplayer不存在了");
                         WriteLog.WriteLogFile("重启啦!!!");

@@ -23,8 +23,9 @@ namespace wlxm
         /// 辅助的版本
         /// </summary>
         private static int fuzhuBanben = Jingjie.YOUXIBANBEN;
-        
 
+        private static string fuzhuyouxi = Jingjie.DANGQIAN_YOUXI;
+        
         /// <summary>
         /// 全局button 点了就不自动运行
         /// </summary>
@@ -94,8 +95,8 @@ namespace wlxm
             dict.Add("路人超能", "com.idreamsky.psycho100/com.yinghuochong.unity_entry.CustomUnityPlayerActivity");
             dict.Add("境界", "com.wk.jingjie.ewan/cn.ewan.supersdk.activity.SplashActivity");
             dict.Add("境界官方","com.ourpalm.bleach.gw/com.ourpalm.gamesdk.MainActivity");
-            
-            this.label3.Text = "当前游戏:" + "暂定:境界官方";
+
+            this.label3.Text = "当前游戏:" + fuzhuyouxi;
             this.label3.ForeColor = Color.Red;
             string a_b = "";
             if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
@@ -247,10 +248,17 @@ namespace wlxm
             int jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx, dizhi);
             //MyLdcmd.myRemove(dqinx);
             //int t = MyLdcmd.addSimulator();
-            myDm mf = new myDm();
-            Jingjie ln = new Jingjie(mf, dqinx);
+            
+            myDm dm = new myDm();
+            int r = 0;
+            if (jubing > 0)
+            {
+                r = dm.bindWindow(jubing);
+            }
+            Jingjie ln = new Jingjie(dm,jubing, dqinx);
+            MyLdcmd.myReboot(dqinx);
             string name = "";
-            ln.denglu(15,out name);
+            
             
                   
             MyFuncUtil.mylogandxianshi("结束"+name);
@@ -331,9 +339,15 @@ namespace wlxm
                 }
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "降低cpu");
                 MyLdcmd.myDownCpu(dqinx, 50);
-                Thread.Sleep(1000 * 10);                 
+                Thread.Sleep(1000 * 10);
+                int jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx, dizhi);
                 myDm mf = new myDm();
-                Jingjie jn = new Jingjie(mf, dqinx);
+                int r = 0;
+                if (jubing > 0)
+                {
+                    r = mf.bindWindow(jubing);
+                }                 
+                Jingjie jn = new Jingjie(mf, dqinx,jubing);
                 if (jn.Jubing <= 0)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "句柄有问题");
@@ -392,7 +406,7 @@ namespace wlxm
                 }
                 WriteLog.WriteLogFile(dqinx + "", "准备操作" + dqinx + "号模拟器");
                 MyLdcmd.installApp(dqinx, @"C:\迅雷下载\jjlydj_ew100224700.apk");
-                bool t = MyFuncUtil.lureninstallOk(dqinx);
+                bool t = MyFuncUtil.lureninstallOk(dqinx, "package:com.wk.jingjie.ewan", () => WriteLog.WriteLogFile(dqinx + "", "需要安装app"));
                 if (t == false)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "安装app没成功");
@@ -436,8 +450,14 @@ namespace wlxm
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + ",resize没成功");
                     return;
                 }
+                int jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx, dizhi);
                 myDm mf = new myDm();
-                Jingjie jn = new Jingjie(mf, dqinx);
+                int r = 0;
+                if (jubing > 0)
+                {
+                    r = mf.bindWindow(jubing);
+                }   
+                Jingjie jn = new Jingjie(mf, dqinx,jubing);
                 if (jn.Jubing <= 0)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "句柄有问题");
@@ -588,10 +608,16 @@ namespace wlxm
                 var ks = MyFuncUtil.GetTimestamp();
                 
                 
-                myDm dm = new myDm();
                 MyFuncUtil.mylogandxianshi("模拟器" + dqinx + "降低cpu");
                 //MyLdcmd.myDownCpu(dqinx, 50);
-                Jingjie yq = new Jingjie(dm, dqinx, dizhi);
+                int jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx, dizhi);
+                myDm mf = new myDm();
+                int r = 0;
+                if (jubing > 0)
+                {
+                    r = mf.bindWindow(jubing);
+                }
+                Jingjie yq = new Jingjie(mf,dqinx, jubing, dizhi);
                 //yq.denglu(15, out a_b);
                 yq.zhuxian("aa",1000);
                 Thread.Sleep(1000 * 60 * 60);
@@ -607,13 +633,14 @@ namespace wlxm
         {
             quanjubutton = 1;
             MyFuncUtil.mylogandxianshi("开始-已取点");
-            string dizhi = null;
-            string path = null;
-            string seed = null;
-            MyFuncUtil.myqiehuancd("d", out dizhi, out path, out seed);
             int dqinx = int.Parse(this.textBox1.Text);
+            int jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx);
             myDm mf = new myDm();
-            Jingjie yq = new Jingjie(mf, dqinx, dizhi);
+            int r = 0;
+            if (jubing > 0)
+            {
+                r = mf.bindWindow(jubing);
+            }
             for (int i = 0; i < 20; i++)
             {
                 foreach (FuHeDuoDian f in Jingjie_DuoDian.List_yqfhduodian)
@@ -684,8 +711,8 @@ namespace wlxm
             for (int j = 1; j < 1000; j++)
             {
                 WriteLog.WriteLogFile("", "序号" + j + ",开始");
-                MyLdcmd.myQuitAll(dizhi);
-                Thread.Sleep(2000);
+                //MyLdcmd.myQuitAll(dizhi);
+                //Thread.Sleep(2000);
                 //MyLdcmd.myRemoveAll(dizhi);
                 Thread.Sleep(2000);
                 MyLdcmd.RunDuokaiqi(a_b);
@@ -693,9 +720,31 @@ namespace wlxm
                 //MyFuncUtil.duokaiqiAdd(a_b);
                 Thread.Sleep(2000);
                 ThreadPool.SetMaxThreads(yunxingIndex.Length, yunxingIndex.Length); //设置最大线程数
+                string[] getquanbujubing = MyLdcmd.getDqmoniqiJuBing();
+                //搞出句柄来 放到每个线程开始里面 如果该句柄为0线程再去检索
+                List<LeiDianCanShu> listleidian = new List<LeiDianCanShu>();
                 foreach (int inx in yunxingIndex)
                 {
-                    ThreadPool.QueueUserWorkItem(new WaitCallback(duoxiand), inx);//线程池指定线程执行Auto方法
+                    int jubing = -1;
+                    foreach (string s in getquanbujubing)
+                    {
+                        string[] b = s.Split('|');
+                        int zt = int.Parse(b[1]);
+                        int ind = int.Parse(b[0]);
+                        if (inx == ind && zt != 1)
+                        {
+
+                            jubing= zt;
+                        }
+                    }
+                    LeiDianCanShu ld = new LeiDianCanShu(inx, jubing);
+                    listleidian.Add(ld);
+                }
+                LeiDianCanShu[] myleiddian = listleidian.ToArray<LeiDianCanShu>();
+                
+                foreach (int inx in yunxingIndex)
+                {
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(duoxiand), listleidian.Find(sd=>sd.Dqinx==inx));//线程池指定线程执行Auto方法
                     //Thread.Sleep(1000 * 40);
                 }
                 var ks = MyFuncUtil.GetTimestamp();
@@ -718,8 +767,7 @@ namespace wlxm
 
         private void duoxiand(object dqind)
         {
-            int a = (int)dqind;
-            duoxianxunhuan("d", a,200);
+            duoxianxunhuan("d", dqind, 200);
             return;
         }
 
@@ -741,8 +789,11 @@ namespace wlxm
             //MyLdcmd.RunDuokaiqi(a_b);
         }
 
-        private void duoxianxunhuan(string a_b, int dqinx,int xhcishu)
+        private void duoxianxunhuan(string a_b, object leidian,int xhcishu)
         {
+            LeiDianCanShu ld = (LeiDianCanShu)leidian;
+            int dqinx = ld.Dqinx;
+            int jubing = ld.Jubing;
             string dizhi = null;
             string path = null;
             string seed = null;
@@ -754,62 +805,154 @@ namespace wlxm
             WriteLog.WriteLogFile(dqinx + "", "准备操作" + dqinx + "号模拟器");            
             var cishu = 0;
             MyFuncJingNoTai mno = new MyFuncJingNoTai();
-            for (int cs = 0; cs < xhcishu; cs++)
+            bool temp = false;
+            while (true)
             {
+                /*进入操作模拟器循环中
+                1.模拟器是不是开着
+                2.开着就看有没有app
+                3.有app就看是不是已进入
+                4.模拟器没开着 打开 第一次 则restore
+                5.模拟器开着 没有app 则关闭 restore
+                6.先检测是不是有指定app 没有则关闭 restore
+                7.有app 再看是不是开着
+                 * */
+
                 var ks = MyFuncUtil.GetTimestamp();
                 Thread.Sleep(2000);
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "进入到循环当中，thread:" + Thread.CurrentThread.ManagedThreadId);
                 Thread.Sleep(1000);
-                bool temp = mno.myQuit(dqinx, dizhi);
-                if (!temp)
+                bool t = MyFuncUtil.isLaunch(dqinx);
+                if (!t)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
+                    temp = MyFuncUtil.Launch(dqinx, dizhi);
+                    if (!temp)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开失败");
+                        Thread.Sleep(20000);
+                        continue;
+                    }
                     Thread.Sleep(20000);
-                    continue;
                 }
-                if(cs==0){
+                t = MyFuncUtil.lureninstallOk(dqinx, "package:com.ourpalm.bleach.gw", () => {
+                    WriteLog.WriteLogFile(dqinx + "", "安装app没成功");
+                    temp = mno.myQuit(dqinx, dizhi);
+                    if (!temp)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
+                        Thread.Sleep(20000);
+                        return;
+                    }
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原");
                     MyLdcmd.myRestore(dqinx, seed, dizhi);
-                }
-                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改名");
-                MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
-                temp=MyFuncUtil.Launch(dqinx, dizhi);
-                if (!temp) {
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开失败");
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改名");
+                    MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
+                    temp = MyFuncUtil.Launch(dqinx, dizhi);
+                    if (!temp)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开失败");
+                        Thread.Sleep(20000);
+                        return;
+                    }
+                    Thread.Sleep(20000);
+                });
+                if (t == false)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "安装app没成功");
+                    temp = mno.myQuit(dqinx, dizhi);
+                    if (!temp)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
+                        Thread.Sleep(20000);
+                        continue;
+                    }
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原");
+                    MyLdcmd.myRestore(dqinx, seed, dizhi);
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改名");
+                    MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
+                    temp = MyFuncUtil.Launch(dqinx, dizhi);
+                    if (!temp)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开失败");
+                        Thread.Sleep(20000);
+                        continue;
+                    }
                     Thread.Sleep(20000);
                     continue;
                 }
-                Thread.Sleep(20000);
-                apkName = dict["境界官方"];
-                int i = MyFuncUtil.QiDongWanChengLurenzhanghao(a_b, dqinx, apkName);
-                if (i == -1)
+                //窗口已打开 获取句柄
+                if (jubing == -1)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开app" + apkName + "失败");
-                    Thread.Sleep(20000);
-                    continue;
+                    jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx, dizhi);
                 }
-                int w = -1, h = -1;
-                MyFuncUtil.getWindowSize(dqinx, out w, out h);
-                if (w != -1 && h != -1 && w < h)
-                {
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "w h不对" + w + " " + h);
-                    Thread.Sleep(20000);
-                    continue;
-                }
-                Thread.Sleep(20000);                
-                temp = mno.lurenResizeOk(dqinx);
-                if (temp == false)
-                {
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + ",resize没成功");
-                    continue;
-                }
-                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "降低cpu");
-                MyLdcmd.myDownCpu(dqinx, 50);
-                Thread.Sleep(1000 * 10); 
                 myDm dm = new myDm();
-                Jingjie yq = new Jingjie(dm, dqinx, dizhi);
+                int r1 = 0;
+                if (jubing > 0)
+                {
+                    r1 = dm.bindWindow(jubing);
+                }
+                if (r1 != 1) {
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "绑定失败");
+                    Thread.Sleep(20000);
+                    continue;
+                }
+                t = mno.PanDuan_QidongLurenzhanghao(dqinx);//根据窗口大小 和 是否有雷电游戏中心标志  判断是否启动了app
+                temp = mno.PanDuan_QidongBySize(dqinx, 1000 * 30);
+                bool t2 = false;
+                if (t && temp)
+                {
+                    string yiqu = "";
+                    t2 = mno.PanDuan_QidongByYiQuDian(dqinx, 1000 * 30, dm,jubing,out yiqu);
+                    if (t2)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器发现已取点" + yiqu);
+                    }
+                }
+                WriteLog.WriteLogFile(dqinx + "", "t2:" + t2 + "t:" + t + "temp:" + temp);
+                if (!t2 || !t || !temp)
+                {
+                    apkName = dict["境界官方"];
+                    int i = MyFuncUtil.QiDongWanChengLurenzhanghao(a_b, dqinx, apkName);
+                    if (i == -1)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开app" + apkName + "失败");
+                        Thread.Sleep(20000);
+                        continue;
+                    }
+                    int w = -1, h = -1;
+                    MyFuncUtil.getWindowSize(dqinx, out w, out h);
+                    if (w != -1 && h != -1 && w < h)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "w h不对" + w + " " + h);
+                        Thread.Sleep(20000);
+                        continue;
+                    }
+                    Thread.Sleep(20000);
+                    temp = mno.lurenResizeOk(dqinx);
+                    if (temp == false)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + ",resize没成功");
+                        continue;
+                    }
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "降低cpu");
+                    MyLdcmd.myDownCpu(dqinx, 50);
+                    Thread.Sleep(1000 * 10);
+                }
+                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "开始尝试登录 主线");
+                Jingjie yq = new Jingjie(dm, dqinx,jubing, dizhi);
+                ZhangHao zhanghao = new ZhangHao();
                 string name = "";
-                tmpBool = yq.denglu(15,out name);
+                string pwd = "";
+                int xuanqu = -1, dengji = -1;
+                string youxi = fuzhuyouxi;
+                zhanghao.zhunbeizhanghao(dqinx, youxi, out name, out pwd, out xuanqu, out dengji);
+                if (name == null || name == "" || pwd == null || pwd == "")
+                {
+                    //当前没有找到需要练级的账号
+                    WriteLog.WriteLogFile(dqinx+"", "当前没有找到需要练级的账号");
+                    return;
+                } 
+                tmpBool = yq.denglu(15,ref name,ref pwd);
                 if (!tmpBool)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "登录环节出错");
@@ -819,6 +962,30 @@ namespace wlxm
                 yq.zhuxian(name,1000*60*60*3);
                 //Thread.Sleep(1000 * 60*60);//停住1小时
                 cishu++;
+                MyLdcmd.myReboot(dqinx);
+                Thread.Sleep(1000 * 60 * 4);
+                bool cqcg = false;
+                t = MyFuncUtil.isLaunch(dqinx);
+                if (t) {
+                    int w = -1, h = -1;
+                    MyFuncUtil.getWindowSize(dqinx, out w, out h);
+                    if (w != -1 && h != -1 && w < h)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "重启成功完成,w h分别为" + w + " " + h);
+                        Thread.Sleep(1000);
+                        cqcg = true;
+                    }
+                }
+                if (!cqcg) {
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "重启失败,强关");
+                    temp = mno.myQuit(dqinx, dizhi);
+                    if (!temp)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
+                        Thread.Sleep(20000);
+                        return;
+                    }
+                }
                 var js = MyFuncUtil.GetTimestamp();
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环" + cishu + "次数");
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环1次耗时" + MyFuncUtil.SecondToHour(js - ks));
@@ -987,8 +1154,15 @@ namespace wlxm
             string path = null;
             string seed = null;
             MyFuncUtil.myqiehuancd("d", out dizhi, out path, out seed);
-            myDm dm = new myDm();
-            Jingjie yq = new Jingjie(dm, 1, dizhi);
+            int dqinx = int.Parse(this.textBox1.Text);
+            int jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx);
+            myDm mf = new myDm();
+            int r1 = 0;
+            if (jubing > 0)
+            {
+                r1 = mf.bindWindow(jubing);
+            }
+            Jingjie yq = new Jingjie(mf, 1,jubing, dizhi);
             Bitmap f = null;
             System.IO.DirectoryInfo TheFolder = new System.IO.DirectoryInfo(mydir1);
             int i = 1;
