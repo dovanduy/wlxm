@@ -884,6 +884,7 @@ namespace wlxm
                 if (jubing == -1)
                 {
                     jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx, dizhi);
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "句柄为"+jubing);
                 }
                 myDm dm = new myDm();
                 int r1 = 0;
@@ -987,6 +988,7 @@ namespace wlxm
                     }
                 }
                 zhanghao.zhiweidengluzhongN(dqinx, Jingjie.DANGQIAN_YOUXI, name, WriteLog.getMachineName());
+                jubing = -1;//句柄要重新取
                 var js = MyFuncUtil.GetTimestamp();
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环" + cishu + "次数");
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环1次耗时" + MyFuncUtil.SecondToHour(js - ks));

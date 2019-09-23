@@ -165,7 +165,9 @@ namespace fuzhu
                         if (xuanqu == 0 && mf.mohuByLeiBool(yk.Sd))
                         {
                             WriteLog.WriteLogFile(this._mnqName,"当前界面为"+yk.Name);
-                            zh.generateNameAndPas(this._dqinx, 7, out zhanghao, out pwd);                            
+                            zh.generateNameAndPas(this._dqinx, 7, out zhanghao, out pwd);
+                            mf.mydelay(300, 600);
+                            mf.mytap(this._jubing, 438, 136);//点击清空按钮
                             mf.mydelay(300, 600);
                             mf.mytap(this._jubing, yk.Zhidingx, yk.Zhidingy);//点击两次
                             mf.mydelay(4000, 6000);
@@ -181,6 +183,8 @@ namespace fuzhu
                                 mf.myKeyPressChar(this._jubing, "tab");
                                 mf.mydelay(2000, 4000);
                             }
+                            mf.mydelay(300, 600);
+                            mf.mytap(this._jubing, 438, 175);//点击清空按钮
                             mf.mydelay(2000, 4000);
                             mf.mytap(this._jubing, 325, 183);//点击密码
                             mf.mydelay(4000, 6000);
@@ -189,8 +193,8 @@ namespace fuzhu
                                 WriteLog.WriteLogFile(this._mnqName, "搞密码");
                                 mf.mytap(this._jubing, 504, 27);
                                 mf.mydelay(2000, 4000);
-                                //zh.shuruqianhuitui(mf, this._dqinx, this._jubing);
-                                //mf.mydelay(2000, 4000);
+                                zh.shuruqianhuitui(mf, this._dqinx, this._jubing);
+                                mf.mydelay(2000, 4000);
                                 mf.SendString(this._jubing, pwd);
                                 mf.mydelay(2000, 4000);
                                 mf.myKeyPressChar(this._jubing, "tab");
@@ -282,14 +286,14 @@ namespace fuzhu
                     }
                 }
                 FuHeSanDian xq1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-服务器选区界面");
-                if (xuanqu == 1 && mf.mohuByLeiBool(xq1.Sd))
+                if (mf.mohuByLeiBool(xq1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, xq1.Name);
                     mf.mytap(this._jubing, 84, 140);//增加新区要改
                     mf.mydelay(2000, 4000);
                 }
                 FuHeSanDian qu1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-选区界面中的1区");
-                if (xuanqu == 1 && mf.mohuByLeiBool(qu1.Sd))
+                if (mf.mohuByLeiBool(qu1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, qu1.Name);
                     xuanqu = 2;
@@ -381,6 +385,10 @@ namespace fuzhu
             ls.AddRange(Jingjie_SanDian.GetObject().findListFuHeSandianByName("选区"));
             ls.AddRange(Jingjie_SanDian.GetObject().findListFuHeSandianByName("存账号"));
             ls.AddRange(Jingjie_SanDian.GetObject().findListFuHeSandianByName("特殊存账号"));
+            int tiaochu1 = 0;
+            int tiaochu2 = 0;
+            int tiaochu3 = 0;
+            int tiaochu4 = 0;
             while (true) {
                 long jsp = MyFuncUtil.GetTimestamp();
                 if ((jsp - ksp) > 1000 * 90)
@@ -391,50 +399,51 @@ namespace fuzhu
                 {
                     foreach (Entity.FuHeSanDian f in ls)
                     {
-                        if (f != Jingjie_SanDian.GetObject().findFuHeSandianByName("游戏-跳过") && mf.mohuByLeiBool(f.Sd))
+                        if (tiaochu1==0 && f != Jingjie_SanDian.GetObject().findFuHeSandianByName("游戏-跳过") && mf.mohuByLeiBool(f.Sd))
                         {
                             WriteLog.WriteLogFile(this._mnqName, f.Name + "模糊取到需要登录");
                             mf.mydelay(1000, 2000);
                             rt.Append(f.Name);
+                            rr = rt.ToString();
+                            tiaochu1 = 1;
                             break;
                         }
                     }
                     foreach (Entity.FuHeSanDian f in Jingjie_SanDian.List_yqfhsandian)
                     {
-                        if (f != Jingjie_SanDian.GetObject().findFuHeSandianByName("游戏-跳过") && !ls.Contains(f) && mf.mohuByLeiBool(f.Sd))
+                        if (tiaochu2 == 0 && f != Jingjie_SanDian.GetObject().findFuHeSandianByName("游戏-跳过") && !ls.Contains(f) && mf.mohuByLeiBool(f.Sd))
                         {
                             WriteLog.WriteLogFile(this._mnqName, f.Name + "模糊取到不需要登录");
                             //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
                             mf.mydelay(1000, 2000);
                             zhuxianrt.Append(f.Name);
+                            yijinruzhuxian = zhuxianrt.ToString();
+                            tiaochu2 = 1;
                             break;
                         }
                     }
-                    if ((rt != null && rt.Length > 0) || (zhuxianrt != null && zhuxianrt.Length > 0))
+                    if (tiaochu3 == 0  && (rt != null && rt.Length > 0) || (zhuxianrt != null && zhuxianrt.Length > 0))
                     {
+                        WriteLog.WriteLogFile(this._mnqName, "跳出10次循环");
+                        tiaochu3 = 1;
                         break;
                     }
                     mf.mydelay(10, 200);
                 }
-                if (rt != null && rt.Length > 0)
+                if (tiaochu4 == 0 && (jsp - ksp) > 1000 * 10 && (rt != null && rt.Length > 0))
                 {
-                    rr = rt.ToString();
-                }
-                if (zhuxianrt != null && zhuxianrt.Length > 0)
-                {
-                    yijinruzhuxian = rt.ToString();
-                }
-                if ((jsp - ksp) > 1000 * 30 && rt != null && rt.Length > 0)
-                {
-                    MyFuncUtil.mylogandxianshi("搞登录,取到点" + rr);
+                    WriteLog.WriteLogFile(this._mnqName, "搞登录,取到点" + rr);
+                    tiaochu4 = 1;
                     break;
                 }
-                if ((jsp - ksp) > 1000 * 30 && zhuxianrt != null && zhuxianrt.Length > 0)
+                if (tiaochu4 == 0 && (jsp - ksp) > 1000 * 10 && (zhuxianrt != null && zhuxianrt.Length > 0))
                 {
-                    MyFuncUtil.mylogandxianshi("不搞登录,取到点" + yijinruzhuxian);
+                    tiaochu4 = 1;
+                    WriteLog.WriteLogFile(this._mnqName, "不搞登录,取到点" + yijinruzhuxian);
                     break;
                 }
             }
+            WriteLog.WriteLogFile(this._mnqName, "登录环节 " + rr.Equals("") + "， " + yijinruzhuxian.Equals(""));
             if (rr.Equals("") && !yijinruzhuxian.Equals(""))
             {
                 WriteLog.WriteLogFile(this._mnqName, "找不到登录标志点,找到其他点,不再搞登录");
@@ -484,7 +493,9 @@ namespace fuzhu
                 if (denglu==0 && mf.mohuByLeiBool(kt.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, kt.Name);
-                    mf.mytap(this._jubing, 346, 151);
+                    mf.mytap(this._jubing, 438, 136);//点击清空按钮
+                    mf.mydelay(300, 600);
+                    mf.mytap(this._jubing, 346, 137);
                     mf.mydelay(4000, 6000);
                     if (mf.mohu(504, 27, 0xffffff) == 1)
                     {
@@ -498,14 +509,17 @@ namespace fuzhu
                         mf.myKeyPressChar(this._jubing, "tab");
                         mf.mydelay(2000, 4000);
                     }
-                    mf.mydelay(2000, 4000);
-                    mf.mytap(this._jubing, 373, 191);//点击密码
+                    mf.mytap(this._jubing, 438, 174);//点击清空按钮
+                    mf.mydelay(300, 600);
+                    mf.mytap(this._jubing, 373, 171);//点击密码
                     mf.mydelay(4000, 6000);
                     if (mf.mohu(504, 27, 0xffffff) == 1)
                     {
                         WriteLog.WriteLogFile(this._mnqName, "搞密码");
                         mf.mytap(this._jubing, 504, 27);
-                        mf.mydelay(2000, 4000);                        
+                        mf.mydelay(2000, 4000);
+                        zhanghao.shuruqianhuitui(mf, this._dqinx, this._jubing);
+                        mf.mydelay(2000, 4000);  
                         mf.SendString(this._jubing, pwd);
                         mf.mydelay(2000, 4000);
                         mf.myKeyPressChar(this._jubing, "tab");
@@ -639,14 +653,14 @@ namespace fuzhu
                     }
                 }
                 FuHeSanDian xq1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-选区界面");
-                if (denglu == 1 && mf.mohuByLeiBool(xq1.Sd))
+                if (mf.mohuByLeiBool(xq1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, xq1.Name);
                     mf.mytap(this._jubing, 84, 140);//增加新区要改
                     mf.mydelay(2000, 4000);
                 }
                 FuHeSanDian qu1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("选区-选区界面中的1区");
-                if (xuanqu == 1 && mf.mohuByLeiBool(qu1.Sd))
+                if (mf.mohuByLeiBool(qu1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, qu1.Name);
                     xuanqu = 2;
@@ -1337,6 +1351,11 @@ namespace fuzhu
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name + " " + jinji + " 此处退出了");
                     jinji = 1;
+                    mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                }
+                if (mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
                     mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-账号被顶");
