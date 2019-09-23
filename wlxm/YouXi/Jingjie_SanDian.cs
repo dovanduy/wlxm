@@ -1062,6 +1062,37 @@ namespace fuzhu
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  256,  317, 0x34c285},
+	{  249,  316, 0x33c08a},
+	{  292,  332, 0xee2e3b},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-每天集结石", ktsd1, 243, 340);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  270,  317, 0xb6050b},
+	{  255,  341, 0xeeb55e},
+	{  471,  314, 0xb4050b},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-集结石花钱", ktsd1, 643, 13);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  170,   57, 0xc0e2f4},
+	{  457,  336, 0xf9e882},
+	{  436,  339, 0xfcdd6a},
+});
+            ktfh1 = new FuHeSanDian("引导-r级人物电线杆", ktsd1, 352, 350);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+
+
+
+
 
             //志拓
             ktsd1 = new SanDian(new int[3, 3]{

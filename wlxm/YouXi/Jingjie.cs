@@ -394,41 +394,44 @@ namespace fuzhu
                 if ((jsp - ksp) > 1000 * 90)
                 {
                     break;
-                }                
-                for (int i = 0; i < 10; i++)
+                }
+                if (tiaochu3 == 0)
                 {
-                    foreach (Entity.FuHeSanDian f in ls)
+                    for (int i = 0; i < 10; i++)
                     {
-                        if (tiaochu1==0 && f != Jingjie_SanDian.GetObject().findFuHeSandianByName("游戏-跳过") && mf.mohuByLeiBool(f.Sd))
+                        foreach (Entity.FuHeSanDian f in ls)
                         {
-                            WriteLog.WriteLogFile(this._mnqName, f.Name + "模糊取到需要登录");
-                            mf.mydelay(1000, 2000);
-                            rt.Append(f.Name);
-                            rr = rt.ToString();
-                            tiaochu1 = 1;
+                            if (tiaochu1 == 0 && f != Jingjie_SanDian.GetObject().findFuHeSandianByName("游戏-跳过") && mf.mohuByLeiBool(f.Sd))
+                            {
+                                WriteLog.WriteLogFile(this._mnqName, f.Name + "模糊取到需要登录");
+                                mf.mydelay(1000, 2000);
+                                rt.Append(f.Name);
+                                rr = rt.ToString();
+                                tiaochu1 = 1;
+                                break;
+                            }
+                        }
+                        foreach (Entity.FuHeSanDian f in Jingjie_SanDian.List_yqfhsandian)
+                        {
+                            if (tiaochu2 == 0 && f != Jingjie_SanDian.GetObject().findFuHeSandianByName("游戏-跳过") && !ls.Contains(f) && mf.mohuByLeiBool(f.Sd))
+                            {
+                                WriteLog.WriteLogFile(this._mnqName, f.Name + "模糊取到不需要登录");
+                                //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                                mf.mydelay(1000, 2000);
+                                zhuxianrt.Append(f.Name);
+                                yijinruzhuxian = zhuxianrt.ToString();
+                                tiaochu2 = 1;
+                                break;
+                            }
+                        }
+                        if (tiaochu3 == 0 && (rt != null && rt.Length > 0) || (zhuxianrt != null && zhuxianrt.Length > 0))
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "跳出10次循环");
+                            tiaochu3 = 1;
                             break;
                         }
+                        mf.mydelay(10, 200);
                     }
-                    foreach (Entity.FuHeSanDian f in Jingjie_SanDian.List_yqfhsandian)
-                    {
-                        if (tiaochu2 == 0 && f != Jingjie_SanDian.GetObject().findFuHeSandianByName("游戏-跳过") && !ls.Contains(f) && mf.mohuByLeiBool(f.Sd))
-                        {
-                            WriteLog.WriteLogFile(this._mnqName, f.Name + "模糊取到不需要登录");
-                            //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
-                            mf.mydelay(1000, 2000);
-                            zhuxianrt.Append(f.Name);
-                            yijinruzhuxian = zhuxianrt.ToString();
-                            tiaochu2 = 1;
-                            break;
-                        }
-                    }
-                    if (tiaochu3 == 0  && (rt != null && rt.Length > 0) || (zhuxianrt != null && zhuxianrt.Length > 0))
-                    {
-                        WriteLog.WriteLogFile(this._mnqName, "跳出10次循环");
-                        tiaochu3 = 1;
-                        break;
-                    }
-                    mf.mydelay(10, 200);
                 }
                 if (tiaochu4 == 0 && (jsp - ksp) > 1000 * 10 && (rt != null && rt.Length > 0))
                 {
@@ -940,6 +943,30 @@ namespace fuzhu
                         mf.mydelay(2000, 3000);
                     }
                     jijieshimianfei++;
+                }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-集结石界面");
+                if (mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-每天集结石");
+                    if (mf.mohuByLeiBool(ktsd1.Sd))
+                    {
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                        mf.mydelay(2000, 3000);
+                        jijieshimianfei++;
+                    }
+                }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-集结石界面");
+                if (mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-集结石花钱");
+                    if (mf.mohuByLeiBool(ktsd1.Sd))
+                    {
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                        mf.mydelay(2000, 3000);
+                        jijieshimianfei++;
+                    }
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("界面-主界面");
                 if (jijieshimianfei==0 && mf.mohuXunHuanJianChi(ktsd1.Sd, 15))

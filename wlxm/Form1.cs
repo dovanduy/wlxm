@@ -737,6 +737,7 @@ namespace wlxm
                             jubing= zt;
                         }
                     }
+                    WriteLog.WriteLogFile("", "index:"+inx+",jubing:"+jubing);
                     LeiDianCanShu ld = new LeiDianCanShu(inx, jubing);
                     listleidian.Add(ld);
                 }
@@ -820,7 +821,7 @@ namespace wlxm
 
                 var ks = MyFuncUtil.GetTimestamp();
                 Thread.Sleep(2000);
-                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "进入到循环当中，thread:" + Thread.CurrentThread.ManagedThreadId);
+                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "进入到循环当中，thread:" + Thread.CurrentThread.ManagedThreadId+",jubing"+jubing);
                 Thread.Sleep(1000);
                 bool t = MyFuncUtil.isLaunch(dqinx);
                 if (!t)
@@ -881,7 +882,7 @@ namespace wlxm
                     continue;
                 }
                 //窗口已打开 获取句柄
-                if (jubing == -1)
+                if (jubing <=0)
                 {
                     jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx, dizhi);
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "句柄为"+jubing);
