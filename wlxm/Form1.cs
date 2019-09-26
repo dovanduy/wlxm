@@ -898,7 +898,7 @@ namespace wlxm
                     Thread.Sleep(20000);
                     continue;
                 }
-                t = mno.PanDuan_QidongLurenzhanghao(dqinx);//根据窗口大小 和 是否有雷电游戏中心标志  判断是否启动了app
+                t = mno.PanDuan_QidongLurenzhanghao(dqinx,dm,jubing);//根据窗口大小 和 是否有雷电游戏中心标志  判断是否启动了app
                 temp = mno.PanDuan_QidongBySize(dqinx, 1000 * 30);
                 bool t2 = false;
                 if (t && temp)

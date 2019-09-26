@@ -221,19 +221,16 @@ namespace MyUtil
         return res;
         }
 
-        public bool PanDuan_QidongLurenzhanghao(int dqinx)
+        public bool PanDuan_QidongLurenzhanghao(int dqinx,myDm dm,int jubing)
         {
 
-            myDm dm = new myDm();
             int x1 = -1;
             int y1 = -1;
-            int jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx);
             if (jubing <= 0)
             {
                 WriteLog.WriteLogFile(dqinx + "", "游戏判断启动，句柄绑定错误");
                 return false;
             }
-            dm.bindWindow(jubing);
             Entity.FuHeSanDian tysd = null;
             int w = -1, h = -1;
             getWindowSize(dqinx, out w, out h);
