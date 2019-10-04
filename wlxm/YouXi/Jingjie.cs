@@ -563,13 +563,16 @@ namespace fuzhu
                         mf.myKeyPressChar(this._jubing, "tab");
                         mf.mydelay(2000, 4000);
                     }
-                    mf.mydelay(2000, 4000);
-                    mf.mytap(this._jubing, 317, 173);//点击密码
+                    mf.mytap(this._jubing, 438, 174);//点击清空按钮
+                    mf.mydelay(300, 600);
+                    mf.mytap(this._jubing, 373, 171);//点击密码
                     mf.mydelay(4000, 6000);
                     if (mf.mohu(504, 27, 0xffffff) == 1)
                     {
                         WriteLog.WriteLogFile(this._mnqName, "搞密码");
                         mf.mytap(this._jubing, 504, 27);
+                        mf.mydelay(2000, 4000);
+                        zhanghao.shuruqianhuitui(mf, this._dqinx, this._jubing);
                         mf.mydelay(2000, 4000);
                         mf.SendString(this._jubing, pwd);
                         mf.mydelay(2000, 4000);
@@ -1053,86 +1056,163 @@ namespace fuzhu
                      {
                          meirijiangli=1;
                      }
-                    if(meirijiangli==0){
-                        WriteLog.WriteLogFile(this._mnqName, ktsd1.Name+"搞奖励");
-                        mf.mytap(this._jubing, 487, 47);
-                        mf.mydelay(2000, 4000);
-                        ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-每日奖励开启----可以换号");
-                        if (mf.mohuByLeiBool(ktsd1.Sd))
-                        {
-                            compareSandianAndtap(ktsd1, 2000, () =>
-                            {
-                                mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
-                                mf.mydelay(1000, 2000);
-                                mf.mytap(this._jubing, 390, 360);
-                                mf.mydelay(1000, 2000);
-                                mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
-                                mf.mydelay(1000, 2000);
-                                mf.mytap(this._jubing, 390, 360);
-                                mf.mydelay(1000, 2000);
-                                mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
-                                mf.mydelay(1000, 2000);
-                                mf.mytap(this._jubing, 390, 360);
-                                mf.mydelay(4000, 6000);
-                            },
-                            () =>
-                            {
-                                mf.mytap(this._jubing, 633, 40);
-                                meirijiangli = 1;
-                            });
-                            
-                        }
-                    }
-                    ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-第3天送啥");
-                    if (meirijiangli==0 && mf.mohuByLeiBool(ktsd1.Sd))
-                    {
-                        compareSandianAndtap(ktsd1, 2000, () =>
-                        {
-                            mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
-                            mf.mydelay(1000, 2000);
-                            mf.mytap(this._jubing, 390, 360);
-                            mf.mydelay(1000, 2000);
-                            mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
-                            mf.mydelay(1000, 2000);
-                            mf.mytap(this._jubing, 390, 360);
-                            mf.mydelay(1000, 2000);
-                            mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
-                            mf.mydelay(1000, 2000);
-                            mf.mytap(this._jubing, 390, 360);
-                            mf.mydelay(4000, 6000);
-                        },
-                        () =>
-                        {
-                            mf.mytap(this._jubing, 633, 40);
-                            meirijiangli = 1;
-                        });
-                       
-                    }
-                    ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-2天送礼");
-                    if (meirijiangli == 0 && mf.mohuByLeiBool(ktsd1.Sd))
-                    {
-                        compareSandianAndtap(ktsd1, 2000, () =>
-                        {
-                            mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
-                            mf.mydelay(1000, 2000);
-                            mf.mytap(this._jubing, 390, 360);
-                            mf.mydelay(1000, 2000);
-                            mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
-                            mf.mydelay(1000, 2000);
-                            mf.mytap(this._jubing, 390, 360);
-                            mf.mydelay(1000, 2000);
-                            mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
-                            mf.mydelay(1000, 2000);
-                            mf.mytap(this._jubing, 390, 360);
-                            mf.mydelay(4000, 6000);
-                        },
-                        () =>
-                        {
-                            mf.mytap(this._jubing, 633, 40);
-                            meirijiangli = 1;
-                        });
+                     if (meirijiangli == 0)
+                     {
+                         WriteLog.WriteLogFile(this._mnqName, ktsd1.Name + "搞奖励");
+                         mf.mytap(this._jubing, 487, 47);
+                         mf.mydelay(2000, 4000);
+                         ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-每日奖励开启----可以换号");
+                         if (mf.mohuByLeiBool(ktsd1.Sd))
+                         {
+                             compareSandianAndtap(ktsd1, 2000, () =>
+                             {
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(4000, 6000);
+                             },
+                             () =>
+                             {
+                                 mf.mytap(this._jubing, 633, 40);
+                                 meirijiangli = 1;
+                             });
 
-                    }
+                         }
+
+                         ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-第3天送啥");
+                         if (meirijiangli == 0 && mf.mohuByLeiBool(ktsd1.Sd))
+                         {
+                             compareSandianAndtap(ktsd1, 2000, () =>
+                             {
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(4000, 6000);
+                             },
+                             () =>
+                             {
+                                 mf.mytap(this._jubing, 633, 40);
+                                 meirijiangli = 1;
+                             });
+
+                         }
+                         ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-2天送礼");
+                         if (meirijiangli == 0 && mf.mohuByLeiBool(ktsd1.Sd))
+                         {
+                             compareSandianAndtap(ktsd1, 2000, () =>
+                             {
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(4000, 6000);
+                             },
+                             () =>
+                             {
+                                 mf.mytap(this._jubing, 633, 40);
+                                 meirijiangli = 1;
+                             });
+
+                         }
+                         ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-2天送礼2");
+                         if (meirijiangli == 0 && mf.mohuByLeiBool(ktsd1.Sd))
+                         {
+                             compareSandianAndtap(ktsd1, 2000, () =>
+                             {
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(4000, 6000);
+                             },
+                             () =>
+                             {
+                                 mf.mytap(this._jubing, 633, 40);
+                                 meirijiangli = 1;
+                             });
+
+                         }
+                         ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-1天送礼");
+                         if (meirijiangli == 0 && mf.mohuByLeiBool(ktsd1.Sd))
+                         {
+                             compareSandianAndtap(ktsd1, 2000, () =>
+                             {
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(4000, 6000);
+                             },
+                             () =>
+                             {
+                                 mf.mytap(this._jubing, 633, 40);
+                                 meirijiangli = 1;
+                             });
+
+                         }
+                         ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-1天送礼2");
+                         if (meirijiangli == 0 && mf.mohuByLeiBool(ktsd1.Sd))
+                         {
+                             compareSandianAndtap(ktsd1, 2000, () =>
+                             {
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                                 mf.mydelay(1000, 2000);
+                                 mf.mytap(this._jubing, 390, 360);
+                                 mf.mydelay(4000, 6000);
+                             },
+                             () =>
+                             {
+                                 mf.mytap(this._jubing, 633, 40);
+                                 meirijiangli = 1;
+                             });
+
+                         }
+                     }
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-每日奖励开启----可以换号");
                 if (meirijiangli == 0 && mf.mohuByLeiBool(ktsd1.Sd))
@@ -1143,11 +1223,11 @@ namespace fuzhu
                         mf.mydelay(1000, 2000);
                         mf.mytap(this._jubing, 390, 360);
                         mf.mydelay(1000, 2000);
-                        mf.mytap(this._jubing, 423, 319);
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                         mf.mydelay(1000, 2000);
                         mf.mytap(this._jubing, 390, 360);
                         mf.mydelay(1000, 2000);
-                        mf.mytap(this._jubing, 550, 322);
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                         mf.mydelay(1000, 2000);
                         mf.mytap(this._jubing, 390, 360);
                         mf.mydelay(4000, 6000);
@@ -1159,7 +1239,10 @@ namespace fuzhu
                         });
                     
                 }
-                
+                if (meirijiangli == 1 && mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    mf.mytap(this._jubing, 633, 40);
+                }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-第3天送啥");
                 if (meirijiangli == 0 && mf.mohuByLeiBool(ktsd1.Sd))
                 {
@@ -1169,11 +1252,11 @@ namespace fuzhu
                         mf.mydelay(1000, 2000);
                         mf.mytap(this._jubing, 390, 360);
                         mf.mydelay(1000, 2000);
-                        mf.mytap(this._jubing, 423, 319);
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                         mf.mydelay(1000, 2000);
                         mf.mytap(this._jubing, 390, 360);
                         mf.mydelay(1000, 2000);
-                        mf.mytap(this._jubing, 550, 322);
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                         mf.mydelay(1000, 2000);
                         mf.mytap(this._jubing, 390, 360);
                         mf.mydelay(4000, 6000);
@@ -1183,6 +1266,10 @@ namespace fuzhu
                             mf.mytap(this._jubing, 633, 40);
                             meirijiangli = 1;
                         });                    
+                }
+                if (meirijiangli == 1 && mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    mf.mytap(this._jubing, 633, 40);
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-2天送礼");
                 if (meirijiangli == 0 && mf.mohuByLeiBool(ktsd1.Sd))
@@ -1209,7 +1296,68 @@ namespace fuzhu
                     });
 
                 }
+                if (meirijiangli == 1 && mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    mf.mytap(this._jubing, 633, 40);
+                }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-1天送礼");
+                if (meirijiangli == 0 && mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    compareSandianAndtap(ktsd1, 2000, () =>
+                    {
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                        mf.mydelay(1000, 2000);
+                        mf.mytap(this._jubing, 390, 360);
+                        mf.mydelay(1000, 2000);
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                        mf.mydelay(1000, 2000);
+                        mf.mytap(this._jubing, 390, 360);
+                        mf.mydelay(1000, 2000);
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                        mf.mydelay(1000, 2000);
+                        mf.mytap(this._jubing, 390, 360);
+                        mf.mydelay(4000, 6000);
+                    },
+                    () =>
+                    {
+                        mf.mytap(this._jubing, 633, 40);
+                        meirijiangli = 1;
+                    });
 
+                }
+                if (meirijiangli == 1 && mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    mf.mytap(this._jubing, 633, 40);
+                }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-1天送礼2");
+                if (meirijiangli == 0 && mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    compareSandianAndtap(ktsd1, 2000, () =>
+                    {
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                        mf.mydelay(1000, 2000);
+                        mf.mytap(this._jubing, 390, 360);
+                        mf.mydelay(1000, 2000);
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                        mf.mydelay(1000, 2000);
+                        mf.mytap(this._jubing, 390, 360);
+                        mf.mydelay(1000, 2000);
+                        mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                        mf.mydelay(1000, 2000);
+                        mf.mytap(this._jubing, 390, 360);
+                        mf.mydelay(4000, 6000);
+                    },
+                    () =>
+                    {
+                        mf.mytap(this._jubing, 633, 40);
+                        meirijiangli = 1;
+                    });
+
+                }
+                if (meirijiangli == 1 && mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    mf.mytap(this._jubing, 633, 40);
+                }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-2天送礼2");
                 if (meirijiangli == 0 && mf.mohuByLeiBool(ktsd1.Sd))
                 {
@@ -1234,6 +1382,10 @@ namespace fuzhu
                         meirijiangli = 1;
                     });
 
+                }
+                if (meirijiangli == 1 && mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    mf.mytap(this._jubing, 633, 40);
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-升5级");
                 if (mf.mohuByLeiBool(ktsd1.Sd))
@@ -1260,6 +1412,15 @@ namespace fuzhu
                     mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-上阵人数不足");
+                if ((zdrs5 == 0) && mf.mohuByLeiBool(ktsd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
+                    mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                    mf.mydelay(3000, 4000);
+                    mf.mytap(this._jubing, 43, 344);
+                    zdrs5 = 1;
+                }
+                ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-上阵人数不足2");
                 if ((zdrs5 == 0) && mf.mohuByLeiBool(ktsd1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
@@ -1377,13 +1538,13 @@ namespace fuzhu
                 if (shibai >= 2 && mf.mohuByLeiBool(ktsd1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name + " " + jinji + " 此处退出了");
-                    jinji = 1;
-                    mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                    //jinji = 1;
+                    //mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                 }
                 if (mf.mohuByLeiBool(ktsd1.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, ktsd1.Name);
-                    mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
+                    //mf.mytap(this._jubing, ktsd1.Zhidingx, ktsd1.Zhidingy);
                 }
                 ktsd1 = Jingjie_SanDian.GetObject().findFuHeSandianByName("特殊引导-账号被顶");
                 if (mf.mohuByLeiBool(ktsd1.Sd))
@@ -1897,7 +2058,7 @@ namespace fuzhu
                             }
                         }
                     }                    
-                    if (mf.mohu(235, 319, 0x31b1a1) == 1)
+                    if (mf.mohu(235, 319, 0x31b1a1) == 1 || mf.mohu(234,  319, 0x44b8af)==1)
                     {
                         qushufrombaidu(out qiangzhequan, fh, 219, 309, 256, 324, 87, 338, 20, 20,"集结石取数");
                         WriteLog.WriteLogFile(this._mnqName, "取数结果qiangzhequan=" + qiangzhequan);
@@ -2124,7 +2285,7 @@ namespace fuzhu
                     mf.mydelay(2000, 3000);
                 }
                 if (panduanjiemian("界面-角色强化")) {
-                    mf.mytap(this._jubing, 33, 57+(ij-1)*55);
+                    mf.mytap(this._jubing, 40, 57+(ij-1)*55);
                     mf.mydelay(2000, 3000);
                     WriteLog.WriteLogFile(this._mnqName, "第" + ij + "个角色选定");
                     List<int> jueseqhl = new List<int>();

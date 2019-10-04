@@ -14,6 +14,7 @@ using System.Collections;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Xml;
 using xDM;
 namespace MyUtil
 {
@@ -1103,6 +1104,26 @@ namespace MyUtil
             }
             dm.myGetClientRect(jubing, out x1, out y1);
             MyFuncUtil.mylogandxianshi("游戏启动不成功，界面有微信图标" + x1 + "  " + y1);
+        }
+
+        public static string getBanben(string SoftName)
+        {
+            XmlDocument xmlDoc2 = new XmlDocument();
+            xmlDoc2.Load(Application.StartupPath + "\\" + "program\\update.xml");
+            XmlNode list = xmlDoc2.SelectSingleNode("Update");
+            string versons = "";
+            foreach (XmlNode node in list)
+            {
+                if (node.Name == "Soft" && node.Attributes["Name"].Value.ToLower() == SoftName.ToLower())
+                {
+                    foreach (XmlNode xml in node)
+                    {
+                        if (xml.Name == "Verson")
+                            versons = xml.InnerText;
+                    }
+                }
+            }
+            return versons;       
         }
 
         public static int suijishu(int min, int max)

@@ -22,7 +22,7 @@ namespace wlxm
         /// <summary>
         /// 辅助的版本
         /// </summary>
-        private static int fuzhuBanben = Jingjie.YOUXIBANBEN;
+        //private static int fuzhuBanben = 1;
 
         private static string fuzhuyouxi = Jingjie.DANGQIAN_YOUXI;
         
@@ -248,20 +248,21 @@ namespace wlxm
             int jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx, dizhi);
             //MyLdcmd.myRemove(dqinx);
             //int t = MyLdcmd.addSimulator();
-            
+            bool a=System.IO.File.Exists(System.Windows.Forms.Application.StartupPath + "\\wlxma.exe");
+                        
             myDm dm = new myDm();
             int r = 0;
             if (jubing > 0)
             {
                 r = dm.bindWindow(jubing);
             }
-            Jingjie ln = new Jingjie(dm,jubing, dqinx);
-            MyLdcmd.myReboot(dqinx);
+            Jingjie ln = new Jingjie(dm, dqinx,jubing);
+           
             string name = "";
             
             
                   
-            MyFuncUtil.mylogandxianshi("结束"+name);
+            MyFuncUtil.mylogandxianshi("结束"+a);
             
         }
 
@@ -511,12 +512,12 @@ namespace wlxm
             for (int j = 0; j < 10000; j++)
             {
                 MyFuncUtil.mylogandxianshi("序号" + j + ",开始");
-                MyLdcmd.myQuitAll(dizhi);
-                Thread.Sleep(2000);
-                MyLdcmd.myRemoveAll(dizhi);
-                Thread.Sleep(2000);
+                //MyLdcmd.myQuitAll(dizhi);
+                //Thread.Sleep(2000);
+                //MyLdcmd.myRemoveAll(dizhi);
+                //Thread.Sleep(2000);
                 MyLdcmd.RunDuokaiqi(a_b);
-                MyFuncUtil.duokaiqiAdd(a_b);
+                //MyFuncUtil.duokaiqiAdd(a_b);
                 Thread.Sleep(2000);
                 ThreadPool.SetMaxThreads(yunxingIndex.Length, yunxingIndex.Length); //设置最大线程数
                 foreach (int inx in yunxingIndex)

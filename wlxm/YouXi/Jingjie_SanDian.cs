@@ -427,7 +427,7 @@ namespace fuzhu
 	            {  422,   14, 0xe3b76e},
 	            {  646,   44, 0xf1c362},
             });
-            ktfh1 = new FuHeSanDian("福利-升级有礼", ktsd1, 111, 195, "  471,  161, 0xc48141  470,  244, 0xc38545  642,   43");
+            ktfh1 = new FuHeSanDian("福利-升级有礼", ktsd1, 111, 227, "  471,  161, 0xc48141  470,  244, 0xc38545  642,   43");
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
@@ -475,6 +475,15 @@ namespace fuzhu
 	            {  509,   84, 0x664520},
             });
             ktfh1 = new FuHeSanDian("特殊引导-上阵人数不足", ktsd1, 283, 250);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  415,  149, 0xb9bbc3},
+	{  291,  253, 0x395aae},
+	{  431,  253, 0xce924a},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-上阵人数不足2", ktsd1, 283, 250);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 
@@ -1008,6 +1017,24 @@ namespace fuzhu
             _list_yqfhsandian.Add(ktfh1);
 
             ktsd1 = new SanDian(new int[3, 3]{
+	{  149,   33, 0xffffff},
+	{  309,   47, 0xee663f},
+	{  338,   93, 0xe35233},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-1天送礼", ktsd1, 295, 319);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  399,   74, 0xff6f91},
+	{  444,   83, 0xe6496f},
+	{  477,   93, 0xcb608c},
+});
+            ktfh1 = new FuHeSanDian("特殊引导-1天送礼2", ktsd1, 295, 319);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
 	{  337,  201, 0x37c1b2},
 	{  458,  229, 0x112255},
 	{  265,  274, 0xce4859},
@@ -1041,6 +1068,15 @@ namespace fuzhu
 	{  544,  267, 0xeaf3fb},
 });
             ktfh1 = new FuHeSanDian("引导-版本热点", ktsd1, 551, 112);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  497,  286, 0xe8e4e5},
+	{  569,  287, 0xe5dfe1},
+	{  587,  320, 0x3abf8f},
+});
+            ktfh1 = new FuHeSanDian("引导-关闭角色界面", ktsd1, 643, 13);
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
 

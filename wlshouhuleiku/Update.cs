@@ -110,15 +110,23 @@ namespace SH_MyUtil
         {
             try
             {
+                WriteLog.WriteLogFile("开始更新");
                 if (!isUpdate)
+                {
+                    WriteLog.WriteLogFile("不用更新");
                     return;
+                }
+                WriteLog.WriteLogFile("loadfile " + loadFile);
                 WebClient wc = new WebClient();
                 string filename = "";
                 string exten = download.Substring(download.LastIndexOf("."));
                 if (loadFile.IndexOf(@"\") == -1)
                     filename = "Update_" + Path.GetFileNameWithoutExtension(loadFile) + exten;
                 else
+                {
                     filename = Path.GetDirectoryName(loadFile) + "\\Update_" + Path.GetFileNameWithoutExtension(loadFile) + exten;
+                    //filename = Path.GetDirectoryName(loadFile) +  exten;
+                }
 
                 FinalZipName = filename;
                 //wc.DownloadFile(download, filename);
@@ -126,7 +134,7 @@ namespace SH_MyUtil
                 wc.DownloadProgressChanged += new DownloadProgressChangedEventHandler(wc_DownloadProgressChanged);
                 wc.DownloadFileCompleted += new System.ComponentModel.AsyncCompletedEventHandler(wc_DownloadFileCompleted);
                 //wc.Dispose();
-
+                WriteLog.WriteLogFile("文件完成" + filename);
             }
             catch
             {
@@ -137,6 +145,7 @@ namespace SH_MyUtil
         void wc_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
             (sender as WebClient).Dispose();
+            WriteLog.WriteLogFile("判断文件是否下载完成");
             isFinish();
         }
 
@@ -156,6 +165,7 @@ namespace SH_MyUtil
         {
             try
             {
+                WriteLog.WriteLogFile("是否需要更新");
                 WebClient wc = new WebClient();
                 Stream stream = wc.OpenRead(updateUrl);
                 XmlDocument xmlDoc = new XmlDocument();

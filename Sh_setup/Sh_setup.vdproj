@@ -39,6 +39,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_AA2D70339A7E44EAB93D736CE0262E9F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C450B209852B42C0A7F5A3F7E23DE588"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -141,6 +147,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
     }
@@ -284,6 +303,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AA2D70339A7E44EAB93D736CE0262E9F"
+            {
+            "SourcePath" = "8:..\\wlsh\\bin\\Debug\\program\\update.xml"
+            "TargetName" = "8:update.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_360071B0DD81453181CB81DFCBEFF31D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C450B209852B42C0A7F5A3F7E23DE588"
             {
             "SourcePath" = "8:..\\wlsh\\bin\\Debug\\wlshouhuleiku.pdb"
@@ -363,7 +402,7 @@
         {
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_7232A3EE8F304155B6B2CBC7D5118C55"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:c:\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -371,6 +410,17 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_360071B0DD81453181CB81DFCBEFF31D"
+                    {
+                    "Name" = "8:program"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_46FCE5C4673F49EAAFF9F28004EF8339"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_9B5E8C613576487884972AD602ADE5AB"
@@ -412,7 +462,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Sh_setup"
         "ProductCode" = "8:{7B68AE41-8F52-441B-B64C-C344F3430834}"
-        "PackageCode" = "8:{259E6664-8DD4-4214-8707-CBF11A0F9CBE}"
+        "PackageCode" = "8:{D3C73895-5937-449F-A373-DA251D0E9076}"
         "UpgradeCode" = "8:{1760B552-4FAE-48E7-A6B2-4EBD62D29106}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"

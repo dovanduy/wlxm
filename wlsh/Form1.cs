@@ -66,11 +66,12 @@ namespace wlsh
             }
         }
 
-        private void wodeceshi_Click(object sender, EventArgs e)
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            UpdateCaoZuo sh = new UpdateCaoZuo();
-            sh.updateWlxm();
+            Environment.Exit(0);
         }
+
+       
         
     }
 }

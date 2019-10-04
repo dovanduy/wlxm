@@ -11,7 +11,7 @@ namespace SH_MyUtil
 {
     public class ShouHu
     {
-        public static int BanBenHao = 2;
+        public static int BanBenHao =7;
         private static readonly object obj = new object();
         public void wohaihuozhe() {
             WriteLog.WriteLogFile("生命的迹象 "+MyFuncUtil.suijishu(1,100));
@@ -168,9 +168,54 @@ namespace SH_MyUtil
             long ks3 = my.GetTimestamp();
             long ks4 = my.GetTimestamp();
             long ks5 = my.GetTimestamp();
+            long ks6 = my.GetTimestamp();
             int duokai = 0;
+            int ksgx = 0;
+            int ksck = 0;
             while (true)
             {
+                if (ksgx == 0) {
+                    System.Threading.Thread.Sleep(1000 * 10);
+                    ksgx = 1;
+                    WriteLog.WriteLogFile("第一次打开要更新" + System.IO.File.Exists(System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe") + " " + System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe");
+                    UpdateCaoZuo sh = new UpdateCaoZuo();
+                    sh.updateWlxm();
+                }
+                if (ksck == 0)
+                {
+                    System.Threading.Thread.Sleep(1000 * 30);
+                    ksck = 1;
+                    WriteLog.WriteLogFile("第一次打开要看否打开了wlxm" + System.IO.File.Exists(System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe") + " " + System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe");
+                    bool t = false;
+                    string appname = "wlxm";
+                    int a = 0;
+                    Process[] processes = Process.GetProcessesByName(appname);
+                    foreach (Process process in processes)
+                    {
+                        if (a==0 && process.ProcessName == appname )
+                        {
+                            t = true;
+                            a = 1;
+                            break;
+                        }
+                    }
+                    if (!t)
+                    {
+                        string appNamec = System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe";
+                        WriteLog.WriteLogFile("wlxm位置" + System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe");
+                        if (System.IO.File.Exists(System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe"))
+                        {
+                            WriteLog.WriteLogFile("wlxm找到文件位置");
+                            Process p = new Process();
+                            p.StartInfo.FileName = appNamec;
+                            //启动程序
+                            p.Start();
+                            ks2 = my.GetTimestamp();//关机项重新计时
+                            WriteLog.WriteLogFile("结束打开wlxm");
+                        }
+
+                    }
+                }
                 long js = my.GetTimestamp();
                 //只是说明还活着
                 if ((js - ks) > 1000 * 60 * 5)
@@ -192,7 +237,7 @@ namespace SH_MyUtil
                     }
                 }
                 //长时间没有数则重启 1号机 1个半小时
-                if (MyFuncUtil.getMachineName().ToUpper().Equals("1HAO") && (js - ks2) > 1000 * 90)
+                if (MyFuncUtil.getMachineName().ToUpper().Equals("1HAO") && (js - ks2) > 1000 * 60*90)
                 {
                     ks2 = my.GetTimestamp();
                     ShouHu s = new ShouHu();
@@ -223,25 +268,32 @@ namespace SH_MyUtil
                     Process current = Process.GetCurrentProcess();
                     string appname = "wlxm";
                     bool t = false;
-                    Process[] processes = Process.GetProcessesByName(appname);                    
+                    Process[] processes = Process.GetProcessesByName(appname);
+                    int a = 0;
                     foreach (Process process in processes)
                     {
-                        if (process.ProcessName == appname)
+                        if (a==0 && process.ProcessName == appname)
                         {
                             t = true;
+                            a = 1;
                             break;
                         }
                     }
                     if (!t)
                     {
-                        string appNamec = @"C:\Program Files (x86)\Setup10\wlxm.exe";
-                        WriteLog.WriteLogFile("wlxm不存在了");
-                        Process p = new Process();
-                        p.StartInfo.FileName = appNamec;                        
-                        //启动程序
-                        p.Start();
-                        ks2 = my.GetTimestamp();//关机项重新计时
-                        WriteLog.WriteLogFile("结束打开wlxm");
+                        string appNamec = System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe";
+                        WriteLog.WriteLogFile("wlxm位置" + System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe");
+                        if (System.IO.File.Exists(System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe"))
+                        {
+                            WriteLog.WriteLogFile("wlxm找到文件位置");
+                            Process p = new Process();
+                            p.StartInfo.FileName = appNamec;
+                            //启动程序
+                            p.Start();
+                            ks2 = my.GetTimestamp();//关机项重新计时
+                            WriteLog.WriteLogFile("结束打开wlxm");
+                        }
+                        
                     }
                 }
 
@@ -292,8 +344,21 @@ namespace SH_MyUtil
                         WriteLog.WriteLogFile("结束打开dnmultiplayer");
                     }
                 }
+                //检测wlxm
+                if ((js - ks6) > 1000 * 60*10)
+                {
+                    ks6 = MyFuncUtil.GetTimestamp();
+                    UpdateCaoZuo sh = new UpdateCaoZuo();
+                    sh.updateWlxm();
+                }
+
+
+
             }
+
+
         }
+
 
     }
 }
