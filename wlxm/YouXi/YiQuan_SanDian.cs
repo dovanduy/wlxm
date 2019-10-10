@@ -5,7 +5,7 @@ using System.Text;
 using Entity;
 using xDM;
 
-namespace fuzhu1
+namespace fuzhu
 {
     public class YiQuan_SanDian
     {
@@ -55,6 +55,80 @@ namespace fuzhu1
 
         static YiQuan_SanDian()
         {
+            //新增三点 10.10
+            SanDian guanbisdx = new SanDian(new int[3, 3] {
+	{  439,  131, 0x4d2b05},
+	{  432,  160, 0xd79a16},
+	{  440,  164, 0x9e421a},
+});
+            FuHeSanDian guanbifhx = new FuHeSanDian("开引导-领取箱子", guanbisdx, 436, 157);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
+	{  485,  265, 0xf7f44a},
+	{  485,  278, 0xe8e414},
+	{  505,  268, 0xebb81e},
+});
+            guanbifhx = new FuHeSanDian("引导时-布阵", guanbisdx, 490, 280);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
+	{   47,  286, 0xe69700},
+	{   64,  282, 0x5c786a},
+	{   85,  288, 0xe6a507},
+});
+            guanbifhx = new FuHeSanDian("开引导-领取战斗场奖励1", guanbisdx, 66, 283);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
+	{  141,  286, 0xedc900},
+	{  106,  287, 0xedb607},
+	{  120,  284, 0x4c5399},
+});
+            guanbifhx = new FuHeSanDian("开引导-领取战斗场奖励2", guanbisdx, 121, 283);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
+	{  163,  284, 0xeded16},
+	{  189,  287, 0x5e2607},
+	{  176,  291, 0xedd97d},
+});
+            guanbifhx = new FuHeSanDian("开引导-领取战斗场奖励3", guanbisdx, 180, 283);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
+	{   19,  104, 0x256a8c},
+	{   12,  105, 0x225276},
+	{    7,  105, 0x2e88a3},
+});
+            guanbifhx = new FuHeSanDian("引导时-主线任务", guanbisdx, 46, 118);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             SanDian guanbisd1 = new SanDian(new int[3, 3] { { 136, 106, 0xe79941 }, { 232, 223, 0x9b9b9b }, { 302, 231, 0xe79000 } });
             FuHeSanDian guanbifh1 = new FuHeSanDian("关闭实名认证", guanbisd1, 209, 225);
             _list_yqsandian.Add(guanbisd1);
@@ -1577,7 +1651,16 @@ namespace fuzhu1
             return _list_yqfhsandian.Find(f => name.Equals(f.Name)
                 );
         }
+        public List<FuHeSanDian> findListFuHeSandianByName(string nameindex)
+        {
+            return _list_yqfhsandian.FindAll(f => f.Name.IndexOf(nameindex) == 0
+                );
+        }
 
+        public List<FuHeSanDian> findAllFuHeSandian()
+        {
+            return _list_yqfhsandian;
+        }
         public Dictionary<String,FuHeSanDian> getYiQuanDict()
         {
             return  _dict;

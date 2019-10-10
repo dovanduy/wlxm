@@ -5,7 +5,7 @@ using System.Text;
 using Entity;
 using xDM;
 
-namespace fuzhu1
+namespace fuzhu
 {
     public class YiQuan_DuoDian
     {

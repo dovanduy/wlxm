@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 using Entity;
 namespace fuzhu1
 {
+    /*
     public class YiQuan
     {
         private myDm mf;
@@ -461,7 +462,7 @@ namespace fuzhu1
                             WriteLog.WriteLogFile(this._mnqName,"30s,yxdj不动");
                             break;
                         }
-                    }*/
+                    }
                     if ((js - ks) > 1000 * 60 * 10)
                     {
                         WriteLog.WriteLogFile(this._mnqName,"循环超过10min");
@@ -783,7 +784,7 @@ namespace fuzhu1
                 WriteLog.WriteLogFile(this._mnqName,"发现光头提示10");
                 mf.mytap(this._jubing, 121, 40);
                 mx++;
-            }*/
+            }
             dz = new DuoDianZhaoSe(0xfefefe, "0|-8|0x404d5d,0|-30|0x2e5ba7,0|-41|0x2e7dc1,0|-52|0xd1a773,0|-60|0xd99c1b,1|-75|0x304151,1|-84|0x2f384d,8|-79|0x213042", 90, 180, 0, 200, 95);
             mf.myqudianqusezuobiaoByLeiWuJubing(dz, out x, out y);
             if (x != -1 && y != -1)
@@ -890,7 +891,7 @@ namespace fuzhu1
                 mf.mydelay(3000, 6000);
                 mf.mytap(this._jubing, 206, 4);//关闭窗口,右上角
                 mx++;  
-            }*/
+            }
             dz = new DuoDianZhaoSe(0xdd3421, "-6|0|0xd83121,-6|4|0x3d0e0b,-1|4|0xb33325,6|2|0xd7d8d7,7|-1|0xfbfbfb,91|1|0xde2c29", 90, 55, 25, 165, 45);
             mf.myqudianqusezuobiaoByLeiWuJubing(dz, out x, out y);
             if (x != -1 && y != -1)
@@ -1535,7 +1536,7 @@ namespace fuzhu1
                 WriteLog.WriteLogFile(this._mnqName, "超市招募券");
                 mf.mydelay(3200, 4500);
                 mf.mytap(this._jubing, 196, 22);
-            }*/
+            }
         }
         public void qianghua()
         {
@@ -2055,4 +2056,5 @@ namespace fuzhu1
         }
         
     }
+*/
 }

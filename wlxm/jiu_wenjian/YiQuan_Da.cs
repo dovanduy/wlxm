@@ -282,7 +282,7 @@ namespace fuzhu1
         public void zhuxian()
         {
             while (true) {
-                foreach (FuHeSanDian f in YiQuan_SanDian.List_yqfhsandian)
+               /* foreach (FuHeSanDian f in YiQuan_SanDian.List_yqfhsandian)
                 {
                     if (mf.mohuByLei(f.Sd)==1)
                     {
@@ -293,7 +293,7 @@ namespace fuzhu1
                             mf.mydelay(200, 1500);
                         }
                     }
-                }
+                }*/
                 panduankaping(457, 272);
             }
 

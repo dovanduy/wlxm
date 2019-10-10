@@ -30,7 +30,7 @@ namespace MyUtil
 
 
 
-        public bool lurenResizeOk(int index)
+        public bool lurenResizeOk(int index,string youxi="luneng")
         {
 
             WriteLog.WriteLogFile(index + "", "改变窗口位置--开始");
@@ -39,7 +39,7 @@ namespace MyUtil
             long ksjs = MyFuncUtil.GetTimestamp();
             long ks = MyFuncUtil.GetTimestamp();
             int width = -1, height = -1;
-            myReSize(index, out width, out height);
+            myReSize(index, out width, out height,youxi);
             int jubing = MyLdcmd.getDqmoniqiWaiCengJuBingByIndex(index, dizhi);
             int jubing2 = MyLdcmd.getDqmoniqiJuBingByIndex(index, dizhi);
             if (jubing <= 0)
@@ -89,7 +89,7 @@ namespace MyUtil
             }
             return t;
         }
-        public void myReSize(int index, out int width, out int height, string dizhi = @"d:\ChangZhi\dnplayer2\", string youxi = "luneng")
+        public void myReSize(int index, out int width, out int height, string youxi = "luneng", string dizhi = @"d:\ChangZhi\dnplayer2\")
         {
             WriteLog.WriteLogFile(index + "", "模拟器" + index + "开始改位置");
             int dqwidth = 2560;//1920 1024
@@ -268,10 +268,10 @@ namespace MyUtil
             }
             Rect lprect = new Rect();
             GetWindowRect(new IntPtr(jubing), out lprect);
-            WriteLog.WriteLogFile(index + "", "当前width,height" + width + "," + height + " 改变位置外框" + (lprect.Right - lprect.Left) + " " + (lprect.Bottom - lprect.Top));
             width = lprect.Right - lprect.Left;
             height = lprect.Bottom - lprect.Top;
-        }
+            WriteLog.WriteLogFile(index + "", "当前width,height" + width + "," + height + " 改变位置外框" + (lprect.Right - lprect.Left) + " " + (lprect.Bottom - lprect.Top));
+         }
 
 
         public bool PanDuan_QidongByYiQuDian(int dqinx, int haomiao, myDm mf, int jubing, out string yiqudian)
@@ -302,7 +302,7 @@ namespace MyUtil
             int res = 0;
             for (int i = 0; i < 10; i++)
             {
-                foreach (Entity.FuHeSanDian f in fuzhu.Jingjie_SanDian.List_yqfhsandian)
+                foreach (Entity.FuHeSanDian f in fuzhu.YiQuan_SanDian.List_yqfhsandian)
                 {
                     if (mf.mohuByLeiBool(f.Sd))
                     {

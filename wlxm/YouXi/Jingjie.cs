@@ -601,7 +601,8 @@ namespace fuzhu
                     WriteLog.WriteLogFile(this._mnqName, "当前账号无法登陆,置为N,修改时间更新换号");
                     zhanghao.zhiweidengluzhongN(this._dqinx, DANGQIAN_YOUXI, name, WriteLog.getMachineName());
                     int dengji = -1;
-                    zhanghao.zhunbeizhanghao(this._dqinx, DANGQIAN_YOUXI, out name, out pwd, out xuanqu, out dengji);
+                    string jieduan = null;
+                    zhanghao.zhunbeizhanghao(this._dqinx, DANGQIAN_YOUXI, out name, out pwd, out xuanqu, out dengji,out jieduan);
                     if (name == null || name == "" || pwd == null || pwd == "")
                     {
                         //当前没有找到需要练级的账号

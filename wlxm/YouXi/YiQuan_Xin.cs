@@ -10,10 +10,12 @@ using LuciferSrcipt;
 using System.Threading;
 using Newtonsoft.Json.Linq;
 using Entity;
-namespace fuzhu1
+namespace fuzhu
 {
     public class YiQuan_Xin
     {
+        public static string DangQianYouXi = "yiquan";
+
         private myDm mf;
         private int _dqinx;
 
@@ -54,20 +56,79 @@ namespace fuzhu1
         
 
 
-        public YiQuan_Xin(xDm mydm, int dqinx, string dizhi)
+        public YiQuan_Xin(xDm mydm, int dqinx,int jubing,string dizhi)
         {
             this.mf = (myDm)mydm;
             this._dqinx = dqinx;
-            this._jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx,dizhi);            
+            this._jubing = jubing;            
             //模拟器的名字 取值有问题 改为index
             this._mnqName = dqinx + "";
             int r=mf.bindWindow(this._jubing);
             WriteLog.WriteLogFile(this._mnqName, "一拳构造函数,句柄是:" + _jubing + ",模拟器index是:" + _mnqName + "，thread:" + Thread.CurrentThread.ManagedThreadId + "，绑定:" + r);
         }
 
-        public Boolean denglu(int fenzhong)
+        public Boolean denglu(int fenzhong,string name)
         {
-            WriteLog.WriteLogFile(this._mnqName, "进入到登录环节  " + this._jubing + "，thread:" + Thread.CurrentThread.ManagedThreadId);
+            /**WriteLog.WriteLogFile(this._mnqName, "进入到登录环节  " + this._jubing + "，thread:" + Thread.CurrentThread.ManagedThreadId);
+            //循环90秒判断是否已经进入
+            WriteLog.WriteLogFile(this._mnqName, "检测是否已进入游戏");
+            long ksp = MyFuncUtil.GetTimestamp();
+            StringBuilder rt = new StringBuilder();
+            string rr = "";
+            StringBuilder zhuxianrt = new StringBuilder();
+            string yijinruzhuxian = "";
+            List<FuHeSanDian> ls = YiQuan_SanDian.GetObject().findAllFuHeSandian();            
+            int tiaochu3 = 0;
+            int tiaochu4 = 0;
+            while (true)
+            {
+                long jsp = MyFuncUtil.GetTimestamp();
+                if ((jsp - ksp) > 1000 * 90)
+                {
+                    break;
+                }
+                if (tiaochu3 == 0)
+                {
+                    for (int i = 0; i < 10; i++)
+                    {
+                        foreach (Entity.FuHeSanDian f in ls)
+                        {
+                            if (mf.mohuByLeiBool(f.Sd))
+                            {
+                                WriteLog.WriteLogFile(this._mnqName, f.Name + "模糊取到需要登录");
+                                mf.mydelay(1000, 2000);
+                                rt.Append(f.Name);
+                                rr = rt.ToString();
+                                break;
+                            }
+                        }
+                        if (tiaochu3 == 0 && (rt != null && rt.Length > 0) || (zhuxianrt != null && zhuxianrt.Length > 0))
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "跳出10次循环");
+                            tiaochu3 = 1;
+                            break;
+                        }
+                        mf.mydelay(10, 200);
+                    }
+                }
+                if (tiaochu4 == 0 && (jsp - ksp) > 1000 * 10 && (rt != null && rt.Length > 0))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, "已进入游戏" + rr);
+                    tiaochu4 = 1;
+                    break;
+                }
+                
+            }
+            WriteLog.WriteLogFile(this._mnqName, "登录环节 " + rr.Equals("") + "， " + yijinruzhuxian.Equals(""));
+            if (!rr.Equals("") && !name.Equals(""))
+            {
+                WriteLog.WriteLogFile(this._mnqName, "找到标志点,找到其他点,不再搞登录");
+                return false;
+            }
+            **/
+
+
+
             Boolean abc = true;
             long kstime = mf.GetTime();
             FuHeSanDian d1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("关闭实名认证");
@@ -90,16 +151,17 @@ namespace fuzhu1
 
         }
         
-        public Boolean zhuce(int fz,out int dengji,out int xuanqu)
+        public Boolean zhuce(int fz,out int dengji,out int xuanqu,out string name)
         {
             Boolean zccg = true;
             dengji = -1;
             xuanqu = -1;
             WriteLog.WriteLogFile(this._mnqName, "进入到注册环节-登录或注册" + " " + this._jubing);
-            string name = null;
+            name = "";
             string pwd = null;
+            string jieduan = null;
             ZhangHao zhanghao = new ZhangHao();
-            zhanghao.zhunbeizhanghao(this._dqinx,"1",out name, out pwd,out xuanqu,out dengji);
+            zhanghao.zhunbeizhanghao(this._dqinx,"1",out name, out pwd,out xuanqu,out dengji,out jieduan);
             int zhucele = 0;
             long ks = MyFuncUtil.GetTimestamp();
             long ks1 = MyFuncUtil.GetTimestamp();
@@ -175,10 +237,19 @@ namespace fuzhu1
                     {
                         mf.mytap(this._jubing, 220, 104);
                         mf.mydelay(2000, 4000);
-                        zhanghao.shuruchar(mf, this._dqinx, this._jubing, name);
+                        zhanghao.shuruqianhuitui(mf, this._dqinx, this._jubing);
+                        mf.mydelay(2000, 4000);
+                        mf.SendString(this._jubing, name);
+                        mf.mydelay(2000, 4000);
+                        mf.myKeyPressChar(this._jubing, "tab");
+                        mf.mydelay(2000, 4000);
                         mf.mytap(this._jubing, 223, 136);
                         mf.mydelay(2000, 4000);
-                        zhanghao.shuruchar(mf, this._dqinx, this._jubing, pwd);
+                        zhanghao.shuruqianhuitui(mf, this._dqinx, this._jubing);
+                        mf.mydelay(2000, 4000);
+                        mf.SendString(this._jubing, pwd);
+                        mf.mydelay(2000, 4000);
+                        mf.myKeyPressChar(this._jubing, "tab");
                         mf.mydelay(2000, 4000);
                         mf.mytap(this._jubing, 268, 176);
                         mf.mydelay(2000, 4000);
@@ -261,7 +332,7 @@ namespace fuzhu1
             }
             if (zhucele == 1) {
                 //新账号或老账号存入数据库
-                zhanghao.denglusaveNameAndPas(name, pwd, this._dqinx);
+                zhanghao.denglusaveNameAndPas(name, pwd, this._dqinx,DangQianYouXi);
             } 
             //成功后关闭实名 开始选区 默认区不动
             ks = MyFuncUtil.GetTimestamp();
@@ -361,6 +432,22 @@ namespace fuzhu1
             kpzb.Add(new ZuoBiao(407, 136));
             string[] kapingyanse1 = mf.myGetColorWuJbList(kpzb);
             string[] kapingyanse2 = kapingyanse1;
+            List<FuHeSanDian> ls = YiQuan_SanDian.GetObject().findListFuHeSandianByName("开引导");            
+            foreach (FuHeSanDian fh in ls)
+            {
+                if (mf.mohuByLeiBool(fh.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, fh.Name);
+                    if (fh.Zhidingx != -1 && fh.Zhidingy != -1)
+                    {
+                        mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                    }
+
+                }
+            }
+            
+
+
             FuHeSanDian fhzd1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("开头的战斗超人画像1");
             if (mf.mohuByLeiBool(fhzd1.Sd))
             {
@@ -906,9 +993,9 @@ namespace fuzhu1
             FuHeSanDian dh3 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-设置昵称");
             FuHeSanDian dh4 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-关卡界面");
             FuHeSanDian dh5 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-宝箱领取");
-            //FuHeSanDian dh6 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-角色养成");
+            FuHeSanDian dh6 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-主线任务");
             FuHeSanDian dh7 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-招募骑士");
-            //FuHeSanDian dh8 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-地图主线任务地底人");
+            FuHeSanDian dh8 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-布阵");
             FuHeSanDian dh9 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-关闭核心技");
             FuHeSanDian dh10 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-关闭布阵");
             FuHeSanDian dh11 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-关闭离开关卡");
@@ -918,7 +1005,7 @@ namespace fuzhu1
             FuHeSanDian dh15 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-黑屏普通攻击");
             FuHeSanDian dh16 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-一拳通关完成关闭");
             WriteLog.WriteLogFile(this._mnqName, "进入引导区开始引导时作");
-            FuHeSanDian dh = mf.fuHeSanDianShuZu(new FuHeSanDian[] { dh1, dh2, dh3, dh4, dh5, dh7, dh9, dh10, dh11, dh12, dh13, dh14, dh15, dh16 });
+            FuHeSanDian dh = mf.fuHeSanDianShuZu(new FuHeSanDian[] { dh1, dh2, dh3, dh4, dh5, dh6, dh7, dh8, dh9, dh10, dh11, dh12, dh13, dh14, dh15, dh16 });
             if (dh != null)
             {
                 WriteLog.WriteLogFile(this._mnqName,dh.Name);
@@ -1108,7 +1195,7 @@ namespace fuzhu1
         }
 
 
-        public void zhuxian()
+        public void zhuxian(string name)
         {
             WriteLog.WriteLogFile(this._mnqName, "进入到主线任务");
             dijibieks();            
@@ -1159,7 +1246,7 @@ namespace fuzhu1
         
 
         
-        public void quitdq()
+        public void quitdq(string name)
         {
             int dengji = -1;
             int zuanshi = -1;
@@ -1224,7 +1311,7 @@ namespace fuzhu1
                 }
             }
             ZhangHao zhanghao = new ZhangHao();
-            zhanghao.tuichusaveNameAndPas("",this._dqinx, WriteLog.getMachineName(),dengji,zuanshi,qiangzhequan);
+            zhanghao.tuichusaveNameAndPas(name,this._dqinx, WriteLog.getMachineName(),dengji,zuanshi,qiangzhequan);
         }
 
         private void quqiangzhequan(out int qzs,FuHeSanDian qz){
@@ -1369,7 +1456,7 @@ namespace fuzhu1
 
         private void savebmp() {
             string bmpname = this._mnqName+"_"+mf.GetTime() + "";
-            mf.captureBmp(this._jubing, @"d:\mypic", bmpname + ".bmp");
+            mf.captureBmp(this._jubing, @"d:\mypic_save", bmpname + ".bmp");
             Thread.Sleep(4000);
         }
 
@@ -1396,56 +1483,62 @@ namespace fuzhu1
                 }
                 if (panduanjiemian("判断地图界面"))
                 {
-                    savebmp();
+                    //savebmp();
                     WriteLog.WriteLogFile(this._mnqName, "缩小后，再次进入判断地图界面");
-                    mf.mytap(this._jubing, 234, 125);//强者券 --234,  125 --226,152
+                    //mf.mytap(this._jubing, 234, 125);//强者券 --234,  125 --226,152
                     mf.mydelay(2000, 4000);
                     if (!gettiaoguo()) {
-                        mf.mytap(this._jubing, 226, 152);//强者券 --234,  125 --226,152
+                        //mf.mytap(this._jubing, 226, 152);//强者券 --234,  125 --226,152
                         mf.mydelay(2000, 4000);
                     }
-                    mf.mytap(this._jubing, 299, 286);
+                    //mf.mytap(this._jubing, 299, 286);
                     mf.mydelay(4000, 6000);
                 }
                 if (panduanjiemian("判断地图界面"))
                 {
-                    savebmp();
+                    //savebmp();
                     WriteLog.WriteLogFile(this._mnqName, "缩小后，再次进入判断地图界面，准备宝箱");
+                    
+                    int dianji4 = 0;
+                    if (mf.mohu(233, 138, 0xdfbf7e) == 1)
+                    {
+                        dianji4 = 1;
+                    }
+                    int dianji5 = 0;
+                    if (mf.mohu(325, 139, 0x9fa273) == 1)
+                    {
+                        dianji5 = 1;
+                    }
+                    int dianji6 = 0;
+                    if (mf.mohu(259, 43, 0xbbabaa) == 1)
+                    {
+                        dianji6 = 1;
+                    }
+                    WriteLog.WriteLogFile(this._mnqName, "dianji各数值情况" + dianji4 + " " + dianji5 + " " + dianji6 + " ");
                     for (int j = 0; j < 2; j++)
                     {
                         for (int i = 0; i < 4; i++)
                         {
                             if (j == 0)
                             {
-                                mf.mytap(this._jubing, 323, 126); //318 154 324 145
                                 mf.mydelay(2000, 4000);
-                                if (!gettiaoguo())
+                                if (!gettiaoguo() && dianji4 == 1)
                                 {
-                                    mf.mytap(this._jubing, 318,154);
+                                    mf.mytap(this._jubing, 233, 138);
                                     mf.mydelay(2000, 4000);
-                                }
-                                if (!gettiaoguo())
-                                {
-                                    mf.mytap(this._jubing, 324,145);
-                                    mf.mydelay(2000, 4000);
-                                }
-                                if (gettiaoguo())
-                                {
-                                    mf.mytap(this._jubing, tiaoguoyongX, tiaoguoyongY);                                    
                                 }
                             }
                             if (j == 1)
                             {
-                                mf.mytap(this._jubing, 258, 34); //235,55 259,48
-                                mf.mydelay(2000, 4000);
-                                if (!gettiaoguo())
+                                
+                                if (!gettiaoguo() && dianji5 == 1)
                                 {
-                                    mf.mytap(this._jubing, 235, 55);
+                                    //mf.mytap(this._jubing, 325, 139);
                                     mf.mydelay(2000, 4000);
                                 }
-                                if (!gettiaoguo())
+                                if (!gettiaoguo() && dianji6 == 1)
                                 {
-                                    mf.mytap(this._jubing, 259, 48);
+                                   // mf.mytap(this._jubing, 259, 43);
                                     mf.mydelay(2000, 4000);
                                 }
                                 if (gettiaoguo())

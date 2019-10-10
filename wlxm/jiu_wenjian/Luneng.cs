@@ -13,8 +13,10 @@ using LuciferSrcipt;
 using System.Threading;
 using Newtonsoft.Json.Linq;
 using Entity;
+
 namespace fuzhu1
 {
+   /*
     public class Luneng
     {
         private myDm mf;
@@ -375,8 +377,9 @@ namespace fuzhu1
             WriteLog.WriteLogFile(this._mnqName, "进入到注册环节-登录或注册" + " " + this._jubing);
             string name = null;
             string pwd = null;
+            string jieduan = null;
             ZhangHao zhanghao = new ZhangHao();
-            zhanghao.zhunbeizhanghao(this._dqinx,"路人",out name, out pwd,out xuanqu,out dengji);
+            zhanghao.zhunbeizhanghao(this._dqinx,"路人",out name, out pwd,out xuanqu,out dengji,out jieduan);
             int zhucele = 0;
             long ks = MyFuncUtil.GetTimestamp();
             long ks1 = MyFuncUtil.GetTimestamp();
@@ -3270,4 +3273,5 @@ namespace fuzhu1
             return rt;
         }
     }
+    * */
 }

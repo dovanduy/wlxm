@@ -154,14 +154,14 @@ namespace MyUtil
             }
         }
 
-        public void denglusaveNameAndPas(string name,string pwd,int dqindex)
+        public void denglusaveNameAndPas(string name,string pwd,int dqindex,string youxiname)
         {
             SqlHelp sqh = SqlHelp.GetInstance();
             lock(obj)
             {
                 try
                 {
-                    DataTable dt = sqh.getAll("select top 1 name from zhanghao where name = '" + name + "'");
+                    DataTable dt = sqh.getAll("select top 1 name from zhanghao where name = '" + name + "' and youxi='"+youxiname+"'");
                     if (dt.Rows.Count > 0)
                     {
                         sqh.update("update zhanghao set dengluzhong='Y' where name='"
@@ -170,10 +170,10 @@ namespace MyUtil
                     else
                     {
 
-                        sqh.update("insert into zhanghao (name,pwd,dqindex,yxbz,yimai,dengluzhong,pcname,xgsj) values('"
+                        sqh.update("insert into zhanghao (name,pwd,dqindex,yxbz,yimai,dengluzhong,pcname,xgsj,youxi) values('"
                            + name + "','" + pwd + "'," + dqindex + ",'Y','N','Y','"
                            + WriteLog.getMachineName()
-                           + "','" + DateTime.Now.ToString("yyyy-MM-dd") + "')");
+                           + "','" + DateTime.Now.ToString("yyyy-MM-dd") + "','"+youxiname+"')");
                     }
                 }
                 catch (Exception ex)
@@ -259,19 +259,20 @@ namespace MyUtil
             }
         }
 
-        public void zhunbeizhanghao(int dqinx,string youxi,out string name, out string pwd,out int xuanqu,out int dengji)
+        public void zhunbeizhanghao(int dqinx,string youxi,out string name, out string pwd,out int xuanqu,out int dengji,out string jieduan)
         {
             //服务器上有应该登录的账号则使用指定账号登录
             WriteLog.WriteLogFile(dqinx + "", "开始找需要练级的账号");
-            name = null;
+            name = "";
             pwd = null;
             xuanqu = -1;
             dengji = -1;
+            jieduan = "";
             SqlHelp sqh = SqlHelp.GetInstance();
             string dqsj = DateTime.Now.ToString("yyyy-MM-dd");
             lock (obj)
             {
-                DataTable dt = sqh.getAll("select top 1 name,pwd,isnull(xuanqu,-1),isnull(dengji,-1) from zhanghao where yxbz='Y' and dengluzhong='Y' and pcname='"
+                DataTable dt = sqh.getAll("select top 1 name,pwd,isnull(xuanqu,-1),isnull(dengji,-1),isnull(jieduan,'') from zhanghao where yxbz='Y' and dengluzhong='Y' and pcname='"
 
                     + WriteLog.getMachineName() + "' and dqindex=" + dqinx + " and youxi='" + youxi + "'")
                     ;
@@ -281,6 +282,7 @@ namespace MyUtil
                     pwd = (string)dt.Rows[0][1];
                     xuanqu = (int)dt.Rows[0][2];
                     dengji = (int)dt.Rows[0][3];
+                    jieduan = (string)dt.Rows[0][4];
                     WriteLog.WriteLogFile(dqinx + "", "找到需要练级的账号" + name + " " + pwd + ",xuanqu " + xuanqu + "并置为登录中");
                     return;
                 }
@@ -290,7 +292,7 @@ namespace MyUtil
                     + "'  and yxbz='Y' and dengluzhong='N' "
                     + " and yimai='N'  and youxi='" + youxi + "')";
                 sqh.update(updatesql);
-                dt = sqh.getAll("select top 1 name,pwd,isnull(xuanqu,-1),isnull(dengji,-1) from zhanghao where yxbz='Y' and dengluzhong='Y' and pcname='"
+                dt = sqh.getAll("select top 1 name,pwd,isnull(xuanqu,-1),isnull(dengji,-1),isnull(jieduan,'') from zhanghao where yxbz='Y' and dengluzhong='Y' and pcname='"
 
                     + WriteLog.getMachineName() + "' and dqindex=" + dqinx + " and youxi='" + youxi + "'")
                     ;
@@ -300,6 +302,7 @@ namespace MyUtil
                     pwd = (string)dt.Rows[0][1];
                     xuanqu = (int)dt.Rows[0][2];
                     dengji = (int)dt.Rows[0][3];
+                    jieduan = (string)dt.Rows[0][4];
                     WriteLog.WriteLogFile(dqinx+"", "找到需要练级的账号" + name + " " + pwd + ",xuanqu " + xuanqu+"并置为登录中");
                 }
             }
@@ -356,6 +359,24 @@ namespace MyUtil
                 catch (Exception ex)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "更新账号为无效失败");
+                    throw ex;
+                }
+            }
+        }
+
+        public void gengxinjieduan(int dqinx, string youxi, string name, string jieduan="zhuxian")
+        {
+            //服务器上有登录账号后置为登陆中
+            SqlHelp sqh = SqlHelp.GetInstance();
+            lock (obj)
+            {
+                try
+                {
+                    sqh.update("update zhanghao set jieduan='"+jieduan+"'  where name='" + name + "' and youxi='" + youxi + "'");
+                }
+                catch (Exception ex)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "更新账号的阶段是zhuxian还是denglu,更新失败");
                     throw ex;
                 }
             }
