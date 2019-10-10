@@ -159,9 +159,9 @@ namespace fuzhu
             WriteLog.WriteLogFile(this._mnqName, "进入到注册环节-登录或注册" + " " + this._jubing);
             name = "";
             string pwd = null;
-            string jieduan = null;
+            //string jieduan = null;
             ZhangHao zhanghao = new ZhangHao();
-            zhanghao.zhunbeizhanghao(this._dqinx,"1",out name, out pwd,out xuanqu,out dengji,out jieduan);
+            //zhanghao.zhunbeizhanghao(this._dqinx,"yiquan",out name, out pwd,out xuanqu,out dengji,out jieduan);
             int zhucele = 0;
             long ks = MyFuncUtil.GetTimestamp();
             long ks1 = MyFuncUtil.GetTimestamp();

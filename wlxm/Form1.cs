@@ -715,7 +715,7 @@ namespace wlxm
                 string jieduan = "";
                 int xuanqu = -1, dengji = -1;
                 string youxi = fuzhuyouxi;
-                zhanghao.zhunbeizhanghao(dqinx, youxi, out name, out pwd, out xuanqu, out dengji, out jieduan);
+                //zhanghao.zhunbeizhanghao(dqinx, youxi, out name, out pwd, out xuanqu, out dengji, out jieduan);
                 if (name == null || name == "" || pwd == null || pwd == "")
                 {
                     //当前没有找到需要练级的账号
