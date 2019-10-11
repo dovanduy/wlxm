@@ -110,7 +110,14 @@ namespace fuzhu
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 
-
+            guanbisdx = new SanDian(new int[3, 3] {
+	{  424,  239, 0xffdb21},
+	{  450,  116, 0xf0ce2a},
+	{  470,   42, 0xba615b},
+});
+            guanbifhx = new FuHeSanDian("开引导-关闭领取奖励", guanbisdx, 467, 45);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
 
 
 

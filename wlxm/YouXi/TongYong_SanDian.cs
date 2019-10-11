@@ -41,6 +41,15 @@ namespace fuzhu
             ktfh1 = new FuHeSanDian("雷电首页截图-平板", ktsd1, -1, -1, "新建平板模式用");
             _list_yqsandian.Add(ktsd1);
             _list_yqfhsandian.Add(ktfh1);
+
+            ktsd1 = new SanDian(new int[3, 3]{
+	{  322,   87, 0xd0d0d0},
+	{  412,   82, 0xd0d0d0},
+	{  497,   85, 0xd0d0d0},
+});
+            ktfh1 = new FuHeSanDian("IPtool", ktsd1, 277, 161);
+            _list_yqsandian.Add(ktsd1);
+            _list_yqfhsandian.Add(ktfh1);
         }
 
         private static List<ZuoBiao> _list_zuobiao = new List<ZuoBiao>();

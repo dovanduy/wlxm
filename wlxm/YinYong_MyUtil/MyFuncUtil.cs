@@ -363,7 +363,7 @@ namespace MyUtil
             }
             Rect lprect = new Rect();
             GetWindowRect(new IntPtr(jubing), out lprect);            
-            WriteLog.WriteLogFile(index + "", "当前width,height" + width + "," + height + " 改变位置外框" + (lprect.Right - lprect.Left) + " " + (lprect.Bottom - lprect.Top) );
+            //WriteLog.WriteLogFile(index + "", "当前width,height" + width + "," + height + " 改变位置外框" + (lprect.Right - lprect.Left) + " " + (lprect.Bottom - lprect.Top) );
             width = lprect.Right - lprect.Left;
             height = lprect.Bottom - lprect.Top;
         }
@@ -722,7 +722,7 @@ namespace MyUtil
             Entity.FuHeSanDian tysd =null;
             int w=-1,h=-1;
             getWindowSize(dqinx,out w,out h);
-            WriteLog.WriteLogFile(dqinx + "", w + " " + h);
+            //WriteLog.WriteLogFile(dqinx + "", w + " " + h);
             int a = 0;
             if (w == 489 && h == 840)
             {

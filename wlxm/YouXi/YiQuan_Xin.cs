@@ -151,14 +151,13 @@ namespace fuzhu
 
         }
         
-        public Boolean zhuce(int fz,out int dengji,out int xuanqu,out string name)
+        public Boolean zhuce(int fz,out int dengji,out int xuanqu,ref string name)
         {
             Boolean zccg = true;
             dengji = -1;
             xuanqu = -1;
             WriteLog.WriteLogFile(this._mnqName, "进入到注册环节-登录或注册" + " " + this._jubing);
-            name = "";
-            string pwd = null;
+            string pwd = "a99999";
             //string jieduan = null;
             ZhangHao zhanghao = new ZhangHao();
             //zhanghao.zhunbeizhanghao(this._dqinx,"yiquan",out name, out pwd,out xuanqu,out dengji,out jieduan);
@@ -230,7 +229,7 @@ namespace fuzhu
             int dianyici = 0;
             while (true)
             {
-                if (name != null && pwd != null)
+                //if (name != null && pwd != null)
                 {
                     FuHeSanDian d = YiQuan_SanDian.GetObject().findFuHeSandianByName("登录或注册");
                     if (mf.mohuByLeiBool(d.Sd))
@@ -263,10 +262,10 @@ namespace fuzhu
                     FuHeSanDian d6 = YiQuan_SanDian.GetObject().findFuHeSandianByName("首次进入登录或注册");
                     if (mf.mohuByLeiBool(d6.Sd) && dianyici == 0)
                     {
-                        throw new Exception("出错了,新模拟器不应该数据库有账号");
+                        //throw new Exception("出错了,新模拟器不应该数据库有账号");
                     }
                 }
-                else
+                //else
                 {
                     //注册后登录
                     FuHeSanDian d6 = YiQuan_SanDian.GetObject().findFuHeSandianByName("首次进入登录或注册");
@@ -287,15 +286,25 @@ namespace fuzhu
                     if (mf.mohuByLeiBool(d.Sd))
                     {
                         WriteLog.WriteLogFile(this._mnqName, d.Name);
-                        zhanghao.generateNameAndPas(this._dqinx, 7, out name, out pwd);
+                        //zhanghao.generateNameAndPas(this._dqinx, 7, out name, out pwd);
                         mf.mydelay(2000, 4000);
                         mf.mytap(this._jubing, 230, 112);
                         mf.mydelay(2000, 4000);
-                        zhanghao.shuruchar(mf, this._dqinx, this._jubing, name);
+                        zhanghao.shuruqianhuitui(mf, this._dqinx, this._jubing);
+                        mf.mydelay(2000, 4000);
+                        mf.SendString(this._jubing, name);
+                        mf.mydelay(2000, 4000);
+                        mf.myKeyPressChar(this._jubing, "tab");
+                        mf.mydelay(2000, 4000);
                         mf.mytap(this._jubing, 232, 140);
                         mf.mydelay(2000, 4000);
-                        zhanghao.shuruchar(mf, this._dqinx, this._jubing, pwd);
-                        mf.mydelay(4000, 6000);
+                        zhanghao.shuruqianhuitui(mf, this._dqinx, this._jubing);
+                        mf.mydelay(2000, 4000);
+                        mf.SendString(this._jubing, pwd);
+                        mf.mydelay(2000, 4000);
+                        mf.myKeyPressChar(this._jubing, "tab");
+                        mf.mydelay(2000, 4000);
+                        
                         if (mf.fanwei(333,  169,342,  179,0x1eb9ee )==1)
                         {
                             WriteLog.WriteLogFile(this._mnqName, "去掉绑定手机对号");
@@ -312,8 +321,7 @@ namespace fuzhu
                             break;
                         }
                         else {
-                            name = null;
-                            pwd = null;
+                            zhanghao.generateNameAndPas(this._dqinx, 7, out name, out pwd);
                             WriteLog.WriteLogFile(this._mnqName,"账号可能已被占用");
                         }
                     }                    

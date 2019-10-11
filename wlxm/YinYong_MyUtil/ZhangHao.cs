@@ -382,6 +382,52 @@ namespace MyUtil
             }
         }
 
+        public void updateIp(int dqinx, string youxi, string name, string ip)
+        {
+            //服务器上有登录账号后置为登陆中
+            SqlHelp sqh = SqlHelp.GetInstance();
+            lock (obj)
+            {
+                try
+                {
+                    sqh.update("update zhanghao set ip='" + ip + "'  where name='" + name + "' and youxi='" + youxi + "'");
+                }
+                catch (Exception ex)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "更新账号的ip,更新失败");
+                    throw ex;
+                }
+            }
+        }
+
+        public bool panduanIpKeYong(int dqinx, string youxi,string ip)
+        {
+            //服务器上有登录账号后置为登陆中
+            SqlHelp sqh = SqlHelp.GetInstance();
+            lock (obj)
+            {
+                try
+                {
+                    DataTable dt = sqh.getAll("select name,isnull(ip,'') from zhanghao where ip='"
+
+                    + ip + "' and youxi='" + youxi + "' and yxbz='Y' and dengluzhong='Y'")
+                    ;
+                    if (dt.Rows.Count > 0)
+                    {
+
+                        WriteLog.WriteLogFile(dqinx + "", "找到需要练级的账号" + dt.Rows[0][0] + " " + dt.Rows[0][1] + "为相同ip");
+                        return true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "更新账号的ip,更新失败");
+                    throw ex;
+                }
+                return false;
+            }
+        }
+
         public void getZhanghaoXinxi(int dqinx,string youxi, string zhanghao,string xinxi,out int ox)
         {
             //服务器上有登录账号后置为登陆中

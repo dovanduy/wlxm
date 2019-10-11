@@ -154,6 +154,96 @@ namespace xDM
                 oy = int.Parse(a1[1]);
             }
         }
+
+        public Boolean myGetColorWuJuBing_duokai(int x, int y, string color)
+        {
+            bool tmp = false;
+            String tmpcolor = mydm.GetColor(x, y);
+            if (color.ToLower().Equals(tmpcolor.ToLower()))
+            {
+                tmp = true;
+            }
+            return tmp;
+        }
+
+        public int jingque_duokai(int mx1, int my1, int myanse1, int mx2 = -1, int my2 = -1, int myanse2 = -1, int mx3 = -1, int my3 = -1, int myanse3 = -1)
+        {
+            string firstColor = myanse1.ToString("X");
+            bool rs1 = myGetColorWuJuBing_duokai(mx1, my1, firstColor);
+            bool rs2 = false;
+            if (mx2 != -1)
+            {
+                string secColor = myanse2.ToString("X");
+                rs2 = myGetColorWuJuBing_duokai(mx2, my2, secColor);
+            }
+            bool rs3 = false;
+            if (mx3 != -1)
+            {
+                string thrColor = myanse3.ToString("X");
+                rs3 = myGetColorWuJuBing_duokai(mx3, my3, thrColor);
+            }
+            if (rs1 && rs2 && rs3)
+            {
+                return 1;
+            }
+            if (rs1 && rs2 && (myanse3 == -1))
+            {
+                return 1;
+            }
+            if (rs1 && (myanse2 == -1) && (myanse3 == -1))
+            {
+                return 1;
+            }
+            return 0;
+
+        }
+        public int mohu_duokai(int mx1, int my1, int myanse1, int mx2 = -1, int my2 = -1, int myanse2 = -1, int mx3 = -1, int my3 = -1, int myanse3 = -1, int sim = 90)
+        {
+            
+            int ox = -1, oy = -1;
+            int rs1 = -1;
+            rs1 = jingque_duokai(mx1, my1, myanse1, mx2, my2, myanse2, mx3, my3, myanse3);
+            if (rs1 == 1)
+            {
+                return 1;
+            }
+            myqudianqudanse_duokai(myanse1, sim, mx1, my1, mx1 + 1, my1 + 1, out ox, out oy);
+            if (ox != -1 && oy != -1)
+            {
+                rs1 = 1;
+            }
+            int rs2 = -1;
+            if (mx2 != -1)
+            {
+                myqudianqudanse_duokai(myanse2, sim, mx2, my2, mx2 + 1, my2 + 1, out ox, out oy);
+                if (ox != -1 && oy != -1)
+                {
+                    rs2 = 1;
+                }
+            }
+            int rs3 = -1;
+            if (mx3 != -1)
+            {
+                myqudianqudanse_duokai(myanse3, sim, mx3, my3, mx3 + 1, my3 + 1, out ox, out oy);
+                if (ox != -1 && oy != -1)
+                {
+                    rs3 = 1;
+                }
+            }
+            if ((rs1 == 1) && (rs2 == 1) && (rs3 == 1))
+            {
+                return 1;
+            }
+            if ((rs1 == 1) && (rs2 == 1) && (myanse3 == -1))
+            {
+                return 1;
+            }
+            if ((rs1 == 1) && (myanse2 == -1) && (myanse3 == -1))
+            {
+                return 1;
+            }
+            return 0;
+        }
         /// <summary>
         /// 鼠标左键点击 x y坐标
         /// </summary>

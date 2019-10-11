@@ -234,7 +234,7 @@ namespace MyUtil
             Entity.FuHeSanDian tysd = null;
             int w = -1, h = -1;
             getWindowSize(dqinx, out w, out h);
-            WriteLog.WriteLogFile(dqinx + "", w + " " + h);
+            //WriteLog.WriteLogFile(dqinx + "", w + " " + h);
             int a = 0;
             if (w == 489 && h == 840)
             {
@@ -287,6 +287,47 @@ namespace MyUtil
                 }
                 int r = panduankasiqudian(dqinx, mf, jubing, out oyiqudian);
                 if (r >= 1) {
+                    rt = true;
+                    break;
+                }
+            }
+            yiqudian = oyiqudian;
+            return rt;
+        }
+
+        public bool PanDuan_QidongByYiQuDian_IP(int dqinx, int haomiao, myDm mf, int jubing, out string yiqudian)
+        {
+            WriteLog.WriteLogFile(dqinx + "", "模拟器发现已取点-开始判断" + haomiao);
+            long ks = MyFuncUtil.GetTimestamp();
+            var rt = false;
+            string oyiqudian = "";
+            Entity.FuHeSanDian f = fuzhu.TongYong_SanDian.GetObject().findFuHeSandianByName("IPtool");
+            while (true)
+            {
+                long js = MyFuncUtil.GetTimestamp();
+                if ((js - ks) > haomiao)
+                {
+                    break;
+                }                
+                if (mf.mohuByLeiBool(f.Sd))
+                {
+                    WriteLog.WriteLogFile(dqinx + "", f.Name + "模糊取到"+jubing+" "+mf.bindWindow(jubing));
+                    //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);                    
+                    //mf.myMove(jubing, f.Zhidingx, f.Zhidingy);
+                    if (mf.mohu_duokai(84, 237, 0xd5d5d5) == 1)
+                    {
+                        mf.mytap_duokai(jubing, 84, 237);
+                    }
+                    mf.mydelay(2000, 3000);
+                    if (mf.mohu_duokai(80, 536, 0xffffff) == 1)
+                    {
+                        mf.mytap_duokai(jubing, 80, 536);
+                        mf.mydelay(2000, 3000);
+                        mf.mytap_duokai(jubing, 428, 763);
+                        mf.mydelay(2000, 3000);
+                    }
+                    WriteLog.WriteLogFile(dqinx + "",  mf.GetClipboard()+" 当前剪切板");
+                    oyiqudian = mf.GetClipboard();
                     rt = true;
                     break;
                 }
