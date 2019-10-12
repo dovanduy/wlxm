@@ -195,5 +195,11 @@ namespace fuzhu
             return _list_yqfhduodian.Find(f => name.Equals(f.Name)
                 );
         }
+
+        public List<FuHeDuoDian> findListFuHeDuodianByName(string nameindex)
+        {
+            return _list_yqfhduodian.FindAll(f => f.Name.IndexOf(nameindex) == 0
+                );
+        }
     }
 }

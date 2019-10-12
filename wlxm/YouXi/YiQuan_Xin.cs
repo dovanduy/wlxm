@@ -15,7 +15,8 @@ namespace fuzhu
     public class YiQuan_Xin
     {
         public static string DangQianYouXi = "yiquan";
-
+        private int xianzhi_x = 687;
+        private int xianzhi_y = 386;
         private myDm mf;
         private int _dqinx;
 
@@ -153,6 +154,7 @@ namespace fuzhu
         
         public Boolean zhuce(int fz,out int dengji,out int xuanqu,ref string name)
         {
+           
             Boolean zccg = true;
             dengji = -1;
             xuanqu = -1;
@@ -303,24 +305,32 @@ namespace fuzhu
                         mf.SendString(this._jubing, pwd);
                         mf.mydelay(2000, 4000);
                         mf.myKeyPressChar(this._jubing, "tab");
-                        mf.mydelay(2000, 4000);
-                        
+                        mf.mydelay(2000, 4000);                        
                         if (mf.fanwei(333,  169,342,  179,0x1eb9ee )==1)
                         {
                             WriteLog.WriteLogFile(this._mnqName, "去掉绑定手机对号");
                             mf.mytap(this._jubing, 337, 175);
                             mf.mydelay(1000, 3000);
                         }
+                        
                         mf.mytap(this._jubing, 266, 239);
-                        mf.mydelay(4000, 6000);
+                        mf.mydelay(6000, 9000);
                         d = YiQuan_SanDian.GetObject().findFuHeSandianByName("新账号注册");
+                        FuHeSanDian d1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("关闭实名认证");
                         if (!mf.mohuByLeiBool(d.Sd))
                         {
                             WriteLog.WriteLogFile(this._mnqName, d.Name + "注册成功");
                             zhucele = 1;
                             break;
+                        }                        
+                        else if (mf.mohuByLeiBool(d1.Sd))
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, d.Name + "注册成功-发现实名");
+                            zhucele = 1;
+                            break;
                         }
-                        else {
+                        else if (mf.mohuByLeiBool(d.Sd))
+                        {
                             zhanghao.generateNameAndPas(this._dqinx, 7, out name, out pwd);
                             WriteLog.WriteLogFile(this._mnqName,"账号可能已被占用");
                         }
@@ -2831,6 +2841,9 @@ namespace fuzhu
                     }
                 }
             }
+            if (mohu(0, 0, 0x009de4) == 1) {
+                
+            }
         }
 
 
@@ -2878,5 +2891,166 @@ namespace fuzhu
             return rt;
            
         }
+
+
+
+
+        /// <summary>
+        /// 鼠标左键点击 x y坐标
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void click(int x, int y)
+        {
+            int x1 = MyFuncUtil.suijishu(-2, 2);
+            int y1 = MyFuncUtil.suijishu(-2, 2);            
+            mf.mydelay(50, 80);
+            if ((x1 + x < 0) || (y1 + y < 0) ||
+                (x1 + x > xianzhi_x) || (y1 + y > xianzhi_y))
+            {
+                WriteLog.WriteLogFile("", "出边界了.." + x + " " + y);
+                return;
+            }
+            mf.MoveTo(x + x1, y + y1);
+            mf.mydelay(60, 120);
+            mf.LeftDown();
+            mf.mydelay(10, 50);
+            mf.LeftUp();
+            mf.mydelay(10, 120);
+        }
+
+        /// <summary>
+        /// 间隔多少毫秒
+        /// </summary>
+        public void msleep(int jg)
+        {
+            mf.mydelay(jg,jg);
+        }
+
+        public int mohu(int mx1, int my1, int myanse1, int mx2 = -1, int my2 = -1, int myanse2 = -1, int mx3 = -1, int my3 = -1, int myanse3 = -1, int sim = 90)
+        {
+            if ((mx1 < 0) || (my1 < 0) ||
+                (mx1 > xianzhi_x) || (my1 > xianzhi_y) ||
+                (mx1 + 1 < 0) || (my1 + 1 < 0) ||
+                (mx1 + 1 > xianzhi_x) || (my1 + 1 > xianzhi_y))
+            {
+                WriteLog.WriteLogFile("", "mohu无句柄出边界了.." + mx1 + " " + my1);
+                return 0;
+            }
+
+            int ox = -1, oy = -1;
+            int rs1 = -1;
+            rs1 = mf.jingque(mx1, my1, myanse1, mx2, my2, myanse2, mx3, my3, myanse3);
+            if (rs1 == 1)
+            {
+                return 1;
+            }
+            mf.myqudianqudanse(myanse1, sim, mx1, my1, mx1 + 1, my1 + 1, out ox, out oy);
+            if (ox != -1 && oy != -1)
+            {
+                rs1 = 1;
+            }
+            int rs2 = -1;
+            if (mx2 != -1)
+            {
+                mf.myqudianqudanse(myanse2, sim, mx2, my2, mx2 + 1, my2 + 1, out ox, out oy);
+                if (ox != -1 && oy != -1)
+                {
+                    rs2 = 1;
+                }
+            }
+            int rs3 = -1;
+            if (mx3 != -1)
+            {
+                mf.myqudianqudanse(myanse3, sim, mx3, my3, mx3 + 1, my3 + 1, out ox, out oy);
+                if (ox != -1 && oy != -1)
+                {
+                    rs3 = 1;
+                }
+            }
+            if ((rs1 == 1) && (rs2 == 1) && (rs3 == 1))
+            {
+                return 1;
+            }
+            if ((rs1 == 1) && (rs2 == 1) && (myanse3 == -1))
+            {
+                return 1;
+            }
+            if ((rs1 == 1) && (myanse2 == -1) && (myanse3 == -1))
+            {
+                return 1;
+            }
+            return 0;
+        }
+
+
+        /// <summary>
+        /// 从指定坐标按下鼠标左键 开始拖鼠标 到指定坐标2结束
+        /// </summary>
+        /// <param name="jubing"></param>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        public void touchdown(int x1, int y1, int x2, int y2)
+        {
+            //int res = mf.IsBind(jubing);
+            //if (res != 1)
+            {
+                //res = bindWindow(jubing);
+            }
+            mf.mydelay(10, 20);
+            mf.MoveTo(x1, y1);
+            mf.mydelay(200, 300);
+            mf.LeftDown();
+            mf.mydelay(100, 200);
+            int beichu1 = x1 >= x2 ? 10 : -10;
+            int beichu2 = y1 >= y2 ? 10 : -10;
+            int jiangex = System.Math.Abs(x1 - x2) / beichu1;
+            int jiangey = System.Math.Abs(y1 - y2) / beichu2;
+            int absjiangex = System.Math.Abs(jiangex);
+            int absjiangey = System.Math.Abs(jiangey);
+            //MyFuncUtil.mylogandxianshi("jiangex,jiangey" + jiangex + " " + jiangey + " beichu1：" + beichu1 + " beichu2：" + beichu2);
+            int jiaoxiao = absjiangex <= absjiangey ? absjiangex : absjiangey;
+            //MyFuncUtil.mylogandxianshi("jiaoxiao" + jiaoxiao);
+            int dqx = x1;
+            int dqy = y1;
+            MyFuncUtil.mylogandxianshi("x1,y1---" + x1 + " " + y1);
+            for (int i = 0; i < jiaoxiao; i++)
+            {
+                mf.MoveTo(x1 - (i + 1) * beichu1, y1 - (i + 1) * beichu2);
+                dqx = x1 - (i + 1) * beichu1;
+                dqy = y1 - (i + 1) * beichu2;
+                mf.mydelay(100, 300);
+                //MyFuncUtil.mylogandxianshi("x1,y1 " + (x1 - (i + 1) * beichu1) + " " + (y1 - (i + 1) * beichu2));
+                //MyFuncUtil.mylogandxianshi("dqx,dqy --"+dqx+" "+dqy);
+            }
+            int jiaoxiao2 = absjiangex > absjiangey ? absjiangex - absjiangey : absjiangey - absjiangex;
+            if (absjiangex > absjiangey)
+            {
+                for (int i = 0; i < jiaoxiao2; i++)
+                {
+                    mf.MoveTo(dqx - (i + 1) * beichu1, dqy);
+                    mf.mydelay(100, 300);
+                    //MyFuncUtil.mylogandxianshi("dqx,dqy --" + (dqx - (i + 1) * beichu1) + " " + dqy);
+                }
+            }
+            else if (absjiangex < absjiangey)
+            {
+                for (int i = 0; i < jiaoxiao2; i++)
+                {
+                    mf.MoveTo(dqx, dqy - (i + 1) * beichu2);
+                    mf.mydelay(100, 300);
+                    //MyFuncUtil.mylogandxianshi("dqx,dqy" + dqx + " " + (dqy - (i + 1) * beichu2));
+                }
+            }
+            mf.MoveTo(x2, y2);
+            mf.mydelay(100, 300);
+            mf.LeftUp();
+            mf.mydelay(100, 300);
+        }
     }
+
+
+        
 }

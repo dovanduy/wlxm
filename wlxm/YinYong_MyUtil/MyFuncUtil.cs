@@ -477,13 +477,15 @@ namespace MyUtil
             myDm dm = new myDm();
             lock (dm)
             {
-                int jb2 = dm.FindWindowEx(0, "LDPlayerMsgFrame", "");
+                int jb2 = dm.FindWindowEx(0, "MessageBoxWindow", "");
                 if (jb2 > 0)
                 {
                     dm.bindWindow(jb2);
                     WriteLog.WriteLogFile("", "发现一个是否关闭,点是");
-                    if (dm.mohu(366, 181, 0x009de4) == 1) {
-                        dm.mytap(jb2, 346, 181);
+                    if (dm.mohu_duokai(293, 178, 0x009de4) == 1)
+                    {
+                        WriteLog.WriteLogFile("", "点是");
+                        dm.mytap_duokai(jb2, 346, 181);
                         dm.mydelay(1000, 2000);
                     }
                 }
@@ -879,6 +881,7 @@ namespace MyUtil
 
         public static void duokaiqiAdd(string a_b)
         {
+            zaiciguanbi();
             WriteLog.WriteLogFile("", "打开模拟器,新增15个或20个");
             int a = 4;
             if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))

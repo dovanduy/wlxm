@@ -28,6 +28,7 @@ namespace xDM
             return md;
             //Thread.Sleep(md * 10);
         }
+
         new public int delay(int m)
         {
             Thread.Sleep(m);
@@ -272,6 +273,8 @@ namespace xDM
             mydm.LeftUp();
             mydelay(10, 120);
         }
+
+        
 
         /// <summary>
         /// 鼠标左键点击 x y坐标

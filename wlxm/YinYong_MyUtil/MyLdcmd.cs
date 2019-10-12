@@ -819,8 +819,8 @@ namespace MyUtil
             MyLdcmd myldcmd = MyLdcmd.GetObject();
             lock (obj)
             {
-                myldcmd.ImplementCmd(string.Format("{0}dnconsole modify --index {1} --resolution 960,540,160 --cpu 1 --memory 1024 --imei auto", myldcmd.SimulatorPath, index));
-                WriteLog.WriteLogFile(index + "", string.Format("{0}dnconsole modify --index {1} --resolution 960,540,160 --cpu 1 --memory 1024 --imei auto", myldcmd.SimulatorPath, index));
+                myldcmd.ImplementCmd(string.Format("{0}dnconsole modify --index {1} --resolution 540,960,240 --cpu 1 --memory 1024 --imei auto", myldcmd.SimulatorPath, index));
+                WriteLog.WriteLogFile(index + "", string.Format("{0}dnconsole modify --index {1} --resolution 540,960,240 --cpu 1 --memory 1024 --imei auto", myldcmd.SimulatorPath, index));
             }
         }
 

@@ -258,20 +258,9 @@ namespace wlxm
 
             string a ="";
             MyFuncJingNoTai mno = new MyFuncJingNoTai();
-            //getIP(dqinx,dizhi,seed,mno,jubing,out a);
-            if (mf.mohu_duokai(84, 237, 0xd5d5d5) == 1)
-            {
-                mf.mytap_duokai(jubing, 84, 237);
-            }
-            mf.mydelay(2000, 3000);
-            if (mf.mohu_duokai( 80,  536, 0xffffff) == 1) {
-                mf.mytap_duokai(jubing, 80, 536);
-                mf.mydelay(2000, 3000);
-                mf.mytap_duokai(jubing, 428, 763);
-                mf.mydelay(2000, 3000);
-            }
+            MyLdcmd.installApp(dqinx, @"C:\迅雷下载\yiquanchaoren_huanchangyouxi_1.1.7.apk");
             WriteLog.WriteLogFile(dqinx + "", mf.GetClipboard() + " 当前剪切板");
-            MyFuncUtil.mylogandxianshi("结束"+a);
+            MyFuncUtil.mylogandxianshi("结束");
            
         }
 
@@ -281,7 +270,7 @@ namespace wlxm
             bool temp=false;
             t = MyFuncUtil.lureninstallOk(dqinx, "package:com.ddm.iptools", () =>
             {
-                WriteLog.WriteLogFile(dqinx + "", "安装app没成功");
+                WriteLog.WriteLogFile(dqinx + "", "安装app没成功--iptools");
                 temp = mno.myQuit(dqinx, dizhi);
                 if (!temp)
                 {
@@ -290,7 +279,15 @@ namespace wlxm
                     return;
                 }
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原");
-                MyLdcmd.myRestore(dqinx, seed, dizhi);
+                //MyLdcmd.myRestore(dqinx, seed, dizhi);
+                MyLdcmd.installApp(dqinx, @"C:\迅雷下载\2_1b823b1928a42f09423f28cb79179bfe.apk");
+                temp = mno.myQuit(dqinx, dizhi);
+                if (!temp)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
+                    Thread.Sleep(20000);
+                    return;
+                }
                 temp = MyFuncUtil.Launch(dqinx, dizhi);
                 if (!temp)
                 {
@@ -302,7 +299,7 @@ namespace wlxm
             });
             if (t == false)
             {
-                WriteLog.WriteLogFile(dqinx + "", "安装app没成功");
+                WriteLog.WriteLogFile(dqinx + "", "安装app没成功--iptools");
                 temp = mno.myQuit(dqinx, dizhi);
                 if (!temp)
                 {
@@ -311,7 +308,15 @@ namespace wlxm
                     return;
                 }
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原");
-                MyLdcmd.myRestore(dqinx, seed, dizhi);                
+                //MyLdcmd.myRestore(dqinx, seed, dizhi);      
+                MyLdcmd.installApp(dqinx, @"C:\迅雷下载\2_1b823b1928a42f09423f28cb79179bfe.apk");
+                temp = mno.myQuit(dqinx, dizhi);
+                if (!temp)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
+                    Thread.Sleep(20000);
+                    return;
+                }
                 temp = MyFuncUtil.Launch(dqinx, dizhi);
                 if (!temp)
                 {
@@ -354,6 +359,10 @@ namespace wlxm
                     WriteLog.WriteLogFile(dqinx + "", "模拟器发现已取点" + yiqu);
                 }
                 ip= yiqu;
+            }
+            if (ip != "" && ip.IndexOf("请") < 0)
+            {
+                return;
             }
             WriteLog.WriteLogFile(dqinx + "", " t2:" + t2 + " t:" + t + " temp:" + temp);
             if (!t2 || !t || !temp)
@@ -531,13 +540,13 @@ namespace wlxm
             for (int j = 1; j < 1000; j++)
             {
                 WriteLog.WriteLogFile("", "序号" + j + ",开始");
-                //MyLdcmd.myQuitAll(dizhi);
-                //Thread.Sleep(2000);
-                //MyLdcmd.myRemoveAll(dizhi);
+                MyLdcmd.myQuitAll(dizhi);
+                Thread.Sleep(2000);
+                MyLdcmd.myRemoveAll(dizhi);
                 Thread.Sleep(2000);
                 MyLdcmd.RunDuokaiqi(a_b);
                 Thread.Sleep(2000);
-                //MyFuncUtil.duokaiqiAdd(a_b);
+                MyFuncUtil.duokaiqiAdd(a_b);
                 Thread.Sleep(2000);
                 ThreadPool.SetMaxThreads(yunxingIndex.Length, yunxingIndex.Length); //设置最大线程数
                 string[] getquanbujubing = MyLdcmd.getDqmoniqiJuBing();
@@ -924,7 +933,7 @@ namespace wlxm
             int chongqi = 0;
             string youxi = fuzhuyouxi;
             int ipbeizhan = 0;
-            while (true)
+            for (int ii = 0; ii < 1;ii++ )
             {
                 /*进入操作模拟器循环中
                 1.模拟器是不是开着
@@ -939,10 +948,14 @@ namespace wlxm
                 var ks = MyFuncUtil.GetTimestamp();
                 Thread.Sleep(2000);
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "进入到循环当中，thread:" + Thread.CurrentThread.ManagedThreadId + ",jubing" + jubing);
-                Thread.Sleep(1000);
+                Thread.Sleep(1000);               
                 bool t = MyFuncUtil.isLaunch(dqinx);
                 if (!t)
                 {
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改名");
+                    MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改属性");
+                    MyLdcmd.modifySimulator(dqinx);
                     temp = MyFuncUtil.Launch(dqinx, dizhi);
                     if (!temp)
                     {
@@ -950,11 +963,15 @@ namespace wlxm
                         Thread.Sleep(20000);
                         continue;
                     }
-                    Thread.Sleep(20000);
+                    Thread.Sleep(1000);
+                    MyLdcmd.installApp(dqinx, @"C:\迅雷下载\2_1b823b1928a42f09423f28cb79179bfe.apk");
+                    Thread.Sleep(1000 * 20);
+                    MyLdcmd.installApp(dqinx, @"C:\迅雷下载\yiquanchaoren_huanchangyouxi_1.1.7.apk");
+                    Thread.Sleep(1000 * 20);
                 }
                 t = MyFuncUtil.lureninstallOk(dqinx, "package:com.playcrab.kos.gw", () =>
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "安装app没成功");
+                    WriteLog.WriteLogFile(dqinx + "", "安装app没成功--yiquan");
                     temp = mno.myQuit(dqinx, dizhi);
                     if (!temp)
                     {
@@ -962,10 +979,20 @@ namespace wlxm
                         Thread.Sleep(20000);
                         return;
                     }
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原");
-                    MyLdcmd.myRestore(dqinx, seed, dizhi);
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原--yiquan");
+                    //MyLdcmd.myRestore(dqinx, seed, dizhi);
+                    MyLdcmd.installApp(dqinx, @"C:\迅雷下载\yiquanchaoren_huanchangyouxi_1.1.7.apk");
+                    temp = mno.myQuit(dqinx, dizhi);
+                    if (!temp)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
+                        Thread.Sleep(20000);
+                        return;
+                    }
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改名");
                     MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改属性");
+                    MyLdcmd.modifySimulator(dqinx);
                     temp = MyFuncUtil.Launch(dqinx, dizhi);
                     if (!temp)
                     {
@@ -977,7 +1004,7 @@ namespace wlxm
                 });
                 if (t == false || chongqi == 1)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "安装app没成功");
+                    WriteLog.WriteLogFile(dqinx + "", "安装app没成功--yiquan");
                     temp = mno.myQuit(dqinx, dizhi);
                     if (!temp)
                     {
@@ -985,10 +1012,20 @@ namespace wlxm
                         Thread.Sleep(20000);
                         continue;
                     }
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原");
-                    MyLdcmd.myRestore(dqinx, seed, dizhi);
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原--yiquan");
+                    //MyLdcmd.myRestore(dqinx, seed, dizhi);
+                    MyLdcmd.installApp(dqinx, @"C:\迅雷下载\yiquanchaoren_huanchangyouxi_1.1.7.apk");
+                    temp = mno.myQuit(dqinx, dizhi);
+                    if (!temp)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
+                        Thread.Sleep(20000);
+                        continue;
+                    }
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改名");
                     MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改属性");
+                    MyLdcmd.modifySimulator(dqinx);
                     temp = MyFuncUtil.Launch(dqinx, dizhi);
                     if (!temp)
                     {
@@ -1019,18 +1056,21 @@ namespace wlxm
                     continue;
                 }
                 string ip = "";
-                ZhangHao zhanghao = new ZhangHao();
+                ZhangHao zhanghao = new ZhangHao();               
                 getIP(dqinx, dizhi, seed, mno, jubing, out ip);
-                if (ip!= null && !"".Equals(ip) && ip.IndexOf("请") < 0)
+                if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
                 {
-                    t = zhanghao.panduanIpKeYong(dqinx, youxi, ip);
-                    if (t)
+                    if (ip != null && !"".Equals(ip) && ip.IndexOf("请") < 0)
                     {
-                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "ip已被占");
-                        MyLdcmd.myReboot(dqinx);
-                        Thread.Sleep(1000 * 60 * 4);
-                        ipbeizhan++;
-                        continue;
+                        t = zhanghao.panduanIpKeYong(dqinx, youxi, ip);
+                        if (t)
+                        {
+                            WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "ip已被占");
+                            MyLdcmd.myReboot(dqinx);
+                            Thread.Sleep(1000 * 60 * 4);
+                            ipbeizhan++;
+                            continue;
+                        }
                     }
                 }
                 string name = "";
@@ -1086,9 +1126,9 @@ namespace wlxm
                     Thread.Sleep(1000 * 10);
                 }
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "开始尝试登录主线");
-                YiQuan_Xin yq = new YiQuan_Xin(dm, dqinx, jubing, dizhi); 
+                YiQuan_Xin yq = new YiQuan_Xin(dm, dqinx, jubing, dizhi);
                 int xuanqu = -1, dengji = -1;
-                
+
                 //zhanghao.zhunbeizhanghao(dqinx, youxi, out name, out pwd, out xuanqu, out dengji, out jieduan);
                 if (name == null || name == "" || pwd == null || pwd == "")
                 {
@@ -1118,8 +1158,15 @@ namespace wlxm
                 yq.quitdq(name);
                 //Thread.Sleep(1000 * 60*60);//停住1小时
                 cishu++;
-                MyLdcmd.myReboot(dqinx);
+                // MyLdcmd.myReboot(dqinx);
                 Thread.Sleep(1000 * 60 * 4);
+                temp = mno.myQuit(dqinx, dizhi);
+                if (!temp)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
+                    Thread.Sleep(20000);
+                    continue;
+                }
                 bool cqcg = false;
                 t = MyFuncUtil.isLaunch(dqinx);
                 if (t)
@@ -1141,7 +1188,7 @@ namespace wlxm
                     {
                         WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
                         Thread.Sleep(20000);
-                        return;
+                        continue;
                     }
                 }
                 zhanghao.zhiweidengluzhongN(dqinx, "yiquan", name, WriteLog.getMachineName());
