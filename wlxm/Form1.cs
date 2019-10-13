@@ -254,12 +254,9 @@ namespace wlxm
             {
                 r = mf.bindWindow(jubing);
             }
-            YiQuan_Xin ln = new YiQuan_Xin(mf, dqinx, jubing,dizhi);
-
-            string a ="";
-            MyFuncJingNoTai mno = new MyFuncJingNoTai();
-            MyLdcmd.installApp(dqinx, @"C:\迅雷下载\yiquanchaoren_huanchangyouxi_1.1.7.apk");
-            WriteLog.WriteLogFile(dqinx + "", mf.GetClipboard() + " 当前剪切板");
+            //YiQuan_Xin ln = new YiQuan_Xin(mf, dqinx, jubing,dizhi);
+            MyLdcmd.myLaunch1(dqinx, dizhi);
+            MyLdcmd.myReboot(dqinx);
             MyFuncUtil.mylogandxianshi("结束");
            
         }

@@ -140,13 +140,13 @@ namespace MyUtil
         /// </summary>
         /// <param name="index">模拟器序号</param>
         /// <returns></returns>
-        public string Launch()
+        public string Launch(int index)
         {
             lock (obj)
             {
                 return ImplementCmd(
-                    string.Format("{0}dnconsole modify --index 0 --resolution 600,360,160 --cpu 1 --memory 1024 --imei auto",
-                    SimulatorPath));
+                    string.Format("{0}dnconsole modify --index {1} --resolution 600,360,160 --cpu 1 --memory 1024 --imei auto",
+                    SimulatorPath,index));
             }
         }
 
@@ -740,7 +740,7 @@ namespace MyUtil
         {
             MyLdcmd myldcmd = MyLdcmd.GetObject(dizhi);
             myldcmd.SimulatorPath = ld.SimulatorPath;
-            string a = myldcmd.Launch();
+            string a = myldcmd.Launch(dqinx);
             WriteLog.WriteLogFile("", a);
         }
 

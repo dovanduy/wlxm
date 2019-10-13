@@ -456,6 +456,13 @@ namespace fuzhu
                 if (mf.mohuByLeiBool(fh.Sd))
                 {
                     WriteLog.WriteLogFile(this._mnqName, fh.Name);
+                    if (fh.Listzuobiao != null && fh.Listzuobiao.Count > 0) {
+                        foreach (ZuoBiao z in fh.Listzuobiao) {
+                            if (mohu(z.X, z.Y, z.Yanse) == 1) {
+                                click(z.X, z.Y);
+                            }
+                        }
+                    }
                     if (fh.Zhidingx != -1 && fh.Zhidingy != -1)
                     {
                         mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
@@ -610,6 +617,13 @@ namespace fuzhu
                 WriteLog.WriteLogFile(this._mnqName, "准备打怪");
                 int x = -1, y = -1;
                 FuHeDuoDian hq = YiQuan_DuoDian.GetObject().findFuHeDuodianByName("类似光头红色拳头");
+                mf.myqudianqusezuobiaoByLeiWuJubing(hq.Dz, out x, out y);
+                if (x != -1 && y != -1)
+                {
+                    WriteLog.WriteLogFile(this._mnqName, hq.Name + x + " " + y);
+                    mf.mytap(this._jubing, x, y + 50);
+                }
+                hq = YiQuan_DuoDian.GetObject().findFuHeDuodianByName("类似光头红色拳头2");
                 mf.myqudianqusezuobiaoByLeiWuJubing(hq.Dz, out x, out y);
                 if (x != -1 && y != -1)
                 {
@@ -1023,7 +1037,7 @@ namespace fuzhu
             FuHeSanDian dh15 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-黑屏普通攻击");
             FuHeSanDian dh16 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-一拳通关完成关闭");
             WriteLog.WriteLogFile(this._mnqName, "进入引导区开始引导时作");
-            FuHeSanDian dh = mf.fuHeSanDianShuZu(new FuHeSanDian[] { dh1, dh2, dh3, dh4, dh5, dh6, dh7, dh8, dh9, dh10, dh11, dh12, dh13, dh14, dh15, dh16 });
+            FuHeSanDian dh = mf.fuHeSanDianShuZu(new FuHeSanDian[] { dh1, dh2, dh3, dh4, dh5, dh6, dh7,  dh9, dh10, dh11, dh12, dh13, dh14, dh15, dh16 });
             if (dh != null)
             {
                 WriteLog.WriteLogFile(this._mnqName,dh.Name);
@@ -1039,6 +1053,18 @@ namespace fuzhu
                             mf.mydelay(300, 1000);
                         }
                     }
+                }
+            }
+
+            if (mf.mohuByLeiBool(dh8.Sd))
+            {
+                WriteLog.WriteLogFile(this._mnqName, dh8.Name);
+                mf.mydelay(100, 600);
+                mf.mytap(this._jubing, dh8.Zhidingx, dh8.Zhidingy);
+                mf.mydelay(100, 600);
+                if (!mf.mohuByLeiBool(dh8.Sd)) {
+                    WriteLog.WriteLogFile(this._mnqName, dh8.Name+"不再打开");
+                    mf.mytap(this._jubing,508, 9);                    
                 }
             }
 
@@ -1179,9 +1205,9 @@ namespace fuzhu
                 yindaoshizuo_xian(); 
                 //tedingdian_dijibie();
             }
-            if ((kp2 - kp1) > 1000 * 60*5)
+            if ((kp2 - kp1) > 1000 * 60*10)
             {
-                WriteLog.WriteLogFile(this._mnqName,"卡屏5分钟");
+                WriteLog.WriteLogFile(this._mnqName,"卡屏10分钟");
                 string path = @"c:\mypic_save\";
                 string name=this._dqinx+"_"+mf.GetTime()+".bmp";
                 mf.captureBmp(this._jubing, path, name);
@@ -1193,7 +1219,7 @@ namespace fuzhu
         }
 
 
-        private bool panduanzhandou(SanDian sd)
+        private bool panduanzhandou1(SanDian sd)
         {
             bool rs = false;
             long dqsj = MyFuncUtil.GetTimestamp();
@@ -1201,9 +1227,9 @@ namespace fuzhu
             {
                 zdsj = MyFuncUtil.GetTimestamp();
             }
-            if ((dqsj - zdsj) > 1000 * 60 * 15)
+            if ((dqsj - zdsj) > 1000 * 60 * 60*3)
             {
-                WriteLog.WriteLogFile(this._mnqName,"15分钟未战斗");
+                WriteLog.WriteLogFile(this._mnqName,"45分钟未战斗");
                 string path = @"c:\mypic_save\";
                 string name = this._dqinx + "_" + mf.GetTime() + ".bmp";
                 mf.captureBmp(this._jubing, path, name);
@@ -1738,11 +1764,11 @@ namespace fuzhu
                     kp1 = MyFuncUtil.GetTimestamp();
                 }
 
-                SanDian zdhm = YiQuan_SanDian.GetObject().findFuHeSandianByName("战斗画面").Sd;
-                if (panduanzhandou(zdhm))
-                {
-                    break;
-                }
+                //SanDian zdhm = YiQuan_SanDian.GetObject().findFuHeSandianByName("战斗画面").Sd;
+                //if (panduanzhandou(zdhm))
+                //{
+                   // break;
+                //}
 
                 SanDian zdsb = YiQuan_SanDian.GetObject().findFuHeSandianByName("出现战斗失败").Sd;
                 if (mf.jingqueByLeiBool(zdsb))

@@ -117,6 +117,11 @@ namespace fuzhu
             _list_yqduodian.Add(dz3);
             _list_yqfhduodian.Add(fh3);
 
+            DuoDianZhaoSe dz4 = new DuoDianZhaoSe(0xda3519, "-7|-2|0xee280a,-3|8|0x530f07,-1|-9|0xcc462f,1|3|0xf32614", 90, 0, 0, 532, 240);
+            FuHeDuoDian fh4 = new FuHeDuoDian("类似光头红色拳头2", dz4, -1, -1, ls0);
+            _list_yqduodian.Add(dz4);
+            _list_yqfhduodian.Add(fh4);
+
             
             //其他多点
             DuoDianZhaoSe rcdz1 = new DuoDianZhaoSe(0x69b509, "-9|0|0x529f09,10|0|0x6fc507,-69|-1|0xabe27e,-80|-1|0x97ca6f", 90, 0, 90, 110, 160);
