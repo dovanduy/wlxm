@@ -285,6 +285,34 @@ namespace fuzhu
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  331,  144, 0x6a686d},
+	{  317,  141, 0x908c8c},
+	{  334,  211, 0xffdb21},
+});
+            guanbifhx = new FuHeSanDian("开引导-未上阵离开吗", guanbisdx, 334, 211);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  502,  275, 0xa9976e},
+	{  369,  189, 0xefb294},
+	{  426,  216, 0xff9e61},
+});
+            guanbifhx = new FuHeSanDian("开引导-首领挑战开搞", guanbisdx, 502, 275);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  325,  133, 0x641d29},
+	{  130,   28, 0x614100},
+	{  139,  123, 0x5f5952},
+});
+            guanbifhx = new FuHeSanDian("开引导-蚊女剧情1", guanbisdx, 325, 133);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+
 
 
 
@@ -1163,11 +1191,11 @@ namespace fuzhu
             _list_yqfhsandian.Add(new2);
 
             new1 = new SanDian(new int[3, 3]{
-	            {  440,   82, 0xefebde},
-	            {  124,  218, 0xfb4420},
-	            {  329,  149, 0x9a93c3},
-            });
-            new2 = new FuHeSanDian("第四章孤高改造人", new1, 330, 239);
+	{  363,  245, 0xffd21d},
+	{  115,  225, 0xda3711},
+	{  107,  205, 0xf7cf08},
+});
+            new2 = new FuHeSanDian("第四章孤高改造人", new1, 363, 245);
             _list_yqsandian.Add(new1);
             _list_yqfhsandian.Add(new2);
 

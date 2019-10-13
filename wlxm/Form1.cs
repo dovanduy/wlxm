@@ -148,15 +148,15 @@ namespace wlxm
                 Thread.Sleep(1000);
                 var js = MyFuncUtil.GetTimestamp();
                 i++;
-
+                int daojishi = 60 * 3;
                 //MyFuncUtil.SecondToHour(+i + (js - ks) / 1000+" "
                 CalcFinished("程序已运行:" + MyFuncUtil.SecondToHour(js - ks) + zidong);
                 this.label2.ForeColor = Color.Red;
-                if (quanjubutton == 0 && yici == 0 && (js - ks) > 1000 * 10 && (js - ks) <= 1000 * 20)
+                if (quanjubutton == 0 && yici == 0 && (js - ks) > 1000 * 10 && (js - ks) <= 1000 * daojishi)
                 {
-                    WriteLog.WriteLogFile("", "程序搞自动倒计时 " + (20-(js - ks)/1000)+"秒");
+                    WriteLog.WriteLogFile("", "程序搞自动倒计时 " + (daojishi - (js - ks) / 1000) + "秒");
                 }
-                if (quanjubutton==0 && yici == 0 && (js - ks) > 1000 * 20)
+                if (quanjubutton == 0 && yici == 0 && (js - ks) > 1000 * daojishi)
                 {
                     quanjubutton = 1;
                     yici = 1;
@@ -930,7 +930,7 @@ namespace wlxm
             int chongqi = 0;
             string youxi = fuzhuyouxi;
             int ipbeizhan = 0;
-            for (int ii = 0; ii < 1;ii++ )
+            for (int ii = 0; ii < 10;ii++ )
             {
                 /*进入操作模拟器循环中
                 1.模拟器是不是开着
