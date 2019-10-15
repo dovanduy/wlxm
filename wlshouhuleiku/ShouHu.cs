@@ -254,11 +254,11 @@ namespace SH_MyUtil
                     ks3 = MyFuncUtil.GetTimestamp();
                     DateTime dt = getYunXingQkLasttime();
                     TimeSpan span = DateTime.Now.Subtract(dt);
-                    WriteLog.WriteLogFile("准备更新与上次统计相比,间隔 " + span.Minutes + "分钟");
+                    //WriteLog.WriteLogFile("准备更新与上次统计相比,间隔 " + span.Minutes + "分钟");
                     if (span.Hours >= 1)
                     {
                         WriteLog.WriteLogFile("与上次统计相比,间隔 " + span.Minutes + "分钟");
-                        gxYunXingQk("jingjieguanfang");
+                        //gxYunXingQk("jingjieguanfang");
                     }
                 }
                 //检测wlxm

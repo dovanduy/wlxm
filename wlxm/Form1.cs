@@ -186,7 +186,7 @@ namespace wlxm
                     DateTime dt=zh.getYunXingQkLasttime();
                     TimeSpan span = DateTime.Now.Subtract(dt);
                     WriteLog.WriteLogFile("", "准备更新与上次统计相比,间隔 " + span.Minutes + "分钟");
-                    if (span.Hours >= 1 || span.Minutes > 45)
+                    if (span.Hours >= 1)
                     {
                         WriteLog.WriteLogFile("", "与上次统计相比,间隔 " + span.Minutes + "分钟");
                         zh.gxYunXingQk("yiquan");
@@ -1096,6 +1096,7 @@ namespace wlxm
                 WriteLog.WriteLogFile(dqinx + "", "t2:" + t2 + "t:" + t + "temp:" + temp);
                 if (!t2 || !t || !temp)
                 {
+                    apkName = dict["一拳超人"];
                     i = MyFuncUtil.QiDongWanChengLurenzhanghao(a_b, dqinx, apkName);
                     if (i == -1)
                     {
@@ -1811,6 +1812,51 @@ namespace wlxm
                 this.zidongthread.Abort();
             }
             Application.Exit();       
+        }
+
+        private void jietujiese_Click(object sender, EventArgs e)
+        {
+            quanjubutton = 1;
+            WriteLog.WriteLogFile("", "开始截图");
+            string dizhi = null;
+            string path = null;
+            string seed = null;
+            MyFuncUtil.myqiehuancd("d", out dizhi, out path, out seed);
+            string ab = this.textBox1.Text;
+            if (ab == null || ab.Equals("")) {
+                WriteLog.WriteLogFile("", "没填写句柄值");
+                return;
+            }
+            int dqinx = int.Parse(this.textBox1.Text);
+            int jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx, dizhi);
+            myDm mf = new myDm();
+            int r = 0;
+            if (jubing > 0)
+            {
+                r = mf.bindWindow(jubing);
+            }
+            string filename = dqinx + "_" + mf.GetTime() + ".bmp";
+            if (mf.IsFileExist(@"c:\mypic\" + filename) == 1)
+            {
+                WriteLog.WriteLogFile("", "有重复图存在");
+                filename = dqinx + "_" + mf.GetTime() + ".bmp";
+            }
+            mf.captureBmp(jubing, @"c:\mypic\", filename);
+            if (mf.IsFileExist(@"c:\mypic\" + filename) == 1)
+            {
+                if (System.IO.File.Exists(@"D:\TSColorPicker\TSColorPicker.exe"))
+                {
+                    Process p = new Process();
+                    p.StartInfo.FileName = @"D:\TSColorPicker\TSColorPicker.exe";
+                    //启动程序
+                    p.Start();
+                }
+                else {
+                    WriteLog.WriteLogFile("", "d盘没有tscolor");
+                }
+            }
+            WriteLog.WriteLogFile("", "结束截图");
+
         }
 
         
