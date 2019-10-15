@@ -300,7 +300,7 @@ namespace MyUtil
         /// </summary>
         /// <param name="ldcmd"></param>
         /// <returns></returns>
-        public static string[] getDqmoniqiWaiCengJuBing(string dizhi)
+        public static string[] getDqmoniqiWaiCengJuBing(string dizhi= @"d:\ChangZhi\dnplayer2\")
         {
 
             List<string> slist = MyLdcmd.GetListSimulator(dizhi);
@@ -338,6 +338,7 @@ namespace MyUtil
 
         }
 
+ 
        
 
 

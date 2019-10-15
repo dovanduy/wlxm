@@ -99,6 +99,10 @@ namespace MyUtil
             {
                 Directory.CreateDirectory(@"c:\mypic_save\");
             }
+            if (!Directory.Exists(@"c:\mypic\"))//如果不存在就创建file文件夹　　             　　              
+            {
+                Directory.CreateDirectory(@"c:\mypic\");
+            }
            
             
             if (!Directory.Exists(@"d:\mypic_save\"))//如果不存在就创建file文件夹　　             　　              
@@ -370,7 +374,7 @@ namespace MyUtil
 
         public static bool lureninstallOk(int dqinx,string apppackage,Action myinstall)
         {
-            WriteLog.WriteLogFile(dqinx + "", "检测安装是否成功");
+            WriteLog.WriteLogFile(dqinx + "", "检测安装是否成功" + apppackage);
             bool t = false;
             //隔30秒检测是否安装成功
             long ksjs = MyFuncUtil.GetTimestamp();
@@ -381,7 +385,7 @@ namespace MyUtil
             {
                 if (yici == 0) {
                     yici = 1;
-                    WriteLog.WriteLogFile(dqinx + "", "开头要检测安装一次");
+                    WriteLog.WriteLogFile(dqinx + "", "开头要检测安装一次" + apppackage);
                     luren = MyLdcmd.jingjieisok(dqinx, apppackage);
                 }
                 long js = MyFuncUtil.GetTimestamp();
@@ -398,7 +402,7 @@ namespace MyUtil
                 }
                 if (luren)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "安装app成功");
+                    WriteLog.WriteLogFile(dqinx + "", "安装app成功" + apppackage);
                     t = true;
                     break;
                 }
@@ -746,7 +750,7 @@ namespace MyUtil
 
         public static int QiDongWanChengLurenzhanghao(string a_b, int dqinx, string app)
         {
-            WriteLog.WriteLogFile(dqinx + "", "尝试打开app" + dqinx);
+            WriteLog.WriteLogFile(dqinx + "", "尝试打开app" + app);
             bool qidongcg = true;
             long ks = GetTimestamp();
             int i = 1;

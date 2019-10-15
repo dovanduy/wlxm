@@ -22,9 +22,18 @@ namespace Entity
             set { _jubing = value; }
         }
 
-        public LeiDianCanShu(int dqinx, int jubing) {
+        public LeiDianCanShu(int dqinx, int jubing,int waicengjubing) {
             this._dqinx = dqinx;
             this._jubing = jubing;
+            this._waiCengJuBing = waicengjubing;
+        }
+
+        private int _waiCengJuBing;
+
+        public int WaiCengJuBing
+        {
+            get { return _waiCengJuBing; }
+            set { _waiCengJuBing = value; }
         }
     }
 }

@@ -702,6 +702,8 @@ namespace xDM
         public int bindWindow(int jb)
         {
             int ret = mydm.BindWindow(jb, "gdi", "windows3", "windows", 1);
+            //同时绑定本体
+            ret = this.BindWindow(jb, "gdi", "windows3", "windows", 1);
             return ret;
         }
 

@@ -11,7 +11,7 @@ namespace SH_MyUtil
 {
     public class ShouHu
     {
-        public static int BanBenHao =7;
+        public static int BanBenHao =8;
         private static readonly object obj = new object();
         public void wohaihuozhe() {
             WriteLog.WriteLogFile("生命的迹象 "+MyFuncUtil.suijishu(1,100));

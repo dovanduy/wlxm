@@ -207,7 +207,7 @@ namespace MyUtil
             }
         }
 
-        public void tuichusaveNameAndPas(string name,int dqindex,string pcname,int dengji,int zuanshi,int qiangzhequan)
+        public void tuichusaveNameAndPas(string name,int dqindex,string youxi,string pcname,int dengji,int zuanshi,int qiangzhequan)
         {
             WriteLog.WriteLogFile(dqindex+"", "name " + name + ",pcname " + pcname+",强者券 " + qiangzhequan + ",钻石 " + zuanshi+ ",等级 " +dengji);
             SqlHelp sqh = SqlHelp.GetInstance();
@@ -216,7 +216,7 @@ namespace MyUtil
                 try
                 {
                     DataTable dt = sqh.getAll("select top 1 name from zhanghao where name = '" + name+
-                         "'");
+                         "' and youxi='"+youxi+"'");
                     if (dt.Rows.Count > 0)
                     {
                         if (dengji != -1 && zuanshi != -1 && qiangzhequan != -1)
@@ -224,25 +224,25 @@ namespace MyUtil
                             sqh.update("update zhanghao set xgsj='"
                             + DateTime.Now.ToString("yyyy-MM-dd") + "' , dengji="
                             + dengji + ", zuanshi =" + zuanshi + " , qiangzhequan=" + qiangzhequan + " , dengluzhong='N' "
-                            + " where name='" + name + "'");
+                            + " where name='" + name + "' and youxi='" + youxi + "'");
                         }
                         else if (zuanshi != -1 && qiangzhequan == -1)
                         {
                             sqh.update("update zhanghao set xgsj='"
                             + DateTime.Now.ToString("yyyy-MM-dd") + "',  zuanshi =" + zuanshi + " , dengluzhong='N' "
-                            + " where name='" + name + "'");
+                            + " where name='" + name + "' and youxi='" + youxi + "'");
                         }
                         else if (zuanshi != -1 && qiangzhequan!=-1)
                         {
                             sqh.update("update zhanghao set xgsj='"
                             + DateTime.Now.ToString("yyyy-MM-dd") + "',  zuanshi =" + zuanshi + " , qiangzhequan=" + qiangzhequan + " , dengluzhong='N' "
-                            + " where name='" + name + "'");
+                            + " where name='" + name + "' and youxi='" + youxi + "'");
                         }
                         else
                         {
                             sqh.update("update zhanghao set xgsj='"
                             + DateTime.Now.ToString("yyyy-MM-dd") + "', dengluzhong='N' "
-                            + " where name='" + name + "'");
+                            + " where name='" + name + "' and youxi='" + youxi + "'");
                         }
                     }
                     else

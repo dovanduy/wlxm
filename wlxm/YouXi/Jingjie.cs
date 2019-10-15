@@ -2075,7 +2075,7 @@ namespace fuzhu
             }
             WriteLog.WriteLogFile(this._mnqName, "强者券 "+qiangzhequan+",钻石 "+zuanshi);
             ZhangHao zhanghao = new ZhangHao();
-            zhanghao.tuichusaveNameAndPas(name,this._dqinx, WriteLog.getMachineName(), dengji, zuanshi, qiangzhequan);
+            zhanghao.tuichusaveNameAndPas(name,this._dqinx,DANGQIAN_YOUXI, WriteLog.getMachineName(), dengji, zuanshi, qiangzhequan);
         }
 
         private void quqiangzhequan(out int qzs,FuHeSanDian qz){
