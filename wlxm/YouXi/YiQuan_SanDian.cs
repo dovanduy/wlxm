@@ -312,6 +312,60 @@ namespace fuzhu
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  435,  243, 0xd7d7d7},
+	{  131,  227, 0xe93517},
+	{  158,  161, 0x181c21},
+});
+            guanbifhx = new FuHeSanDian("开引导-改造人不能开始关闭", guanbisdx, 468, 45);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  400,  215, 0xf6d145},
+	{  162,  152, 0x363633},
+	{   86,  191, 0xf3c942},
+});
+            guanbifhx = new FuHeSanDian("开引导-挑战首领max", guanbisdx, 398, 212);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  401,  252, 0x9d9287},
+	{  330,  251, 0xa56608},
+	{  417,   60, 0xaea6a4},
+});
+            guanbifhx = new FuHeSanDian("开引导-打虫女出招", guanbisdx, 442, 120);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  256,  194, 0xeeb294},
+	{  308,  218, 0xff6e17},
+	{  341,  224, 0x3f3e3c},
+});
+            guanbifhx = new FuHeSanDian("开引导-角色解除限制", guanbisdx, 435, 279);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  458,   36, 0x561714},
+	{  440,   37, 0x000300},
+	{  428,   96, 0x8d4544},
+});
+            guanbifhx = new FuHeSanDian("开引导-打虫女出招2", guanbisdx, 442, 120);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  274,   42, 0xefb294},
+	{  341,   73, 0x3f3d3d},
+	{  272,   87, 0xb02b13},
+});
+            guanbifhx = new FuHeSanDian("开引导-角色解除限制2", guanbisdx, 479, 58);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
 
 
 

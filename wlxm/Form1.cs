@@ -189,7 +189,7 @@ namespace wlxm
                     if (span.Hours >= 1 || span.Minutes > 45)
                     {
                         WriteLog.WriteLogFile("", "与上次统计相比,间隔 " + span.Minutes + "分钟");
-                        //zh.gxYunXingQk("jingjieguanfang");
+                        zh.gxYunXingQk("yiquan");
                     }
                 }
 
@@ -255,8 +255,8 @@ namespace wlxm
                 r = mf.bindWindow(jubing);
             }
             //YiQuan_Xin ln = new YiQuan_Xin(mf, dqinx, jubing,dizhi);
-            MyLdcmd.myLaunch1(dqinx, dizhi);
-            MyLdcmd.myReboot(dqinx);
+            ZhangHao zh = new ZhangHao();
+            zh.gxYunXingQk("yiquan");
             MyFuncUtil.mylogandxianshi("结束");
            
         }
