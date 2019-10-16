@@ -162,7 +162,7 @@ namespace wlxm
                     yici = 1;
                     //dpanduoxiancheng.PerformClick();
                     zidong = ",自动运行中";
-                    if (WriteLog.getMachineName().ToUpper().Equals("1HAO"))
+                    if (WriteLog.getMachineName().ToUpper().Equals("2HAO"))
                     {
                         //gaozhanghaotou duoxianzongtou
                         ThreadStart threadStart = new ThreadStart(gaozhanghaotou);//通过ThreadStart委托告诉子线程执行什么方法　
@@ -172,7 +172,7 @@ namespace wlxm
                     }
                     else
                     {
-                        ThreadStart threadStart = new ThreadStart(gaozhanghaotou);//通过ThreadStart委托告诉子线程执行什么方法　
+                        ThreadStart threadStart = new ThreadStart(duoxianzongtou);//通过ThreadStart委托告诉子线程执行什么方法　
                         this.zidongthread = new Thread(threadStart);
                         this.zidongthread.Name = "wodedpanduoxian";
                         this.zidongthread.Start();
@@ -716,7 +716,7 @@ namespace wlxm
             {
                 return;
             }
-            WriteLog.WriteLogFile(dqinx + "", "准备操作" + dqinx + "号模拟器");
+            WriteLog.WriteLogFile(dqinx + "", "准备操作" + dqinx + "号模拟器-搞账号");
             var cishu = 0;
             MyFuncJingNoTai mno = new MyFuncJingNoTai();
             bool temp = false;
@@ -989,7 +989,7 @@ namespace wlxm
             {
                 return;
             }
-            WriteLog.WriteLogFile(dqinx + "", "准备操作" + dqinx + "号模拟器");
+            WriteLog.WriteLogFile(dqinx + "", "准备操作" + dqinx + "号模拟器-搞主线");
             var cishu = 0;
             MyFuncJingNoTai mno = new MyFuncJingNoTai();
             bool temp = false;
