@@ -1331,6 +1331,17 @@ namespace wlxm
                 Thread.Sleep(2000);
                 ThreadPool.SetMaxThreads(yunxingIndex.Length, yunxingIndex.Length); //设置最大线程数
                 string[] getquanbujubing = MyLdcmd.getDqmoniqiJuBing();
+                if (getquanbujubing.Length <= 1) {
+                    MyLdcmd.myQuitAll(dizhi);
+                    Thread.Sleep(2000);
+                    MyLdcmd.myRemoveAll(dizhi);
+                    Thread.Sleep(2000);
+                    MyLdcmd.RunDuokaiqi(a_b);
+                    Thread.Sleep(2000);
+                    MyFuncUtil.duokaiqiAdd(a_b);
+                    Thread.Sleep(2000);
+                    getquanbujubing = MyLdcmd.getDqmoniqiJuBing();
+                }
                 string[] getquanbuwaicengjubing = MyLdcmd.getDqmoniqiWaiCengJuBing();
                 //搞出句柄来 放到每个线程开始里面 如果该句柄为0线程再去检索
                 List<LeiDianCanShu> listleidian = new List<LeiDianCanShu>();
