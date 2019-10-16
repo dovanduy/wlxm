@@ -254,119 +254,27 @@ namespace wlxm
             {
                 r = mf.bindWindow(jubing);
             }
-            MyFuncJingNoTai mno = new MyFuncJingNoTai();
+            string name = "";
+            string pwd = "";
+            string jieduan = "";
+            int xuanqu = -1, dengji = -1;
+            ZhangHao zhanghao = new ZhangHao();
+            zhanghao.zhunbeizhanghao(dqinx, YiQuan_Xin.DangQianYouXi, out name, out pwd, out xuanqu, out dengji, out jieduan);
+            if (name == null || name == "" || pwd == null || pwd == "")
+            {
+                //当前没有找到需要练级的账号
+                WriteLog.WriteLogFile(dqinx + "", "当前没有找到需要练级的账号");
+                return;
+            }
+            YiQuan_Xin yq = new YiQuan_Xin(mf, dqinx, jubing, dizhi);
+            tmpBool = yq.denglu(15, ref name, ref pwd,ref xuanqu);
             
             MyFuncUtil.mylogandxianshi("结束");
            
         }
 
        
-
-        private void guanfangjingjiecunhao(object inx)
-        {
-            /*单线程模式：
-             *1、新建成功后打开该模拟器 安装可以在模拟器未打开情况下进行
-             *2、模拟器打开后安装apk
-             *3、安装成功后打开游戏
-             *4、游戏更新成功后选择游客登录并保存
-             *5、保存后截取要保存的图并识图
-             *6、识图后存入sql
-             *7、关闭模拟器
-             *8、reload存盘文件
-             */
-            int cishu = 0;
-            int maxcishu = 100;
-            MyFuncJingNoTai mno = new MyFuncJingNoTai();
-            for (int cs = 0; cs < maxcishu; cs++)
-            {
-                var ks = MyFuncUtil.GetTimestamp();
-                string dizhi = null;
-                string path = null;
-                string seed = null;
-                string a_b = "d";
-                MyFuncUtil.myqiehuancd(a_b, out dizhi, out path, out seed);
-                int dqinx = (int)inx;
-                if (dqinx <= -1)
-                {
-                    continue;
-                }
-                WriteLog.WriteLogFile(dqinx + "", "准备操作" + dqinx + "号模拟器");
-                bool temp = mno.myQuit(dqinx, dizhi);//关闭指定模拟器 dqinx
-                if (!temp)
-                {
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
-                    Thread.Sleep(20000);
-                    continue;
-                }
-                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原");
-                MyLdcmd.myRestore(dqinx, seed, dizhi);
-                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改名");
-                MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
-                temp = MyFuncUtil.Launch(dqinx, dizhi);
-                if (!temp)
-                {
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开失败");
-                    Thread.Sleep(20000);
-                    continue;
-                }
-                Thread.Sleep(20000);
-                apkName = dict["境界官方"];
-                int i = MyFuncUtil.QiDongWanChengLurenzhanghao(a_b, dqinx, apkName);
-                if (i == -1)
-                {
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开app" + apkName + "失败");
-                    Thread.Sleep(20000);
-                    continue;
-                }
-                int w = -1, h = -1;
-                MyFuncUtil.getWindowSize(dqinx, out w, out h);
-                if (w != -1 && h != -1 && w < h)
-                {
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "w h不对" + w + " " + h);
-                    Thread.Sleep(20000);
-                    continue;
-                }
-                Thread.Sleep(1000*60*2);
-               
-                temp = mno.lurenResizeOk(dqinx);
-                if (temp == false)
-                {
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + ",resize没成功");
-                    continue;
-                }
-                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "降低cpu");
-                MyLdcmd.myDownCpu(dqinx, 50);
-                Thread.Sleep(1000 * 10);
-                int jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx, dizhi);
-                myDm mf = new myDm();
-                int r = 0;
-                if (jubing > 0)
-                {
-                    r = mf.bindWindow(jubing);
-                }                 
-                Jingjie jn = new Jingjie(mf, dqinx,jubing);
-                if (jn.Jubing <= 0)
-                {
-                    WriteLog.WriteLogFile(dqinx + "", "句柄有问题");
-                    Thread.Sleep(20000);
-                    continue;
-                }
-                jn.jingjiecunhao();
-                temp = mno.myQuit(dqinx, dizhi);//关闭指定模拟器 dqinx
-                if (!temp)
-                {
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
-                    Thread.Sleep(20000);
-                    continue;
-                }
-                Thread.Sleep(10000);
-                WriteLog.WriteLogFile(dqinx + "", "一次循环结束");
-                var js = MyFuncUtil.GetTimestamp();
-                cishu++;
-                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环完成");
-                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环1次耗时" + MyFuncUtil.SecondToHour(js - ks));
-            }
-        }
+        
         private void yiquancunzhanghao(object inx)
         {
             duoxianxunhuan_zhanghao("d", inx, 20);
@@ -1279,16 +1187,24 @@ namespace wlxm
                     WriteLog.WriteLogFile(dqinx + "", "当前没有找到需要练级的账号");
                     return;
                 }
-                tmpBool = yq.denglu(15, ref name, ref pwd);
+                tmpBool = yq.denglu(15, ref name, ref pwd,ref xuanqu);
                 if (!tmpBool)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "登录环节出错");
                     Thread.Sleep(1000 * 60 * 3);
                     continue;
                 }
+                zhanghao.updateIp(dqinx, youxi, name, ip);
                 yq.zhuxian(name, 1000 * 60 * 60 * 3);
+                yq.quitdq(name);
                 //Thread.Sleep(1000 * 60*60);//停住1小时
+                zhanghao.tuichusaveNameAndPas(name, dqinx, youxi, WriteLog.getMachineName(), -1, -1, -1);               
                 cishu++;
+                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改名");
+                MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
+                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改属性");
+                MyLdcmd.modifySimulator(dqinx);
+                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "重新启动");
                 MyLdcmd.myReboot(dqinx);
                 Thread.Sleep(1000 * 60 * 4);
                 bool cqcg = false;

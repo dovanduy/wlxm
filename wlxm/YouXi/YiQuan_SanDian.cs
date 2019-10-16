@@ -414,7 +414,16 @@ namespace fuzhu
 	            {  239,  241, 0x361400},
 	            {  258,  267, 0xf4f4f4},
             });
-            guanbifhx = new FuHeSanDian("登录相关-进入游戏", guanbisdx, 260, 241);
+            guanbifhx = new FuHeSanDian("登录-进入游戏", guanbisdx, 260, 241);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  307,  244, 0xffdb21},
+	{  519,   60, 0xffdf31},
+	{  517,   11, 0xffdf31},
+});
+            guanbifhx = new FuHeSanDian("登录-进入游戏2", guanbisdx, 260, 241);
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 
@@ -437,7 +446,32 @@ namespace fuzhu
             _list_yqfhsandian.Add(guanbifhx);
 
 
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  525,   30, 0x45d1e6},
+	{  485,    5, 0x45d1e6},
+	{  509,   21, 0xeffbfd},
+});
+            guanbifhx = new FuHeSanDian("登录相关-已点开账号或密码", guanbisdx, 502, 19);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
 
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  306,  162, 0x8bbe1f},
+	{  320,  200, 0x1eaddf},
+	{  265,   68, 0x1eb9ee},
+});
+            guanbifhx = new FuHeSanDian("登录相关-使用新账号登录", guanbisdx, 274, 200);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  289,  178, 0x1eaddf},
+	{  239,  205, 0x8fc31f},
+	{  327,  210, 0xf39800},
+});
+            guanbifhx = new FuHeSanDian("登录相关-使用新账号登录的具体页面", guanbisdx, 285, 179,"{	{  309,  104, 0xf5f5f5},	{  307,  132, 0xf5f5f5},	{  289,  175, 0x1eaedf},}");
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
 
 
 

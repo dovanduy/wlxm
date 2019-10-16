@@ -68,7 +68,7 @@ namespace fuzhu
             WriteLog.WriteLogFile(this._mnqName, "一拳构造函数,句柄是:" + _jubing + ",模拟器index是:" + _mnqName + "，thread:" + Thread.CurrentThread.ManagedThreadId + "，绑定:" + r);
         }
 
-        public Boolean denglu(int fenzhong, ref string name,ref string pwd)
+        public Boolean denglu(int fenzhong, ref string name,ref string pwd,ref int xuanqu)
         {
 
             WriteLog.WriteLogFile(this._mnqName, "进入到登录环节  " + this._jubing + "，thread:" + Thread.CurrentThread.ManagedThreadId);
@@ -80,6 +80,13 @@ namespace fuzhu
             StringBuilder zhuxianrt = new StringBuilder();
             string yijinruzhuxian = "";
             List<FuHeSanDian> ls = YiQuan_SanDian.GetObject().findListFuHeSandianByName("登录相关");
+            ls.Add(YiQuan_SanDian.GetObject().findFuHeSandianByName("关闭实名认证"));
+            ls.Add(YiQuan_SanDian.GetObject().findFuHeSandianByName("关闭公告"));
+            ls.Add(YiQuan_SanDian.GetObject().findFuHeSandianByName("首次进入登录或注册"));
+            ls.Add(YiQuan_SanDian.GetObject().findFuHeSandianByName("登录或注册"));
+            ls.Add(YiQuan_SanDian.GetObject().findFuHeSandianByName("新账号注册"));
+            ls.Add(YiQuan_SanDian.GetObject().findFuHeSandianByName("账号切换后选新账号"));
+            ls.AddRange(YiQuan_SanDian.GetObject().findListFuHeSandianByName("空白"));
             List<FuHeSanDian> ls2 = YiQuan_SanDian.GetObject().findAllFuHeSandian();
             List<FuHeSanDian> feixiangguan=ls2.FindAll(f => !ls.Contains(f)
                 );
@@ -136,31 +143,352 @@ namespace fuzhu
                 
             }
             WriteLog.WriteLogFile(this._mnqName, "登录环节 " + rr.Equals("") + "， " + yijinruzhuxian.Equals(""));
-            if (zhuxianrt != null && zhuxianrt.Length > 0)
+            if ((rt == null || rt.Length == 0) &&zhuxianrt != null && zhuxianrt.Length > 0)
             {
                 WriteLog.WriteLogFile(this._mnqName, "找到标志点,找到其他点,不再搞登录");
                 return true;
-            } 
-            Boolean abc = true;
-            long kstime = mf.GetTime();
-            FuHeSanDian d1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("关闭实名认证");
-            FuHeSanDian d2 = YiQuan_SanDian.GetObject().findFuHeSandianByName("关闭公告");
-            if (mf.mohuByLeiBool(d1.Sd))
-            {
-                WriteLog.WriteLogFile(this._mnqName, d1.Name);
-                mf.mytap(this._jubing, d1.Zhidingx, d1.Zhidingy);
             }
-            if (mf.mohuByLeiBool(d2.Sd))
+
+            WriteLog.WriteLogFile(this._mnqName, "进入到登录环节  " + this._jubing + "，thread:" + Thread.CurrentThread.ManagedThreadId);
+            ZhangHao zhanghao = new ZhangHao();
+            long ks = MyFuncUtil.GetTimestamp();
+            bool t1 = false;
+            int denglu = 0;
+            int yici = 0;
+            int tiaochuci = 0;
+            bool zccg = false;
+            while (true)
             {
-                WriteLog.WriteLogFile(this._mnqName, d2.Name);
-                mf.mytap(this._jubing, d2.Zhidingx, d2.Zhidingy);
+                if (yici == 0)
+                {
+                    WriteLog.WriteLogFile(this._mnqName, "进入登录循环");
+                    yici = 1;
+                }
+                long js = MyFuncUtil.GetTimestamp();
+                FuHeSanDian kt = YiQuan_SanDian.GetObject().findFuHeSandianByName("登录相关-首次进入登录或注册");
+                if (mf.mohuByLeiBool(kt.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, kt.Name);
+                    mf.mytap(this._jubing, kt.Zhidingx,kt.Zhidingy);
+                    mf.mydelay(2000, 4000);
+                }
+                kt = YiQuan_SanDian.GetObject().findFuHeSandianByName("登录相关-已点开账号或密码");
+                if (mf.mohuByLeiBool(kt.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, kt.Name);
+                    mf.mytap(this._jubing, kt.Zhidingx, kt.Zhidingy);
+                    mf.mydelay(2000, 4000);
+                }
+
+                kt = YiQuan_SanDian.GetObject().findFuHeSandianByName("登录相关-录入账号密码");
+                if (denglu == 0 && mf.mohuByLeiBool(kt.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, kt.Name);
+                    mf.mytap(this._jubing, 339, 117);//点击清空按钮
+                    mf.mydelay(300, 600);
+                    mf.mytap(this._jubing, 229, 115);
+                    mf.mydelay(4000, 6000);
+                    if (mf.mohu(438, 25, 0xffffff) == 1)
+                    {
+                        WriteLog.WriteLogFile(this._mnqName, "搞账号");
+                        mf.mytap(this._jubing, 431, 24);
+                        mf.mydelay(2000, 4000);
+                        zhanghao.shuruqianhuitui(mf, this._dqinx, this._jubing);
+                        mf.mydelay(2000, 4000);
+                        mf.SendString(this._jubing, name);
+                        mf.mydelay(2000, 4000);
+                        mf.myKeyPressChar(this._jubing, "tab");
+                        mf.mydelay(2000, 4000);
+                    }
+                    mf.mytap(this._jubing, 306, 148);//点击密码
+                    mf.mydelay(4000, 6000);
+                    if (mf.mohu(438, 25, 0xffffff) == 1)
+                    {
+                        WriteLog.WriteLogFile(this._mnqName, "搞密码");
+                        mf.mytap(this._jubing, 431, 24);
+                        mf.mydelay(2000, 4000);
+                        zhanghao.shuruqianhuitui(mf, this._dqinx, this._jubing);
+                        mf.mydelay(2000, 4000);
+                        mf.SendString(this._jubing, pwd);
+                        mf.mydelay(2000, 4000);
+                        mf.myKeyPressChar(this._jubing, "tab");
+                        mf.mydelay(2000, 4000);
+                    }
+                    if (mf.mohu(286, 197, 0x1eaddf) == 1)
+                    {
+                        WriteLog.WriteLogFile(this._mnqName, "搞登录");
+                        mf.mydelay(2000, 4000);
+                        mf.mytap(this._jubing, 286, 197);//点击登录
+                        mf.mydelay(9000, 18000);
+                        if (!mf.mohuXunHuanJianChi(kt.Sd, 20))
+                        {
+                            denglu = -1;
+                        }
+                    }
+                }
+                if (denglu == -1 && tiaochuci > 0 && !mf.mohuXunHuanJianChi(kt.Sd, 20))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, kt.Name + " 登录成功");
+                    denglu = 1;
+                }
+                kt = YiQuan_SanDian.GetObject().findFuHeSandianByName("登录相关-使用新账号登录的具体页面");
+                if (denglu == 0 && mf.mohuByLeiBool(kt.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, kt.Name);
+                    mf.mytap(this._jubing, 339, 106);//点击清空按钮
+                    mf.mydelay(300, 600);
+                    mf.mytap(this._jubing, 313, 107);
+                    mf.mydelay(4000, 6000);
+                    if (mf.mohu(438, 25, 0xffffff) == 1)
+                    {
+                        WriteLog.WriteLogFile(this._mnqName, "搞账号");
+                        mf.mytap(this._jubing, 431, 24);
+                        mf.mydelay(2000, 4000);
+                        zhanghao.shuruqianhuitui(mf, this._dqinx, this._jubing);
+                        mf.mydelay(2000, 4000);
+                        mf.SendString(this._jubing, name);
+                        mf.mydelay(2000, 4000);
+                        mf.myKeyPressChar(this._jubing, "tab");
+                        mf.mydelay(2000, 4000);
+                    }
+                    mf.mytap(this._jubing, 339, 135);//点击清空按钮
+                    mf.mydelay(300, 600);
+                    mf.mytap(this._jubing, 312, 135);//点击密码
+                    mf.mydelay(4000, 6000);
+                    if (mf.mohu(438, 25, 0xffffff) == 1)
+                    {
+                        WriteLog.WriteLogFile(this._mnqName, "搞密码");
+                        mf.mytap(this._jubing, 431, 24);
+                        mf.mydelay(2000, 4000);
+                        zhanghao.shuruqianhuitui(mf, this._dqinx, this._jubing);
+                        mf.mydelay(2000, 4000);
+                        mf.SendString(this._jubing, pwd);
+                        mf.mydelay(2000, 4000);
+                        mf.myKeyPressChar(this._jubing, "tab");
+                        mf.mydelay(2000, 4000);
+                    }
+                    if (mf.mohu(266, 176, 0x1daddf) == 1)
+                    {
+                        WriteLog.WriteLogFile(this._mnqName, "搞登录");
+                        mf.mydelay(2000, 4000);
+                        mf.mytap(this._jubing, 266, 176);//点击登录
+                        mf.mydelay(9000, 18000);
+                        if (!mf.mohuXunHuanJianChi(kt.Sd, 20))
+                        {
+                            denglu = -1;
+                        }
+                    }
+                }
+
+                if (denglu == -1 && tiaochuci > 0 && !mf.mohuXunHuanJianChi(kt.Sd, 20))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, kt.Name + " 登录成功");
+                    denglu = 1;
+                }
+                if (denglu == 0 && (mf.mohuXunHuanJianChi(kt.Sd, 20)))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, "当前账号无法登陆,置为N,修改时间更新换号");
+                    zhanghao.zhiweidengluzhongN(this._dqinx, DangQianYouXi, name, WriteLog.getMachineName());
+                    int dengji = -1;
+                    string jieduan = null;
+                    zhanghao.zhunbeizhanghao(this._dqinx, DangQianYouXi, out name, out pwd, out xuanqu, out dengji, out jieduan);
+                    if (name == null || name == "" || pwd == null || pwd == "")
+                    {
+                        //当前没有找到需要练级的账号
+                        WriteLog.WriteLogFile(this._mnqName, "换账号，但没有找到需要练级的账号");
+                        break;
+                    }
+                }
+
+                kt = YiQuan_SanDian.GetObject().findFuHeSandianByName("登录相关-关闭实名认证");
+                if (mf.mohuByLeiBool(kt.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, kt.Name);
+                    mf.mytap(this._jubing, kt.Zhidingx, kt.Zhidingy);
+                    tiaochuci++;
+                }
+                kt = YiQuan_SanDian.GetObject().findFuHeSandianByName("登录相关-关闭公告");
+                if (mf.mohuByLeiBool(kt.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, kt.Name);
+                    mf.mytap(this._jubing, kt.Zhidingx, kt.Zhidingy);
+                    tiaochuci++;
+                }
+                kt = YiQuan_SanDian.GetObject().findFuHeSandianByName("登录相关-使用新账号登录");
+                if (mf.mohuByLeiBool(kt.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, kt.Name);
+                    mf.mytap(this._jubing, kt.Zhidingx, kt.Zhidingy);
+                    mf.mydelay(2000, 4000);
+                }
+                FuHeSanDian dlxf = YiQuan_SanDian.GetObject().findFuHeSandianByName("登录-进入游戏");
+                bool t = mf.mohuXunHuanJianChi(dlxf.Sd, 60);
+                if (denglu == 0 && t)
+                {
+                    WriteLog.WriteLogFile(this._mnqName, dlxf.Name + "选择切换账号");
+                    mf.mytap(this._jubing, 510, 55);
+                    mf.mydelay(2000, 4000);
+                    t = mf.mohuXunHuanJianChi(dlxf.Sd, 60);
+                    if (!t)
+                    {
+                        tiaochuci = 0;
+                    }
+                }
+                if (denglu == 1 && t)
+                {
+                    WriteLog.WriteLogFile(this._mnqName, dlxf.Name);
+                    ks = MyFuncUtil.GetTimestamp();
+                    WriteLog.WriteLogFile(this._mnqName, "存完账号,准备进入游戏环节" + " " + this._jubing);
+                    int jl = 0;
+                    int qushuyici = 0;
+                    int guanbi = 0;
+                    while (true)
+                    {
+                        FuHeSanDian d1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("关闭实名认证");
+                        FuHeSanDian d2 = YiQuan_SanDian.GetObject().findFuHeSandianByName("关闭公告");
+                        FuHeSanDian[] dzu = new FuHeSanDian[] { d1, d2 };
+                        foreach (FuHeSanDian f in dzu)
+                        {
+                            if (mf.mohuByLeiBool(f.Sd))
+                            {
+                                WriteLog.WriteLogFile(this._mnqName, f.Name + "关闭" + guanbi + "次");
+                                mf.mytap(this._jubing, f.Zhidingx, f.Zhidingy);
+                                guanbi++;
+                            }
+                        }
+                        FuHeSanDian d4 = YiQuan_SanDian.GetObject().findFuHeSandianByName("进入游戏");
+                        if (guanbi > 1 && mf.mohuByLeiBool(d4.Sd) && (xuanqu == -1) && (qushuyici == 0))
+                        {
+
+                            qushufrombaidu(out xuanqu, d4, 229, 207, 285, 225);
+                            if (xuanqu != -1)
+                            {
+                                qushuyici = 1;
+                            }
+                        }
+                        if ((xuanqu != -1) && mf.mohuByLeiBool(d4.Sd))
+                        {
+                            mf.mytap(this._jubing, 275, 240);
+                            mf.mydelay(1000, 3000);
+                            jl = 1;
+                        }
+                        SanDian[] sdzu = new SanDian[] { d1.Sd, d2.Sd, d4.Sd, };
+                        if (jl == 1 && !mf.mohuqubiaoXunHuan(sdzu, 20 * 1))
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "20s全不在,进去了");
+                            zccg = true;
+                            break;
+                        }
+                        long jstime = MyFuncUtil.GetTimestamp();
+                        if ((jstime - ks) > fenzhong * 60 * 1000)
+                        {
+                            zccg = false;
+                            WriteLog.WriteLogFile(this._mnqName, "进入游戏环节-没有成功完成");
+                            break;
+                        }
+                    }
+                    if ((xuanqu != -1) && (qushuyici == 1))
+                    {
+                        //更新选区
+                        zhanghao.updateXuanqu(name, xuanqu);
+                    }
+                }
+
+                dlxf = YiQuan_SanDian.GetObject().findFuHeSandianByName("登录-进入游戏2");
+                t = mf.mohuXunHuanJianChi(dlxf.Sd, 60);
+                if (denglu == 0 && t)
+                {
+                    WriteLog.WriteLogFile(this._mnqName, dlxf.Name + "选择切换账号");
+                    mf.mytap(this._jubing, 510, 55);
+                    mf.mydelay(2000, 4000);
+                    t = mf.mohuXunHuanJianChi(dlxf.Sd, 60);
+                    if (!t)
+                    {
+                        tiaochuci = 0;
+                    }
+                }
+                if (denglu == 1 && t)
+                {
+                    WriteLog.WriteLogFile(this._mnqName, dlxf.Name);
+                    ks = MyFuncUtil.GetTimestamp();
+                    WriteLog.WriteLogFile(this._mnqName, "存完账号,准备进入游戏环节" + " " + this._jubing);
+                    int jl = 0;
+                    int qushuyici = 0;
+                    int guanbi = 0;
+                    while (true)
+                    {
+                        FuHeSanDian d1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("关闭实名认证");
+                        FuHeSanDian d2 = YiQuan_SanDian.GetObject().findFuHeSandianByName("关闭公告");
+                        FuHeSanDian[] dzu = new FuHeSanDian[] { d1, d2 };
+                        foreach (FuHeSanDian f in dzu)
+                        {
+                            if (mf.mohuByLeiBool(f.Sd))
+                            {
+                                WriteLog.WriteLogFile(this._mnqName, f.Name + "关闭" + guanbi + "次");
+                                mf.mytap(this._jubing, f.Zhidingx, f.Zhidingy);
+                                guanbi++;
+                            }
+                        }
+                        FuHeSanDian d4 = YiQuan_SanDian.GetObject().findFuHeSandianByName("进入游戏");
+                        if (guanbi > 1 && mf.mohuByLeiBool(d4.Sd) && (xuanqu == -1) && (qushuyici == 0))
+                        {
+
+                            qushufrombaidu(out xuanqu, d4, 229, 207, 285, 225);
+                            if (xuanqu != -1)
+                            {
+                                qushuyici = 1;
+                            }
+                        }
+                        if ((xuanqu != -1) && mf.mohuByLeiBool(d4.Sd))
+                        {
+                            mf.mytap(this._jubing, 275, 240);
+                            mf.mydelay(1000, 3000);
+                            jl = 1;
+                        }
+                        SanDian[] sdzu = new SanDian[] { d1.Sd, d2.Sd, d4.Sd, };
+                        if (jl == 1 && !mf.mohuqubiaoXunHuan(sdzu, 20 * 1))
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, "20s全不在,进去了");
+                            zccg = true;
+                            break;
+                        }
+                        long jstime = MyFuncUtil.GetTimestamp();
+                        if ((jstime - ks) > fenzhong * 60 * 1000)
+                        {
+                            zccg = false;
+                            WriteLog.WriteLogFile(this._mnqName, "进入游戏环节-没有成功完成");
+                            break;
+                        }
+                    }
+                    if ((xuanqu != -1) && (qushuyici == 1))
+                    {
+                        //更新选区
+                        zhanghao.updateXuanqu(name, xuanqu);
+                    }
+                }
+
+
+
+                if (zccg)
+                {
+                    WriteLog.WriteLogFile(this._mnqName, "进入游戏,登录阶段顺利结束");
+                    t1 = true;
+                    break;
+                }
+                if (t1)
+                {
+                    break;
+                }
+                if ((js - ks) > 1000 * 60 * fenzhong)
+                {
+                    WriteLog.WriteLogFile(this._mnqName, "登录阶段超时");
+                    WriteLog.WriteLogFile(this._mnqName, "找到需要练级的账号" + name + " " + pwd + ",xuanqu " + xuanqu + ",恢复为不登录");
+                    zhanghao.zhiweidengluzhongN(this._dqinx, DangQianYouXi, name, WriteLog.getMachineName());
+                    break;
+                }
             }
-            FuHeSanDian d3 = YiQuan_SanDian.GetObject().findFuHeSandianByName("登录或注册");
-            FuHeSanDian d4 = YiQuan_SanDian.GetObject().findFuHeSandianByName("进入游戏");
-            FuHeSanDian d5 = YiQuan_SanDian.GetObject().findFuHeSandianByName("首次进入登录或注册");
-            SanDian[] sdzu = new SanDian[] { d1.Sd, d2.Sd, d3.Sd, d4.Sd, d5.Sd };
-            abc = mf.mohuqubiaoXunHuan(sdzu, 60 * fenzhong);
-            return abc;
+            return t1;
+
         }
 
         public Boolean denglu(int fenzhong,string name)

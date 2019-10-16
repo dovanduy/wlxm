@@ -13,8 +13,8 @@ namespace xDM
         //private static readonly object myob = new object();
         private dmsoft mydm = new dmsoft();
         //录入的x y有限制 一拳的限制 532 299 路人 687 386
-        private int xianzhi_x = 687;
-        private int xianzhi_y = 386;
+        private int xianzhi_x = 532;
+        private int xianzhi_y = 299;
         public int suijishu1(int min, int max)
         {
             Random rd = new Random();
