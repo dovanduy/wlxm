@@ -124,6 +124,9 @@ namespace MyUtil
         public void myReSizeByWAndH(int index,int jubing,int width,int height,string dizhi = @"d:\ChangZhi\dnplayer2\")
         {
             WriteLog.WriteLogFile(index + "", "模拟器" + index + "开始改大小,外层句柄"+jubing);
+            if (jubing <=0) {
+                jubing = MyLdcmd.getDqmoniqiWaiCengJuBingByIndex(index,dizhi);
+            }
             int dqwidth = 2560;//1920 1024
             int dqheight = 1440;//1080 768
             IntPtr p = new IntPtr(jubing);
@@ -411,7 +414,7 @@ namespace MyUtil
             return rt;
         }
 
-        public void getIP(int dqinx, string dizhi, string seed, MyFuncJingNoTai mno, int jubing, int waicengjubing, out string ip)
+        public void getIP(int dqinx, string dizhi, string seed, int jubing, int waicengjubing, out string ip)
         {
             WriteLog.WriteLogFile(dqinx + "", "获取IP,jubing:" + jubing + ",waicengjubing:" + waicengjubing);
             ip = "";
@@ -420,7 +423,7 @@ namespace MyUtil
             t = MyFuncUtil.lureninstallOk(dqinx, "package:com.ddm.iptools", () =>
             {
                 WriteLog.WriteLogFile(dqinx + "", "安装app没成功--iptools");
-                temp = mno.myQuit(dqinx, dizhi);
+                temp = myQuit(dqinx, dizhi);
                 if (!temp)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
@@ -430,7 +433,7 @@ namespace MyUtil
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原");
                 //MyLdcmd.myRestore(dqinx, seed, dizhi);
                 MyLdcmd.installApp(dqinx, @"C:\迅雷下载\2_1b823b1928a42f09423f28cb79179bfe.apk");
-                temp = mno.myQuit(dqinx, dizhi);
+                temp = myQuit(dqinx, dizhi);
                 if (!temp)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
@@ -449,7 +452,7 @@ namespace MyUtil
             if (t == false)
             {
                 WriteLog.WriteLogFile(dqinx + "", "安装app没成功--iptools");
-                temp = mno.myQuit(dqinx, dizhi);
+                temp = myQuit(dqinx, dizhi);
                 if (!temp)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
@@ -459,7 +462,7 @@ namespace MyUtil
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原");
                 //MyLdcmd.myRestore(dqinx, seed, dizhi);      
                 MyLdcmd.installApp(dqinx, @"C:\迅雷下载\2_1b823b1928a42f09423f28cb79179bfe.apk");
-                temp = mno.myQuit(dqinx, dizhi);
+                temp = myQuit(dqinx, dizhi);
                 if (!temp)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
@@ -497,13 +500,13 @@ namespace MyUtil
             //apkName = dict["IPtool"];
             string apkName = "com.ddm.iptools/com.ddm.iptools.ui.MainActivity";
             int i = MyFuncUtil.QiDongWanChengLurenzhanghao("d", dqinx, apkName);
-            t = mno.PanDuan_QidongLurenzhanghao(dqinx, dm, jubing);//根据窗口大小 和 是否有雷电游戏中心标志  判断是否启动了app
-            temp = mno.PanDuan_QidongBySize(dqinx, waicengjubing, 1000 * 30, 578, 998);
+            t = PanDuan_QidongLurenzhanghao(dqinx, dm, jubing);//根据窗口大小 和 是否有雷电游戏中心标志  判断是否启动了app
+            temp = PanDuan_QidongBySize(dqinx, waicengjubing, 1000 * 30, 578, 998);
             bool t2 = false;
             string yiqu = "";
             if (t && temp)
             {
-                t2 = mno.PanDuan_QidongByYiQuDian_IP(dqinx, 1000 * 30, dm, jubing, out yiqu);
+                t2 = PanDuan_QidongByYiQuDian_IP(dqinx, 1000 * 30, dm, jubing, out yiqu);
                 if (t2)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器发现已取点" + yiqu);
@@ -533,7 +536,7 @@ namespace MyUtil
                 {
                     break;
                 }
-                mno.PanDuan_QidongByYiQuDian_IP(dqinx, 1000 * 30, dm, jubing, out yiqu);
+                PanDuan_QidongByYiQuDian_IP(dqinx, 1000 * 30, dm, jubing, out yiqu);
                 ip = yiqu;
                 dm.mydelay(1000, 2000);
                 WriteLog.WriteLogFile(dqinx + "", ip + "  --当前ip循环中");

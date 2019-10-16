@@ -758,6 +758,8 @@ namespace wlxm
                     Thread.Sleep(1000 * 20);
                     MyLdcmd.installApp(dqinx, @"C:\迅雷下载\yiquanchaoren_huanchangyouxi_1.1.7.apk");
                     Thread.Sleep(1000 * 20);
+                    jubing = -1;//句柄要重新取
+                    waicengjubing = -1;
                 }
                 t = MyFuncUtil.lureninstallOk(dqinx, "package:com.playcrab.kos.gw", () =>
                 {
@@ -791,6 +793,8 @@ namespace wlxm
                         return;
                     }
                     Thread.Sleep(20000);
+                    jubing = -1;//句柄要重新取
+                    waicengjubing = -1;
                 });
                 if (t == false || chongqi == 1)
                 {
@@ -825,8 +829,10 @@ namespace wlxm
                     }
                     chongqi = 0;
                     Thread.Sleep(20000);
+                    jubing = -1;//句柄要重新取
+                    waicengjubing = -1;
                     continue;
-                }
+                }                
                 //窗口已打开 获取句柄
                 if (jubing <= 0)
                 {
@@ -849,8 +855,8 @@ namespace wlxm
                 ZhangHao zhanghao = new ZhangHao();               
                 if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
                 {
-                    mno.getIP(dqinx, dizhi, seed, mno, jubing, waicengjubing, out ip);
-                    if (ip != null && !"".Equals(ip) && ip.IndexOf("请") < 0)
+                    mno.getIP(dqinx, dizhi, seed,jubing, waicengjubing, out ip);
+                    if (ip != null && !"".Equals(ip) && ip.IndexOf("请") < 0 && !"1".Equals(ip))
                     {
                         t = zhanghao.panduanIpKeYong(dqinx, youxi, ip);
                         if (t)
@@ -951,39 +957,16 @@ namespace wlxm
                 cishu++;
                 // MyLdcmd.myReboot(dqinx);
                 Thread.Sleep(1000 * 60 * 4);
+                jubing = -1;//句柄要重新取
+                waicengjubing = -1;
                 temp = mno.myQuit(dqinx, dizhi);
                 if (!temp)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
                     Thread.Sleep(20000);
                     continue;
-                }
-                bool cqcg = false;
-                t = MyFuncUtil.isLaunch(dqinx);
-                if (t)
-                {
-                    int w = -1, h = -1;
-                    MyFuncUtil.getWindowSize(dqinx, out w, out h);
-                    if (w != -1 && h != -1 && w < h)
-                    {
-                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "重启成功完成,w h分别为" + w + " " + h);
-                        Thread.Sleep(1000);
-                        cqcg = true;
-                    }
-                }
-                if (!cqcg)
-                {
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "重启失败,强关");
-                    temp = mno.myQuit(dqinx, dizhi);
-                    if (!temp)
-                    {
-                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
-                        Thread.Sleep(20000);
-                        continue;
-                    }
-                }
-                zhanghao.zhiweidengluzhongN(dqinx, "yiquan", name, WriteLog.getMachineName());
-                jubing = -1;//句柄要重新取
+                }             
+                //zhanghao.zhiweidengluzhongN(dqinx, "yiquan", name, WriteLog.getMachineName());
                 var js = MyFuncUtil.GetTimestamp();
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环" + cishu + "次数");
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环1次耗时" + MyFuncUtil.SecondToHour(js - ks));
@@ -1038,9 +1021,11 @@ namespace wlxm
                         Thread.Sleep(20000);
                         continue;
                     }
+                    jubing = -1;//句柄要重新取
+                    waicengjubing = -1;
                     Thread.Sleep(20000);
                 }
-                t = MyFuncUtil.lureninstallOk(dqinx, "package:com.ourpalm.bleach.gw", () =>
+                t = MyFuncUtil.lureninstallOk(dqinx, "package:com.playcrab.kos.gw", () =>
                 {
                     WriteLog.WriteLogFile(dqinx + "", "安装app没成功");
                     temp = mno.myQuit(dqinx, dizhi);
@@ -1061,6 +1046,8 @@ namespace wlxm
                         Thread.Sleep(20000);
                         return;
                     }
+                    jubing = -1;//句柄要重新取
+                    waicengjubing = -1;
                     Thread.Sleep(20000);
                 });
                 if (t == false)
@@ -1086,6 +1073,8 @@ namespace wlxm
                         Thread.Sleep(20000);
                         continue;
                     }
+                    jubing = -1;//句柄要重新取
+                    waicengjubing = -1;
                     Thread.Sleep(20000);
                     continue;
                 }
@@ -1112,8 +1101,8 @@ namespace wlxm
                 ZhangHao zhanghao = new ZhangHao();
                 if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
                 {
-                    mno.getIP(dqinx, dizhi, seed, mno, jubing, waicengjubing, out ip);
-                    if (ip != null && !"".Equals(ip) && ip.IndexOf("请") < 0)
+                    mno.getIP(dqinx, dizhi, seed, jubing, waicengjubing, out ip);
+                    if (ip != null && !"".Equals(ip) && ip.IndexOf("请") < 0 && !"1".Equals(ip))
                     {
                         t = zhanghao.panduanIpKeYong(dqinx, youxi, ip);
                         if (t)
@@ -1200,6 +1189,8 @@ namespace wlxm
                 //Thread.Sleep(1000 * 60*60);//停住1小时
                 zhanghao.tuichusaveNameAndPas(name, dqinx, youxi, WriteLog.getMachineName(), -1, -1, -1);               
                 cishu++;
+                jubing = -1;//句柄要重新取
+                waicengjubing = -1;
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改名");
                 MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改属性");
@@ -1231,8 +1222,7 @@ namespace wlxm
                         return;
                     }
                 }
-                zhanghao.zhiweidengluzhongN(dqinx, Jingjie.DANGQIAN_YOUXI, name, WriteLog.getMachineName());
-                jubing = -1;//句柄要重新取
+                //zhanghao.zhiweidengluzhongN(dqinx, Jingjie.DANGQIAN_YOUXI, name, WriteLog.getMachineName());
                 var js = MyFuncUtil.GetTimestamp();
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环" + cishu + "次数");
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环1次耗时" + MyFuncUtil.SecondToHour(js - ks));

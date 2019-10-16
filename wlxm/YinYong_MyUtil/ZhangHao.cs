@@ -415,7 +415,7 @@ namespace MyUtil
                     if (dt.Rows.Count > 0)
                     {
 
-                        WriteLog.WriteLogFile(dqinx + "", "找到需要练级的账号" + dt.Rows[0][0] + " " + dt.Rows[0][1] + "为相同ip");
+                        WriteLog.WriteLogFile(dqinx + "", "找到需要练级的账号" + dt.Rows[0][0] + " " + dt.Rows[0][1] + "为相同ip:"+ip);
                         return true;
                     }
                 }
