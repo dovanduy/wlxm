@@ -1266,13 +1266,32 @@ namespace wlxm
                 {
                     if (mf.mohuByLeiBool(f.Sd))
                     {
-                        MyFuncUtil.mylogandxianshi(f.Name+"模糊取到");
+                        MyFuncUtil.mylogandxianshi(f.Name + "模糊取到YiQuan_SanDian");
                         //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
                         mf.mydelay(1000, 2000);
                     }
                     if (mf.jingqueByLeiBool(f.Sd))
                     {
-                        MyFuncUtil.mylogandxianshi(f.Name + "精确取到");
+                        MyFuncUtil.mylogandxianshi(f.Name + "精确取到YiQuan_SanDian");
+                        mf.mydelay(1000, 2000);
+                    }
+                }
+                mf.mydelay(10, 200);
+
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                foreach (FuHeSanDian f in YiQuanZhiTuo_SanDian.List_yqfhsandian)
+                {
+                    if (mf.mohuByLeiBool(f.Sd))
+                    {
+                        MyFuncUtil.mylogandxianshi(f.Name + "模糊取到YiQuanZhiTuo_SanDian");
+                        //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                        mf.mydelay(1000, 2000);
+                    }
+                    if (mf.jingqueByLeiBool(f.Sd))
+                    {
+                        MyFuncUtil.mylogandxianshi(f.Name + "精确取到YiQuanZhiTuo_SanDian");
                         mf.mydelay(1000, 2000);
                     }
                 }

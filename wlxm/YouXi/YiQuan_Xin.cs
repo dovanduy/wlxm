@@ -88,6 +88,7 @@ namespace fuzhu
             ls.Add(YiQuan_SanDian.GetObject().findFuHeSandianByName("账号切换后选新账号"));
             ls.Add(YiQuan_SanDian.GetObject().findFuHeSandianByName("登录-进入游戏"));
             ls.Add(YiQuan_SanDian.GetObject().findFuHeSandianByName("登录-进入游戏2"));
+            ls.Add(YiQuan_SanDian.GetObject().findFuHeSandianByName("进入游戏"));
             //ls.AddRange(YiQuan_SanDian.GetObject().findListFuHeSandianByName("空白"));
             List<FuHeSanDian> ls2 = YiQuan_SanDian.GetObject().findAllFuHeSandian();
             List<FuHeSanDian> feixiangguan=ls2.FindAll(f => !ls.Contains(f)
