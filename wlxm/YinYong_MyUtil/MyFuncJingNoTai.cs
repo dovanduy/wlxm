@@ -40,6 +40,7 @@ namespace MyUtil
             long ks = MyFuncUtil.GetTimestamp();
             int width = -1, height = -1;
             myReSize(index, out width, out height,youxi);
+            WriteLog.WriteLogFile(index + "", "准备获取句柄，在lurenResizeOk处");
             int jubing = MyLdcmd.getDqmoniqiWaiCengJuBingByIndex(index, dizhi);
             int jubing2 = MyLdcmd.getDqmoniqiJuBingByIndex(index, dizhi);
             if (jubing <= 0)
@@ -136,7 +137,7 @@ namespace MyUtil
             x = (index % 4) * (dqwidth / 4);
             y = (index / 4) * (dqheight / 4);
             WriteLog.WriteLogFile(index + "", index + "x:" + x + ",y:" + y);
-            SetWindowPos(p, p2, x, y, width, height, SWP_SHOWWINDOW|SWP_NOMOVE);
+            SetWindowPos(p, p2, x, y, width, height, SWP_SHOWWINDOW);
             
         }
         
@@ -183,7 +184,8 @@ namespace MyUtil
 
         public bool myQuit(int index, string dizhi)
         {
-            var res = false;            
+            var res = false;
+            WriteLog.WriteLogFile(index+"","准备获取句柄，在myquit处");
             int jubing = MyLdcmd.getDqmoniqiWaiCengJuBingByIndex(index, dizhi);
             IntPtr p = new IntPtr(jubing);
             PostMessage(p, WM_CLOSE, 0, 0);
@@ -279,6 +281,7 @@ namespace MyUtil
             string dizhi = @"d:\ChangZhi\dnplayer2\";
             width = -1;
             height = -1;
+            WriteLog.WriteLogFile(index + "", "准备获取句柄，在getWindowSize处外层句柄");
             int jubing = MyLdcmd.getDqmoniqiWaiCengJuBingByIndex(index, dizhi);
             if (jubing <= 0)
             {
@@ -481,6 +484,7 @@ namespace MyUtil
             //窗口已打开 获取句柄
             if (jubing <= 0)
             {
+                WriteLog.WriteLogFile(dqinx + "", "准备获取句柄，在getIP处");
                 jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx, dizhi);
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "句柄为" + jubing);
             }

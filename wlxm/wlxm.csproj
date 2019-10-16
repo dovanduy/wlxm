@@ -95,6 +95,8 @@
     <Compile Include="YinYong_MyUtil\WriteLog.cs" />
     <Compile Include="YinYong_MyUtil\ZhangHao.cs" />
     <Compile Include="YouXi\Jingjie_DuoDian.cs" />
+    <Compile Include="YouXi\YiQuanZhiTuo_DuoDian.cs" />
+    <Compile Include="YouXi\YiQuanZhiTuo_SanDian.cs" />
     <Compile Include="YouXi\YiQuan_DuoDian.cs" />
     <Compile Include="YouXi\YiQuan_SanDian.cs" />
     <Compile Include="YouXi\youxi.cs" />
