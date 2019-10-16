@@ -86,7 +86,7 @@ namespace fuzhu
             ls.Add(YiQuan_SanDian.GetObject().findFuHeSandianByName("登录或注册"));
             ls.Add(YiQuan_SanDian.GetObject().findFuHeSandianByName("新账号注册"));
             ls.Add(YiQuan_SanDian.GetObject().findFuHeSandianByName("账号切换后选新账号"));
-            ls.AddRange(YiQuan_SanDian.GetObject().findListFuHeSandianByName("空白"));
+            //ls.AddRange(YiQuan_SanDian.GetObject().findListFuHeSandianByName("空白"));
             List<FuHeSanDian> ls2 = YiQuan_SanDian.GetObject().findAllFuHeSandian();
             List<FuHeSanDian> feixiangguan=ls2.FindAll(f => !ls.Contains(f)
                 );
@@ -125,7 +125,7 @@ namespace fuzhu
                                 break;
                             }
                         }
-                        if (tiaochu3 == 0 && (rt != null && rt.Length > 0) || (zhuxianrt != null && zhuxianrt.Length > 0))
+                        if (tiaochu3 == 0 && (rt != null && rt.Length > 0) || (zhuxianrt != null && zhuxianrt.Length > 0)&&(jsp - ksp) > 1000 * 20)
                         {
                             WriteLog.WriteLogFile(this._mnqName, "跳出10次循环");
                             tiaochu3 = 1;

@@ -400,6 +400,7 @@ namespace fuzhu
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 
+
             guanbisdx = new SanDian(new int[3, 3]{
 	            {  267,   56, 0x3dc2f0},
 	            {  237,  198, 0xa4def2},

@@ -865,6 +865,8 @@ namespace wlxm
                             MyLdcmd.myReboot(dqinx);
                             Thread.Sleep(1000 * 60 * 4);
                             ipbeizhan++;
+                            jubing = -1;//句柄要重新取
+                            waicengjubing = -1;
                             continue;
                         }
                     }
@@ -1110,6 +1112,8 @@ namespace wlxm
                             WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "ip已被占");
                             MyLdcmd.myReboot(dqinx);
                             Thread.Sleep(1000 * 60 * 4);
+                            jubing = -1;//句柄要重新取
+                            waicengjubing = -1;
                             continue;
                         }
                     }
@@ -1123,7 +1127,7 @@ namespace wlxm
                     continue;
                 }
                 t = mno.PanDuan_QidongLurenzhanghao(dqinx, dm, jubing);//根据窗口大小 和 是否有雷电游戏中心标志  判断是否启动了app
-                temp = mno.PanDuan_QidongBySize(dqinx, jubing, 1000 * 30);
+                temp = mno.PanDuan_QidongBySize(dqinx, waicengjubing, 1000 * 30, 601, 338);
                 bool t2 = false;
                 if (t && temp)
                 {
@@ -1153,7 +1157,7 @@ namespace wlxm
                         continue;
                     }
                     Thread.Sleep(20000);
-                    temp = mno.lurenResizeOk(dqinx);
+                    temp = mno.lurenResizeOk(dqinx,"yiquan");
                     if (temp == false)
                     {
                         WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + ",resize没成功");
