@@ -65,6 +65,318 @@ namespace fuzhu
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 
+
+            guanbisdx = new SanDian(new int[3, 3] {
+	{  405,  276, 0xf0f0e8},
+	{  439,  225, 0xffcf42},
+	{  384,  226, 0xffcf42},
+});
+            guanbifhx = new FuHeSanDian("引导-关闭对话框wl加", guanbisdx, 246, 270);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            List<ZuoBiao> wlls = new List<ZuoBiao>();
+            wlls.Add(new ZuoBiao(465, 37, 0xfffbef));
+            guanbisdx = new SanDian(new int[3, 3] {
+	{  175,   66, 0x865228},
+	{  116,  119, 0xf3b00c},
+	{  129,   33, 0xa52421},
+});
+            guanbifhx = new FuHeSanDian("引导-关闭对话框wl加购买花钻石", guanbisdx, 517, 9,"",wlls);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            wlls = new List<ZuoBiao>();
+            wlls.Add(new ZuoBiao(417, 63, 0xfffbef));
+            wlls.Add(new ZuoBiao(509, 9, 0xffbf12));
+            wlls.Add(new ZuoBiao(509, 9, 0xffbf12));
+            guanbisdx = new SanDian(new int[3, 3] {
+	{  165,   65, 0xffde4f},
+	{  122,   66, 0xffe34a},
+	{  348,  112, 0x7b499c},
+});
+            guanbifhx = new FuHeSanDian("引导-关闭对话框wl加购买花钻石2", guanbisdx, 517, 9, "", wlls);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            wlls = new List<ZuoBiao>();
+            wlls.Add(new ZuoBiao(419, 65, 0xfffbef));
+            guanbisdx = new SanDian(new int[3, 3] {
+	{  341,  183, 0xffcb21},
+	{  208,  185, 0xffcb21},
+	{  176,   66, 0xc64d31},
+});
+            guanbifhx = new FuHeSanDian("引导-关闭对话框wl加购买花钻石3", guanbisdx, 517, 9, "", wlls);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+
+            wlls = new List<ZuoBiao>();
+            wlls.Add(new ZuoBiao(419, 252, 0x1b0500));
+            wlls.Add(new ZuoBiao(465, 35, 0xfffbf2));
+            guanbisdx = new SanDian(new int[3, 3] {
+	{   92,   63, 0xf7ba18},
+	{  121,   32, 0xa52421},
+	{  448,  253, 0xffdb21},
+});
+            guanbifhx = new FuHeSanDian("引导-积分奖励领取过", guanbisdx, 517, 9, "", wlls);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            wlls = new List<ZuoBiao>();
+            wlls.Add(new ZuoBiao(481, 209, 0xfff6c3));
+            wlls.Add(new ZuoBiao(458, 266, 0xad1008));
+            SanDian new1 = new SanDian(new int[3, 3]{
+	            {   42,    7, 0xfb4129},
+	            {   88,    4, 0xefaa00},
+	            {  479,  210, 0xfff3c6},
+            });
+            FuHeSanDian new2 = new FuHeSanDian("引导-布阵界面", new1,-1, -1, "", wlls);
+            _list_yqsandian.Add(new1);
+            _list_yqfhsandian.Add(new2);
+
+            wlls = new List<ZuoBiao>();
+            wlls.Add(new ZuoBiao(465, 36, 0xfffbf1));
+            guanbisdx = new SanDian(new int[3, 3] {
+	{   91,   78, 0xfcca25},
+	{  212,   87, 0xff5d42},
+	{  137,   79, 0x4ab200},
+});
+            guanbifhx = new FuHeSanDian("引导-关闭战报已经胜利", guanbisdx, 517, 9, "", wlls);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            wlls = new List<ZuoBiao>();
+            wlls.Add(new ZuoBiao(466, 36, 0xfffbf5));
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  216,   87, 0xff5d42},
+	{  137,   77, 0xde1010},
+	{  116,   35, 0xa52421},
+});
+            guanbifhx = new FuHeSanDian("引导-关闭战报已经失败", guanbisdx, 517, 9, "", wlls);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{   38,   23, 0xdc3421},
+	{  512,   55, 0x7b20de},
+	{  523,  279, 0xfead07},
+});
+            guanbifhx = new FuHeSanDian("引导-关闭招募活动窗口", guanbisdx, 517, 9);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  186,   90, 0x9c69ce},
+	{  292,  209, 0x8a79ab},
+	{  444,  183, 0x60409a},
+});
+            guanbifhx = new FuHeSanDian("引导-关闭萌新礼包", guanbisdx, 459, 55);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  359,   97, 0xefb294},
+	{  512,  109, 0xffb007},
+	{  495,  133, 0x999089},
+});
+            guanbifhx = new FuHeSanDian("引导-关闭小和尚介绍来到协会竞技", guanbisdx, 204, 253);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  149,  166, 0xefb294},
+	{  152,  217, 0xad2912},
+	{   72,  198, 0xfffefe},
+});
+            guanbifhx = new FuHeSanDian("引导-关闭小和尚介绍钉头锤任务", guanbisdx, 24, 190);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{   42,  117, 0xefb294},
+	{  148,  147, 0xff7927},
+	{  160,  146, 0xff6b13},
+});
+            guanbifhx = new FuHeSanDian("王磊引导-拖拽怒吼其实", guanbisdx, 24, 190);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  150,  148, 0xff8d46},
+	{  137,  146, 0xff7b2b},
+	{   40,  131, 0xefb294},
+});
+            guanbifhx = new FuHeSanDian("王磊引导-拖拽怒吼其实2", guanbisdx, 24, 190);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            wlls = new List<ZuoBiao>();
+            wlls.Add(new ZuoBiao(509, 9, 0xffbf12));
+            wlls.Add(new ZuoBiao(509, 9, 0xffbf12));
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  479,  222, 0xb58239},
+	{  488,  119, 0xb98a3d},
+	{   41,   19, 0xde3421},
+});
+            guanbifhx = new FuHeSanDian("引导-超市直接关闭", guanbisdx, 508, 9);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            wlls = new List<ZuoBiao>();
+            wlls.Add(new ZuoBiao(388, 73, 0xde2c29));
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  348,  117, 0xcf4f0f},
+	{  320,  119, 0x93c52d},
+	{  304,  172, 0xffc310},
+});
+            guanbifhx = new FuHeSanDian("引导-强者券购买关闭", guanbisdx, 508, 9);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  415,  253, 0x71645a},
+	{  328,  252, 0xa56608},
+	{  441,  120, 0x3899af},
+});
+            guanbifhx = new FuHeSanDian("引导-wl加打蚊女", guanbisdx, 415, 253);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  441,  119, 0x3a9eaf},
+	{  435,  114, 0xafafaf},
+	{  440,  125, 0x173d64},
+});
+            guanbifhx = new FuHeSanDian("引导-wl加人物有打的提示", guanbisdx, 415, 253);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  324,  120, 0x782b36},
+	{  319,  115, 0xfb9b95},
+	{  316,  106, 0xe37a79},
+});
+            guanbifhx = new FuHeSanDian("引导-wl加打蚊女红色拳头", guanbisdx, 324, 126);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  256,   45, 0xefb294},
+	{  404,   55, 0xffae05},
+	{  319,   82, 0x575451},
+});
+            guanbifhx = new FuHeSanDian("引导-行业协会查看对手情况wl", guanbisdx, 312, 162);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{   73,   16, 0xececd2},
+	{   66,   14, 0xf7f4d6},
+	{   69,   15, 0xbcbcac},
+});
+            guanbifhx = new FuHeSanDian("引导-手动改自动wl", guanbisdx, 70, 15);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  365,  103, 0xefb294},
+	{  413,  133, 0x76716b},
+	{  462,  158, 0xf9ab00},
+});
+            guanbifhx = new FuHeSanDian("引导-行业协会刚进入wl", guanbisdx, 198, 254);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  270,   37, 0xffe34a},
+	{  292,   37, 0xc34121},
+	{  462,   50, 0xb5aabd},
+});
+            guanbifhx = new FuHeSanDian("引导-忍者特训关闭wl", guanbisdx, 490, 41);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  390,  162, 0xbe5730},
+	{  390,  129, 0x5a2808},
+	{  408,  129, 0xffcf4a},
+});
+            guanbifhx = new FuHeSanDian("引导-领取关卡宝箱wl", guanbisdx, 395, 160);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  504,  165, 0xaa391c},
+	{  512,  143, 0xfff525},
+	{  481,  143, 0xffff21},
+});
+            guanbifhx = new FuHeSanDian("引导-领取关卡宝箱2wl", guanbisdx, 503, 157);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  259,  100, 0xefb294},
+	{  383,  115, 0xff7d2e},
+	{  316,  126, 0xff8033},
+});
+            guanbifhx = new FuHeSanDian("引导-少材料一拳通关提示wl", guanbisdx, 439, 108);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  219,  284, 0xbbbbbb},
+	{  222,  261, 0xff8621},
+	{   33,   18, 0xcb281c},
+});
+            guanbifhx = new FuHeSanDian("引导-招募非免费直接关wl", guanbisdx, 508, 9);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  110,  222, 0xde3210},
+	{  115,  195, 0xf3ca11},
+	{  348,  241, 0xf9d548},
+});
+            guanbifhx = new FuHeSanDian("引导-第五章开始任务wl", guanbisdx, 336, 241);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  254,  197, 0xefb294},
+	{  310,  222, 0x514e4c},
+	{  400,  199, 0xffae00},
+});
+            guanbifhx = new FuHeSanDian("引导-光头要求锻炼技能wl", guanbisdx, 432, 280);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  432,  113, 0xaf8391},
+	{  430,   96, 0xaf8e8e},
+	{  460,  125, 0x735256},
+});
+            guanbifhx = new FuHeSanDian("引导-大蚊女下雨中wl", guanbisdx, 440, 121);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  371,  198, 0xff7a29},
+	{  353,  197, 0xff6e17},
+	{  429,  234, 0xffae00},
+});
+            guanbifhx = new FuHeSanDian("引导-首领挑战开启先点地图", guanbisdx, 493, 267);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+
+
+
+
+
+
+
             guanbisdx = new SanDian(new int[3, 3] {
 	{  162,  286, 0xedcd08},
 	{   50,   12, 0xcccccc},
@@ -538,9 +850,9 @@ guanbisdx = new SanDian(new int[3, 3]{
 	{   32,    8, 0xfd4027},
 	{  448,  259, 0xc91414},
 });
-           FuHeSanDian guanbi1fhx = new FuHeSanDian("引导-剧情--布阵-一键上阵--开始挑战", guanbisdx, -1,-1, "",ablist1);
-            _list_yqsandian.Add(guanbisdx);
-            _list_yqfhsandian.Add(guanbifhx);
+           FuHeSanDian guanbi1fhx = new FuHeSanDian("引导-剧情--布阵-一键上阵--开始挑战", guanbi1sdx, -1, -1, "", ablist1);
+           _list_yqsandian.Add(guanbi1sdx);
+           _list_yqfhsandian.Add(guanbi1fhx);
 
             guanbisdx = new SanDian(new int[3, 3] {
 	{  440,  131, 0x4debff},
@@ -1612,12 +1924,12 @@ guanbisdx = new SanDian(new int[3, 3]{
             _list_yqsandian.Add(zdhmsd9);
             _list_yqfhsandian.Add(zdhmfh9);
 
-            SanDian new1 = new SanDian(new int[3, 3]{
+            new1 = new SanDian(new int[3, 3]{
 	            {  337,  156, 0xffd338},
 	            {  328,  129, 0x6c3b0e},
 	            {  349,  128, 0xe5ba44},
             });
-            FuHeSanDian new2 = new FuHeSanDian("引导-第一关领取宝箱", new1, 338, 156);
+            new2 = new FuHeSanDian("引导-第一关领取宝箱", new1, 338, 156);
             _list_yqsandian.Add(new1);
             _list_yqfhsandian.Add(new2);
             _dict.Add(new2.Name, new2);

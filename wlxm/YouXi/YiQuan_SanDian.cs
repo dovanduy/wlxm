@@ -400,6 +400,15 @@ namespace fuzhu
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 
+            guanbisdx = new SanDian(new int[3, 3] {
+	{   80,   29, 0xdd3021},
+	{   55,   27, 0xefaa00},
+	{   65,   27, 0xde3421},
+});
+            guanbifhx = new FuHeSanDian("登录相关-服务器选择", guanbisdx, 482, 27);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
 
             guanbisdx = new SanDian(new int[3, 3]{
 	            {  267,   56, 0x3dc2f0},
@@ -416,6 +425,15 @@ namespace fuzhu
 	            {  258,  267, 0xf4f4f4},
             });
             guanbifhx = new FuHeSanDian("登录-进入游戏", guanbisdx, 260, 241);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  294,  141, 0x636166},
+	{  298,  152, 0x474750},
+	{  280,  213, 0xffdb21},
+});
+            guanbifhx = new FuHeSanDian("登录-发现维护项", guanbisdx, 260, 241);
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 

@@ -315,7 +315,7 @@ namespace wlxm
             //zh.zhiweidengluzhongN("jingjie", WriteLog.getMachineName());
             for (int j = 1; j < 1000; j++)
             {
-                WriteLog.WriteLogFile("", "序号" + j + ",开始");
+                WriteLog.WriteLogFile("", "序号" + j + ",开始搞账号");
                 MyLdcmd.myQuitAll(dizhi);
                 Thread.Sleep(2000);
                 MyLdcmd.myRemoveAll(dizhi);
@@ -1126,7 +1126,7 @@ namespace wlxm
                     Thread.Sleep(20000);
                     continue;
                 }
-                t = mno.PanDuan_QidongLurenzhanghao(dqinx, dm, jubing);//根据窗口大小 和 是否有雷电游戏中心标志  判断是否启动了app
+                t = mno.PanDuan_QidongLurenzhanghao(dqinx, dm, waicengjubing);//根据窗口大小 和 是否有雷电游戏中心标志  判断是否启动了app
                 temp = mno.PanDuan_QidongBySize(dqinx, waicengjubing, 1000 * 30, 601, 338);
                 bool t2 = false;
                 if (t && temp)
@@ -1333,7 +1333,7 @@ namespace wlxm
             //zh.zhiweidengluzhongN("jingjie", WriteLog.getMachineName());
             for (int j = 1; j < 1000; j++)
             {
-                WriteLog.WriteLogFile("", "序号" + j + ",开始");
+                WriteLog.WriteLogFile("", "序号" + j + ",开始，搞主线");
                 //MyLdcmd.myQuitAll(dizhi);
                 //Thread.Sleep(2000);
                 //MyLdcmd.myRemoveAll(dizhi);

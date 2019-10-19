@@ -254,7 +254,7 @@ namespace MyUtil
             }
             Entity.FuHeSanDian tysd = null;
             int w = -1, h = -1;
-            getWindowSize(dqinx, out w, out h);
+            getWindowSize(dqinx,jubing, out w, out h);
             //WriteLog.WriteLogFile(dqinx + "", w + " " + h);
             int a = 0;
             if (w == 489 && h == 840)
@@ -276,17 +276,20 @@ namespace MyUtil
         }
 
 
-        public void getWindowSize(int index, out int width, out int height)
+        public void getWindowSize(int index,int jubing, out int width, out int height)
         {
             string dizhi = @"d:\ChangZhi\dnplayer2\";
             width = -1;
             height = -1;
-            WriteLog.WriteLogFile(index + "", "准备获取句柄，在getWindowSize处外层句柄");
-            int jubing = MyLdcmd.getDqmoniqiWaiCengJuBingByIndex(index, dizhi);
             if (jubing <= 0)
             {
-                WriteLog.WriteLogFile(index + "", "改变窗口位置，句柄绑定错误");
-                return;
+                WriteLog.WriteLogFile(index + "", "准备获取句柄，在getWindowSize处外层句柄");
+                jubing = MyLdcmd.getDqmoniqiWaiCengJuBingByIndex(index, dizhi);
+                if (jubing <= 0)
+                {
+                    WriteLog.WriteLogFile(index + "", "改变窗口位置，句柄绑定错误");
+                    return;
+                }
             }
             Rect lprect = new Rect();
             GetWindowRect(new IntPtr(jubing), out lprect);
@@ -405,7 +408,7 @@ namespace MyUtil
                     break;
                 }
                 int w = -1, h = -1;
-                getWindowSize(dqinx, out w, out h);
+                getWindowSize(dqinx, waicengjubing,out w, out h);
                 if (w==wid && h==hei)
                 {
                     rt = true;
