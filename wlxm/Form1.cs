@@ -258,16 +258,8 @@ namespace wlxm
             string pwd = "";
             string jieduan = "";
             int xuanqu = -1, dengji = -1;
-            ZhangHao zhanghao = new ZhangHao();
-            zhanghao.zhunbeizhanghao(dqinx, YiQuan_Xin.DangQianYouXi, out name, out pwd, out xuanqu, out dengji, out jieduan);
-            if (name == null || name == "" || pwd == null || pwd == "")
-            {
-                //当前没有找到需要练级的账号
-                WriteLog.WriteLogFile(dqinx + "", "当前没有找到需要练级的账号");
-                return;
-            }
-            YiQuan_Xin yq = new YiQuan_Xin(mf, dqinx, jubing, dizhi);
-            tmpBool = yq.denglu(15, ref name, ref pwd,ref xuanqu);
+            MyFuncJingNoTai mno = new MyFuncJingNoTai();
+            bool t2 = mno.PanDuan_QidongByYiQuDian(dqinx, 1000 * 30, mf, jubing, out name);
             
             MyFuncUtil.mylogandxianshi("结束");
            

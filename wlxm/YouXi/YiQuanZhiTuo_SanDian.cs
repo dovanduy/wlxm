@@ -484,6 +484,15 @@ namespace fuzhu
             _list_yqsandian.Add(new1);
             _list_yqfhsandian.Add(new2);
 
+            new1 = new SanDian(new int[3, 3]{
+	{   46,   15, 0x651b10},
+	{  118,   34, 0x624600},
+	{  318,  114, 0xc87273},
+});
+            new2 = new FuHeSanDian("引导-大蚊女引导洪拳wl", new1, 325,  132);
+            _list_yqsandian.Add(new1);
+            _list_yqfhsandian.Add(new2);
+
             guanbisdx = new SanDian(new int[3, 3]{
 	{  432,  113, 0xaf8391},
 	{  430,   96, 0xaf8e8e},

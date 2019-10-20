@@ -301,7 +301,7 @@ namespace MyUtil
 
         public bool PanDuan_QidongByYiQuDian(int dqinx, int haomiao, myDm mf, int jubing, out string yiqudian)
         {
-            WriteLog.WriteLogFile(dqinx + "", "模拟器发现已取点-开始判断"+haomiao);
+            WriteLog.WriteLogFile(dqinx + "", "模拟器发现已取点已去电非ip-开始判断"+haomiao);
             long ks = MyFuncUtil.GetTimestamp();
             var rt = false;
             string oyiqudian = "";
@@ -317,6 +317,7 @@ namespace MyUtil
                 }
             }
             yiqudian = oyiqudian;
+            WriteLog.WriteLogFile(dqinx + "", "模拟器发现已取点已去电非ip-结束判断" + haomiao);
             return rt;
         }
 
@@ -363,7 +364,7 @@ namespace MyUtil
 
         private int panduankasiqudian(int dqinx,myDm mf,int jubing,out string yiqudian)
         {
-            
+            WriteLog.WriteLogFile(dqinx + "", "进入已取点-开始判断" );
             StringBuilder rt = new StringBuilder();
             int res = 0;
             for (int i = 0; i < 10; i++)
@@ -373,6 +374,20 @@ namespace MyUtil
                     if (mf.mohuByLeiBool(f.Sd))
                     {
                         WriteLog.WriteLogFile(dqinx + "", f.Name + "模糊取到");
+                        //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                        mf.mydelay(1000, 2000);
+                        rt.Append(f.Name);
+                        res++;
+                    }
+                    if (res > 0) {
+                        break;
+                    }
+                }
+                foreach (Entity.FuHeSanDian f in fuzhu.YiQuanZhiTuo_SanDian.List_yqfhsandian)
+                {
+                    if (mf.mohuByLeiBool(f.Sd))
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", f.Name + "Zhituo模糊取到");
                         //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
                         mf.mydelay(1000, 2000);
                         rt.Append(f.Name);
@@ -393,6 +408,7 @@ namespace MyUtil
                 rr = rt.ToString();
             }
             yiqudian = rr;
+            WriteLog.WriteLogFile(dqinx + "", "进入已取点-结束");
             return res;
         }
 
