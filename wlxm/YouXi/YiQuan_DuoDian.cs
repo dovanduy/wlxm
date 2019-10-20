@@ -122,7 +122,15 @@ namespace fuzhu
             _list_yqduodian.Add(dz4);
             _list_yqfhduodian.Add(fh4);
 
-            
+            dz4 = new DuoDianZhaoSe(0xf52802, "0|-6|0xd0330e,-5|-6|0xf72810,-5|6|0x30312e,10|2|0xeb290a", 90, 0, 0, 532, 240);
+            fh4 = new FuHeDuoDian("类似光头红色拳头3", dz4, -1, -1, ls0);
+            _list_yqduodian.Add(dz4);
+            _list_yqfhduodian.Add(fh4);
+
+            dz4 = new DuoDianZhaoSe(0xff2c02, "0|-8|0xd64931,-10|0|0xd64931,-1|6|0xc62400,11|1|0xdd5738", 90, 0, 0, 532, 280);
+            fh4 = new FuHeDuoDian("类似光头红色拳头4", dz4, -1, -1, ls0);
+            _list_yqduodian.Add(dz4);
+            _list_yqfhduodian.Add(fh4);
             //其他多点
             DuoDianZhaoSe rcdz1 = new DuoDianZhaoSe(0x69b509, "-9|0|0x529f09,10|0|0x6fc507,-69|-1|0xabe27e,-80|-1|0x97ca6f", 90, 0, 90, 110, 160);
             FuHeDuoDian rcfh1 = new FuHeDuoDian("支线已完成", rcdz1, -1, -1);

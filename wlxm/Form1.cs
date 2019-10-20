@@ -1101,7 +1101,9 @@ namespace wlxm
                 string youxi = fuzhuyouxi;
                 string ip = "1";
                 ZhangHao zhanghao = new ZhangHao();
-                if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
+                int w = -1, h = -1;
+                MyFuncUtil.getWindowSize(dqinx, out w, out h);
+                if ((w != -1 && h != -1 && w < h) && WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
                 {
                     mno.getIP(dqinx, dizhi, seed, jubing, waicengjubing, out ip);
                     if (ip != null && !"".Equals(ip) && ip.IndexOf("请") < 0 && !"1".Equals(ip))
@@ -1148,7 +1150,8 @@ namespace wlxm
                         Thread.Sleep(20000);
                         continue;
                     }
-                    int w = -1, h = -1;
+                    w = -1;
+                    h = -1;
                     MyFuncUtil.getWindowSize(dqinx, out w, out h);
                     if (w != -1 && h != -1 && w < h)
                     {
@@ -1206,7 +1209,8 @@ namespace wlxm
                 t = MyFuncUtil.isLaunch(dqinx);
                 if (t)
                 {
-                    int w = -1, h = -1;
+                    w = -1;
+                    h = -1;
                     MyFuncUtil.getWindowSize(dqinx, out w, out h);
                     if (w != -1 && h != -1 && w < h)
                     {
@@ -1236,6 +1240,14 @@ namespace wlxm
         private void quanliucheng_Click(object sender, EventArgs e)
         {
             quanjubutton = 1;
+            ThreadStart threadStart = new ThreadStart(duoxianchengyiqudian);//通过ThreadStart委托告诉子线程执行什么方法　
+            Thread thread = new Thread(threadStart);
+            thread.Name = "wodeduoxianyiquandian";
+            thread.Start();
+            
+        }
+
+        private void duoxianchengyiqudian() {
             MyFuncUtil.mylogandxianshi("开始-已取点");
             int dqinx = int.Parse(this.textBox1.Text);
             int jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx);
@@ -1257,7 +1269,7 @@ namespace wlxm
                         //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
                         mf.mydelay(1000, 2000);
                     }
-                }               
+                }
                 mf.mydelay(10, 200);
             }
             for (int i = 0; i < 10; i++)
