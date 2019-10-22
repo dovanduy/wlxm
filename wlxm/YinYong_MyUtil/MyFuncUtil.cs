@@ -718,13 +718,6 @@ namespace MyUtil
             myDm dm = new myDm();
             int x1 = -1;
             int y1 = -1;
-            int jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx);
-            if (jubing <= 0)
-            {
-                WriteLog.WriteLogFile(dqinx + "", "游戏判断启动，句柄绑定错误");
-                return false;
-            }
-            dm.bindWindow(jubing);
             Entity.FuHeSanDian tysd =null;
             int w=-1,h=-1;
             getWindowSize(dqinx,out w,out h);
@@ -740,10 +733,20 @@ namespace MyUtil
                 a = 1;
                 tysd = fuzhu.TongYong_SanDian.GetObject().findFuHeSandianByName("雷电首页截图-平板");
             }
-            if (a==1 && dm.mohuByLeiBool_duokai(tysd.Sd))
+            if (a == 1)
             {
-                WriteLog.WriteLogFile(dqinx + "", "游戏启动不成功，界面有雷电游戏 " + x1 + " " + y1);
-                return false;
+                int jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx);
+                if (jubing <= 0)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "游戏判断启动，句柄绑定错误");
+                    return false;
+                }
+                dm.bindWindow(jubing);
+                if (dm.mohuByLeiBool_duokai(tysd.Sd))
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "游戏启动不成功，界面有雷电游戏 " + x1 + " " + y1);
+                    return false;
+                }
             }
             return true;
         }

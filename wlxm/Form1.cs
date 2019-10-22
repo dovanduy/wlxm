@@ -257,9 +257,11 @@ namespace wlxm
             int dengji = -1, xuanqu = -1;
             string name = "";
             YiQuan_Xin yq = new YiQuan_Xin (mf,dqinx, jubing, dizhi);
-            yq.zhuce(15,out dengji,out xuanqu,ref name);
-            
-            MyFuncUtil.mylogandxianshi("结束");
+            //yq.zhuce(15,out dengji,out xuanqu,ref name);
+            apkName = dict["一拳超人"];
+            //MyFuncUtil.QiDongWanChengLurenzhanghao("d", dqinx, apkName);
+            string a=MyLdcmd.StartApp(dqinx, apkName);
+            MyFuncUtil.mylogandxianshi("结束"+a);
            
         }
 
@@ -1118,7 +1120,7 @@ namespace wlxm
                     Thread.Sleep(20000);
                     continue;
                 }
-                t = mno.PanDuan_QidongLurenzhanghao(dqinx, dm, waicengjubing);//根据窗口大小 和 是否有雷电游戏中心标志  判断是否启动了app
+                t = mno.PanDuan_QidongLurenzhanghao(dqinx, dm,waicengjubing);//根据窗口大小 和 是否有雷电游戏中心标志  判断是否启动了app
                 temp = mno.PanDuan_QidongBySize(dqinx, waicengjubing, 1000 * 30, 601, 338);
                 bool t2 = false;
                 if (t && temp)
@@ -1133,12 +1135,15 @@ namespace wlxm
                 WriteLog.WriteLogFile(dqinx + "", "t2 已取点判断:" + t2 + "t 路人账号判断:" + t + "temp Size判断:" + temp);
                 if (!t2 || !t || !temp)
                 {
-                    i = MyFuncUtil.QiDongWanChengLurenzhanghao(a_b, dqinx, apkName);
                     if (i == -1)
                     {
-                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开app" + apkName + "失败");
-                        Thread.Sleep(20000);
-                        continue;
+                        i = MyFuncUtil.QiDongWanChengLurenzhanghao(a_b, dqinx, apkName);
+                        if (i == -1)
+                        {
+                            WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开app" + apkName + "失败");
+                            Thread.Sleep(20000);
+                            continue;
+                        }
                     }
                     w = -1;
                     h = -1;
@@ -1321,7 +1326,7 @@ namespace wlxm
             }
             else
             {
-                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
+                yunxingIndex = new int[] { 1};//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
             }
             string a_b = "d";
             //qdinit(a_b);

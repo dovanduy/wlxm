@@ -45,7 +45,8 @@ namespace MyUtil
             //ld.SimulatorPath = lcddizhi;
         }
 
-        public static void setDizhi(string dizhi) {
+        public static void setDizhi(string dizhi = @"d:\ChangZhi\dnplayer2\")
+        {
             lcddizhi = dizhi;
         }
 
@@ -72,8 +73,9 @@ namespace MyUtil
             return ldCmd;
         }
 
-        public static LdCmd getLdCmd() {
-            
+        public static LdCmd getLdCmd(string dizhi = @"d:\ChangZhi\dnplayer2\")
+        {
+            ld.SimulatorPath = dizhi;
             return ld;
         }
         /// <summary>
@@ -134,7 +136,19 @@ namespace MyUtil
                 LogWriteLock.ExitWriteLock();
             }
         }
-
+        /// <summary>
+        /// 启动应用
+        /// </summary>
+        /// <param name="index">模拟器序号</param>
+        /// <param name="value">包名/Activity类名</param>
+        /// <returns></returns>
+        public static string StartApp(int index, string value)
+        {
+            MyLdcmd md = MyLdcmd.GetObject();
+            string a = md.ImplementCmd(string.Format("{0}ld -s {1} am start -n {2}", md.SimulatorPath, index, value));
+            WriteLog.WriteLogFile(index + "", string.Format("{0}ld -s {1} am start -n {2}", md.SimulatorPath, index, value));
+            return a;
+        }
         /// <summary>
         /// 打开模拟器并启动程序
         /// </summary>

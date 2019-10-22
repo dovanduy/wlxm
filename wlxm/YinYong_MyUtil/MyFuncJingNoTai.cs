@@ -124,10 +124,10 @@ namespace MyUtil
 
         public void myReSizeByWAndH(int index,int jubing,int width,int height,string dizhi = @"d:\ChangZhi\dnplayer2\")
         {
-            WriteLog.WriteLogFile(index + "", "模拟器" + index + "开始改大小,外层句柄"+jubing);
             if (jubing <=0) {
                 jubing = MyLdcmd.getDqmoniqiWaiCengJuBingByIndex(index,dizhi);
             }
+            WriteLog.WriteLogFile(index + "", "模拟器" + index + "开始改大小,外层句柄" + jubing);
             int dqwidth = 2560;//1920 1024
             int dqheight = 1440;//1080 768
             IntPtr p = new IntPtr(jubing);
