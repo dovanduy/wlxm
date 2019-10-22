@@ -274,7 +274,7 @@ namespace MyUtil
             {
                 DataTable dt = sqh.getAll("select top 1 name,pwd,isnull(xuanqu,-1),isnull(dengji,-1),isnull(jieduan,'') from zhanghao where yxbz='Y' and dengluzhong='Y' and pcname='"
 
-                    + WriteLog.getMachineName() + "' and dqindex=" + dqinx + " and youxi='" + youxi + "'")
+                    + WriteLog.getMachineName() + "' and dqindex=" + dqinx + " and youxi='" + youxi + "' order by xuanqu desc")
                     ;
                 if (dt.Rows.Count > 0)
                 {
@@ -388,13 +388,16 @@ namespace MyUtil
             SqlHelp sqh = SqlHelp.GetInstance();
             lock (obj)
             {
+                if (ip.Trim().Length > 20) {
+                    ip = ip.Trim().Substring(0, 20);
+                }
                 try
                 {
-                    sqh.update("update zhanghao set ip='" + ip + "'  where name='" + name + "' and youxi='" + youxi + "'");
+                    sqh.update("update zhanghao set ip='" + ip  + "'  where name='" + name + "' and youxi='" + youxi + "'");
                 }
                 catch (Exception ex)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "更新账号的ip,更新失败");
+                    WriteLog.WriteLogFile(dqinx + "", "更新账号的ip,更新失败"+ex.Message);
                     throw ex;
                 }
             }

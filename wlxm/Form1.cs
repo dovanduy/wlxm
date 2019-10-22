@@ -185,10 +185,10 @@ namespace wlxm
                     ZhangHao zh = new ZhangHao();
                     DateTime dt=zh.getYunXingQkLasttime();
                     TimeSpan span = DateTime.Now.Subtract(dt);
-                    WriteLog.WriteLogFile("", "准备更新与上次统计相比,间隔 " + span.Minutes + "分钟");
+                    //WriteLog.WriteLogFile("", "准备更新与上次统计相比,间隔 " + span.Minutes + "分钟");
                     if (span.Hours >= 1)
                     {
-                        WriteLog.WriteLogFile("", "与上次统计相比,间隔 " + span.Minutes + "分钟");
+                        //WriteLog.WriteLogFile("", "与上次统计相比,间隔 " + span.Minutes + "分钟");
                         zh.gxYunXingQk("yiquan");
                     }
                 }
@@ -254,12 +254,10 @@ namespace wlxm
             {
                 r = mf.bindWindow(jubing);
             }
+            int dengji = -1, xuanqu = -1;
             string name = "";
-            string pwd = "";
-            string jieduan = "";
-            int xuanqu = -1, dengji = -1;
-            MyFuncJingNoTai mno = new MyFuncJingNoTai();
-            bool t2 = mno.PanDuan_QidongByYiQuDian(dqinx, 1000 * 30, mf, jubing, out name);
+            YiQuan_Xin yq = new YiQuan_Xin (mf,dqinx, jubing, dizhi);
+            yq.zhuce(15,out dengji,out xuanqu,ref name);
             
             MyFuncUtil.mylogandxianshi("结束");
            

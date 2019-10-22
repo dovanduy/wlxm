@@ -114,7 +114,8 @@ namespace SH_MyUtil
                         "sum(case when z.zuanshi>3000  then 1 else 0 end)  zuanshidayu3000," +
                         "sum(case when z.qiangzhequan>0  then 1 else 0 end)  qiangzhedayu0," +
                         "sum(case when z.xgsj>=convert(varchar(10),getdate(),120) then 1 else 0 end)  zxiugai" +
-                        " from zhanghao z where youxi='" + youxi + "'";
+                        " from zhanghao z ";
+                    //where youxi='" + youxi + "'";
 
                     DataTable dt = sqh.getAll(selsql);
                     int a = dt.Rows.Count;

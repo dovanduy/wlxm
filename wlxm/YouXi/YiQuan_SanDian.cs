@@ -401,6 +401,15 @@ namespace fuzhu
             _list_yqfhsandian.Add(guanbifhx);
 
             guanbisdx = new SanDian(new int[3, 3] {
+	{   80,   25, 0xd93324},
+	{  278,   31, 0xefaa00},
+	{  487,   27, 0xa52421},
+});
+            guanbifhx = new FuHeSanDian("登录相关-选区界面", guanbisdx, 482, 27);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
 	{   80,   29, 0xdd3021},
 	{   55,   27, 0xefaa00},
 	{   65,   27, 0xde3421},

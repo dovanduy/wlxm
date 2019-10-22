@@ -1208,7 +1208,7 @@ namespace MyUtil
                 WriteLog.WriteLogFile("", StartX +"" );
                 return null;
             }
-            WriteLog.WriteLogFile("", StartX + " "+iWidth+" "+w+" "+h);
+            //WriteLog.WriteLogFile("", StartX + " "+iWidth+" "+w+" "+h);
             if (StartX + iWidth > w)
             {
                 iWidth = w - StartX;
