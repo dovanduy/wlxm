@@ -2068,7 +2068,7 @@ namespace fuzhu
                     if (zaicishibai >= 2)
                     {
                         WriteLog.WriteLogFile(this._mnqName, "战斗失败两次以上,退出循环");
-                        break;
+                        //break;
                     }
                 }
                 if (shibai == 1 && zaicishibai < 2)
@@ -2251,11 +2251,7 @@ namespace fuzhu
                 mf.captureBmp(this._jubing, @"c:\mypic_save\", filename);
                 if (mf.IsFileExist(@"c:\mypic_save\" + filename) == 1)
                 {
-                    string r = generalBasicDemo(this._dqinx, @"c:\mypic_save\" + filename);
-                    if (r != null && r != "")
-                    {
-                        dengji = int.Parse(r);
-                    }
+                    WriteLog.WriteLogFile(this._mnqName, "没进入角色 " + filename);
                 }
             }
             zhaozhujiemian(20 * 1000);
@@ -2277,11 +2273,7 @@ namespace fuzhu
                 mf.captureBmp(this._jubing, @"c:\mypic_save\", filename);
                 if (mf.IsFileExist(@"c:\mypic_save\" + filename) == 1)
                 {
-                    string r = generalBasicDemo(this._dqinx, @"c:\mypic_save\" + filename);
-                    if (r != null && r != "")
-                    {
-                        zuanshi = int.Parse(r);
-                    }
+                    WriteLog.WriteLogFile(this._mnqName, "没主界面没搞钻石 " + filename);
                 }
             }  
             zhaozhujiemian(20 * 1000);

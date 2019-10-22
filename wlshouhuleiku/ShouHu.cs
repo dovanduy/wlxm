@@ -259,7 +259,7 @@ namespace SH_MyUtil
                     if (span.Hours >= 1)
                     {
                         WriteLog.WriteLogFile("与上次统计相比,间隔 " + span.Minutes + "分钟");
-                        //gxYunXingQk("jingjieguanfang");
+                        gxYunXingQk("jingjieguanfang");
                     }
                 }
                 //检测wlxm
