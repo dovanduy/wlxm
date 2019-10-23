@@ -1582,8 +1582,9 @@ namespace fuzhu
             FuHeSanDian dh15 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-黑屏普通攻击");
             FuHeSanDian dh16 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-一拳通关完成关闭");
             FuHeSanDian dh17 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时解除限制");
+            FuHeSanDian dh18 = YiQuan_SanDian.GetObject().findFuHeSandianByName("开引导-继续搞主线");
             WriteLog.WriteLogFile(this._mnqName, "进入引导区开始引导时作");
-            FuHeSanDian dh = mf.fuHeSanDianShuZu(new FuHeSanDian[] { dh1, dh2, dh3, dh4, dh5, dh6, dh7, dh9, dh10, dh11, dh12, dh13, dh14, dh15, dh16, dh17 });
+            FuHeSanDian dh = mf.fuHeSanDianShuZu(new FuHeSanDian[] { dh1, dh2, dh3, dh4, dh5, dh6, dh7, dh9, dh10, dh11, dh12, dh13, dh14, dh15, dh16, dh17,dh18 });
             if (dh != null)
             {
                 WriteLog.WriteLogFile(this._mnqName,dh.Name);
@@ -1738,6 +1739,7 @@ namespace fuzhu
         }
         private bool panduankaping(long kp1)
         {
+            WriteLog.WriteLogFile(this._mnqName, "进入判断卡屏函数");
             bool rs = false;
             long kp2 = MyFuncUtil.GetTimestamp();
             if ((kp2 - kp1) > 1000 * 50)
@@ -1750,7 +1752,12 @@ namespace fuzhu
                 yindaoshizuo_xian(); 
                 //tedingdian_dijibie();
             }
-            List<FuHeSanDian> ls = YiQuanZhiTuo_SanDian.GetObject().findListFuHeSandianByName("引导");
+            List<FuHeSanDian> ls1 = YiQuanZhiTuo_SanDian.GetObject().findListFuHeSandianByName("引导");
+            List<FuHeSanDian> ls2 = new List<FuHeSanDian>();
+            ls2.Add(YiQuanZhiTuo_SanDian.GetObject().findFuHeSandianByName("引导时-主线任务"));
+            ls2.Add(YiQuanZhiTuo_SanDian.GetObject().findFuHeSandianByName("引导-有主线任务"));
+            ls2.Add(YiQuanZhiTuo_SanDian.GetObject().findFuHeSandianByName("引导-地图主线任务地底人"));
+            List<FuHeSanDian> ls = ls1.FindAll(f => !ls2.Contains(f));
             if (ls != null && ls.Count > 0)
             {
                 foreach (FuHeSanDian fh in ls)
@@ -1843,8 +1850,9 @@ namespace fuzhu
             int zidongzhandou = 0;
             int putonggongji = 0;
             int kai1beisu = 0;
-
+            int zhaomumianfei = 0;
             int qiri = 0;
+            int kaishiditu = 0;
             while (true)
             {
 
@@ -1970,13 +1978,6 @@ namespace fuzhu
                     mf.mytap(this._jubing, fhzd1.Zhidingx, fhzd1.Zhidingy);
                 };
 
-                fhzd1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("开引导-继续搞主线");
-                if (mf.mohuByLeiBool(fhzd1.Sd))
-                {
-                    WriteLog.WriteLogFile(this._mnqName, fhzd1.Name);
-                    mf.mytap(this._jubing, fhzd1.Zhidingx, fhzd1.Zhidingy);
-                    mf.mydelay(2100, 3800);
-                };
 
                 fhzd1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-支线完成领取");
                 if (mf.mohuByLeiBool(fhzd1.Sd))
@@ -2079,10 +2080,11 @@ namespace fuzhu
                         //break;
                     }
                 }
-                if (shibai == 1 && zaicishibai < 2)
+                if (mf.mohuByLeiBool(zdsb) && shibai == 1 )
                 {
                     WriteLog.WriteLogFile(this._mnqName, "战斗第一次失败,进入到角色强化循环");
                     zhaozhujiemian(20 * 1000);
+                    //先免费招募
                     qianghua();
                     lingqu();
                     zhaozhujiemian(20 * 1000);
@@ -2094,6 +2096,7 @@ namespace fuzhu
                     WriteLog.WriteLogFile(this._mnqName,  "恢复shibai0");
                     shibai = 0;                    
                 }
+               
                 SanDian xrsc = YiQuanZhiTuo_SanDian.GetObject().findFuHeSandianByName("引导-新人手册").Sd;
                 if (mf.mohuByLeiBool(xrsc))
                 {
@@ -2165,16 +2168,22 @@ namespace fuzhu
                     mf.mytap(this._jubing, 431, 275);
                     putonggongji = 1;
                 };
+                fhzd1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("第一精英关领取宝箱");
+                if (mf.mohuByLeiBool(fhzd1.Sd))
+                {
+                    mf.mytap(this._jubing, fhzd1.Zhidingx, fhzd1.Zhidingy);
+                    kaishiditu = 1;
+                };
                 fhzd1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("地图事件触发");
                 if (mf.mohuByLeiBool(fhzd1.Sd))
                 {
-                    zhaoxiangzi_ditu();
                     kai1beisu = 1;
+                    kaishiditu = 1;
                 };
                 fhzd1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("判断地图界面");
-                if (mf.mohuByLeiBool(fhzd1.Sd))
+                if (kaishiditu == 1 && mf.mohuByLeiBool(fhzd1.Sd) &&1==2)
                 {
-                    zhaoxiangzi_ditu();
+                    zhaoxiangzi_ditu(ref kaishiditu);
                     kai1beisu = 1;
                 };
                 fhzd1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("加1倍速开启");
@@ -2184,12 +2193,50 @@ namespace fuzhu
                     WriteLog.WriteLogFile(this._mnqName, "开启1倍速");
                 };
                 zhandouxiangguan(zidongzhandou, putonggongji, kai1beisu);
-
+                if (zhaomumianfei==0 && panduanjiemian("主界面"))
+                {
+                    //开始免费招募
+                    FuHeSanDian zm = null;
+                    WriteLog.WriteLogFile(this._mnqName, "开始免费招募");
+                    mf.mytapbijiao(350, 275, 0xb87e1c);
+                    mf.mydelay(2000, 4000);
+                    gaomianfeizhaomu(ref zhaomumianfei);
+                }
 
 
             }
         }
-
+        public void gaomianfeizhaomu(ref int mianfeizhaomu){
+            FuHeSanDian zm = null;
+            if (mf.mohuByLeiBool(YiQuan_SanDian.GetObject().findFuHeSandianByName("刚打开图鉴").Sd))
+            {
+                WriteLog.WriteLogFile(this._mnqName, YiQuan_SanDian.GetObject().findFuHeSandianByName("刚打开图鉴").Name);
+                mf.mytapbijiao(212, 259, 0xffdb21);
+                mf.mydelay(2000, 4000);
+                zm = YiQuan_SanDian.GetObject().findFuHeSandianByName("图鉴里前往招募");
+                if (mf.mohuByLeiBool(zm.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, zm.Name);
+                    mf.mytap(this._jubing, zm.Zhidingx, zm.Zhidingy);
+                    mf.mydelay(2000, 4000);
+                }
+            }
+            zm = YiQuan_SanDian.GetObject().findFuHeSandianByName("刚打开招募");
+            if (mf.mohuByLeiBool(zm.Sd))
+            {
+                if (mohu(527, 105, 0xe7494a) == 1)
+                {
+                    mf.mytap(this._jubing, 486, 128);
+                    mf.mydelay(2000, 4000);
+                    if (mohu(235, 254, 0xe7494a) == 1)
+                    {
+                        mf.mytap(this._jubing, 199, 265);
+                        mf.mydelay(2000, 4000);
+                    }
+                    mianfeizhaomu = 1;
+                }
+            }
+        }
         private void compareColorAndtap(List<ZuoBiao> kpzb, int ms, Action thentap1,Action thentap2)
         {
             string[] kapingyanse1 = mf.myGetColorWuJbList(kpzb);
@@ -2466,7 +2513,7 @@ namespace fuzhu
             Thread.Sleep(4000);
         }
 
-        public void zhaoxiangzi_ditu()
+        public void zhaoxiangzi_ditu(ref int kaishiditu)
         {
             WriteLog.WriteLogFile(this._mnqName, "地图事件开始");
             if (panduanjiemian("判断地图界面")) {
@@ -2570,6 +2617,7 @@ namespace fuzhu
                         }
                     }
                     savebmp();
+                    kaishiditu = 0;
                 }
             }
             WriteLog.WriteLogFile(this._mnqName, "地图事件结束");
@@ -2860,14 +2908,14 @@ namespace fuzhu
                 fhzd1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("地图事件触发");
                 if (mf.mohuByLeiBool(fhzd1.Sd))
                 {
-                    zhaoxiangzi_ditu();
+                    zhaoxiangzi_ditu(ref kaishiditu);
                     kaishiditu = 0;
                     kai1beisu = 1;
                 };
                 fhzd1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("判断地图界面");
                 if (mf.mohuByLeiBool(fhzd1.Sd) && kaishiditu == 1)
                 {
-                    zhaoxiangzi_ditu();
+                    zhaoxiangzi_ditu(ref kaishiditu);
                     kaishiditu = 0;
                     kai1beisu = 1;
                 };
@@ -3269,15 +3317,13 @@ namespace fuzhu
                 fhzd1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("地图事件触发");
                 if (mf.mohuByLeiBool(fhzd1.Sd))
                 {
-                    zhaoxiangzi_ditu();
-                    kaishiditu = 0;
+                    zhaoxiangzi_ditu(ref kaishiditu);
                     kai1beisu = 1;
                 };
                 fhzd1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("判断地图界面");
                 if (mf.mohuByLeiBool(fhzd1.Sd) && kaishiditu == 1)
                 {
-                    zhaoxiangzi_ditu();
-                    kaishiditu = 0;
+                    zhaoxiangzi_ditu(ref kaishiditu);
                     kai1beisu = 1;
                 };
                 fhzd1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("加1倍速开启");
@@ -3562,6 +3608,11 @@ namespace fuzhu
                     }
                     zhandouxuanren();
                 };
+                //搞绝技
+                mf.mytapbijiao(391, 289, 0x9bb8ca);
+                mf.mytapbijiao(425, 290, 0x9ec5d1);
+                mf.mytapbijiao(466, 289, 0xb8d6e8);
+                mf.mytapbijiao(505, 290, 0xbababa);
                 sd = YiQuan_SanDian.GetObject().findFuHeSandianByName("战斗中可跳过");
                 if (mf.mohuByLeiBool(sd.Sd))
                 {
@@ -4314,7 +4365,13 @@ namespace fuzhu
                     long js = MyFuncUtil.GetTimestamp();
                     guanbi_all();
                     mf.mydelay(600, 1200);
-                    List<FuHeSanDian> ls = YiQuanZhiTuo_SanDian.GetObject().findListFuHeSandianByName("引导");
+                    List<FuHeSanDian> ls1 = YiQuanZhiTuo_SanDian.GetObject().findListFuHeSandianByName("引导");
+                    List<FuHeSanDian> ls2 = new List<FuHeSanDian>();
+                    ls2.Add(YiQuanZhiTuo_SanDian.GetObject().findFuHeSandianByName("引导时-主线任务"));
+                    ls2.Add(YiQuanZhiTuo_SanDian.GetObject().findFuHeSandianByName("引导-有主线任务"));
+                    ls2.Add(YiQuanZhiTuo_SanDian.GetObject().findFuHeSandianByName("引导-地图主线任务地底人"));
+                    ls2.Add(YiQuan_SanDian.GetObject().findFuHeSandianByName("开引导-继续搞主线"));
+                    List<FuHeSanDian> ls = ls1.FindAll(f => !ls2.Contains(f));
                     if (ls != null && ls.Count > 0)
                     {
                         foreach (FuHeSanDian fh in ls)
@@ -4341,6 +4398,8 @@ namespace fuzhu
                             }
                         }
                     }
+                    yindaoshizuo();
+                    yindaoshizuo_xian();
                     if (panduanjiemian("主界面"))
                     {
                         mf.mydelay(2000, 3000);

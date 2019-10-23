@@ -1385,8 +1385,8 @@ namespace fuzhu
 	            {   38,  192, 0xcca744},
             });
             new2 = new FuHeSanDian("战斗街道左侧的箱子", new1, 30, 207);
-            _list_yqsandian.Add(new1);
-            _list_yqfhsandian.Add(new2);
+            //_list_yqsandian.Add(new1);
+            //_list_yqfhsandian.Add(new2);
 
             new1 = new SanDian(new int[3, 3]{
 	{  363,  245, 0xffd21d},
@@ -1405,6 +1405,8 @@ namespace fuzhu
             new2 = new FuHeSanDian("第四章-通用剧情界面", new1);
             _list_yqsandian.Add(new1);
             _list_yqfhsandian.Add(new2);
+
+
 
             new1 = new SanDian(new int[3, 3]{
 	            {  491,  254, 0x90939d},
@@ -1990,6 +1992,33 @@ namespace fuzhu
             FuHeSanDian szfh1 = new FuHeSanDian("背包里的强者券", szsd1);
             _list_yqsandian.Add(szsd1);
             _list_yqfhsandian.Add(szfh1);
+
+            new1 = new SanDian(new int[3, 3]{
+	{   39,   14, 0xf23f2f},
+	{  211,  260, 0xffdb21},
+	{  500,  273, 0xffcb21},
+});
+            new2 = new FuHeSanDian("刚打开图鉴", new1);
+            _list_yqsandian.Add(new1);
+            _list_yqfhsandian.Add(new2);
+
+            new1 = new SanDian(new int[3, 3]{
+	{  221,  107, 0x639a39},
+	{  223,  154, 0xc63533},
+	{  403,   96, 0xffcf18},
+});
+            new2 = new FuHeSanDian("图鉴里前往招募", new1, 404, 96);
+            _list_yqsandian.Add(new1);
+            _list_yqfhsandian.Add(new2);
+
+            new1 = new SanDian(new int[3, 3]{
+	{   41,   17, 0xff4129},
+	{  221,  262, 0xff8621},
+	{  364,  267, 0xffd81f},
+});
+            new2 = new FuHeSanDian("刚打开招募", new1);
+            _list_yqsandian.Add(new1);
+            _list_yqfhsandian.Add(new2);
         }
         /// <summary>
         /// 单例模式====双层互锁

@@ -257,11 +257,8 @@ namespace wlxm
             int dengji = -1, xuanqu = -1;
             string name = "";
             YiQuan_Xin yq = new YiQuan_Xin (mf,dqinx, jubing, dizhi);
-            //yq.zhuce(15,out dengji,out xuanqu,ref name);
-            apkName = dict["一拳超人"];
-            //MyFuncUtil.QiDongWanChengLurenzhanghao("d", dqinx, apkName);
-            string a=MyLdcmd.StartApp(dqinx, apkName);
-            MyFuncUtil.mylogandxianshi("结束"+a);
+            yq.gaomianfeizhaomu(ref dengji);
+            MyFuncUtil.mylogandxianshi("结束"+dengji);
            
         }
 
@@ -879,6 +876,7 @@ namespace wlxm
                 bool t2 = false;
                 if (t && temp)
                 {
+                    Thread.Sleep(1000 * 30);
                     string yiqu = "";
                     t2 = mno.PanDuan_QidongByYiQuDian(dqinx, 1000 * 30, dm, jubing, out yiqu);
                     if (t2)
@@ -1125,6 +1123,7 @@ namespace wlxm
                 bool t2 = false;
                 if (t && temp)
                 {
+                    Thread.Sleep(1000 * 30);
                     string yiqu = "";
                     t2 = mno.PanDuan_QidongByYiQuDian(dqinx, 1000 * 30, dm, jubing, out yiqu);
                     if (t2)

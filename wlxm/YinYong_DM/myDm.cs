@@ -279,7 +279,33 @@ namespace xDM
             mydelay(10, 120);
         }
 
-        
+        /// <summary>
+        /// 鼠标左键点击 x y坐标
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void mytapbijiao(int x, int y,int yanse)
+        {
+            bool t = myGetColorWuJuYouYanSe(x, y, yanse);
+            if (!t) {
+                return;
+            }
+            int x1 = MyFuncUtil.suijishu(-2, 2);
+            int y1 = MyFuncUtil.suijishu(-2, 2);            
+            mydelay(50, 80);
+            if ((x1 + x < 0) || (y1 + y < 0) ||
+                (x1 + x > xianzhi_x) || (y1 + y > xianzhi_y))
+            {
+                WriteLog.WriteLogFile("", "出边界了.." + x + " " + y);
+                return;
+            }
+            mydm.MoveTo(x + x1, y + y1);
+            mydelay(60, 120);
+            mydm.LeftDown();
+            mydelay(10, 50);
+            mydm.LeftUp();
+            mydelay(10, 120);
+        }
 
         /// <summary>
         /// 鼠标左键点击 x y坐标

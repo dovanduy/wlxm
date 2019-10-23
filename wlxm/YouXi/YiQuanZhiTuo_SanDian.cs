@@ -343,9 +343,9 @@ namespace fuzhu
             _list_yqfhsandian.Add(guanbifhx);
 
             guanbisdx = new SanDian(new int[3, 3]{
-	{   73,   16, 0xececd2},
-	{   66,   14, 0xf7f4d6},
-	{   69,   15, 0xbcbcac},
+	{   64,   18, 0xbebea5},
+	{   62,   15, 0xbebba4},
+	{   76,    9, 0x434a61},
 });
             guanbifhx = new FuHeSanDian("引导-手动改自动wl", guanbisdx, 70, 15);
             _list_yqsandian.Add(guanbisdx);
@@ -1055,7 +1055,14 @@ guanbisdx = new SanDian(new int[3, 3]{
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 
-
+            new1 = new SanDian(new int[3, 3]{
+	{  221,  107, 0x639a39},
+	{  223,  154, 0xc63533},
+	{  403,   96, 0xffcf18},
+});
+            new2 = new FuHeSanDian("引导--前往免费招募直接关", new1, 444, 49);
+            _list_yqsandian.Add(new1);
+            _list_yqfhsandian.Add(new2);
 
 
 
@@ -1113,12 +1120,14 @@ guanbisdx = new SanDian(new int[3, 3]{
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 
+            wlls = new List<ZuoBiao>();
+            wlls.Add(new ZuoBiao(14, 146, 0xe8d37f));
             guanbisdx = new SanDian(new int[3, 3] {
 	{   19,  104, 0x256a8c},
 	{   12,  105, 0x225276},
 	{    7,  105, 0x2e88a3},
 });
-            guanbifhx = new FuHeSanDian("引导时-主线任务", guanbisdx, 46, 118);
+            guanbifhx = new FuHeSanDian("引导时-主线任务", guanbisdx, 46, 118,"",wlls);
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 
@@ -2700,8 +2709,8 @@ guanbisdx = new SanDian(new int[3, 3]{
 	            {  517,  274, 0xa9a7b0},
             });
             new2 = new FuHeSanDian("引导-布阵卡死点", new1, 493, 279, "引导-与角色头像-强化开始一起用");
-            _list_yqsandian.Add(new1);
-            _list_yqfhsandian.Add(new2);
+            //_list_yqsandian.Add(new1);
+            //_list_yqfhsandian.Add(new2);
 
             new1 = new SanDian(new int[3, 3]{
 	            {  316,  148, 0xe0eaf8},
@@ -2831,12 +2840,16 @@ guanbisdx = new SanDian(new int[3, 3]{
             _list_yqfhsandian.Add(jdgfh6);
 
             //任务系列
+            wlls = new List<ZuoBiao>();
+            wlls.Add(new ZuoBiao(83, 103, 0x6cc108));
+            wlls.Add(new ZuoBiao(14, 146, 0xe8d37f));
+            wlls.Add(new ZuoBiao(13, 148, 0x96ca6e));
             SanDian rwsd1 = new SanDian(new int[3, 3]{
 	            {   27,  105, 0x44c9d5},
 	            {   23,  104, 0x46cfda},
 	            {   13,  105, 0x3eb3c3},
             });
-            FuHeSanDian rwfh1 = new FuHeSanDian("引导-有主线任务", rwsd1, 35, 119, "引导-排除红色拳头的乱跑");
+            FuHeSanDian rwfh1 = new FuHeSanDian("引导-有主线任务", rwsd1, 35, 119, "引导-排除红色拳头的乱跑",wlls);
             _list_yqsandian.Add(rwsd1);
             _list_yqfhsandian.Add(rwfh1);
 

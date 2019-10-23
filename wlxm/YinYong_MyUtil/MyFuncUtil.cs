@@ -762,6 +762,7 @@ namespace MyUtil
                 if (i == 1)
                 {
                     Qidong(dqinx, app);
+                    Thread.Sleep(1000 * 20);
                     i++;
                 }
                 if (PanDuan_QidongLurenzhanghao(a_b, dqinx))
