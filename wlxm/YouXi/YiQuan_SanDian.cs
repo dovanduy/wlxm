@@ -1271,6 +1271,16 @@ namespace fuzhu
             _list_yqfhsandian.Add(new2);
 
             new1 = new SanDian(new int[3, 3]{
+	{  484,  112, 0x9f3233},
+	{  515,  130, 0x908e99},
+	{  508,   10, 0xaf8813},
+});
+            new2 = new FuHeSanDian("引导时解除限制", new1, 515, 130);
+            _list_yqsandian.Add(new1);
+            _list_yqfhsandian.Add(new2);
+
+
+            new1 = new SanDian(new int[3, 3]{
 	            {  244,  208, 0xd89f86},
 	            {  329,  229, 0xff690f},
 	            {  398,  201, 0xffae00},

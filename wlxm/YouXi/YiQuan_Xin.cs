@@ -1581,8 +1581,9 @@ namespace fuzhu
             FuHeSanDian dh14 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-一拳通关");
             FuHeSanDian dh15 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-黑屏普通攻击");
             FuHeSanDian dh16 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-一拳通关完成关闭");
-            WriteLog.WriteLogFile(this._mnqName, "进入引导区开始引导时作");            
-            FuHeSanDian dh = mf.fuHeSanDianShuZu(new FuHeSanDian[] { dh1, dh2, dh3, dh4, dh5, dh6, dh7,  dh9, dh10, dh11, dh12, dh13, dh14, dh15, dh16 });
+            FuHeSanDian dh17 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时解除限制");
+            WriteLog.WriteLogFile(this._mnqName, "进入引导区开始引导时作");
+            FuHeSanDian dh = mf.fuHeSanDianShuZu(new FuHeSanDian[] { dh1, dh2, dh3, dh4, dh5, dh6, dh7, dh9, dh10, dh11, dh12, dh13, dh14, dh15, dh16, dh17 });
             if (dh != null)
             {
                 WriteLog.WriteLogFile(this._mnqName,dh.Name);
@@ -1918,7 +1919,14 @@ namespace fuzhu
                     mf.mydrag(this._jubing, 41, 266, 290, 210);
                     mf.mydelay(100, 800);
                 }
-
+                fhzd1 = YiQuanZhiTuo_SanDian.GetObject().findFuHeSandianByName("王磊引导-拖拽怒吼其实3");
+                if (mf.mohuByLeiBool(fhzd1.Sd))
+                {
+                    WriteLog.WriteLogFile(this._mnqName, fhzd1.Name);
+                    mf.mydelay(100, 600);
+                    mf.mydrag(this._jubing, 41, 266, 290, 210);
+                    mf.mydelay(100, 800);
+                }
                 fhzd1 = YiQuanZhiTuo_SanDian.GetObject().findFuHeSandianByName("王磊引导-wl加钉锤头");
                 if (mf.mohuByLeiBool(fhzd1.Sd))
                 {

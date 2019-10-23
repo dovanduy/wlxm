@@ -250,6 +250,15 @@ namespace fuzhu
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 
+            guanbisdx = new SanDian(new int[3, 3]{
+	{   39,  127, 0xeeb293},
+	{  166,  149, 0xff7623},
+	{  196,  132, 0xffae00},
+});
+            guanbifhx = new FuHeSanDian("王磊引导-拖拽怒吼其实3", guanbisdx, 24, 190);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
             wlls = new List<ZuoBiao>();
             wlls.Add(new ZuoBiao(509, 9, 0xffbf12));
             wlls.Add(new ZuoBiao(509, 9, 0xffbf12));
@@ -755,7 +764,14 @@ namespace fuzhu
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 
-
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  173,  188, 0x73a263},
+	{  126,   27, 0xf1a900},
+	{  372,  176, 0xe7b64a},
+});
+            guanbifhx = new FuHeSanDian("引导-点击蟑螂人wl", guanbisdx, 173, 188);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
 
 
 

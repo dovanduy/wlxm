@@ -290,7 +290,7 @@ namespace MyUtil
                 +" where name=(select top 1 name from zhanghao "
                     + " where xgsj < '" + dqsj
                     + "'  and yxbz='Y' and dengluzhong='N' "
-                    + " and yimai='N'  and youxi='" + youxi + "')";
+                    + " and yimai='N'  and youxi='" + youxi + "  order by xuanqu desc')";
                 sqh.update(updatesql);
                 dt = sqh.getAll("select top 1 name,pwd,isnull(xuanqu,-1),isnull(dengji,-1),isnull(jieduan,'') from zhanghao where yxbz='Y' and dengluzhong='Y' and pcname='"
 
