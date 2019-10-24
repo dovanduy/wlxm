@@ -873,7 +873,7 @@ namespace fuzhu
                                 WriteLog.WriteLogFile(this._mnqName, dlxf.Name + "选服成功");
                                 mf.mydelay(2000, 4000);
                                 xuanhao = 1;
-                                xuanqu = 82;
+                                xuanqu = 83;
                             }
                         }
                     }
@@ -893,7 +893,7 @@ namespace fuzhu
                         WriteLog.WriteLogFile(this._mnqName, dlxf1.Name + "选服成功");                        
                         mf.mydelay(2000, 4000);
                         xuanhao = 1;
-                        xuanqu = 82;
+                        xuanqu = 83;
                     }
                 }   
                 if ((xuanqu != -1) && mf.mohuByLeiBool(d4.Sd))

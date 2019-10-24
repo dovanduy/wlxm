@@ -1005,7 +1005,9 @@ namespace wlxm
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改名");
                     MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改属性");
-                    MyLdcmd.modifySimulator(dqinx);                
+                    MyLdcmd.modifySimulator(dqinx);
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "降低cpu");
+                    MyLdcmd.myDownCpu(dqinx, 50);
                     temp = MyFuncUtil.Launch(dqinx, dizhi);
                     if (!temp)
                     {
@@ -1031,6 +1033,8 @@ namespace wlxm
                     MyLdcmd.myRestore(dqinx, seed, dizhi);
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改名");
                     MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "降低cpu");
+                    MyLdcmd.myDownCpu(dqinx, 50);
                     temp = MyFuncUtil.Launch(dqinx, dizhi);
                     if (!temp)
                     {
@@ -1058,6 +1062,8 @@ namespace wlxm
                     MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改属性");
                     MyLdcmd.modifySimulator(dqinx);
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "降低cpu");
+                    MyLdcmd.myDownCpu(dqinx, 50);
                     temp = MyFuncUtil.Launch(dqinx, dizhi);
                     if (!temp)
                     {
@@ -1123,7 +1129,7 @@ namespace wlxm
                 bool t2 = false;
                 if (t && temp)
                 {
-                    Thread.Sleep(1000 * 30);
+                    Thread.Sleep(1000 * 50);
                     string yiqu = "";
                     t2 = mno.PanDuan_QidongByYiQuDian(dqinx, 1000 * 30, dm, jubing, out yiqu);
                     if (t2)
@@ -1196,6 +1202,8 @@ namespace wlxm
                 MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改属性");
                 MyLdcmd.modifySimulator(dqinx);
+                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "降低cpu");
+                MyLdcmd.myDownCpu(dqinx, 50);
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "重新启动");
                 MyLdcmd.myReboot(dqinx);
                 Thread.Sleep(1000 * 60 * 4);
