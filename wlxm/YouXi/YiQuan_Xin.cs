@@ -835,7 +835,6 @@ namespace fuzhu
             int jl = 0;
             int qushuyici = 0;
             int guanbi = 0;
-            int xuanhao = 0;
             while (true) {
                 FuHeSanDian d1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("关闭实名认证");
                 FuHeSanDian d2 = YiQuan_SanDian.GetObject().findFuHeSandianByName("关闭公告");
@@ -850,33 +849,10 @@ namespace fuzhu
                     }
                 }
                 FuHeSanDian d4 = YiQuan_SanDian.GetObject().findFuHeSandianByName("进入游戏");
-                if (guanbi>1 && mf.mohuByLeiBool(d4.Sd) &&(xuanqu == -1) && (qushuyici == 0))
+                if (mf.mohuByLeiBool(d4.Sd) &&(xuanqu == -1) && (qushuyici == 0))
                 {
-                    FuHeSanDian dlxf = YiQuan_SanDian.GetObject().findFuHeSandianByName("进入游戏");
-                    bool t0 = mf.mohuXunHuanJianChi(dlxf.Sd, 60);
-                    if (xuanhao == 0 && t0)
-                    {
-                        WriteLog.WriteLogFile(this._mnqName, dlxf.Name);
-                        mf.mytap(this._jubing, 228, 214);
-                        mf.mydelay(2000, 4000);
-                        FuHeSanDian xq = YiQuan_SanDian.GetObject().findFuHeSandianByName("登录相关-选区界面");
-                        if (mf.mohuByLeiBool(xq.Sd))
-                        {
-                            WriteLog.WriteLogFile(this._mnqName, xq.Name);
-                            mf.mytap(this._jubing, 112, 97);//这次选前面第一行
-                            mf.mydelay(2000, 4000);
-                            mf.mytap(this._jubing, 219, 82);//选择82区
-                            mf.mydelay(2000, 4000);
-                            bool t1 = mf.mohuXunHuanJianChi(dlxf.Sd, 60);
-                            if (t1)
-                            {
-                                WriteLog.WriteLogFile(this._mnqName, dlxf.Name + "选服成功");
-                                mf.mydelay(2000, 4000);
-                                xuanhao = 1;
-                                xuanqu = 83;
-                            }
-                        }
-                    }
+                    xuanqu = 83;
+                    qushuyici = 1;
                 }
                 FuHeSanDian xq1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("登录相关-选区界面");
                 if (mf.mohuByLeiBool(xq1.Sd))
@@ -892,18 +868,20 @@ namespace fuzhu
                     {
                         WriteLog.WriteLogFile(this._mnqName, dlxf1.Name + "选服成功");                        
                         mf.mydelay(2000, 4000);
-                        xuanhao = 1;
                         xuanqu = 83;
+                        qushuyici = 1;
                     }
                 }   
                 if ((xuanqu != -1) && mf.mohuByLeiBool(d4.Sd))
                 {
+                    WriteLog.WriteLogFile(this._mnqName, "点击进入游戏");
                     mf.mytap(this._jubing, 275, 240);
                     mf.mydelay(1000, 3000);
                     jl = 1;
                 }
                 SanDian[] sdzu = new SanDian[] { d1.Sd, d2.Sd, d4.Sd, };
-                if (jl==1 && !mf.mohuqubiaoXunHuan(sdzu, 20 * 1)) {
+                if (jl == 1 && xuanqu != -1 && !mf.mohuqubiaoXunHuan(sdzu, 20 * 1))
+                {
                     WriteLog.WriteLogFile(this._mnqName, "20s全不在,进去了");                    
                     zccg = true;
                     break;
@@ -916,7 +894,7 @@ namespace fuzhu
                     break;
                 }
             }
-            if ((xuanqu != -1) && (qushuyici == 1))
+            if (xuanqu != -1)
             {
                 //更新选区
                 zhanghao.updateXuanqu(name, xuanqu);
@@ -3158,10 +3136,38 @@ namespace fuzhu
             while (true)
             {
                 var jstime = MyFuncUtil.GetTimestamp();
-                if ((jstime - kstime) > 60 * 1000 * 5)
+                if ((jstime - kstime) > 60 * 1000 * 10)
                 {
                     WriteLog.WriteLogFile(this._mnqName, "5分钟退出");
                     break;
+                }
+                List<FuHeSanDian> ls = YiQuanZhiTuo_SanDian.GetObject().findListFuHeSandianByName("引导");
+                if (ls != null && ls.Count > 0)
+                {
+                    foreach (FuHeSanDian fh in ls)
+                    {
+                        if (mf.mohuByLeiBool(fh.Sd))
+                        {
+                            WriteLog.WriteLogFile(this._mnqName, fh.Name);
+                            if (fh.Listzuobiao != null && fh.Listzuobiao.Count > 0)
+                            {
+                                foreach (ZuoBiao z in fh.Listzuobiao)
+                                {
+                                    if (mohu(z.X, z.Y, z.Yanse, -1, -1, -1, -1, -1, -1, 80) == 1)
+                                    {
+                                        click(z.X, z.Y, z.Pianyix, z.Pianyiy);
+                                        mf.mydelay(1400, 1800);
+                                    }
+                                }
+                            }
+                            if (fh.Zhidingx != -1 && fh.Zhidingy != -1)
+                            {
+                                mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                                mf.mydelay(1400, 1800);
+                            }
+
+                        }
+                    }
                 }
                 if ((jstime - kpjishi) > 60 * 1000 && compareColor(kapingyanse1, kapingyanse2))
                 {

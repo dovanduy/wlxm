@@ -11,6 +11,321 @@ using Entity;
 namespace fuzhu1
 {
     /*
+      private void ceshi_button_Click(object sender, EventArgs e)
+        {
+            quanjubutton = 1;
+            int[] yunxingIndex = null;
+            if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
+            {
+                yunxingIndex = new int[] { 1, };//2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15,16,17,18,19
+            }
+            else
+            {
+                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
+            }
+            string a_b = "d";
+            //qdinit(a_b);
+            //MyLdcmd.RunDuokaiqi(a_b);
+            string dizhi = null;
+            string path = null;
+            string seed = null;
+            MyFuncUtil.myqiehuancd(a_b, out dizhi, out path, out seed);
+            //所有账号置为dengluzhong N 多个机器的话 会有麻烦
+            //ZhangHao zh = new ZhangHao();
+            //zh.zhiweidengluzhongN("jingjie", WriteLog.getMachineName());
+            for (int j = 1; j < 1000; j++)
+            {
+                WriteLog.WriteLogFile("", "序号" + j + ",开始");
+                //MyLdcmd.myQuitAll(dizhi);
+                //Thread.Sleep(2000);
+                //MyLdcmd.myRemoveAll(dizhi);
+                Thread.Sleep(2000);
+                MyLdcmd.RunDuokaiqi(a_b);
+                Thread.Sleep(2000);
+                //MyFuncUtil.duokaiqiAdd(a_b);
+                Thread.Sleep(2000);
+                ThreadPool.SetMaxThreads(yunxingIndex.Length, yunxingIndex.Length); //设置最大线程数
+                string[] getquanbujubing = MyLdcmd.getDqmoniqiJuBing();
+                //搞出句柄来 放到每个线程开始里面 如果该句柄为0线程再去检索
+                List<LeiDianCanShu> listleidian = new List<LeiDianCanShu>();
+                foreach (int inx in yunxingIndex)
+                {
+                    int jubing = -1;
+                    foreach (string s in getquanbujubing)
+                    {
+                        string[] b = s.Split('|');
+                        int zt = int.Parse(b[1]);
+                        int ind = int.Parse(b[0]);
+                        if (inx == ind && zt != 1)
+                        {
+
+                            jubing = zt;
+                        }
+                    }
+                    WriteLog.WriteLogFile("", "index:" + inx + ",jubing:" + jubing);
+                    LeiDianCanShu ld = new LeiDianCanShu(inx, jubing,-1);
+                    listleidian.Add(ld);
+                }
+                LeiDianCanShu[] myleiddian = listleidian.ToArray<LeiDianCanShu>();
+
+                foreach (int inx in yunxingIndex)
+                {
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(duoxian_cs), listleidian.Find(sd => sd.Dqinx == inx));//线程池指定线程执行Auto方法
+                    //Thread.Sleep(1000 * 40);
+                }
+                var ks = MyFuncUtil.GetTimestamp();
+                while (true)
+                {
+                    Thread.Sleep(10000);//这句写着，主要是没必要循环那么多次。去掉也可以。
+                    int maxWorkerThreads, workerThreads;
+                    int portThreads;
+                    ThreadPool.GetMaxThreads(out maxWorkerThreads, out portThreads);
+                    ThreadPool.GetAvailableThreads(out workerThreads, out portThreads);
+                    if (maxWorkerThreads - workerThreads == 0)
+                    {
+                        break;
+                    }
+                }
+
+                WriteLog.WriteLogFile("", "序号" + j + ",结束");
+            }
+
+           
+        }
+        private void duoxian_cs(object dqind)
+        {
+            duoxianxunhuan_zhanghao("d", dqind, 20);
+            return;
+        }
+
+        private void duoxianxunhuancs(string a_b, object dqind, int xhcishu)
+        {
+            LeiDianCanShu ld = (LeiDianCanShu)dqind;
+            int dqinx = ld.Dqinx;
+            int jubing = ld.Jubing;
+            string dizhi = null;
+            string path = null;
+            string seed = null;
+            MyFuncUtil.myqiehuancd(a_b, out dizhi, out path, out seed);
+            if (dqinx <= -1)
+            {
+                return;
+            }
+            WriteLog.WriteLogFile(dqinx + "", "准备操作" + dqinx + "号模拟器");
+            var cishu = 0;
+            MyFuncJingNoTai mno = new MyFuncJingNoTai();
+            bool temp = false;
+            int chongqi = 0;
+            while (true)
+            {
+                /*进入操作模拟器循环中
+                1.模拟器是不是开着
+                2.开着就看有没有app
+                3.有app就看是不是已进入
+                4.模拟器没开着 打开 第一次 则restore
+                5.模拟器开着 没有app 则关闭 restore
+                6.先检测是不是有指定app 没有则关闭 restore
+                7.有app 再看是不是开着
+               
+
+                var ks = MyFuncUtil.GetTimestamp();
+                Thread.Sleep(2000);
+                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "进入到循环当中，thread:" + Thread.CurrentThread.ManagedThreadId + ",jubing" + jubing);
+                Thread.Sleep(1000);                
+                bool t = MyFuncUtil.isLaunch(dqinx);
+                if (!t)
+                {
+                    temp = MyFuncUtil.Launch(dqinx, dizhi);
+                    if (!temp)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开失败");
+                        Thread.Sleep(20000);
+                        continue;
+                    }
+                    Thread.Sleep(20000);
+                }
+                t = MyFuncUtil.lureninstallOk(dqinx, "package:com.playcrab.kos.gw", () =>
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "安装app没成功");
+                    temp = mno.myQuit(dqinx, dizhi);
+                    if (!temp)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
+                        Thread.Sleep(20000);
+                        return;
+                    }
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原");
+                    MyLdcmd.myRestore(dqinx, seed, dizhi);
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改名");
+                    MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
+                    temp = MyFuncUtil.Launch(dqinx, dizhi);
+                    if (!temp)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开失败");
+                        Thread.Sleep(20000);
+                        return;
+                    }
+                    Thread.Sleep(20000);
+                });
+                if (t == false || chongqi==1)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "安装app没成功");
+                    temp = mno.myQuit(dqinx, dizhi);
+                    if (!temp)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
+                        Thread.Sleep(20000);
+                        continue;
+                    }
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原");
+                    MyLdcmd.myRestore(dqinx, seed, dizhi);
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改名");
+                    MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
+                    temp = MyFuncUtil.Launch(dqinx, dizhi);
+                    if (!temp)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开失败");
+                        Thread.Sleep(20000);
+                        continue;
+                    }
+                    chongqi = 0;
+                    Thread.Sleep(20000);
+                    continue;
+                }
+                //窗口已打开 获取句柄
+                if (jubing <= 0)
+                {
+                    jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx, dizhi);
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "句柄为" + jubing);
+                }
+                myDm dm = new myDm();
+                int r1 = 0;
+                if (jubing > 0)
+                {
+                    r1 = dm.bindWindow(jubing);
+                }
+                if (r1 != 1)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "绑定失败");
+                    Thread.Sleep(20000);
+                    continue;
+                }
+                apkName = dict["一拳超人"];
+                int i = MyFuncUtil.QiDongWanChengLurenzhanghao(a_b, dqinx, apkName);
+                if (i == -1)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开app" + apkName + "失败");
+                    Thread.Sleep(20000);
+                    continue;
+                }
+                t = mno.PanDuan_QidongLurenzhanghao(dqinx, dm, jubing);//根据窗口大小 和 是否有雷电游戏中心标志  判断是否启动了app
+                temp = mno.PanDuan_QidongBySize(dqinx, 1000 * 30,601,338);
+                bool t2 = false;
+                if (t && temp)
+                {
+                    string yiqu = "";
+                    t2 = mno.PanDuan_QidongByYiQuDian(dqinx, 1000 * 30, dm, jubing, out yiqu);
+                    if (t2)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器发现已取点" + yiqu);
+                    }
+                }
+                WriteLog.WriteLogFile(dqinx + "", "t2:" + t2 + "t:" + t + "temp:" + temp);
+                if (!t2 || !t || !temp)
+                {
+                    i = MyFuncUtil.QiDongWanChengLurenzhanghao(a_b, dqinx, apkName);
+                    if (i == -1)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开app" + apkName + "失败");
+                        Thread.Sleep(20000);
+                        continue;
+                    }
+                    int w = -1, h = -1;
+                    MyFuncUtil.getWindowSize(dqinx, out w, out h);
+                    if (w != -1 && h != -1 && w < h)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "w h不对" + w + " " + h);
+                        Thread.Sleep(20000);
+                        continue;
+                    }
+                    Thread.Sleep(20000);
+                    temp = mno.lurenResizeOk(dqinx,"yiquan");
+                    if (temp == false)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + ",resize没成功");
+                        continue;
+                    }
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "降低cpu");
+                    MyLdcmd.myDownCpu(dqinx, 50);
+                    Thread.Sleep(1000 * 10);
+                }
+                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "开始尝试登录主线");
+                YiQuan_Xin yq = new YiQuan_Xin(dm, dqinx, jubing, dizhi);
+                ZhangHao zhanghao = new ZhangHao();
+                string name = "";
+                string pwd = "";                
+                int xuanqu = -1, dengji = -1;
+                string youxi = fuzhuyouxi;
+                //zhanghao.zhunbeizhanghao(dqinx, youxi, out name, out pwd, out xuanqu, out dengji, out jieduan);
+                if (name == null || name == "" || pwd == null || pwd == "")
+                {
+                    //当前没有找到需要练级的账号
+                    WriteLog.WriteLogFile(dqinx + "", "当前没有找到需要练级的账号");
+                    //return;
+                }
+                tmpBool = yq.denglu(15,name);
+                if (!tmpBool)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "登录环节出错");
+                    Thread.Sleep(1000 * 60 * 3);
+                    chongqi = 1;
+                    continue;
+                }
+                tmpBool = yq.zhuce(15,out dengji,out xuanqu,ref name);
+                if (!tmpBool)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "注册环节出错");
+                    Thread.Sleep(1000 * 60 * 3);
+                    chongqi = 1;
+                    continue;
+                }
+                yq.zhuxian(name,3000);
+                yq.quitdq(name);
+                //Thread.Sleep(1000 * 60*60);//停住1小时
+                cishu++;
+                MyLdcmd.myReboot(dqinx);
+                Thread.Sleep(1000 * 60 * 4);
+                bool cqcg = false;
+                t = MyFuncUtil.isLaunch(dqinx);
+                if (t)
+                {
+                    int w = -1, h = -1;
+                    MyFuncUtil.getWindowSize(dqinx, out w, out h);
+                    if (w != -1 && h != -1 && w < h)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "重启成功完成,w h分别为" + w + " " + h);
+                        Thread.Sleep(1000);
+                        cqcg = true;
+                    }
+                }
+                if (!cqcg)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "重启失败,强关");
+                    temp = mno.myQuit(dqinx, dizhi);
+                    if (!temp)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
+                        Thread.Sleep(20000);
+                        return;
+                    }
+                }
+                zhanghao.zhiweidengluzhongN(dqinx,"yiquan", name, WriteLog.getMachineName());
+                jubing = -1;//句柄要重新取
+                var js = MyFuncUtil.GetTimestamp();
+                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环" + cishu + "次数");
+                WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环1次耗时" + MyFuncUtil.SecondToHour(js - ks));
+            }
+        }
     public class YiQuan
     {
         private myDm mf;
