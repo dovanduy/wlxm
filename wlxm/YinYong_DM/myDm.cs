@@ -284,7 +284,7 @@ namespace xDM
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void mytapbijiao(int x, int y,int yanse)
+        public void mytapbijiao(int x, int y,int yanse,int pianyix=0,int pianyiy=0)
         {
             bool t = myGetColorWuJuYouYanSe(x, y, yanse);
             if (!t) {
@@ -293,13 +293,13 @@ namespace xDM
             int x1 = MyFuncUtil.suijishu(-2, 2);
             int y1 = MyFuncUtil.suijishu(-2, 2);            
             mydelay(50, 80);
-            if ((x1 + x < 0) || (y1 + y < 0) ||
-                (x1 + x > xianzhi_x) || (y1 + y > xianzhi_y))
+            if ((x1 + x+pianyix < 0) || (y1 + y+pianyiy < 0) ||
+                (x1 + x + pianyix > xianzhi_x) || (y1 + y + pianyiy > xianzhi_y))
             {
                 WriteLog.WriteLogFile("", "出边界了.." + x + " " + y);
                 return;
             }
-            mydm.MoveTo(x + x1, y + y1);
+            mydm.MoveTo(x + x1 + pianyix, y + y1 + pianyiy);
             mydelay(60, 120);
             mydm.LeftDown();
             mydelay(10, 50);

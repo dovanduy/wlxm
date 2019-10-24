@@ -1583,7 +1583,6 @@ namespace fuzhu
             FuHeSanDian dh16 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-一拳通关完成关闭");
             FuHeSanDian dh17 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时解除限制");
             FuHeSanDian dh18 = YiQuan_SanDian.GetObject().findFuHeSandianByName("开引导-继续搞主线");
-            WriteLog.WriteLogFile(this._mnqName, "进入引导区开始引导时作");
             FuHeSanDian dh = mf.fuHeSanDianShuZu(new FuHeSanDian[] { dh1, dh2, dh3, dh4, dh5, dh6, dh7, dh9, dh10, dh11, dh12, dh13, dh14, dh15, dh16, dh17,dh18 });
             if (dh != null)
             {
@@ -1898,7 +1897,7 @@ namespace fuzhu
                             if (fh.Listzuobiao != null && fh.Listzuobiao.Count > 0) {
                                 foreach (ZuoBiao z in fh.Listzuobiao) {
                                     if (mohu(z.X, z.Y, z.Yanse,-1,-1,-1,-1,-1,-1,80) == 1) {
-                                        click(z.X, z.Y);
+                                        click(z.X, z.Y,z.Pianyix,z.Pianyiy);
                                         mf.mydelay(1400, 1800);
                                     }
                                 }
@@ -1906,6 +1905,7 @@ namespace fuzhu
                             if (fh.Zhidingx != -1 && fh.Zhidingy != -1)
                             {
                                 mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                                mf.mydelay(1400, 1800);
                             }
 
                         }
@@ -2202,8 +2202,11 @@ namespace fuzhu
                     mf.mydelay(2000, 4000);
                     gaomianfeizhaomu(ref zhaomumianfei);
                 }
-
-
+                fhzd1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("刚打开图鉴");
+                if (zhaomumianfei == 1 && mf.mohuByLeiBool(fhzd1.Sd))
+                {
+                    mf.mytap(this._jubing, 517, 9);
+                }
             }
         }
         public void gaomianfeizhaomu(ref int mianfeizhaomu){
@@ -3609,10 +3612,10 @@ namespace fuzhu
                     zhandouxuanren();
                 };
                 //搞绝技
-                mf.mytapbijiao(391, 289, 0x9bb8ca);
-                mf.mytapbijiao(425, 290, 0x9ec5d1);
-                mf.mytapbijiao(466, 289, 0xb8d6e8);
-                mf.mytapbijiao(505, 290, 0xbababa);
+                mf.mytapbijiao(391, 289, 0x9bb8ca,0,-50);
+                mf.mytapbijiao(425, 290, 0x9ec5d1, 0, -50);
+                mf.mytapbijiao(466, 289, 0xb8d6e8, 0, -50);
+                mf.mytapbijiao(505, 290, 0xbababa, 0, -50);
                 sd = YiQuan_SanDian.GetObject().findFuHeSandianByName("战斗中可跳过");
                 if (mf.mohuByLeiBool(sd.Sd))
                 {
@@ -4481,18 +4484,18 @@ namespace fuzhu
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void click(int x, int y)
+        public void click(int x, int y,int pianyix=0,int pianyiy=0)
         {
             int x1 = MyFuncUtil.suijishu(-2, 2);
             int y1 = MyFuncUtil.suijishu(-2, 2);
             mf.mydelay(50, 80);
-            if ((x1 + x < 0) || (y1 + y < 0) ||
-                (x1 + x > xianzhi_x) || (y1 + y > xianzhi_y))
+            if ((x1 + x + pianyix < 0) || (y1 + y + pianyiy < 0) ||
+                (x1 + x + pianyix > xianzhi_x) || (y1 + y + pianyiy > xianzhi_y))
             {
                 WriteLog.WriteLogFile("", "出边界了.." + x + " " + y);
                 return;
             }
-            mf.Mydm.MoveTo(x + x1, y + y1);
+            mf.Mydm.MoveTo(x + x1 + pianyix, y + y1 + pianyiy);
             mf.mydelay(60, 120);
             mf.Mydm.LeftDown();
             mf.mydelay(10, 50);

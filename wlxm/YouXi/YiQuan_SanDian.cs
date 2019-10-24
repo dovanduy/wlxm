@@ -1542,12 +1542,16 @@ namespace fuzhu
             _list_yqfhsandian.Add(jdgfh6);
 
             //任务系列
+            List<ZuoBiao>  wlls = new List<ZuoBiao>();
+            wlls.Add(new ZuoBiao(83, 103, 0x6cc108));
+            wlls.Add(new ZuoBiao(14, 146, 0xe8d37f));
+            wlls.Add(new ZuoBiao(13, 148, 0x96ca6e));
             SanDian rwsd1 = new SanDian(new int[3, 3]{
 	            {   27,  105, 0x44c9d5},
 	            {   23,  104, 0x46cfda},
 	            {   13,  105, 0x3eb3c3},
             });
-            FuHeSanDian rwfh1 = new FuHeSanDian("有主线任务", rwsd1, 35, 119, "排除红色拳头的乱跑");
+            FuHeSanDian rwfh1 = new FuHeSanDian("有主线任务", rwsd1, 35, 119, "排除红色拳头的乱跑",wlls);
             _list_yqsandian.Add(rwsd1);
             _list_yqfhsandian.Add(rwfh1);
 
