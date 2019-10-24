@@ -1124,8 +1124,8 @@ guanbisdx = new SanDian(new int[3, 3]{
 
             wlls = new List<ZuoBiao>();
             wlls.Add(new ZuoBiao(83, 103, 0x6cc108, 10, 10));
-            wlls.Add(new ZuoBiao(14, 146, 0xe8d37f, 10, 10));
-            wlls.Add(new ZuoBiao(13, 148, 0x96ca6e, 10, 10));
+            //wlls.Add(new ZuoBiao(14, 146, 0xe8d37f, 10, 10));
+            //wlls.Add(new ZuoBiao(13, 148, 0x96ca6e, 10, 10));
             guanbisdx = new SanDian(new int[3, 3] {
 	{   19,  104, 0x256a8c},
 	{   12,  105, 0x225276},
@@ -2191,8 +2191,8 @@ guanbisdx = new SanDian(new int[3, 3]{
 
             wlls = new List<ZuoBiao>();
             wlls.Add(new ZuoBiao(83, 103, 0x6cc108,10,10));
-            wlls.Add(new ZuoBiao(14, 146, 0xe8d37f, 10, 10));
-            wlls.Add(new ZuoBiao(13, 148, 0x96ca6e, 10, 10));
+            //wlls.Add(new ZuoBiao(14, 146, 0xe8d37f, 10, 10));
+           // wlls.Add(new ZuoBiao(13, 148, 0x96ca6e, 10, 10));
             SanDian ydsd9 = new SanDian(new int[3, 3]{
 	            {  100,    2, 0xefaa00},
 	            {   44,    3, 0xf0aa00},
@@ -2850,8 +2850,8 @@ guanbisdx = new SanDian(new int[3, 3]{
             //任务系列
             wlls = new List<ZuoBiao>();
             wlls.Add(new ZuoBiao(83, 103, 0x6cc108, 10, 10));
-            wlls.Add(new ZuoBiao(14, 146, 0xe8d37f, 10, 10));
-            wlls.Add(new ZuoBiao(13, 148, 0x96ca6e, 10, 10));
+            //wlls.Add(new ZuoBiao(14, 146, 0xe8d37f, 10, 10));
+            //wlls.Add(new ZuoBiao(13, 148, 0x96ca6e, 10, 10));
             SanDian rwsd1 = new SanDian(new int[3, 3]{
 	            {   27,  105, 0x44c9d5},
 	            {   23,  104, 0x46cfda},

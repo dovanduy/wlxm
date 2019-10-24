@@ -1409,11 +1409,11 @@ namespace fuzhu
             };
             if (zhandou_jiedao())
             {
-                fhzd1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("战斗街道左侧的箱子");
-                if (mf.mohuByLeiBool(fhzd1.Sd))
+                //fhzd1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("战斗街道左侧的箱子");
+                //if (mf.mohuByLeiBool(fhzd1.Sd))
                 {
-                    mf.mytap(this._jubing, fhzd1.Zhidingx, fhzd1.Zhidingy);
-                    mf.mydelay(5000, 9000);
+                    //mf.mytap(this._jubing, fhzd1.Zhidingx, fhzd1.Zhidingy);
+                   // mf.mydelay(5000, 9000);
                 }
             }
 
@@ -1875,6 +1875,7 @@ namespace fuzhu
                             if (fh.Listzuobiao != null && fh.Listzuobiao.Count > 0) {
                                 foreach (ZuoBiao z in fh.Listzuobiao) {
                                     if (mohu(z.X, z.Y, z.Yanse,-1,-1,-1,-1,-1,-1,80) == 1) {
+                                        WriteLog.WriteLogFile(this._mnqName, z.X + "  " + z.Y + "  " + z.Yanse);
                                         click(z.X, z.Y,z.Pianyix,z.Pianyiy);
                                         mf.mydelay(1400, 1800);
                                     }
@@ -3622,6 +3623,7 @@ namespace fuzhu
                 mf.mytapbijiao(425, 290, 0x9ec5d1, 0, -50);
                 mf.mytapbijiao(466, 289, 0xb8d6e8, 0, -50);
                 mf.mytapbijiao(505, 290, 0xbababa, 0, -50);
+                mf.mytapbijiao(515, 291, 0xc6e2fe, 0, -50);
                 sd = YiQuan_SanDian.GetObject().findFuHeSandianByName("战斗中可跳过");
                 if (mf.mohuByLeiBool(sd.Sd))
                 {

@@ -257,7 +257,7 @@ namespace wlxm
             int dengji = -1, xuanqu = -1;
             string name = "";
             YiQuan_Xin yq = new YiQuan_Xin (mf,dqinx, jubing, dizhi);
-            yq.gaomianfeizhaomu(ref dengji);
+            yq.zhuxian("",30000);
             MyFuncUtil.mylogandxianshi("结束"+dengji);
            
         }
