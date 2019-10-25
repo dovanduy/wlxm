@@ -70,7 +70,7 @@ namespace fuzhu
             int r=mf.bindWindow(this._jubing);
             WriteLog.WriteLogFile(this._mnqName, "一拳构造函数,句柄是:" + _jubing + ",模拟器index是:" + _mnqName + "，thread:" + Thread.CurrentThread.ManagedThreadId + "，绑定:" + r);
         }
-
+        
         public Boolean denglu(int fenzhong, ref string name,ref string pwd,ref int xuanqu)
         {
 
@@ -156,8 +156,6 @@ namespace fuzhu
                 WriteLog.WriteLogFile(this._mnqName, "找到标志点,找到其他点,不再搞登录");
                 return true;
             }
-
-            WriteLog.WriteLogFile(this._mnqName, "进入到登录环节  " + this._jubing + "，thread:" + Thread.CurrentThread.ManagedThreadId);
             ZhangHao zhanghao = new ZhangHao();
             long ks = MyFuncUtil.GetTimestamp();
             bool t1 = false;
@@ -1555,13 +1553,13 @@ namespace fuzhu
             FuHeSanDian dh10 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-关闭布阵");
             FuHeSanDian dh11 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-关闭离开关卡");
             FuHeSanDian dh12 = YiQuan_SanDian.GetObject().findFuHeSandianByName("角色关闭窗口");
-            FuHeSanDian dh13 = YiQuan_SanDian.GetObject().findFuHeSandianByName("有主线任务");
+            //FuHeSanDian dh13 = YiQuan_SanDian.GetObject().findFuHeSandianByName("有主线任务");
             FuHeSanDian dh14 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-一拳通关");
             FuHeSanDian dh15 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-黑屏普通攻击");
             FuHeSanDian dh16 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时-一拳通关完成关闭");
             FuHeSanDian dh17 = YiQuan_SanDian.GetObject().findFuHeSandianByName("引导时解除限制");
             FuHeSanDian dh18 = YiQuan_SanDian.GetObject().findFuHeSandianByName("开引导-继续搞主线");
-            FuHeSanDian dh = mf.fuHeSanDianShuZu(new FuHeSanDian[] { dh1, dh2, dh3, dh4, dh5, dh6, dh7, dh9, dh10, dh11, dh12, dh13, dh14, dh15, dh16, dh17,dh18 });
+            FuHeSanDian dh = mf.fuHeSanDianShuZu(new FuHeSanDian[] { dh1, dh2, dh3, dh4, dh5, dh6, dh7, dh9, dh10, dh11, dh12,  dh14, dh15, dh16, dh17,dh18 });
             if (dh != null)
             {
                 WriteLog.WriteLogFile(this._mnqName,dh.Name);
@@ -2062,12 +2060,21 @@ namespace fuzhu
                 if (mf.mohuByLeiBool(zdsb) && shibai == 1 )
                 {
                     WriteLog.WriteLogFile(this._mnqName, "战斗第一次失败,进入到角色强化循环");
-                    zhaozhujiemian(20 * 1000);
-                    //先免费招募
-                    qianghua();
-                    lingqu();
-                    zhaozhujiemian(20 * 1000);
-                    zaicishibai++;
+                    zdsb = YiQuanZhiTuo_SanDian.GetObject().findFuHeSandianByName("引导-首次失败提示角色养成").Sd;
+                    if (mf.jingqueByLeiBool(zdsb))
+                    {
+                        qianghua();
+                        lingqu();
+                    }
+                    else
+                    {
+                        zhaozhujiemian(20 * 1000);
+                        //先免费招募
+                        qianghua();
+                        lingqu();
+                        zhaozhujiemian(20 * 1000);
+                        zaicishibai++;
+                    }
                 }
                 zdsb = YiQuanZhiTuo_SanDian.GetObject().findFuHeSandianByName("引导-全场最佳").Sd;
                 if (mf.jingqueByLeiBool(zdsb))
@@ -4374,7 +4381,6 @@ namespace fuzhu
                 long ks = MyFuncUtil.GetTimestamp();
                 while (true) {
                     long js = MyFuncUtil.GetTimestamp();
-                    guanbi_all();
                     mf.mydelay(600, 1200);
                     List<FuHeSanDian> ls1 = YiQuanZhiTuo_SanDian.GetObject().findListFuHeSandianByName("引导");
                     List<FuHeSanDian> ls2 = new List<FuHeSanDian>();
@@ -4409,8 +4415,6 @@ namespace fuzhu
                             }
                         }
                     }
-                    yindaoshizuo();
-                    yindaoshizuo_xian();
                     if (panduanjiemian("主界面"))
                     {
                         mf.mydelay(2000, 3000);
@@ -4423,9 +4427,6 @@ namespace fuzhu
                         break;
                     }
                 }
-            }
-            if (mohu(0, 0, 0x009de4) == 1) {
-                
             }
         }
 

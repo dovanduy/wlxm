@@ -1122,18 +1122,7 @@ guanbisdx = new SanDian(new int[3, 3]{
             _list_yqfhsandian.Add(guanbifhx);
 
 
-            wlls = new List<ZuoBiao>();
-            wlls.Add(new ZuoBiao(83, 103, 0x6cc108, 10, 10));
-            //wlls.Add(new ZuoBiao(14, 146, 0xe8d37f, 10, 10));
-            //wlls.Add(new ZuoBiao(13, 148, 0x96ca6e, 10, 10));
-            guanbisdx = new SanDian(new int[3, 3] {
-	{   19,  104, 0x256a8c},
-	{   12,  105, 0x225276},
-	{    7,  105, 0x2e88a3},
-});
-            guanbifhx = new FuHeSanDian("引导时-主线任务", guanbisdx, 46, 118,"",wlls);
-            _list_yqsandian.Add(guanbisdx);
-            _list_yqfhsandian.Add(guanbifhx);
+            
 
             guanbisdx = new SanDian(new int[3, 3] {
 	{   36,   13, 0xf13d28},
@@ -1326,7 +1315,25 @@ guanbisdx = new SanDian(new int[3, 3]{
 	{  147,   26, 0x8d472a},
 	{  166,   24, 0x90462d},
 });
-            guanbifhx = new FuHeSanDian("引导-新人手册", guanbisdx);
+            guanbifhx = new FuHeSanDian("引导-新人手册", guanbisdx,471,36);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{   19,  147, 0xb9a660},
+	{   10,  146, 0xceba6e},
+	{  102,  149, 0x84e209},
+});
+            guanbifhx = new FuHeSanDian("引导-钉头锤任务已完成", guanbisdx, 37, 154);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{   35,   19, 0xde3421},
+	{  505,  234, 0xd6cfc6},
+	{  491,  264, 0xf8d736},
+});
+            guanbifhx = new FuHeSanDian("引导-打开邮件后领取", guanbisdx, 491, 264);
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 
@@ -2189,18 +2196,7 @@ guanbisdx = new SanDian(new int[3, 3]{
             _list_yqsandian.Add(new11);
             _list_yqfhsandian.Add(new22);
 
-            wlls = new List<ZuoBiao>();
-            wlls.Add(new ZuoBiao(83, 103, 0x6cc108,10,10));
-            //wlls.Add(new ZuoBiao(14, 146, 0xe8d37f, 10, 10));
-           // wlls.Add(new ZuoBiao(13, 148, 0x96ca6e, 10, 10));
-            SanDian ydsd9 = new SanDian(new int[3, 3]{
-	            {  100,    2, 0xefaa00},
-	            {   44,    3, 0xf0aa00},
-	            {   32,   84, 0xf9cf4a},
-            });
-            FuHeSanDian ydfh9 = new FuHeSanDian("引导-地图主线任务地底人", ydsd9, 48, 117,"",wlls);
-            _list_yqsandian.Add(ydsd9);
-            _list_yqfhsandian.Add(ydfh9);
+            
 
             List<ZuoBiao> ydlist3 = new List<ZuoBiao>();
             ydlist3.Add(new ZuoBiao(122, 197));
@@ -2836,6 +2832,16 @@ guanbisdx = new SanDian(new int[3, 3]{
             _list_yqsandian.Add(jdgsd5);
             _list_yqfhsandian.Add(jdgfh5);
 
+            wlls = new List<ZuoBiao>();
+            wlls.Add(new ZuoBiao(340, 247, 0xffd01c));
+            guanbisdx = new SanDian(new int[3, 3]{
+	            {  269,   55, 0xfffbf7},
+	            {  378,   35, 0xffffef},
+	            {  342,  249, 0xffcf1b},
+            });
+            guanbifhx = new FuHeSanDian("引导-领取新手指引关闭", guanbisdx, 378, 37,"",wlls);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
 
 
             SanDian jdgsd6 = new SanDian(new int[3, 3]{
@@ -2850,6 +2856,7 @@ guanbisdx = new SanDian(new int[3, 3]{
             //任务系列
             wlls = new List<ZuoBiao>();
             wlls.Add(new ZuoBiao(83, 103, 0x6cc108, 10, 10));
+            wlls.Add(new ZuoBiao(89, 147, 0x54a119, -50, 10));
             //wlls.Add(new ZuoBiao(14, 146, 0xe8d37f, 10, 10));
             //wlls.Add(new ZuoBiao(13, 148, 0x96ca6e, 10, 10));
             SanDian rwsd1 = new SanDian(new int[3, 3]{
@@ -2860,6 +2867,34 @@ guanbisdx = new SanDian(new int[3, 3]{
             FuHeSanDian rwfh1 = new FuHeSanDian("引导-有主线任务", rwsd1, 35, 119, "引导-排除红色拳头的乱跑",wlls);
             _list_yqsandian.Add(rwsd1);
             _list_yqfhsandian.Add(rwfh1);
+
+            wlls = new List<ZuoBiao>();
+            wlls.Add(new ZuoBiao(83, 103, 0x6cc108, 10, 10));
+            wlls.Add(new ZuoBiao(89, 147, 0x54a119, -50, 10));
+            //wlls.Add(new ZuoBiao(14, 146, 0xe8d37f, 10, 10));
+            //wlls.Add(new ZuoBiao(13, 148, 0x96ca6e, 10, 10));
+            guanbisdx = new SanDian(new int[3, 3] {
+	{   19,  104, 0x256a8c},
+	{   12,  105, 0x225276},
+	{    7,  105, 0x2e88a3},
+});
+            guanbifhx = new FuHeSanDian("引导时-主线任务", guanbisdx, 46, 118, "", wlls);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            wlls = new List<ZuoBiao>();
+            wlls.Add(new ZuoBiao(83, 103, 0x6cc108, 10, 10));
+            wlls.Add(new ZuoBiao(89, 147, 0x54a119, -50, 10));
+            //wlls.Add(new ZuoBiao(14, 146, 0xe8d37f, 10, 10));
+            // wlls.Add(new ZuoBiao(13, 148, 0x96ca6e, 10, 10));
+            SanDian ydsd9 = new SanDian(new int[3, 3]{
+	            {  100,    2, 0xefaa00},
+	            {   44,    3, 0xf0aa00},
+	            {   32,   84, 0xf9cf4a},
+            });
+            FuHeSanDian ydfh9 = new FuHeSanDian("引导-地图主线任务地底人", ydsd9, 48, 117, "", wlls);
+            _list_yqsandian.Add(ydsd9);
+            _list_yqfhsandian.Add(ydfh9);
 
             SanDian rwsd2 = new SanDian(new int[3, 3]{
 	            {  284,   79, 0x84a6e7},

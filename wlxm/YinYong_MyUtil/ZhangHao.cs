@@ -272,7 +272,7 @@ namespace MyUtil
             string dqsj = DateTime.Now.ToString("yyyy-MM-dd");
             lock (obj)
             {
-                DataTable dt = sqh.getAll("select top 1 name,pwd,isnull(xuanqu,-1),isnull(dengji,-1),isnull(jieduan,'') from zhanghao where yxbz='Y' and dengluzhong='Y' and pcname='"
+                DataTable dt = sqh.getAll("select top 1 name,pwd,isnull(xuanqu,-1),isnull(dengji,-1),isnull(jieduan,'') from zhanghao where yxbz='Y' and yimai='N' and dengluzhong='Y' and pcname='"
 
                     + WriteLog.getMachineName() + "' and dqindex=" + dqinx + " and youxi='" + youxi + "' order by xuanqu desc")
                     ;
@@ -292,7 +292,7 @@ namespace MyUtil
                     + "'  and yxbz='Y' and dengluzhong='N' "
                     + " and yimai='N'  and youxi='" + youxi + "' order by xuanqu desc)";
                 sqh.update(updatesql);
-                dt = sqh.getAll("select top 1 name,pwd,isnull(xuanqu,-1),isnull(dengji,-1),isnull(jieduan,'') from zhanghao where yxbz='Y' and dengluzhong='Y' and pcname='"
+                dt = sqh.getAll("select top 1 name,pwd,isnull(xuanqu,-1),isnull(dengji,-1),isnull(jieduan,'') from zhanghao where yxbz='Y' and yimai='N' and dengluzhong='Y' and pcname='"
 
                     + WriteLog.getMachineName() + "' and dqindex=" + dqinx + " and youxi='" + youxi + "'")
                     ;
