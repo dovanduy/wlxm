@@ -634,5 +634,53 @@ namespace MyUtil
 
             
         }
+
+        public List<ZhangHaoEntity> getZhangHaoList(string youxi, string yimai="", string yxbz="", int xuanqu=-1, string pcname="") {
+            SqlHelp sqh = SqlHelp.GetInstance();
+            string dqsj = DateTime.Now.ToString("yyyy-MM-dd");
+            List<ZhangHaoEntity> rs=new List<ZhangHaoEntity>();
+            lock (obj)
+            {
+                string sql = "select name,pwd,isnull(xuanqu,-1),yimai,yxbz,isnull(zuanshi,-1),isnull(qiangzhequan,-1),pcname,xgsj from zhanghao where  youxi='"
+
+                    + youxi + "'";
+                if (yimai != null && !"".Equals(yimai)) {
+                    sql += " and yimai='" + yimai + "' ";
+                }
+                if (yxbz != null && !"".Equals(yxbz))
+                {
+                    sql += " and yxbz='" + yxbz + "' ";
+                }
+                if (yxbz != null && xuanqu != -1)
+                {
+                    sql += " and xuanqu=" + xuanqu + " ";
+                }
+                if (pcname != null && !"".Equals(pcname))
+                {
+                    sql += " and pcname='" + pcname + "' ";
+                }
+                DataTable dt = sqh.getAll(sql);
+                if (dt.Rows.Count > 0)
+                {
+                    //name,pwd,isnull(xuanqu,-1),yimai,yxbz,isnull(zuanshi,-1),isnull(qiangzhe,-1),pcname,xgsj
+                    foreach(DataRow r in dt.Rows){
+                        ZhangHaoEntity zhe=new ZhangHaoEntity();
+                        zhe.Name=(string)r[0];
+                        zhe.Pwd=(string)r[1];
+                        zhe.Xuanqu=(int)r[2];
+                        zhe.Yimai=(string)r[3];
+                        zhe.Yxbz=(string)r[4];
+                        zhe.Zuanshi=(int)r[5];
+                        zhe.Qiangzhe=(int)r[6];
+                        zhe.Pcname=(string)r[7];
+                        zhe.Xgsj = (DateTime)r[8];
+                        zhe.Youxi = youxi;
+                        rs.Add(zhe);
+                        //WriteLog.WriteLogFile("", "找到需要练级的账号" + name + " " + pwd + ",xuanqu " + xuanqu + "并置为登录中");
+                    }
+                }
+            }
+            return rs;
+        }
     }
 }

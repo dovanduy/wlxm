@@ -93,7 +93,7 @@ namespace fuzhu
             ls.Add(YiQuan_SanDian.GetObject().findFuHeSandianByName("登录-进入游戏2"));
             ls.Add(YiQuan_SanDian.GetObject().findFuHeSandianByName("登录-发现维护项"));
             ls.Add(YiQuan_SanDian.GetObject().findFuHeSandianByName("进入游戏"));
-            ls.AddRange(YiQuan_SanDian.GetObject().findListFuHeSandianByName("空白"));
+            //ls.AddRange(YiQuan_SanDian.GetObject().findListFuHeSandianByName("空白"));
             List<FuHeSanDian> ls2 = YiQuan_SanDian.GetObject().findAllFuHeSandian();
             ls2.AddRange(YiQuanZhiTuo_SanDian.GetObject().findAllFuHeSandian());
             List<FuHeSanDian> feixiangguan=ls2.FindAll(f => !ls.Contains(f)
@@ -3638,6 +3638,13 @@ namespace fuzhu
                 }
             }
             //战斗倍速问题
+            if (panduanjiemian("战斗场面协会竞技")) {
+                FuHeSanDian sd = YiQuan_SanDian.GetObject().findFuHeSandianByName("战斗场面跳过");
+                if (mf.mohuByLeiBool(sd.Sd))
+                {
+                    mf.mytap(this._jubing, sd.Zhidingx, sd.Zhidingy);
+                }
+            }
         }
         private bool zhandou_jiedao() {
             FuHeSanDian fhzd1 = YiQuan_SanDian.GetObject().findFuHeSandianByName("角色头像-强化开始");
@@ -4216,6 +4223,14 @@ namespace fuzhu
                 {
                     tmp = true;                       
                 } 
+            }
+            if ("战斗场面协会竞技".Equals(jiemian))
+            {
+                SanDian sd = YiQuan_SanDian.GetObject().findFuHeSandianByName("战斗场面协会竞技").Sd;
+                if (mf.mohuByLeiBool(sd))
+                {
+                    tmp = true;
+                }
             }
             if ("跳过的剧情界面".Equals(jiemian))
             {

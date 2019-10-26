@@ -1491,8 +1491,8 @@ guanbisdx = new SanDian(new int[3, 3]{
 	{   63,  226, 0xffd01a},
 });
             guanbifhx = new FuHeSanDian("引导-竞技自己打一次--非引导", guanbisdx, 43, 226);
-            _list_yqsandian.Add(guanbisdx);
-            _list_yqfhsandian.Add(guanbifhx);
+            //_list_yqsandian.Add(guanbisdx);
+            //_list_yqfhsandian.Add(guanbifhx);
 
             guanbisdx = new SanDian(new int[3, 3]{
 	{   79,   30, 0xd5d5d5},

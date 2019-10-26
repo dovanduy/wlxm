@@ -7,13 +7,13 @@ using xDM;
 
 namespace fuzhu
 {
-    public class YiQuan_SanDian
+    public class ShuMen_SanDian
     {
         #region 单例模式变量
         private static readonly object obj = new object();
-        private static YiQuan_SanDian yqsd = null;
+        private static ShuMen_SanDian yqsd = null;
         #endregion
-        private YiQuan_SanDian()
+        private ShuMen_SanDian()
         {
 
         }
@@ -22,8 +22,8 @@ namespace fuzhu
 
         public static List<ZuoBiao> List_zuobiao
         {
-            get { return YiQuan_SanDian._list_zuobiao; }
-            set { YiQuan_SanDian._list_zuobiao = value; }
+            get { return ShuMen_SanDian._list_zuobiao; }
+            set { ShuMen_SanDian._list_zuobiao = value; }
         }
 
 
@@ -31,8 +31,8 @@ namespace fuzhu
 
         public static List<SanDian> List_yqsandian
         {
-            get { return YiQuan_SanDian._list_yqsandian; }
-            set { YiQuan_SanDian._list_yqsandian = value; }
+            get { return ShuMen_SanDian._list_yqsandian; }
+            set { ShuMen_SanDian._list_yqsandian = value; }
         }
 
 
@@ -40,8 +40,8 @@ namespace fuzhu
 
         public static List<FuHeSanDian> List_yqfhsandian
         {
-            get { return YiQuan_SanDian._list_yqfhsandian; }
-            set { YiQuan_SanDian._list_yqfhsandian = value; }
+            get { return ShuMen_SanDian._list_yqfhsandian; }
+            set { ShuMen_SanDian._list_yqfhsandian = value; }
         }
 
 
@@ -53,8 +53,15 @@ namespace fuzhu
             set { _dict = value; }
         }
 
-        static YiQuan_SanDian()
+        static ShuMen_SanDian()
         {
+            //登录选择 不包括进入游戏
+            //引导开头 看到就点
+            //长引导 点击后延时5秒
+            //界面 主界面 背包界面 战斗界面 角色界面 福利界面
+            //关闭窗口 需要找主界面时 关掉各种xx
+
+
             //新增三点 10.10
             List<ZuoBiao> zb = new List<ZuoBiao>();
             zb.Add(new ZuoBiao(439, 131, 0x4d2b05));
@@ -976,6 +983,24 @@ namespace fuzhu
 	            {   11,   56, 0x8889a0},
             });
             FuHeSanDian zdhmfh1 = new FuHeSanDian("战斗画面", zdhmsd1, 387, 185);
+            _list_yqsandian.Add(zdhmsd1);
+            _list_yqfhsandian.Add(zdhmfh1);
+
+            zdhmsd1 = new SanDian(new int[3, 3]{
+	{  270,   13, 0xffd851},
+	{  292,   12, 0xffdb5b},
+	{  249,   13, 0xf9fafa},
+});
+            zdhmfh1 = new FuHeSanDian("战斗场面协会竞技", zdhmsd1, 387, 185);
+            _list_yqsandian.Add(zdhmsd1);
+            _list_yqfhsandian.Add(zdhmfh1);
+
+            zdhmsd1 = new SanDian(new int[3, 3]{
+	{   13,  173, 0xedeccc},
+	{   18,  173, 0xe4e2c4},
+	{   24,  166, 0x849cad},
+});
+            zdhmfh1 = new FuHeSanDian("战斗场面跳过", zdhmsd1, 16, 171);
             _list_yqsandian.Add(zdhmsd1);
             _list_yqfhsandian.Add(zdhmfh1);
 
@@ -2028,7 +2053,7 @@ namespace fuzhu
         /// 单例模式====双层互锁
         /// </summary>
         /// <returns></returns>
-        public static YiQuan_SanDian GetObject()
+        public static ShuMen_SanDian GetObject()
         {
             if (yqsd == null)
             {
@@ -2036,7 +2061,7 @@ namespace fuzhu
                 {
                     if (yqsd == null)
                     {
-                        yqsd = new YiQuan_SanDian();
+                        yqsd = new ShuMen_SanDian();
                     }
                 }
             }

@@ -119,11 +119,16 @@ namespace wlxm
                     foreach (XmlNode xml in node)
                     {
                         if (xml.Name == "Verson")
+                        {
                             this.label1.Text = xml.InnerText;
+                            this.Text = "游戏辅助,版本" + xml.InnerText;
+                        }
                     }
                 }
             }
-
+            //ZhangHao zh = new ZhangHao();
+            //List<ZhangHaoEntity> myzhanghaolist=zh.getZhangHaoList("yiquan");
+            //this.dataGridView1.DataSource = myzhanghaolist;
         }
         public Form1()
         {
@@ -148,7 +153,7 @@ namespace wlxm
                 Thread.Sleep(1000);
                 var js = MyFuncUtil.GetTimestamp();
                 i++;
-                int daojishi = 60 * 3;
+                int daojishi = 1000*60*60 * 3;
                 //MyFuncUtil.SecondToHour(+i + (js - ks) / 1000+" "
                 CalcFinished("程序已运行:" + MyFuncUtil.SecondToHour(js - ks) + zidong);
                 this.label2.ForeColor = Color.Red;
