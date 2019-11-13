@@ -56,7 +56,7 @@ namespace wlxm
         /// </summary>
         //private object locker = new object();
         /// <summary>
-        /// 主线程 定时显示运行时间
+        /// 主线程 定时显示运行时间 自动更新游戏情况
         /// </summary>
         private Thread thread;
         private delegate void changeText(string result);
@@ -88,6 +88,13 @@ namespace wlxm
         /// </summary>
         private static readonly object obj = new object();
 
+
+        /// <summary>
+        /// 多个游戏的保存
+        /// </summary>
+        private List<YouXiEntity> myyouxi = new List<YouXiEntity>();
+
+
         private void initPackageName()
         {
             dict.Add("明日方舟", "com.hypergryph.arknights/com.u8.sdk.U8UnityContext");
@@ -108,7 +115,7 @@ namespace wlxm
                 a_b = "c";
             }
             MyFuncUtil.createDirIfNotExist(a_b);
-
+            this.label24.Visible = false;
             XmlDocument xmlDoc2 = new XmlDocument();
             xmlDoc2.Load(Application.StartupPath + "\\" + "update.xml");
             XmlNode list = xmlDoc2.SelectSingleNode("Update");
@@ -120,11 +127,21 @@ namespace wlxm
                     {
                         if (xml.Name == "Verson")
                         {
-                            this.label1.Text = xml.InnerText;
-                            this.Text = "游戏辅助,版本" + xml.InnerText;
+                           this.Text = "游戏辅助,版本" + xml.InnerText;
                         }
                     }
                 }
+            }
+            YouXiEntity yx = new YouXiEntity("一拳超人", "1.0.0.0","主线", "com.playcrab.kos.gw/org.cocos2dx.lua.AppActivity", "com.playcrab.kos.gw", "YiQuanXin", "YiQuanXin");
+            myyouxi.Add(yx);            
+            this.comboBox1.DataSource = myyouxi;
+            this.comboBox1.DisplayMember = "youxiname";
+            this.comboBox1.ValueMember = "youxiname";
+            YouXiEntity myy = myyouxi.Find(ob => ob.Youxiname == this.comboBox1.SelectedValue.ToString());
+            if (myy != null)
+            {
+                this.label1.Text = myy.Version.ToString();
+                this.label17.Text = myy.Zidong;
             }
             //ZhangHao zh = new ZhangHao();
             //List<ZhangHaoEntity> myzhanghaolist=zh.getZhangHaoList("yiquan");
@@ -153,7 +170,7 @@ namespace wlxm
                 Thread.Sleep(1000);
                 var js = MyFuncUtil.GetTimestamp();
                 i++;
-                int daojishi = 1000*60*60 * 3;
+                int daojishi = 60*3;
                 //MyFuncUtil.SecondToHour(+i + (js - ks) / 1000+" "
                 CalcFinished("程序已运行:" + MyFuncUtil.SecondToHour(js - ks) + zidong);
                 this.label2.ForeColor = Color.Red;
@@ -186,6 +203,7 @@ namespace wlxm
                 //每隔一小时由zk更新一次 测试时 每隔1分钟
                 if (WriteLog.getMachineName().ToUpper().Equals("WLZHONGKONG") && (js - ks_gxyunxing) > 1000 * 60*20)
                 {
+                    WriteLog.WriteLogFile("", "准备更新运行情况");
                     ks_gxyunxing = MyFuncUtil.GetTimestamp();
                     ZhangHao zh = new ZhangHao();
                     DateTime dt=zh.getYunXingQkLasttime();
@@ -1372,12 +1390,15 @@ namespace wlxm
         private void guanbixiancheng_Click(object sender, EventArgs e)
         {
             quanjubutton = 1;
-            MyFuncUtil.killProcess("wlxm");
-            if (this.zidongthread!=null && this.zidongthread.ThreadState == System.Threading.ThreadState.Running)
+            //MyFuncUtil.killProcess("wlxm");
+            //if (this.zidongthread!=null && this.zidongthread.ThreadState == System.Threading.ThreadState.Running)
             {
                 this.zidongthread.Abort();
             }
-            Application.Exit();       
+            this.thread.Abort();
+            //Application.Exit();
+            this.label24.Text = "线程已关闭";
+            this.label24.Visible = true;
         }
 
         private void jietujiese_Click(object sender, EventArgs e)
@@ -1425,6 +1446,18 @@ namespace wlxm
             WriteLog.WriteLogFile("", "结束截图");
 
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectValue = this.comboBox1.SelectedValue.ToString();
+            YouXiEntity myy=myyouxi.Find(ob => ob.Youxiname == selectValue);
+            if (myy != null) {
+                this.label1.Text = myy.Version.ToString();
+                this.label17.Text = myy.Zidong;
+            }
+        }
+
+        
 
         
 

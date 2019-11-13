@@ -57,7 +57,7 @@
     <Compile Include="Entity\FuHeDuoDian.cs" />
     <Compile Include="Entity\JiQiYunXing.cs" />
     <Compile Include="Entity\LeiDianCanShu.cs" />
-    <Compile Include="Entity\YouXi.cs" />
+    <Compile Include="Entity\YouXiEntity.cs" />
     <Compile Include="Entity\YunXingQK.cs" />
     <Compile Include="Entity\ZhangHaoEntity.cs" />
     <Compile Include="Entity\ZuoBiao.cs" />
