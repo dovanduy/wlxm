@@ -57,6 +57,7 @@
     <Compile Include="Entity\FuHeDuoDian.cs" />
     <Compile Include="Entity\JiQiYunXing.cs" />
     <Compile Include="Entity\LeiDianCanShu.cs" />
+    <Compile Include="Entity\YouXi.cs" />
     <Compile Include="Entity\YunXingQK.cs" />
     <Compile Include="Entity\ZhangHaoEntity.cs" />
     <Compile Include="Entity\ZuoBiao.cs" />
@@ -75,6 +76,11 @@
     <Compile Include="jiu_wenjian\Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="jiu_wenjian\YiQuanZhiTuo_DuoDian.cs" />
+    <Compile Include="jiu_wenjian\YiQuanZhiTuo_SanDian.cs" />
+    <Compile Include="jiu_wenjian\YiQuan_DuoDian.cs" />
+    <Compile Include="jiu_wenjian\YiQuan_SanDian.cs" />
+    <Compile Include="jiu_wenjian\YiQuan_Xin.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="YinYong_DM\dm.cs" />
@@ -95,11 +101,9 @@
     <Compile Include="YinYong_MyUtil\SqlHelp.cs" />
     <Compile Include="YinYong_MyUtil\WriteLog.cs" />
     <Compile Include="YinYong_MyUtil\ZhangHao.cs" />
-    <Compile Include="YouXi\Jingjie_DuoDian.cs" />
-    <Compile Include="YouXi\YiQuanZhiTuo_DuoDian.cs" />
-    <Compile Include="YouXi\YiQuanZhiTuo_SanDian.cs" />
-    <Compile Include="YouXi\YiQuan_DuoDian.cs" />
-    <Compile Include="YouXi\YiQuan_SanDian.cs" />
+    <Compile Include="jiu_wenjian\Jingjie_DuoDian.cs" />
+    <Compile Include="YouXi\shumen\ShuMen_DuoDian.cs" />
+    <Compile Include="YouXi\shumen\ShuMen_SanDian.cs" />
     <Compile Include="YouXi\youxi.cs" />
     <Compile Include="jiu_wenjian\MingRi.cs" />
     <Compile Include="jiu_wenjian\MingRi_Sort.cs" />
@@ -111,12 +115,12 @@
     </Compile>
     <Compile Include="jiu_wenjian\YiQuan.cs" />
     <Compile Include="jiu_wenjian\YiQuan_Da.cs" />
-    <Compile Include="YouXi\YiQuan_Xin.cs" />
+    <Compile Include="YouXi\shumen\ShuMen.cs" />
     <Compile Include="jiu_wenjian\Luneng.cs" />
     <Compile Include="jiu_wenjian\Luneng_SanDian.cs" />
     <Compile Include="YouXi\TongYong_SanDian.cs" />
-    <Compile Include="YouXi\Jingjie.cs" />
-    <Compile Include="YouXi\Jingjie_SanDian.cs" />
+    <Compile Include="jiu_wenjian\Jingjie.cs" />
+    <Compile Include="jiu_wenjian\Jingjie_SanDian.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
