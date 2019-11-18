@@ -83,7 +83,7 @@ namespace xDM
         public bool mohuByLeiBool_duokai(SanDian sd, int sim = 90)
         {
             bool tmp = false;
-            bool tmp1 = this.jingqueByLeiBool(sd);
+            bool tmp1 = this.jingqueByLeiBool_duokai(sd);
             if (tmp1 == true)
             {
                 return true;
@@ -640,7 +640,7 @@ namespace xDM
             if ((x < 0) || (y < 0) ||
                 (x > xianzhi_x) || (y > xianzhi_y))
             {
-                WriteLog.WriteLogFile("", "myGetColorWuJuBing出边界了..");
+                WriteLog.WriteLogFile("", "myGetColorWuJuBing出边界了.."+x+" "+y);
                 return false;
             }
             bool tmp = false;
@@ -676,6 +676,18 @@ namespace xDM
             //MyFuncUtil.mylogandxianshi(tmpcolor);
             //if ("ffffff".Equals(tmpcolor
         }
+
+        public bool myFindColorWuJubingBool(int x1, int y1, int x2, int y2, int color)
+        {
+            bool r = false;
+            int zx = -1, zy = -1;
+            myFindColorWuJubing(x1, y1, x2, y2, color,out zx,out zy);
+            if (zx != -1 && zy != -1) {
+                r = true;
+            }
+            return r;
+        }
+
 
         public void ClientToScreen(int jubing, out int myx, out int myy, out int myx1, out int myy1)
         {
@@ -776,6 +788,22 @@ namespace xDM
                 (x2 > xianzhi_x) || (y2 > xianzhi_y))
             {
                 WriteLog.WriteLogFile("", "captureBmp.." + x1 + " " + y1);
+                return 0;
+            }
+            mydm.SetPath(path);
+            res = mydm.Capture(x1, y1, x2, y2, fileName);
+            return res;
+        }
+
+        public int captureBmpFeiXianDing(int jubing, string path, string fileName, int x1, int y1, int x2, int y2)
+        {
+            //循环绑定 绑定成功才截图
+            int res = -1;
+            int width = 0;
+            int height = 0;
+            mydm.GetClientSize(jubing, out width, out height);
+            if (x1 < 0 || x2 > width || y1 < 0 || y2 > height)
+            {
                 return 0;
             }
             mydm.SetPath(path);
@@ -1589,6 +1617,39 @@ namespace xDM
             }            
             return tmp;
         }
+
+        public bool jingqueByLeiBool_duokai(SanDian sd)
+        {
+            bool tmp = false;
+            string firstColor = sd.Myanse1.ToString("X");
+            bool rs1 = myGetColorWuJuBing_duokai(sd.Mx1, sd.My1, firstColor);
+            bool rs2 = false;
+            if (sd.Mx2 != -1)
+            {
+                string secColor = sd.Myanse2.ToString("X");
+                rs2 = myGetColorWuJuBing_duokai(sd.Mx2, sd.My2, secColor);
+            }
+            bool rs3 = false;
+            if (sd.Mx3 != -1)
+            {
+                string thrColor = sd.Myanse3.ToString("X");
+                rs3 = myGetColorWuJuBing_duokai(sd.Mx3, sd.My3, thrColor);
+            }
+            if (rs1 && rs2 && rs3)
+            {
+                return true;
+            }
+            if (rs1 && rs2 && (sd.Myanse3 == -1))
+            {
+                return true;
+            }
+            if (rs1 && (sd.Myanse2 == -1) && (sd.Myanse3 == -1))
+            {
+                return true;
+            }
+            return tmp;
+        }
+
         public int fanwei(int fx1, int fy1, int fx1_, int fy1_, int fyanse1)
         {
             int zx=-1,zy=-1;

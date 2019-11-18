@@ -459,6 +459,44 @@ namespace MyUtil
             }
         }
 
+        public int getJiuYouZhangHaoCount(int dqinx, string youxi = "jiuyouzhuce")
+        {
+            SqlHelp sqh = SqlHelp.GetInstance();
+            DataTable dt = sqh.getAll("select count(*) from zhanghao where youxi='" + youxi + "'");
+            int r = 0;
+            if (dt.Rows.Count > 0)
+            {
+                r = (int)dt.Rows[0][0];
+                WriteLog.WriteLogFile(dqinx + "", "当前游戏 " + youxi + " 存在"+r+"个账号");
+            }
+            return r;
+        }
+
+        public string getJiuYouPwdFromList(int dqinx, List<string> pwdlist,string youxi = "jiuyouzhuce") {
+            int r = getJiuYouZhangHaoCount(dqinx, youxi);
+            string rs = "999999";
+            if (r < 3000) {
+                rs = pwdlist[0];
+            }
+            if (r >= 3000 && r<6000)
+            {
+                rs = pwdlist[1];
+            }
+            if (r >= 6000 && r < 9000)
+            {
+                rs = pwdlist[2];
+            }
+            if (r >= 9000 && r < 12000)
+            {
+                rs = pwdlist[3];
+            }
+            if (r >= 12000 && r < 15000)
+            {
+                rs = pwdlist[4];
+            }
+            return rs;
+        }
+
         public void gxYunXingQk(string youxi)
         {
             //得到运行情况后存入表

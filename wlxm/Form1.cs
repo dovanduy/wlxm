@@ -15,6 +15,7 @@ using MyUtil;
 using fuzhu;
 using Entity;
 using System.Xml;
+
 namespace wlxm
 {
     public partial class Form1 : Form
@@ -94,6 +95,7 @@ namespace wlxm
         /// </summary>
         private List<YouXiEntity> myyouxi = new List<YouXiEntity>();
 
+        
 
         private void initPackageName()
         {
@@ -133,6 +135,8 @@ namespace wlxm
                 }
             }
             YouXiEntity yx = new YouXiEntity("一拳超人", "1.0.0.0","主线", "com.playcrab.kos.gw/org.cocos2dx.lua.AppActivity", "com.playcrab.kos.gw", "YiQuanXin", "YiQuanXin");
+            myyouxi.Add(yx);
+            yx = new YouXiEntity("九游注册", "1.0.0.0", "注册", "cn.ninegame.gamemanager/cn.ninegame.gamemanager.activity.MainActivity", "cn.ninegame.gamemanager", "JiuYou", "JiuYou");
             myyouxi.Add(yx);            
             this.comboBox1.DataSource = myyouxi;
             this.comboBox1.DisplayMember = "youxiname";
@@ -270,27 +274,119 @@ namespace wlxm
             int dqinx = int.Parse(this.textBox1.Text);
             int jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx, dizhi);
             int waicengjubing = MyLdcmd.getDqmoniqiWaiCengJuBingByIndex(dqinx,dizhi);
-                        
             myDm mf = new myDm();
             int r = 0;
             if (jubing > 0)
             {
                 r = mf.bindWindow(jubing);
             }
-            int dengji = -1, xuanqu = -1;
-            string name = "";
-            YiQuan_Xin yq = new YiQuan_Xin (mf,dqinx, jubing, dizhi);
-            yq.zhuxian("",30000);
-            MyFuncUtil.mylogandxianshi("结束"+dengji);
-           
-        }
+            JiuYouZhuCe yq = new JiuYouZhuCe(mf, dqinx, jubing);
+            int shumima = 0;
+            int gaoyanzheng = 0;
+            ZhangHao zhanghao = new ZhangHao();
+            long ks_time = MyFuncUtil.GetTimestamp();
+            int xunhuanshijian = 20;
+            List<string> pwdlist = new List<string>();
+            pwdlist.Add("111222");
+            pwdlist.Add("444333");
+            pwdlist.Add("666888");
+            pwdlist.Add("555222");
+            pwdlist.Add("333222");
+            pwdlist.Add("666222");
+            pwdlist.Add("777222");
+            pwdlist.Add("333555");
+            pwdlist.Add("333888");
+            pwdlist.Add("222555");
+            string pwd=zhanghao.getJiuYouPwdFromList(dqinx, pwdlist,"jiuyouzhuce");
+            while (true) {
+                YouXiFactory youf = new YouXiFactory();
+                List<FuHeSanDian> ls = youf.CreateYouXiSanDian("jiuyou").findListFuHeSandianByName("注册");
+                foreach (FuHeSanDian fh in ls)
+                {
+                    if (mf.mohuByLeiBool_duokai(fh.Sd))
+                    {
+                        WriteLog.WriteLogFile(dqinx+"", fh.Name);
+                        if (fh.Listzuobiao != null && fh.Listzuobiao.Count > 0)
+                        {
+                            foreach (ZuoBiao z in fh.Listzuobiao)
+                            {
+                                if (mf.mohu_duokai(z.X, z.Y, z.Yanse) == 1)
+                                {
+                                    mf.mytap_duokai(jubing,z.X, z.Y);
+                                }
+                            }
+                        }
+                        if (fh.Zhidingx != -1 && fh.Zhidingy != -1)
+                        {
+                            mf.mytap_duokai(jubing, fh.Zhidingx, fh.Zhidingy);
+                        }
 
-       
-        
-        private void yiquancunzhanghao(object inx)
-        {
-            duoxianxunhuan_zhanghao("d", inx, 20);
-            return;
+                    }
+                }
+
+                FuHeSanDian d3 = youf.CreateYouXiSanDian("jiuyou").findFuHeSandianByName("特殊注册-输入密码");
+                if (mf.mohuByLeiBool_duokai(d3.Sd))
+                {
+                    if (shumima == 0)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", d3.Name);
+                        mf.mytap_duokai(jubing, d3.Zhidingx, d3.Zhidingy);
+                        shumima = 1;
+                        zhanghao.shuruqianhuitui(mf, dqinx, jubing);
+                        mf.mydelay(2000, 4000);
+                        mf.SendString(jubing, pwd);
+                        mf.mydelay(2000, 4000);
+                        mf.mytap_duokai(jubing, 267, 508);
+                        mf.mydelay(2000, 4000);
+                    }
+                }
+                d3 = youf.CreateYouXiSanDian("jiuyou").findFuHeSandianByName("特殊注册-搞验证");
+                if (gaoyanzheng == 0 && mf.mohuByLeiBool_duokai(d3.Sd) && mf.myFindColorWuJubingBool(338, 363, 461, 425, 0x0108f9))
+                {
+                    WriteLog.WriteLogFile(dqinx + "", d3.Name);
+                    BaiDuShiTu bdt = new BaiDuShiTu();
+                    string getyzm = bdt.quwenzifromyanzhengma(mf, dqinx, jubing, 339, 364, 459, 424);            
+                    if (getyzm != null && !"".Equals(getyzm))
+                    {
+                        mf.mytap_duokai(jubing,286, 402);
+                        shumima = 1;
+                        //zhanghao.shuruqianhuitui(mf, dqinx, jubing);
+                        mf.mydelay(2000, 4000);
+                        mf.SendString(jubing, getyzm);
+                        mf.mydelay(2000, 4000);
+                        mf.mytap_duokai(jubing, 273, 475);
+                        mf.mydelay(2000, 4000);
+                    }
+                }
+                d3 = youf.CreateYouXiSanDian("jiuyou").findFuHeSandianByName("特殊注册-搞成功存账号");
+                if (mf.mohuByLeiBool_duokai(d3.Sd))
+                {
+                    WriteLog.WriteLogFile(dqinx + "", d3.Name);
+                    gaoyanzheng = 1;
+                    BaiDuShiTu bdt = new BaiDuShiTu();
+                    int getyzm = bdt.qushufrombaidu(mf, dqinx, jubing, 148, 378, 407, 428);
+                    if (getyzm != -1)
+                    {
+                        WriteLog.WriteLogFile(dqinx + "", "准备存账号");
+                        zhanghao.denglusaveNameAndPas(getyzm+ "", "a99999", dqinx, "jiuyouzhuce");
+                        break;
+                    }
+                }
+                long js_time = MyFuncUtil.GetTimestamp();
+                if ((js_time - ks_time) > 1000 * 60 * xunhuanshijian)
+                {
+                    WriteLog.WriteLogFile(dqinx + "",  xunhuanshijian+"分钟循环未成功,跳出");
+                    string path1 = @"c:\mypic_save\";
+                    string name1 = dqinx + "_" + mf.GetTime() + ".bmp";
+                    WriteLog.WriteLogFile(dqinx + "", "进入卡屏函数,保存卡屏图片" + name1);
+                    mf.captureBmp(jubing, path1, name1);
+                    Thread.Sleep(10000);
+                    break;
+                }
+            }
+            
+
+            MyFuncUtil.mylogandxianshi("结束" + pwdlist[0]);
         }
 
         private void lrzh_Click(object sender, EventArgs e)
@@ -300,7 +396,6 @@ namespace wlxm
             Thread thread = new Thread(threadStart);
             thread.Name = "wodegaozhanghao";
             thread.Start();
-            
         }
 
         private void gaozhanghaotou() {
@@ -313,11 +408,7 @@ namespace wlxm
             {
                 yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
             }
-
-
             string a_b = "d";
-            //qdinit(a_b);
-            //MyLdcmd.RunDuokaiqi(a_b);
             string dizhi = null;
             string path = null;
             string seed = null;
@@ -391,14 +482,15 @@ namespace wlxm
                         break;
                     }
                 }
-
                 WriteLog.WriteLogFile("", "序号" + j + ",结束");
-            }
-
-           
+            }           
         }
-        
-        
+
+        private void yiquancunzhanghao(object inx)
+        {
+            duoxianxunhuan_zhanghao("d", inx, 20);
+            return;
+        }
 
         private void duoxianxunhuan_zhanghao(string a_b, object dqind, int xhcishu)
         {
@@ -1156,108 +1248,8 @@ namespace wlxm
 
         
 
-        private void oldquanqd() {
-            apkName = dict["明日方舟"];
-            int[] yunxingIndex = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-            string a_b = "d";
-            qdinit(a_b);
-            for (int j = 1; j < 1000; j++)
-            {
-                WriteLog.WriteLogFile("", "序号" + j + ",开始");
-                MyFuncUtil.LaunchAll(yunxingIndex.Length);
-                Thread.Sleep(10000);
-                List<int> newinx = new List<int>();
-                foreach (int myinx in yunxingIndex)
-                {
-                    int i = MyFuncUtil.QiDongWanChengInx(a_b, myinx, apkName);
-                    if (i != -1)
-                    {
-                        newinx.Add(i);
-                    }
-                    Thread.Sleep(3000);
-                }
-                MyLdcmd.mySort(a_b);
-                Thread.Sleep(2000);
-                ThreadPool.SetMaxThreads(newinx.Count, newinx.Count); //设置最大线程数
-                foreach (int inx in newinx)
-                {
-                    ThreadPool.QueueUserWorkItem(new WaitCallback(duoxiand), inx);//线程池指定线程执行Auto方法
-                    Thread.Sleep(20000);
-                }
-
-                while (true)
-                {
-                    Thread.Sleep(10000);//这句写着，主要是没必要循环那么多次。去掉也可以。
-                    int maxWorkerThreads, workerThreads;
-                    int portThreads;
-                    ThreadPool.GetMaxThreads(out maxWorkerThreads, out portThreads);
-                    ThreadPool.GetAvailableThreads(out workerThreads, out portThreads);
-                    if (maxWorkerThreads - workerThreads == 0)
-                    {
-                        break;
-                    }
-                }
-
-                WriteLog.WriteLogFile("", "序号" + j + ",结束");
-            }
-        }
-
-        private void duoxian(string a_b, int dqinx)
-        {
-            string dizhi = null;
-            string path = null;
-            string seed = null;
-            MyFuncUtil.myqiehuancd(a_b, out dizhi, out path, out seed);
-            //MyLdcmd.mySort(dizhi);
-            Thread.Sleep(2000);
-            WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "进入到循环当中");
-            /*var r = MyFuncUtil.Launch(a, dizhi);
-            if (r == 0)
-            {
-                WriteLog.WriteLogFile(a + "", "模拟器" + a + "打开失败");
-                Thread.Sleep(20000);
-                return;
-            }
-            Thread.Sleep(20000);*/
-            myDm dm = new myDm();
-            lock (dm)
-            {
-                MingRi_Sort mr = new MingRi_Sort(dm, dqinx, dizhi);
-                //登录 要下载文件 暂定十分钟 发现start按钮则立刻跳出
-                tmpBool = mr.denglu(10);
-                if (!tmpBool)
-                {
-                    tmpBoolString.Append("登录环节出错");
-                    return;
-                }
-                tmpBool = mr.zhuce(3);
-                if (!tmpBool)
-                {
-                    tmpBoolString.Append("注册环节出错");
-                    return;
-                }
-                string bmpname = dqinx + "_" + dm.GetTime();
-                mr.zhuxian();
-                Thread.Sleep(10000);
-                int rg = mr.ganyuan_jietu();
-                if (rg != -1)
-                {
-                    Thread.Sleep(10000);
-                    MyLdcmd.myScreencap(dqinx, path + bmpname + ".png", dizhi);
-                    Thread.Sleep(20000);
-                    if (dm.IsFileExist(path + bmpname + ".png") == 1)
-                    {
-                        string abc = mr.generalBasicDemo(dqinx, path + bmpname + ".png");
-                        WriteLog.WriteLogFile(dqinx + "", abc + " " + abc.Length);
-                        MyFuncUtil.MyRestore(dqinx, abc, a_b);
-                        if (abc.Length <= 0)
-                        {
-                            dm.DeleteFile(path + bmpname + ".png");
-                        }
-                    }
-                }
-            }
-        }
+       
+        
 
         
         private void mydo()
