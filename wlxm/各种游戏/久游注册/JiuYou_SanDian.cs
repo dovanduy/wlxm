@@ -69,18 +69,27 @@ namespace fuzhu
             _list_yqfhsandian.Add(guanbifhx);
 
             guanbisdx = new SanDian(new int[3, 3] {
-	{  269,  842, 0xffffff},
-	{  260,  834, 0xf5f5f5},
-	{  291,  856, 0xfcfcfc},
+	{  318,  693, 0xa95b27},
+	{  177,  279, 0xffd53e},
+	{  311,  333, 0x1a1008},
 });
-            guanbifhx = new FuHeSanDian("注册-打开九游后先关广告", guanbisdx, 268, 842);
+            guanbifhx = new FuHeSanDian("注册-打开九游后先关广告", guanbisdx, 268, 842,"掌上三国");
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 
             guanbisdx = new SanDian(new int[3, 3] {
-	{  483,  918, 0xcccccc},
-	{  483,  945, 0xa3a3a3},
-	{   64,  917, 0xfea119},
+	{  271,  531, 0x5f2923},
+	{  312,  692, 0x7b2e23},
+	{  270,  842, 0xffffff},
+});
+            guanbifhx = new FuHeSanDian("注册-打开九游后先关广告2", guanbisdx, 268, 842, "另外一个广告");
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
+	{  396,  370, 0x3b87fe},
+	{  503,  902, 0xf74c31},
+	{  485,  922, 0xcccccc},
 });
             guanbifhx = new FuHeSanDian("注册-可以点击右下角的我", guanbisdx,  487,  919);
             _list_yqsandian.Add(guanbisdx);
@@ -123,6 +132,42 @@ namespace fuzhu
             _list_yqfhsandian.Add(guanbifhx);
 
             guanbisdx = new SanDian(new int[3, 3] {
+	{  425,  555, 0x009688},
+	{  356,  564, 0x009688},
+	{  208,  494, 0x1f1f1f},
+});
+            guanbifhx = new FuHeSanDian("注册-无响应选等待", guanbisdx, 337, 557);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
+	{  110,   76, 0xffffff},
+	{  490,  378, 0x555555},
+	{  489,  576, 0x555555},
+});
+            guanbifhx = new FuHeSanDian("注册-Uc协议后退", guanbisdx, 21, 70);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
+	{  278,  314, 0xff6600},
+	{  413,  712, 0xfb8d13},
+	{  208,  460, 0xff9011},
+});
+            guanbifhx = new FuHeSanDian("注册-版本更新选关闭", guanbisdx, 170, 700);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
+	{  228,  427, 0x898989},
+	{  183,  318, 0xff8400},
+	{  325,  507, 0xfa911b},
+});
+            guanbifhx = new FuHeSanDian("特殊注册-输入完密码", guanbisdx, 325, 507);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
 	{  354,  563, 0xf78b42},
 	{  316,  510, 0xfa9019},
 	{  108,  431, 0x86868c},
@@ -137,6 +182,15 @@ namespace fuzhu
 	{  260,  404, 0x8c8c8c},
 });
             guanbifhx = new FuHeSanDian("特殊注册-搞验证", guanbisdx, 286, 402, "339,  364, 0xffffff  459,  424, 0xffffff 验证码的左上 右下坐标");
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
+	{   92,  459, 0x777777},
+	{  533,  118, 0xf67b29},
+	{  534,   42, 0xf67b29},
+});
+            guanbifhx = new FuHeSanDian("特殊注册-搞验证2", guanbisdx, -1, -1, "74,  207, 0xf9f9f9  465,  432, 0xf9f9f9  验证码的左上 右下坐标");
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 

@@ -49,10 +49,10 @@ namespace MyUtil
         public static extern int WriteWordtoJPG(string FilePath, string PicWH, string XYWrods, int Size, string RGBcolor);
 
 
-        public string getYanZhengMa(string path)
+        public string getYanZhengMa(string path,string datileixing)
         {
             StringBuilder sb = new StringBuilder(512);
-            var ans = SendFile("renzhida|0FFD4CA59A44C9E1", "X3004", path, 300, 0, "", sb);//@"c:\mypic_save\2_653355203.bmp"
+            var ans = SendFile("renzhida|0FFD4CA59A44C9E1", datileixing, path, 300, 0, "", sb);//@"c:\mypic_save\2_653355203.bmp" //X3004
 
             var TID = sb.ToString();
             StringBuilder Reply = new StringBuilder(512);
@@ -63,6 +63,7 @@ namespace MyUtil
                 {
                     Thread.Sleep(1000);
                     GetAnswer(TID, Reply);
+                    //WriteLog.WriteLogFile("", Reply.ToString() + "Reply1");
                     if (Reply.ToString() != "")
                     {
                         WriteLog.WriteLogFile("", Reply.ToString() + "Reply1");
@@ -99,6 +100,7 @@ namespace MyUtil
                 if (TID.ToString() == "#题分不足") { } // 应提示用户
                 if (TID.ToString() == "#网络错误") { } // 应重新发送
                 WriteLog.WriteLogFile("", TID.ToString() + "TID");
+                //throw new Exception();
             }
             return Reply.ToString();
         }

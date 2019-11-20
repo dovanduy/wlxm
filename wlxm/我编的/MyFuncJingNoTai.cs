@@ -123,6 +123,24 @@ namespace MyUtil
             }
         }
 
+        public void myBianWeiZhi(int index, string dizhi = @"d:\ChangZhi\dnplayer2\")
+        {
+            WriteLog.WriteLogFile(index + "", "模拟器" + index + "开始改位置");
+            int dqwidth = 2560;//1920 1024
+            int dqheight = 1440;//1080 768            
+            int jubing = MyLdcmd.getDqmoniqiWaiCengJuBingByIndex(index, dizhi);
+            IntPtr p = new IntPtr(jubing);
+            IntPtr p2 = new IntPtr(HWND_TOP);
+            int x = 0;
+            int y = 0;
+            int yiquanw = 601;
+            int yiquany = 338;
+            x = ((index-1) % 4) * (dqwidth / 4);
+            y = (index / 4) * (dqheight / 4);
+            WriteLog.WriteLogFile(index + "", index + "x:" + x + ",y:" + y);
+            SetWindowPos(p, p2, x, y, yiquanw, yiquany, SWP_NOSIZE);
+        }
+
         public void myReSizeByWAndH(int index,int jubing,int width,int height,string dizhi = @"d:\ChangZhi\dnplayer2\")
         {
             if (jubing <=0) {
@@ -277,6 +295,68 @@ namespace MyUtil
         }
 
 
+        public bool PanDuan_GetZhiDingDian(int dqinx, myDm dm, int jubing,fuzhu.SanDianAbs sdabs,string sdname)
+        {
+
+            if (jubing <= 0)
+            {
+                WriteLog.WriteLogFile(dqinx + "", "游戏判断启动，句柄错误<=0");
+                return false;
+            }
+            Entity.FuHeSanDian tysd = sdabs.findFuHeSandianByName(sdname);
+            int r = dm.bindWindow(jubing);
+            if (r <= 0)
+            {
+                WriteLog.WriteLogFile(dqinx + "", "游戏句柄绑定错误");
+                return false;
+            }
+            if (dm.mohuByLeiBool_duokai(tysd.Sd))
+            {
+                WriteLog.WriteLogFile(dqinx + "", "游戏启动成功，界面有游戏画面" + sdname);
+                return true;
+            }
+            return false;
+        }
+
+        public int QiDongWanChengGetZhiDingDian(int dqinx, string app,myDm dm, int jubing,fuzhu.SanDianAbs sdabs,string sdname)
+        {
+            WriteLog.WriteLogFile(dqinx + "", "尝试打开app" + app);
+            bool qidongcg = true;
+            long ks = MyFuncUtil.GetTimestamp();
+            int i = 1;
+            while (true)
+            {
+                if (i == 1)
+                {
+                    MyFuncUtil.Qidong(dqinx, app);
+                    Thread.Sleep(1000 * 20);
+                    i++;
+                }
+                if (PanDuan_GetZhiDingDian(dqinx,dm,jubing,sdabs,sdname))
+                {
+                    break;
+                }
+                long js = MyFuncUtil.GetTimestamp();
+                Thread.Sleep(20000);
+                if ((js - ks) > 1000 * 60)
+                {
+                    i = 1;
+                }
+                if ((js - ks) > 1000 * 60 * 5)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "打开app很久5分钟也没打开" + dqinx);
+                    qidongcg = false;
+                    break;
+                }
+            }
+            if (!qidongcg)
+            {
+                MyFuncUtil.mylogandxianshi("打开app失败" + dqinx);
+                return -1;
+            }
+            return dqinx;
+        }
+
         public void getWindowSize(int index,int jubing, out int width, out int height)
         {
             string dizhi = @"d:\ChangZhi\dnplayer2\";
@@ -327,36 +407,44 @@ namespace MyUtil
             WriteLog.WriteLogFile(dqinx + "", "模拟器发现已取点-开始判断" + haomiao);
             long ks = MyFuncUtil.GetTimestamp();
             var rt = false;
-            string oyiqudian = "";
+            string oyiqudian = "请稍候";
             Entity.FuHeSanDian f = fuzhu.TongYong_SanDian.GetObject().findFuHeSandianByName("IPtool");
-            while (true)
+            lock (obj)
             {
-                long js = MyFuncUtil.GetTimestamp();
-                if ((js - ks) > haomiao)
+                while (true)
                 {
-                    break;
-                }                
-                if (mf.mohuByLeiBool(f.Sd))
-                {
-                    WriteLog.WriteLogFile(dqinx + "", f.Name + "模糊取到"+jubing+" "+mf.bindWindow(jubing));
-                    //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);                    
-                    //mf.myMove(jubing, f.Zhidingx, f.Zhidingy);
-                    if (mf.mohu_duokai(84, 237, 0xd5d5d5) == 1)
+                    long js = MyFuncUtil.GetTimestamp();
+                    if ((js - ks) > haomiao)
                     {
-                        mf.mytap_duokai(jubing, 84, 237);
+                        break;
                     }
-                    mf.mydelay(2000, 3000);
-                    if (mf.mohu_duokai(80, 536, 0xffffff) == 1)
+                    if (mf.mohuByLeiBool(f.Sd))
                     {
-                        mf.mytap_duokai(jubing, 80, 536);
+                        WriteLog.WriteLogFile(dqinx + "", f.Name + "模糊取到" + jubing + " " + mf.bindWindow(jubing));
+                        //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);                    
+                        //mf.myMove(jubing, f.Zhidingx, f.Zhidingy);
+                        if (mf.mohu_duokai(84, 237, 0xd5d5d5) == 1)
+                        {
+                            mf.mytap_duokai(jubing, 84, 237);
+                            WriteLog.WriteLogFile(dqinx + "", "复制信息1");
+                        }
                         mf.mydelay(2000, 3000);
-                        mf.mytap_duokai(jubing, 428, 763);
-                        mf.mydelay(2000, 3000);
+                        if (mf.mohu_duokai(80, 536, 0xffffff) == 1)
+                        {
+                            mf.mytap_duokai(jubing, 80, 536);
+                            mf.mydelay(2000, 3000);
+                            //mf.mytap_duokai(jubing, 428, 763);
+                            //mf.mydelay(2000, 3000);
+                            WriteLog.WriteLogFile(dqinx + "", "复制信息2");
+                        }
+                        WriteLog.WriteLogFile(dqinx + "", mf.GetClipboard() + " 当前剪切板");
+                        oyiqudian = mf.GetClipboard();
+                        if (oyiqudian != "" && oyiqudian.IndexOf("请") < 0)
+                        {
+                            rt = true;
+                            break;
+                        }
                     }
-                    WriteLog.WriteLogFile(dqinx + "",  mf.GetClipboard()+" 当前剪切板");
-                    oyiqudian = mf.GetClipboard();
-                    rt = true;
-                    break;
                 }
             }
             yiqudian = oyiqudian;
@@ -442,23 +530,22 @@ namespace MyUtil
             WriteLog.WriteLogFile(dqinx + "", "获取IP,jubing:" + jubing + ",waicengjubing:" + waicengjubing);
             ip = "";
             bool t = false;
-            bool temp = false;
             lock (obj)
             {
                 t = MyFuncUtil.lureninstallOk(dqinx, "package:com.ddm.iptools", () =>
                 {
                     WriteLog.WriteLogFile(dqinx + "", "安装app没成功--iptools");
-                    temp = myQuit(dqinx, dizhi);
+                    /*temp = myQuit(dqinx, dizhi);
                     if (!temp)
                     {
                         WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
                         Thread.Sleep(20000);
                         return;
-                    }
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原");
+                    }*/
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "安装iptools");
                     //MyLdcmd.myRestore(dqinx, seed, dizhi);
                     MyLdcmd.installApp(dqinx, @"C:\迅雷下载\2_1b823b1928a42f09423f28cb79179bfe.apk");
-                    temp = myQuit(dqinx, dizhi);
+                    /*temp = myQuit(dqinx, dizhi);
                     if (!temp)
                     {
                         WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
@@ -471,37 +558,12 @@ namespace MyUtil
                         WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开失败");
                         Thread.Sleep(20000);
                         return;
-                    }
-                    Thread.Sleep(20000);
+                    }*/
+                    Thread.Sleep(30000);
                 });
                 if (t == false)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "安装app没成功--iptools");
-                    temp = myQuit(dqinx, dizhi);
-                    if (!temp)
-                    {
-                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
-                        Thread.Sleep(20000);
-                        return;
-                    }
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原");
-                    //MyLdcmd.myRestore(dqinx, seed, dizhi);      
-                    MyLdcmd.installApp(dqinx, @"C:\迅雷下载\2_1b823b1928a42f09423f28cb79179bfe.apk");
-                    temp = myQuit(dqinx, dizhi);
-                    if (!temp)
-                    {
-                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
-                        Thread.Sleep(20000);
-                        return;
-                    }
-                    temp = MyFuncUtil.Launch(dqinx, dizhi);
-                    if (!temp)
-                    {
-                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开失败");
-                        Thread.Sleep(20000);
-                        return;
-                    }
-                    Thread.Sleep(20000);
+                    return;
                 }
                 //窗口已打开 获取句柄
                 if (jubing <= 0)
@@ -525,54 +587,26 @@ namespace MyUtil
                 dm.SetClipboard("请");
                 //apkName = dict["IPtool"];
                 string apkName = "com.ddm.iptools/com.ddm.iptools.ui.MainActivity";
-                int i = MyFuncUtil.QiDongWanChengLurenzhanghao("d", dqinx, apkName);
-                t = PanDuan_QidongLurenzhanghao(dqinx, dm, jubing);//根据窗口大小 和 是否有雷电游戏中心标志  判断是否启动了app
-                temp = PanDuan_QidongBySize(dqinx, waicengjubing, 1000 * 30, 578, 998);
-                bool t2 = false;
-                string yiqu = "";
-                if (t && temp)
+                //int i = MyFuncUtil.QiDongWanChengLurenzhanghao("d", dqinx, apkName);
+                fuzhu.YouXiFactory yxf = new fuzhu.YouXiFactory();
+                int i = QiDongWanChengGetZhiDingDian(dqinx, apkName, dm, jubing, yxf.CreateYouXiSanDian("tongyongsandian"), "IPtool");
+                if (i == -1)
                 {
-                    t2 = PanDuan_QidongByYiQuDian_IP(dqinx, 1000 * 30, dm, jubing, out yiqu);
-                    if (t2)
-                    {
-                        WriteLog.WriteLogFile(dqinx + "", "模拟器发现已取点" + yiqu);
-                    }
-                    ip = yiqu;
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开app" + apkName + "失败");
+                    Thread.Sleep(20000);
+                    return;
+                } 
+                string yiqu = "";                
+                bool t2 = PanDuan_QidongByYiQuDian_IP(dqinx, 1000 * 60*5, dm, jubing, out yiqu);
+                if (t2)
+                {
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器发现已取点" + yiqu);
                 }
-                if (ip != "" && ip.IndexOf("请") < 0)
+                ip = yiqu;                
+                /*if (ip != "" && ip.IndexOf("请") < 0)
                 {
                     return;
-                }
-                WriteLog.WriteLogFile(dqinx + "", " t2:" + t2 + " t:" + t + " temp:" + temp);
-                if (!t2 || !t || !temp)
-                {
-                    i = MyFuncUtil.QiDongWanChengLurenzhanghao("d", dqinx, apkName);
-                    if (i == -1)
-                    {
-                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开app" + apkName + "失败");
-                        Thread.Sleep(20000);
-                        return;
-                    }
-                }
-                WriteLog.WriteLogFile(dqinx + "", ip + "  --当前ip " + ip.IndexOf("请"));
-                long ks = MyFuncUtil.GetTimestamp();
-                while (true)
-                {
-                    if (ip != "" && ip.IndexOf("请") < 0)
-                    {
-                        break;
-                    }
-                    PanDuan_QidongByYiQuDian_IP(dqinx, 1000 * 30, dm, jubing, out yiqu);
-                    ip = yiqu;
-                    dm.mydelay(1000, 2000);
-                    WriteLog.WriteLogFile(dqinx + "", ip + "  --当前ip循环中");
-                    long js = MyFuncUtil.GetTimestamp();
-                    if ((js - ks) > 60 * 1000)
-                    {
-                        WriteLog.WriteLogFile(dqinx + "", "超过60s" + ip);
-                        break;
-                    }
-                }
+                }  */              
             }
         }
 

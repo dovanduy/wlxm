@@ -2182,7 +2182,7 @@ namespace fuzhu
                 if (zhaomumianfei==0 && panduanjiemian("主界面"))
                 {
                     //开始免费招募
-                    FuHeSanDian zm = null;
+                    
                     WriteLog.WriteLogFile(this._mnqName, "开始免费招募");
                     mf.mytapbijiao(350, 275, 0xb87e1c);
                     mf.mydelay(2000, 4000);

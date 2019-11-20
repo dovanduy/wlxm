@@ -413,7 +413,7 @@ namespace MyUtil
                 {
                     DataTable dt = sqh.getAll("select name,isnull(ip,'') from zhanghao where ip='"
 
-                    + ip + "' and youxi='" + youxi + "' and yxbz='Y' and dengluzhong='Y'")
+                    + ip + "' and youxi='" + youxi + "' and yxbz='Y' and dengluzhong='Y' and xgsj='"+DateTime.Now.ToString("yyyy-MM-dd")+"'")
                     ;
                     if (dt.Rows.Count > 0)
                     {

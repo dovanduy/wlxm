@@ -172,7 +172,7 @@ namespace MyUtil
             return qushu;
         }
 
-        public string quwenzifromyanzhengma(myDm mf, int dqinx, int jubing, int x1, int y1, int x2, int y2)
+        public string quwenzifromyanzhengma(myDm mf, int dqinx, int jubing, string datileixing,int x1, int y1, int x2, int y2)
         {
             WriteLog.WriteLogFile(dqinx + "", "先截图再取搞验证码");
             string qushu = "";
@@ -182,7 +182,7 @@ namespace MyUtil
             {
                 WriteLog.WriteLogFile(dqinx + "", "截图保存成功,再取验证码");
                 YanZhengMa yzm = new YanZhengMa();
-                string getyzm = yzm.getYanZhengMa(@"c:\mypic_save\" + filename);
+                string getyzm = yzm.getYanZhengMa(@"c:\mypic_save\" + filename,datileixing);
                 if (getyzm != null && getyzm != "")
                 {
                     qushu = getyzm;

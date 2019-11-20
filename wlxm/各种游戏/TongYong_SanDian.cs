@@ -7,7 +7,7 @@ using xDM;
 
 namespace fuzhu
 {
-    public class TongYong_SanDian
+    public class TongYong_SanDian:SanDianAbs
     {
         #region 单例模式变量
         private static readonly object obj = new object();
@@ -108,17 +108,16 @@ namespace fuzhu
                 }
             }
             return yqsd;
-        }
-                
-        public FuHeSanDian findFuHeSandianByName(string name)
-        {
-            return _list_yqfhsandian.Find(f => name.Equals(f.Name)
-                );
-        }
+        }             
+        
 
         public Dictionary<String,FuHeSanDian> getYiQuanDict()
         {
             return  _dict;
+        }
+        public override List<FuHeSanDian> findAllFuHeSandian()
+        {
+            return _list_yqfhsandian;
         }
     }
 }

@@ -610,7 +610,7 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(124, 60);
             this.label12.TabIndex = 11;
-            this.label12.Text = "1号机";
+            this.label12.Text = "1号-1号";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label14
@@ -622,7 +622,7 @@
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(124, 60);
             this.label14.TabIndex = 13;
-            this.label14.Text = "3号机";
+            this.label14.Text = "3号-3号";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label15
@@ -646,7 +646,7 @@
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(124, 60);
             this.label13.TabIndex = 16;
-            this.label13.Text = "2号机";
+            this.label13.Text = "2号-2号";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // comboBox1

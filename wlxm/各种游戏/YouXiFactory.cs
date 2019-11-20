@@ -26,7 +26,10 @@ namespace fuzhu
         {
             switch (brand)
             {
-                case "jiuyou":
+                case "tongyongsandian":
+                    youcr1 = TongYong_SanDian.GetObject();
+                    break;
+                case "jiuyouzhuce":
                     youcr1 = JiuYou_SanDian.GetObject();
                     break;
                 default:

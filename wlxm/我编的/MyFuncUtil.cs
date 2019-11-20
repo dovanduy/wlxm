@@ -887,15 +887,71 @@ namespace MyUtil
             }
         }
 
-        public static void duokaiqiAdd(string a_b)
+        public static void duokaiqiRemoveAll()
+        {
+            zaiciguanbi();
+            WriteLog.WriteLogFile("", "打开模拟器,删除所有模拟器");
+            int[] moniqiIndex = MyLdcmd.getDqmoniqiIndex();
+            if (moniqiIndex.Length <= 1) {
+                WriteLog.WriteLogFile("", "模拟器只有一个,不用删除");
+                return;
+            }
+            lock (obj)
+            {
+                myDm dm = new myDm();
+                int jb = dm.FindWindowEx(0, "", "雷电多开器");
+                if (jb <= 0)
+                {
+                    WriteLog.WriteLogFile("", "多开器未找到");
+                    return;
+                }
+                int res = dm.bindWindow(jb);
+                if (res > 0)
+                {
+                    dm.mytap_duokai(jb, 24, 631);
+                    Thread.Sleep(2000);
+                    dm.mytap_duokai(jb, 125, 628);
+                    Thread.Sleep(2000);
+                    int jb2 = dm.FindWindowEx(0, "assistantupdateframe", "");
+                    if (jb2 <= 0)
+                    {
+                        WriteLog.WriteLogFile("", "多开器弹出框未找到");
+                        return;
+                    }
+                    myDm dm2 = new myDm();
+                    int res2 = dm2.bindWindow(jb2);
+                    if (res2 > 0)
+                    {
+                        dm2.click(92, 127, 300);
+                        Thread.Sleep(1000 * 3);
+                    }
+                    int jb3 = dm.FindWindowEx(0, "MessageBoxWindow", "");
+                    if (jb3 <= 0)
+                    {
+                        WriteLog.WriteLogFile("", "是否删除所有盘未找到");
+                        return;
+                    }
+                    myDm dm3 = new myDm();
+                    int res3 = dm3.bindWindow(jb3);
+                    if (res3 > 0)
+                    {
+                        dm3.click(279, 176, 300);
+                        Thread.Sleep(1000 * 6);
+                    }
+                }
+            }
+        }
+
+
+        public static void duokaiqiAdd(int shuliang)
         {
             zaiciguanbi();
             WriteLog.WriteLogFile("", "打开模拟器,新增15个或20个");
-            int a = 4;
+            /*int a = 4;
             if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
             {
                 a = 3;
-            }
+            }*/
             
             lock (obj)
             {
@@ -907,7 +963,7 @@ namespace MyUtil
                     return;
                 }
                 int res = dm.bindWindow(jb);
-                for (int i = 0; i < a; i++)
+                for (int i = 0; i < shuliang; i++)
                 {
                     if (res > 0)
                     {

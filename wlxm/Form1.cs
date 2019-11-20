@@ -25,7 +25,7 @@ namespace wlxm
         /// </summary>
         //private static int fuzhuBanben = 1;
 
-        private static string fuzhuyouxi = YiQuan_Xin.DangQianYouXi;
+        private static string fuzhuyouxi = JiuYouZhuCe.DangQianYouXi;
         
         /// <summary>
         /// 全局button 点了就不自动运行
@@ -134,9 +134,9 @@ namespace wlxm
                     }
                 }
             }
-            YouXiEntity yx = new YouXiEntity("一拳超人", "1.0.0.0","主线", "com.playcrab.kos.gw/org.cocos2dx.lua.AppActivity", "com.playcrab.kos.gw", "YiQuanXin", "YiQuanXin");
+            YouXiEntity yx = new YouXiEntity("一拳超人", "yiquan", "1.0.0.0", "主线", "com.playcrab.kos.gw/org.cocos2dx.lua.AppActivity", "package:com.playcrab.kos.gw", "", "YiQuanXin", "YiQuanXin");
             myyouxi.Add(yx);
-            yx = new YouXiEntity("九游注册", "1.0.0.0", "注册", "cn.ninegame.gamemanager/cn.ninegame.gamemanager.activity.MainActivity", "cn.ninegame.gamemanager", "JiuYou", "JiuYou");
+            yx = new YouXiEntity("九游注册", "jiuyouzhuce", "1.0.0.0", "注册", "cn.ninegame.gamemanager/cn.ninegame.gamemanager.activity.MainActivity", "package:cn.ninegame.gamemanager", @"C:\迅雷下载\109_01292442093833704133b4b27b3d6149.apk", "JiuYou", "JiuYou");
             myyouxi.Add(yx);            
             this.comboBox1.DataSource = myyouxi;
             this.comboBox1.DisplayMember = "youxiname";
@@ -198,7 +198,7 @@ namespace wlxm
                     }
                     else
                     {
-                        ThreadStart threadStart = new ThreadStart(duoxianzongtou);//通过ThreadStart委托告诉子线程执行什么方法　
+                        ThreadStart threadStart = new ThreadStart(gaozhanghaotou);//通过ThreadStart委托告诉子线程执行什么方法　
                         this.zidongthread = new Thread(threadStart);
                         this.zidongthread.Name = "wodedpanduoxian";
                         this.zidongthread.Start();
@@ -274,119 +274,25 @@ namespace wlxm
             int dqinx = int.Parse(this.textBox1.Text);
             int jubing = MyLdcmd.getDqmoniqiJuBingByIndex(dqinx, dizhi);
             int waicengjubing = MyLdcmd.getDqmoniqiWaiCengJuBingByIndex(dqinx,dizhi);
+            MyFuncJingNoTai mno = new MyFuncJingNoTai();
             myDm mf = new myDm();
             int r = 0;
             if (jubing > 0)
             {
                 r = mf.bindWindow(jubing);
             }
+            mno.myBianWeiZhi(dqinx);
             JiuYouZhuCe yq = new JiuYouZhuCe(mf, dqinx, jubing);
-            int shumima = 0;
-            int gaoyanzheng = 0;
+            //string name = "";
+            //int xuanqu = -1, dengji = -1;
+            //tmpBool = yq.zhuce("jiuyouzhuce", 20, out dengji, out xuanqu, ref name);            
+            //更新ip
             ZhangHao zhanghao = new ZhangHao();
-            long ks_time = MyFuncUtil.GetTimestamp();
-            int xunhuanshijian = 20;
-            List<string> pwdlist = new List<string>();
-            pwdlist.Add("111222");
-            pwdlist.Add("444333");
-            pwdlist.Add("666888");
-            pwdlist.Add("555222");
-            pwdlist.Add("333222");
-            pwdlist.Add("666222");
-            pwdlist.Add("777222");
-            pwdlist.Add("333555");
-            pwdlist.Add("333888");
-            pwdlist.Add("222555");
-            string pwd=zhanghao.getJiuYouPwdFromList(dqinx, pwdlist,"jiuyouzhuce");
-            while (true) {
-                YouXiFactory youf = new YouXiFactory();
-                List<FuHeSanDian> ls = youf.CreateYouXiSanDian("jiuyou").findListFuHeSandianByName("注册");
-                foreach (FuHeSanDian fh in ls)
-                {
-                    if (mf.mohuByLeiBool_duokai(fh.Sd))
-                    {
-                        WriteLog.WriteLogFile(dqinx+"", fh.Name);
-                        if (fh.Listzuobiao != null && fh.Listzuobiao.Count > 0)
-                        {
-                            foreach (ZuoBiao z in fh.Listzuobiao)
-                            {
-                                if (mf.mohu_duokai(z.X, z.Y, z.Yanse) == 1)
-                                {
-                                    mf.mytap_duokai(jubing,z.X, z.Y);
-                                }
-                            }
-                        }
-                        if (fh.Zhidingx != -1 && fh.Zhidingy != -1)
-                        {
-                            mf.mytap_duokai(jubing, fh.Zhidingx, fh.Zhidingy);
-                        }
+            //zhanghao.updateIp(dqinx, "jiuyouzhuce", name, "121.25.36");
 
-                    }
-                }
-
-                FuHeSanDian d3 = youf.CreateYouXiSanDian("jiuyou").findFuHeSandianByName("特殊注册-输入密码");
-                if (mf.mohuByLeiBool_duokai(d3.Sd))
-                {
-                    if (shumima == 0)
-                    {
-                        WriteLog.WriteLogFile(dqinx + "", d3.Name);
-                        mf.mytap_duokai(jubing, d3.Zhidingx, d3.Zhidingy);
-                        shumima = 1;
-                        zhanghao.shuruqianhuitui(mf, dqinx, jubing);
-                        mf.mydelay(2000, 4000);
-                        mf.SendString(jubing, pwd);
-                        mf.mydelay(2000, 4000);
-                        mf.mytap_duokai(jubing, 267, 508);
-                        mf.mydelay(2000, 4000);
-                    }
-                }
-                d3 = youf.CreateYouXiSanDian("jiuyou").findFuHeSandianByName("特殊注册-搞验证");
-                if (gaoyanzheng == 0 && mf.mohuByLeiBool_duokai(d3.Sd) && mf.myFindColorWuJubingBool(338, 363, 461, 425, 0x0108f9))
-                {
-                    WriteLog.WriteLogFile(dqinx + "", d3.Name);
-                    BaiDuShiTu bdt = new BaiDuShiTu();
-                    string getyzm = bdt.quwenzifromyanzhengma(mf, dqinx, jubing, 339, 364, 459, 424);            
-                    if (getyzm != null && !"".Equals(getyzm))
-                    {
-                        mf.mytap_duokai(jubing,286, 402);
-                        shumima = 1;
-                        //zhanghao.shuruqianhuitui(mf, dqinx, jubing);
-                        mf.mydelay(2000, 4000);
-                        mf.SendString(jubing, getyzm);
-                        mf.mydelay(2000, 4000);
-                        mf.mytap_duokai(jubing, 273, 475);
-                        mf.mydelay(2000, 4000);
-                    }
-                }
-                d3 = youf.CreateYouXiSanDian("jiuyou").findFuHeSandianByName("特殊注册-搞成功存账号");
-                if (mf.mohuByLeiBool_duokai(d3.Sd))
-                {
-                    WriteLog.WriteLogFile(dqinx + "", d3.Name);
-                    gaoyanzheng = 1;
-                    BaiDuShiTu bdt = new BaiDuShiTu();
-                    int getyzm = bdt.qushufrombaidu(mf, dqinx, jubing, 148, 378, 407, 428);
-                    if (getyzm != -1)
-                    {
-                        WriteLog.WriteLogFile(dqinx + "", "准备存账号");
-                        zhanghao.denglusaveNameAndPas(getyzm+ "", "a99999", dqinx, "jiuyouzhuce");
-                        break;
-                    }
-                }
-                long js_time = MyFuncUtil.GetTimestamp();
-                if ((js_time - ks_time) > 1000 * 60 * xunhuanshijian)
-                {
-                    WriteLog.WriteLogFile(dqinx + "",  xunhuanshijian+"分钟循环未成功,跳出");
-                    string path1 = @"c:\mypic_save\";
-                    string name1 = dqinx + "_" + mf.GetTime() + ".bmp";
-                    WriteLog.WriteLogFile(dqinx + "", "进入卡屏函数,保存卡屏图片" + name1);
-                    mf.captureBmp(jubing, path1, name1);
-                    Thread.Sleep(10000);
-                    break;
-                }
-            }
             
-
-            MyFuncUtil.mylogandxianshi("结束" + pwdlist[0]);
+            
+            MyFuncUtil.mylogandxianshi("结束");
         }
 
         private void lrzh_Click(object sender, EventArgs e)
@@ -402,7 +308,7 @@ namespace wlxm
             int[] yunxingIndex = null;
             if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
             {
-                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, };//6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19
+                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, };//2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19
             }
             else
             {
@@ -416,16 +322,22 @@ namespace wlxm
             //所有账号置为dengluzhong N 多个机器的话 会有麻烦
             //ZhangHao zh = new ZhangHao();
             //zh.zhiweidengluzhongN("jingjie", WriteLog.getMachineName());
+            int xinzengmoniqi = 2;
             for (int j = 1; j < 1000; j++)
             {
+                var ks = MyFuncUtil.GetTimestamp();
                 WriteLog.WriteLogFile("", "序号" + j + ",开始搞账号");
                 MyLdcmd.myQuitAll(dizhi);
+                Thread.Sleep(2000);
+                MyLdcmd.RunDuokaiqi(a_b);
+                Thread.Sleep(2000);
+                MyFuncUtil.duokaiqiRemoveAll();
                 Thread.Sleep(2000);
                 MyLdcmd.myRemoveAll(dizhi);
                 Thread.Sleep(2000);
                 MyLdcmd.RunDuokaiqi(a_b);
                 Thread.Sleep(2000);
-                MyFuncUtil.duokaiqiAdd(a_b);
+                MyFuncUtil.duokaiqiAdd(xinzengmoniqi);
                 Thread.Sleep(2000);
                 ThreadPool.SetMaxThreads(yunxingIndex.Length, yunxingIndex.Length); //设置最大线程数
                 string[] getquanbujubing = MyLdcmd.getDqmoniqiJuBing();
@@ -469,7 +381,7 @@ namespace wlxm
                     ThreadPool.QueueUserWorkItem(new WaitCallback(yiquancunzhanghao), listleidian.Find(sd => sd.Dqinx == inx));//线程池指定线程执行Auto方法
                     //Thread.Sleep(1000 * 40);
                 }
-                var ks = MyFuncUtil.GetTimestamp();
+                //var ks = MyFuncUtil.GetTimestamp();
                 while (true)
                 {
                     Thread.Sleep(10000);//这句写着，主要是没必要循环那么多次。去掉也可以。
@@ -483,6 +395,8 @@ namespace wlxm
                     }
                 }
                 WriteLog.WriteLogFile("", "序号" + j + ",结束");
+                var js = MyFuncUtil.GetTimestamp();
+                WriteLog.WriteLogFile("", "大循环1次耗时" + MyFuncUtil.SecondToHour(js - ks));
             }           
         }
 
@@ -511,9 +425,9 @@ namespace wlxm
             MyFuncJingNoTai mno = new MyFuncJingNoTai();
             bool temp = false;
             int chongqi = 0;
-            string youxi = fuzhuyouxi;
+            string youxibaocun = myyouxi.Find(f => f.Youxiname == "九游注册").Youxibaocun;
             int ipbeizhan = 0;
-            for (int ii = 0; ii < 10;ii++ )
+            for (int ii = 0; ii < 1;ii++ )
             {
                 /*进入操作模拟器循环中
                 1.模拟器是不是开着
@@ -536,7 +450,7 @@ namespace wlxm
                     MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改属性");
                     MyLdcmd.modifySimulator(dqinx);
-                    temp = MyFuncUtil.Launch(dqinx, dizhi);
+                    temp = MyFuncUtil.LaunchQiHao(dqinx, dizhi);
                     if (!temp)
                     {
                         WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开失败");
@@ -544,26 +458,27 @@ namespace wlxm
                         continue;
                     }
                     Thread.Sleep(1000);
-                    MyLdcmd.installApp(dqinx, @"C:\迅雷下载\2_1b823b1928a42f09423f28cb79179bfe.apk");
-                    Thread.Sleep(1000 * 20);
-                    MyLdcmd.installApp(dqinx, @"C:\迅雷下载\yiquanchaoren_huanchangyouxi_1.1.7.apk");
-                    Thread.Sleep(1000 * 20);
+                    //MyLdcmd.installApp(dqinx, myyouxi.Find(f=>f.Youxiname=="九游注册").Apkinstall);
+                    Thread.Sleep(1000 * 20); 
                     jubing = -1;//句柄要重新取
                     waicengjubing = -1;
                 }
-                t = MyFuncUtil.lureninstallOk(dqinx, "package:com.playcrab.kos.gw", () =>
+                //开始改位置
+                mno.myBianWeiZhi(dqinx);
+                t = MyFuncUtil.lureninstallOk(dqinx, myyouxi.Find(f => f.Youxiname == "九游注册").Package, () =>
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "安装app没成功--yiquan");
-                    temp = mno.myQuit(dqinx, dizhi);
+                    WriteLog.WriteLogFile(dqinx + "", "安装app没成功--九游注册");
+                    /*temp = mno.myQuit(dqinx, dizhi);
                     if (!temp)
                     {
                         WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
                         Thread.Sleep(20000);
                         return;
-                    }
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原--yiquan");
+                    }*/
+                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "开始安装");
                     //MyLdcmd.myRestore(dqinx, seed, dizhi);
-                    MyLdcmd.installApp(dqinx, @"C:\迅雷下载\yiquanchaoren_huanchangyouxi_1.1.7.apk");
+                    MyLdcmd.installApp(dqinx, myyouxi.Find(f => f.Youxiname == "九游注册").Apkinstall);
+                    /*
                     temp = mno.myQuit(dqinx, dizhi);
                     if (!temp)
                     {
@@ -581,36 +496,36 @@ namespace wlxm
                         WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开失败");
                         Thread.Sleep(20000);
                         return;
-                    }
-                    Thread.Sleep(20000);
-                    jubing = -1;//句柄要重新取
-                    waicengjubing = -1;
+                    }*/
+                    Thread.Sleep(20*1000);
+                    //jubing = -1;//句柄要重新取
+                    //waicengjubing = -1;
                 });
-                if (t == false || chongqi == 1)
+                if (chongqi == 1)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "安装app没成功--yiquan");
+                    /*WriteLog.WriteLogFile(dqinx + "", "安装app没成功--九游注册");
                     temp = mno.myQuit(dqinx, dizhi);
                     if (!temp)
                     {
                         WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
                         Thread.Sleep(20000);
                         continue;
-                    }
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "复原--yiquan");
+                    }*/
+                    //WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "开始安装");
                     //MyLdcmd.myRestore(dqinx, seed, dizhi);
-                    MyLdcmd.installApp(dqinx, @"C:\迅雷下载\yiquanchaoren_huanchangyouxi_1.1.7.apk");
-                    temp = mno.myQuit(dqinx, dizhi);
-                    if (!temp)
-                    {
-                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
-                        Thread.Sleep(20000);
-                        continue;
-                    }
+                    //MyLdcmd.installApp(dqinx, myyouxi.Find(f => f.Youxiname == "九游注册").Apkinstall);
+                    /*temp = mno.myQuit(dqinx, dizhi);
+                     if (!temp)
+                     {
+                         WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
+                         Thread.Sleep(20000);
+                         continue;
+                     }
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改名");
                     MyLdcmd.myRename(dqinx, "雷" + dqinx + "-" + cishu, dizhi);
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "改属性");
                     MyLdcmd.modifySimulator(dqinx);
-                    temp = MyFuncUtil.Launch(dqinx, dizhi);
+                    temp = MyFuncUtil.LaunchQiHao(dqinx, dizhi);
                     if (!temp)
                     {
                         WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开失败");
@@ -618,10 +533,10 @@ namespace wlxm
                         continue;
                     }
                     chongqi = 0;
-                    Thread.Sleep(20000);
+                    Thread.Sleep(20*1000);
                     jubing = -1;//句柄要重新取
-                    waicengjubing = -1;
-                    continue;
+                    waicengjubing = -1;*/
+                    //continue;
                 }                
                 //窗口已打开 获取句柄
                 if (jubing <= 0)
@@ -641,18 +556,19 @@ namespace wlxm
                     Thread.Sleep(20000);
                     continue;
                 }
-                string ip = "1";
+                string ip = "请稍候";
                 ZhangHao zhanghao = new ZhangHao();               
                 if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
                 {
                     mno.getIP(dqinx, dizhi, seed,jubing, waicengjubing, out ip);
                     if (ip != null && !"".Equals(ip) && ip.IndexOf("请") < 0 && !"1".Equals(ip))
                     {
-                        t = zhanghao.panduanIpKeYong(dqinx, youxi, ip);
+                        t = zhanghao.panduanIpKeYong(dqinx, youxibaocun, ip);
                         if (t)
                         {
                             WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "ip已被占");
-                            MyLdcmd.myReboot(dqinx);
+                            //MyLdcmd.myReboot(dqinx);
+                            temp = mno.myQuit(dqinx, dizhi);                             
                             Thread.Sleep(1000 * 60 * 4);
                             ipbeizhan++;
                             jubing = -1;//句柄要重新取
@@ -662,72 +578,20 @@ namespace wlxm
                     }
                 }
                 string name = "";
-                string pwd = "";
-                zhanghao.generateNameAndPas(dqinx, 7, out name, out pwd);
-                apkName = dict["一拳超人"];
-                int i = MyFuncUtil.QiDongWanChengLurenzhanghao(a_b, dqinx, apkName);
+                //zhanghao.generateNameAndPas(dqinx, 7, out name, out pwd);
+                apkName = myyouxi.Find(f => f.Youxiname == "九游注册").Apkname;
+                YouXiFactory yxf=new YouXiFactory();
+                int i = mno.QiDongWanChengGetZhiDingDian(dqinx, apkName, dm, jubing, yxf.CreateYouXiSanDian(youxibaocun), "注册-打开九游后第一界面");
                 if (i == -1)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开app" + apkName + "失败");
                     Thread.Sleep(20000);
                     continue;
-                }
-                t = mno.PanDuan_QidongLurenzhanghao(dqinx, dm, jubing);//根据窗口大小 和 是否有雷电游戏中心标志  判断是否启动了app
-                temp = mno.PanDuan_QidongBySize(dqinx, waicengjubing,1000 * 30, 601, 338);
-                bool t2 = false;
-                if (t && temp)
-                {
-                    Thread.Sleep(1000 * 60*2);
-                    string yiqu = "";
-                    t2 = mno.PanDuan_QidongByYiQuDian(dqinx, 1000 * 30, dm, jubing, out yiqu);
-                    if (t2)
-                    {
-                        WriteLog.WriteLogFile(dqinx + "", "模拟器发现已取点" + yiqu);
-                    }
-                }
-                Thread.Sleep(1000 * 10);
-                WriteLog.WriteLogFile(dqinx + "", "t2 已取点判断:" + t2 + "t 路人账号判断:" + t + "temp Size判断:" + temp);
-                if (!t2 || !t || !temp)
-                {
-                    apkName = dict["一拳超人"];
-                    i = MyFuncUtil.QiDongWanChengLurenzhanghao(a_b, dqinx, apkName);
-                    if (i == -1)
-                    {
-                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开app" + apkName + "失败");
-                        Thread.Sleep(20000);
-                        continue;
-                    }
-                    int w = -1, h = -1;
-                    MyFuncUtil.getWindowSize(dqinx, out w, out h);
-                    if (w != -1 && h != -1 && w < h)
-                    {
-                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "w h不对" + w + " " + h);
-                        Thread.Sleep(20000);
-                        continue;
-                    }
-                    Thread.Sleep(20000);
-                    temp = mno.lurenResizeOk(dqinx, "yiquan");
-                    if (temp == false)
-                    {
-                        WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + ",resize没成功");
-                        continue;
-                    }
-                    WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "降低cpu");
-                    MyLdcmd.myDownCpu(dqinx, 50);
-                    Thread.Sleep(1000 * 10);
-                }
+                } 
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "开始尝试登录主线");
-                YiQuan_Xin yq = new YiQuan_Xin(dm, dqinx, jubing, dizhi);
-                int xuanqu = -1, dengji = -1;                
-                tmpBool = yq.denglu(15, name);
-                if (!tmpBool)
-                {
-                    WriteLog.WriteLogFile(dqinx + "", "登录环节出错");
-                    Thread.Sleep(1000 * 60 * 3);
-                    chongqi = 1;
-                    continue;
-                }
-                tmpBool = yq.zhuce(15, out dengji, out xuanqu, ref name);
+                JiuYouZhuCe yq = new JiuYouZhuCe(dm, dqinx, jubing);
+                int xuanqu = -1, dengji = -1;
+                tmpBool = yq.zhuce(youxibaocun,10, out dengji, out xuanqu, ref name);
                 if (!tmpBool)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "注册环节出错");
@@ -736,14 +600,15 @@ namespace wlxm
                     continue;
                 }
                 //更新ip
-                zhanghao.updateIp(dqinx, youxi, name, ip);
-                yq.zhuxian_zhuceyong(name);
+                zhanghao.updateIp(dqinx, youxibaocun, name, ip);
+                //yq.zhuxian_zhuceyong(name);
                 //yq.quitdq(name);
                 //Thread.Sleep(1000 * 60*60);//停住1小时
-                zhanghao.tuichusaveNameAndPas(name,dqinx, youxi,WriteLog.getMachineName(), -1, -1, -1);
+                //zhanghao.tuichusaveNameAndPas(name,dqinx, youxi,WriteLog.getMachineName(), -1, -1, -1);
                 cishu++;
                 // MyLdcmd.myReboot(dqinx);
-                Thread.Sleep(1000 * 60 * 4);
+                WriteLog.WriteLogFile(dqinx + "", "睡20s");
+                Thread.Sleep(1000 * 20);
                 jubing = -1;//句柄要重新取
                 waicengjubing = -1;
                 temp = mno.myQuit(dqinx, dizhi);
@@ -1071,36 +936,17 @@ namespace wlxm
             }
             for (int i = 0; i < 10; i++)
             {
-                foreach (FuHeSanDian f in YiQuan_SanDian.List_yqfhsandian)
+                foreach (FuHeSanDian f in JiuYou_SanDian.List_yqfhsandian)
                 {
-                    if (mf.mohuByLeiBool(f.Sd))
+                    if (mf.mohuByLeiBool_duokai(f.Sd))
                     {
                         MyFuncUtil.mylogandxianshi(f.Name + "模糊取到YiQuan_SanDian");
                         //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
                         mf.mydelay(1000, 2000);
                     }
-                    if (mf.jingqueByLeiBool(f.Sd))
+                    if (mf.jingqueByLeiBool_duokai(f.Sd))
                     {
                         MyFuncUtil.mylogandxianshi(f.Name + "精确取到YiQuan_SanDian");
-                        mf.mydelay(1000, 2000);
-                    }
-                }
-                mf.mydelay(10, 200);
-
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                foreach (FuHeSanDian f in YiQuanZhiTuo_SanDian.List_yqfhsandian)
-                {
-                    if (mf.mohuByLeiBool(f.Sd))
-                    {
-                        MyFuncUtil.mylogandxianshi(f.Name + "模糊取到YiQuanZhiTuo_SanDian");
-                        //mf.mytap(this._jubing, fh.Zhidingx, fh.Zhidingy);
-                        mf.mydelay(1000, 2000);
-                    }
-                    if (mf.jingqueByLeiBool(f.Sd))
-                    {
-                        MyFuncUtil.mylogandxianshi(f.Name + "精确取到YiQuanZhiTuo_SanDian");
                         mf.mydelay(1000, 2000);
                     }
                 }
@@ -1140,6 +986,7 @@ namespace wlxm
             //所有账号置为dengluzhong N 多个机器的话 会有麻烦
             //ZhangHao zh = new ZhangHao();
             //zh.zhiweidengluzhongN("jingjie", WriteLog.getMachineName());
+            int xinzengmoniqi = 4;
             for (int j = 1; j < 1000; j++)
             {
                 WriteLog.WriteLogFile("", "序号" + j + ",开始，搞主线");
@@ -1160,7 +1007,7 @@ namespace wlxm
                     Thread.Sleep(2000);
                     MyLdcmd.RunDuokaiqi(a_b);
                     Thread.Sleep(2000);
-                    MyFuncUtil.duokaiqiAdd(a_b);
+                    MyFuncUtil.duokaiqiAdd(xinzengmoniqi);
                     Thread.Sleep(2000);
                     getquanbujubing = MyLdcmd.getDqmoniqiJuBing();
                 }

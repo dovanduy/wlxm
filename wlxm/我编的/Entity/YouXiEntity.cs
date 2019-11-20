@@ -15,6 +15,14 @@ namespace Entity
             set { _youxiname = value; }
         }
 
+        private string _youxibaocun;
+
+        public string Youxibaocun
+        {
+            get { return _youxibaocun; }
+            set { _youxibaocun = value; }
+        }
+
         private Version _version;
 
         public Version Version
@@ -30,6 +38,15 @@ namespace Entity
             get { return _apkname; }
             set { _apkname = value; }
         }
+
+        private string _apkinstall;
+
+        public string Apkinstall
+        {
+            get { return _apkinstall; }
+            set { _apkinstall = value; }
+        }
+
         private string _package;
 
         public string Package
@@ -68,11 +85,14 @@ namespace Entity
         }
 
         public YouXiEntity() { }
-        public YouXiEntity(string youxiname, string version,string zidong, string apkname, string package, string sandian, string duodian) {
+        public YouXiEntity(string youxiname,string youxibaocun, string version, string zidong, string apkname, string package, string apkinstall, string sandian, string duodian)
+        {
             this._youxiname = youxiname;
+            this._youxibaocun = youxibaocun;
             this._version = new Version(version);
             this._zidong = zidong;
             this._apkname = apkname;
+            this._apkinstall = apkinstall;
             this._package = package;
             this._sandian = sandian;
             this._duodian = duodian;

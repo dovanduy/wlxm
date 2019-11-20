@@ -67,7 +67,11 @@ namespace fuzhu
             this._jubing = jubing;            
             //模拟器的名字 取值有问题 改为index
             this._mnqName = dqinx + "";
-            int r=mf.bindWindow(this._jubing);
+            int r = -1;
+            if(jubing > 0)
+            {
+                r=mf.bindWindow(this._jubing);
+            }
             WriteLog.WriteLogFile(this._mnqName, DangQianYouXi+"构造函数,句柄是:" + _jubing + ",模拟器index是:" + _mnqName + "，thread:" + Thread.CurrentThread.ManagedThreadId + "，绑定:" + r);
         }
         
@@ -627,15 +631,23 @@ namespace fuzhu
 
         }
         
-        public Boolean zhuce(int fz,out int dengji,out int xuanqu,ref string name)
+        public Boolean zhuce(string apknamebaocun,int fz,out int dengji,out int xuanqu,ref string name)
         {
-
+            
+            dengji = -1;
+            xuanqu = -1;
             Boolean zccg = false;
             int shumima = 0;
             int gaoyanzheng = 0;
+            int wenziyanzheng = 0;
             ZhangHao zhanghao = new ZhangHao();
             long ks_time = MyFuncUtil.GetTimestamp();
-            int xunhuanshijian = 20;
+            int xunhuanshijian = fz;
+            if (this._jubing <= 0)
+            {
+                WriteLog.WriteLogFile(this._mnqName, DangQianYouXi + "构造函数,句柄是:" + _jubing + ",不再搞注册");
+                return zccg;
+            }
             List<string> pwdlist = new List<string>();
             pwdlist.Add("111222");
             pwdlist.Add("444333");
@@ -647,11 +659,11 @@ namespace fuzhu
             pwdlist.Add("333555");
             pwdlist.Add("333888");
             pwdlist.Add("222555");
-            string pwd = zhanghao.getJiuYouPwdFromList(this._dqinx, pwdlist, "jiuyouzhuce");
+            string pwd = zhanghao.getJiuYouPwdFromList(this._dqinx, pwdlist, apknamebaocun);
             while (true)
             {
                 YouXiFactory youf = new YouXiFactory();
-                List<FuHeSanDian> ls = youf.CreateYouXiSanDian("jiuyou").findListFuHeSandianByName("注册");
+                List<FuHeSanDian> ls = youf.CreateYouXiSanDian(apknamebaocun).findListFuHeSandianByName("注册");
                 foreach (FuHeSanDian fh in ls)
                 {
                     if (mf.mohuByLeiBool_duokai(fh.Sd))
@@ -664,18 +676,20 @@ namespace fuzhu
                                 if (mf.mohu_duokai(z.X, z.Y, z.Yanse) == 1)
                                 {
                                     mf.mytap_duokai(this._jubing, z.X, z.Y);
+                                    mf.mydelay(1000, 3000);
                                 }
                             }
                         }
                         if (fh.Zhidingx != -1 && fh.Zhidingy != -1)
                         {
                             mf.mytap_duokai(this._jubing, fh.Zhidingx, fh.Zhidingy);
+                            mf.mydelay(1000, 3000);
                         }
 
                     }
                 }
 
-                FuHeSanDian d3 = youf.CreateYouXiSanDian("jiuyou").findFuHeSandianByName("特殊注册-输入密码");
+                FuHeSanDian d3 = youf.CreateYouXiSanDian(apknamebaocun).findFuHeSandianByName("特殊注册-输入密码");
                 if (mf.mohuByLeiBool_duokai(d3.Sd))
                 {
                     if (shumima == 0)
@@ -683,7 +697,7 @@ namespace fuzhu
                         WriteLog.WriteLogFile(this._dqinx + "", d3.Name);
                         mf.mytap_duokai(this._jubing, d3.Zhidingx, d3.Zhidingy);
                         shumima = 1;
-                        zhanghao.shuruqianhuitui(mf, this._dqinx, this._jubing);
+                        //zhanghao.shuruqianhuitui(mf, this._dqinx, this._jubing);
                         mf.mydelay(2000, 4000);
                         mf.SendString(this._jubing, pwd);
                         mf.mydelay(2000, 4000);
@@ -691,25 +705,65 @@ namespace fuzhu
                         mf.mydelay(2000, 4000);
                     }
                 }
-                d3 = youf.CreateYouXiSanDian("jiuyou").findFuHeSandianByName("特殊注册-搞验证");
+                d3 = youf.CreateYouXiSanDian(apknamebaocun).findFuHeSandianByName("特殊注册-输入完密码");
+                if (shumima == 1 && mf.mohuByLeiBool_duokai(d3.Sd))
+                {
+                    WriteLog.WriteLogFile(this._dqinx + "", d3.Name);
+                    mf.mytap_duokai(this._jubing, d3.Zhidingx, d3.Zhidingy);
+                }
+
+                d3 = youf.CreateYouXiSanDian(apknamebaocun).findFuHeSandianByName("特殊注册-搞验证");
                 if (gaoyanzheng == 0 && mf.mohuByLeiBool_duokai(d3.Sd) && mf.myFindColorWuJubingBool(338, 363, 461, 425, 0x0108f9))
                 {
                     WriteLog.WriteLogFile(this._dqinx + "", d3.Name);
                     BaiDuShiTu bdt = new BaiDuShiTu();
-                    string getyzm = bdt.quwenzifromyanzhengma(mf, this._dqinx, this._jubing, 339, 364, 459, 424);
+                    string getyzm = bdt.quwenzifromyanzhengma(mf, this._dqinx, this._jubing, "X3004", 339, 364, 459, 424);
                     if (getyzm != null && !"".Equals(getyzm))
                     {
                         mf.mytap_duokai(this._jubing, 286, 402);
-                        shumima = 1;
+                        //gaoyanzheng = 1;
                         //zhanghao.shuruqianhuitui(mf, dqinx, jubing);
                         mf.mydelay(2000, 4000);
                         mf.SendString(this._jubing, getyzm);
                         mf.mydelay(2000, 4000);
                         mf.mytap_duokai(this._jubing, 273, 475);
                         mf.mydelay(2000, 4000);
+                        shumima = 0;
                     }
                 }
-                d3 = youf.CreateYouXiSanDian("jiuyou").findFuHeSandianByName("特殊注册-搞成功存账号");
+
+                d3 = youf.CreateYouXiSanDian(apknamebaocun).findFuHeSandianByName("特殊注册-搞验证2");
+                if (wenziyanzheng < 2 && gaoyanzheng == 0 && mf.mohuByLeiBool_duokai(d3.Sd))
+                {
+                    //WriteLog.WriteLogFile(this._dqinx + "", d3.Name+"退出本次程序");
+                   // break;
+                    BaiDuShiTu bdt = new BaiDuShiTu();
+                    string getyzm = bdt.quwenzifromyanzhengma(mf, this._dqinx, this._jubing, "X6006", 0, 0, 539, 483);
+                    string[] zbshuzu = getyzm.Split('|');
+                    if (zbshuzu != null && zbshuzu.Length > 0)
+                    {
+                        foreach (string zb in zbshuzu)
+                        {
+                            string[] zba = zb.Split(',');
+                            if (zba != null && zba.Length == 2)
+                            {
+                                mf.mytap_duokai(this._jubing, int.Parse(zba[0]), int.Parse(zba[1]));
+                                mf.mydelay(1000, 2000);
+                            }
+                        }
+                    }
+                    wenziyanzheng++;
+                    shumima = 0;
+                }
+
+                 d3 = youf.CreateYouXiSanDian(apknamebaocun).findFuHeSandianByName("特殊注册-搞验证2");
+                 if (wenziyanzheng >= 2 && shumima == 1 && gaoyanzheng == 0 && mf.mohuByLeiBool_duokai(d3.Sd))
+                 {
+                     WriteLog.WriteLogFile(this._dqinx + "", d3.Name+"退出本次程序多次搞特殊验证");
+                     break;
+                 }
+
+                d3 = youf.CreateYouXiSanDian(apknamebaocun).findFuHeSandianByName("特殊注册-搞成功存账号");
                 if (mf.mohuByLeiBool_duokai(d3.Sd))
                 {
                     WriteLog.WriteLogFile(this._dqinx + "", d3.Name);
@@ -720,6 +774,7 @@ namespace fuzhu
                     {
                         WriteLog.WriteLogFile(this._dqinx + "", "准备存账号");
                         zhanghao.denglusaveNameAndPas(getyzm + "", pwd, this._dqinx, DangQianYouXi);
+                        name = getyzm + "";
                         zccg = true;
                         break;
                     }
@@ -2021,7 +2076,7 @@ namespace fuzhu
                 if (zhaomumianfei==0 && panduanjiemian("主界面"))
                 {
                     //开始免费招募
-                    FuHeSanDian zm = null;
+                    //FuHeSanDian zm = null;
                     WriteLog.WriteLogFile(this._mnqName, "开始免费招募");
                     mf.mytapbijiao(350, 275, 0xb87e1c);
                     mf.mydelay(2000, 4000);
