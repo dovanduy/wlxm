@@ -293,9 +293,9 @@ namespace wlxm
             //apkName = myyouxi.Find(f => f.Youxiname == "九游注册").Apkname;
             //YouXiFactory yxf = new YouXiFactory();
             //int i = mno.QiDongWanChengGetZhiDingDian(dqin apkName, mf, jubing, yxf.CreateYouXiSanDian("jiuyouzhuce"), "注册-打开九游后第一界面");
-            bool boola = true;
-            zhanghao.saveipfirst(dqinx,"123ceshi",out boola);
-            MyFuncUtil.mylogandxianshi("结束");
+            BaiDuShiTu bdt = new BaiDuShiTu();
+            int getyzm = bdt.qushufrombaidu(mf, dqinx, jubing, 148, 378, 407, 428);
+            MyFuncUtil.mylogandxianshi("结束"+getyzm);
         }
 
         private void lrzh_Click(object sender, EventArgs e)

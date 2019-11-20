@@ -78,11 +78,11 @@ namespace MyUtil
             WriteLog.WriteLogFile(dqinx + "", "先截图再取文字");
             string qushu = "";
             string filename = dqinx + "_" + mf.GetTime() + ".bmp";
-            mf.captureBmpFeiXianDing(jubing, @"c:\mypic_save\", filename, x1, y1, x2, y2);
-            if (mf.IsFileExist(@"c:\mypic_save\" + filename) == 1)
+            mf.captureBmpFeiXianDing(jubing, @"d:\mypic_save\", filename, x1, y1, x2, y2);
+            if (mf.IsFileExist(@"d:\mypic_save\" + filename) == 1)
             {
                 WriteLog.WriteLogFile(dqinx + "", "截图保存成功,再取文字");
-                string r = wenzishibie(dqinx, @"c:\mypic_save\" + filename);
+                string r = wenzishibie(dqinx, @"d:\mypic_save\" + filename);
                 if (r != null && r != "")
                 {
                     qushu = r;
@@ -133,10 +133,10 @@ namespace MyUtil
             WriteLog.WriteLogFile(dqinx+"", "先截图再取数");
             int qushu = -1;
             string filename = dqinx + "_" + mf.GetTime() + ".bmp";
-            mf.captureBmpFeiXianDing(jubing, @"c:\mypic_save\", filename, x1, y1, x2, y2);
-            if (mf.IsFileExist(@"c:\mypic_save\" + filename) == 1)
+            mf.captureBmpFeiXianDing(jubing, @"d:\mypic_save\", filename, x1, y1, x2, y2);
+            if (mf.IsFileExist(@"d:\mypic_save\" + filename) == 1)
             {
-                string r = shuzishibie(dqinx, @"c:\mypic_save\" + filename);
+                string r = wenzishibie(dqinx, @"d:\mypic_save\" + filename);
                 if (r != null && r != "")
                 {
                     qushu = int.Parse(r);
@@ -151,18 +151,18 @@ namespace MyUtil
             WriteLog.WriteLogFile(dqinx + "","先截图再取数gaoqing");
             int qushu = -1;
             string timestamp = mf.GetTime() + "";
-            string mydir1 = @"c:\mypic_save\" + timestamp + ".png";
+            string mydir1 = @"d:\mypic_save\" + timestamp + ".png";
             MyLdcmd.myScreencap(dqinx, mydir1);
             System.Drawing.Bitmap f = MyFuncUtil.ReadImageFile(mydir1);
             if (f != null)
             {
                 System.Drawing.Bitmap g = MyFuncUtil.KiCut(f, x1, y1, x2w, y2h);
-                g.Save(@"C:\mypic_save\" + timestamp + "_1.jpg");
+                g.Save(@"d:\mypic_save\" + timestamp + "_1.jpg");
                 g.Dispose();
             }
-            if (File.Exists(@"C:\mypic_save\" + timestamp + "_1.jpg"))
+            if (File.Exists(@"d:\mypic_save\" + timestamp + "_1.jpg"))
             {
-                string r = shuzishibie(dqinx, @"c:\mypic_save\" + timestamp + "_1.jpg");
+                string r = shuzishibie(dqinx, @"d:\mypic_save\" + timestamp + "_1.jpg");
                 if (r != null && r != "")
                 {
                     qushu = int.Parse(r);
@@ -177,12 +177,12 @@ namespace MyUtil
             WriteLog.WriteLogFile(dqinx + "", "先截图再取搞验证码");
             string qushu = "";
             string filename = dqinx + "_" + mf.GetTime() + ".bmp";
-            mf.captureBmpFeiXianDing(jubing, @"c:\mypic_save\", filename, x1, y1, x2, y2);
-            if (mf.IsFileExist(@"c:\mypic_save\" + filename) == 1)
+            mf.captureBmpFeiXianDing(jubing, @"d:\mypic_save\", filename, x1, y1, x2, y2);
+            if (mf.IsFileExist(@"d:\mypic_save\" + filename) == 1)
             {
                 WriteLog.WriteLogFile(dqinx + "", "截图保存成功,再取验证码");
                 YanZhengMa yzm = new YanZhengMa();
-                string getyzm = yzm.getYanZhengMa(@"c:\mypic_save\" + filename,datileixing);
+                string getyzm = yzm.getYanZhengMa(@"d:\mypic_save\" + filename,datileixing);
                 if (getyzm != null && getyzm != "")
                 {
                     qushu = getyzm;

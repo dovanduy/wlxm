@@ -87,6 +87,15 @@ namespace fuzhu
             _list_yqfhsandian.Add(guanbifhx);
 
             guanbisdx = new SanDian(new int[3, 3] {
+	{  295,  845, 0xffffff},
+	{  301,  698, 0x000000},
+	{  250,  693, 0xffe362},
+});
+            guanbifhx = new FuHeSanDian("注册-打开九游后先关广告3", guanbisdx, 268, 842, "另外一个广告");
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
 	{  396,  370, 0x3b87fe},
 	{  503,  902, 0xf74c31},
 	{  485,  922, 0xcccccc},

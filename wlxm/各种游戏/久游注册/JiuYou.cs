@@ -713,7 +713,7 @@ namespace fuzhu
                 }
 
                 d3 = youf.CreateYouXiSanDian(apknamebaocun).findFuHeSandianByName("特殊注册-搞验证");
-                if (gaoyanzheng == 0 && mf.mohuByLeiBool_duokai(d3.Sd) && mf.myFindColorWuJubingBool(338, 363, 461, 425, 0x0108f9))
+                if (gaoyanzheng == 0 && mf.mohuByLeiBool_duokai(d3.Sd) && (mf.myFindColorWuJubingBool(338, 363, 461, 425, 0x0108f9) || mf.myFindColorWuJubingBool(338, 363, 461, 425, 0x2f32e6)))
                 {
                     WriteLog.WriteLogFile(this._dqinx + "", d3.Name);
                     BaiDuShiTu bdt = new BaiDuShiTu();

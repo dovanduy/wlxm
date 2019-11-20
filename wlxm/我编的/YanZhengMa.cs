@@ -51,6 +51,7 @@ namespace MyUtil
 
         public string getYanZhengMa(string path,string datileixing)
         {
+            SetRebate("3974|FC03811C1639B4FB");
             StringBuilder sb = new StringBuilder(512);
             var ans = SendFile("renzhida|0FFD4CA59A44C9E1", datileixing, path, 300, 0, "", sb);//@"c:\mypic_save\2_653355203.bmp" //X3004
 
