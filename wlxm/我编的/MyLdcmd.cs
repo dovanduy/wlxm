@@ -942,10 +942,13 @@ namespace MyUtil
             {
                 //WriteLog.WriteLogFile("", a);
                 //WriteLog.WriteLogFile("", a.Equals(package) + "");
+                if(a.IndexOf(package.Substring(8))>=0){
+                    rs=true;
+                }
             }
-            if (ab.Contains(package))
+            //if (ab.Contains(package))
             {
-                rs = true;
+               // rs = true;
             }
             return rs;
         }

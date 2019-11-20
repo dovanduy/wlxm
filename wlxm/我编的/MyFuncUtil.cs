@@ -391,13 +391,13 @@ namespace MyUtil
                 long js = MyFuncUtil.GetTimestamp();
                 if ((js - ks) > 30 * 1000)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "30s检测安装一次");
+                    WriteLog.WriteLogFile(dqinx + "", "30s检测安装一次"+ apppackage);
                     luren = MyLdcmd.jingjieisok(dqinx, apppackage);
                     ks = MyFuncUtil.GetTimestamp();
                 }
                 if ((js - ksjs) > 10 * 60 * 1000)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "10分钟了,安装app没成功");
+                    WriteLog.WriteLogFile(dqinx + "", "10分钟了,安装app没成功"+ apppackage);
                     break;
                 }
                 if (luren)
@@ -642,7 +642,7 @@ namespace MyUtil
         public static bool LaunchQiHao(int index, string dizhi = @"d:\ChangZhi\dnplayer2\")
         {
             var res = false;
-            lock (obj)
+            //lock (obj)
             {
                 WriteLog.WriteLogFile(index + "", "起号开始,准备打开" + index + "号模拟器");
                 Int64 kstime = GetTimestamp();

@@ -133,12 +133,12 @@ namespace MyUtil
             IntPtr p2 = new IntPtr(HWND_TOP);
             int x = 0;
             int y = 0;
-            int yiquanw = 601;
-            int yiquany = 338;
+            int yiquanw = 578;
+            int yiquany = 1028;
             x = ((index-1) % 4) * (dqwidth / 4);
             y = (index / 4) * (dqheight / 4);
             WriteLog.WriteLogFile(index + "", index + "x:" + x + ",y:" + y);
-            SetWindowPos(p, p2, x, y, yiquanw, yiquany, SWP_NOSIZE);
+            SetWindowPos(p, p2, x, y, yiquanw, yiquany, SWP_SHOWWINDOW);
         }
 
         public void myReSizeByWAndH(int index,int jubing,int width,int height,string dizhi = @"d:\ChangZhi\dnplayer2\")
@@ -530,9 +530,10 @@ namespace MyUtil
             WriteLog.WriteLogFile(dqinx + "", "获取IP,jubing:" + jubing + ",waicengjubing:" + waicengjubing);
             ip = "";
             bool t = false;
-            lock (obj)
+            string packagename = "package:com.ddm.iptools";
+            //lock (obj)
             {
-                t = MyFuncUtil.lureninstallOk(dqinx, "package:com.ddm.iptools", () =>
+                t = MyFuncUtil.lureninstallOk(dqinx, packagename, () =>
                 {
                     WriteLog.WriteLogFile(dqinx + "", "安装app没成功--iptools");
                     /*temp = myQuit(dqinx, dizhi);
@@ -559,7 +560,7 @@ namespace MyUtil
                         Thread.Sleep(20000);
                         return;
                     }*/
-                    Thread.Sleep(30000);
+                    Thread.Sleep(30*1000);
                 });
                 if (t == false)
                 {

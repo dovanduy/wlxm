@@ -281,7 +281,7 @@ namespace wlxm
             {
                 r = mf.bindWindow(jubing);
             }
-            mno.myBianWeiZhi(dqinx);
+            //mno.myBianWeiZhi(dqinx);
             JiuYouZhuCe yq = new JiuYouZhuCe(mf, dqinx, jubing);
             //string name = "";
             //int xuanqu = -1, dengji = -1;
@@ -290,8 +290,11 @@ namespace wlxm
             ZhangHao zhanghao = new ZhangHao();
             //zhanghao.updateIp(dqinx, "jiuyouzhuce", name, "121.25.36");
 
-            
-            
+            //apkName = myyouxi.Find(f => f.Youxiname == "九游注册").Apkname;
+            //YouXiFactory yxf = new YouXiFactory();
+            //int i = mno.QiDongWanChengGetZhiDingDian(dqin apkName, mf, jubing, yxf.CreateYouXiSanDian("jiuyouzhuce"), "注册-打开九游后第一界面");
+            bool boola = true;
+            zhanghao.saveipfirst(dqinx,"123ceshi",out boola);
             MyFuncUtil.mylogandxianshi("结束");
         }
 
@@ -312,7 +315,7 @@ namespace wlxm
             }
             else
             {
-                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
+                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9,};//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
             }
             string a_b = "d";
             string dizhi = null;
@@ -440,6 +443,7 @@ namespace wlxm
                  * */
 
                 var ks = MyFuncUtil.GetTimestamp();
+                var ks1 = MyFuncUtil.GetTimestamp();
                 Thread.Sleep(2000);
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "进入到循环当中，thread:" + Thread.CurrentThread.ManagedThreadId + ",jubing" + jubing);
                 Thread.Sleep(1000);               
@@ -463,6 +467,9 @@ namespace wlxm
                     jubing = -1;//句柄要重新取
                     waicengjubing = -1;
                 }
+                var js = MyFuncUtil.GetTimestamp();
+                WriteLog.WriteTeDingLog(dqinx + "", "模拟器" + dqinx + "打开耗时" + MyFuncUtil.SecondToHour(js - ks1));
+                ks1 = MyFuncUtil.GetTimestamp();
                 //开始改位置
                 mno.myBianWeiZhi(dqinx);
                 t = MyFuncUtil.lureninstallOk(dqinx, myyouxi.Find(f => f.Youxiname == "九游注册").Package, () =>
@@ -501,6 +508,9 @@ namespace wlxm
                     //jubing = -1;//句柄要重新取
                     //waicengjubing = -1;
                 });
+                js = MyFuncUtil.GetTimestamp();
+                WriteLog.WriteTeDingLog(dqinx + "", "模拟器" + dqinx + "安装app耗时" + MyFuncUtil.SecondToHour(js - ks1));
+                ks1 = MyFuncUtil.GetTimestamp();
                 if (chongqi == 1)
                 {
                     /*WriteLog.WriteLogFile(dqinx + "", "安装app没成功--九游注册");
@@ -558,11 +568,18 @@ namespace wlxm
                 }
                 string ip = "请稍候";
                 ZhangHao zhanghao = new ZhangHao();               
-                if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
+                //if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
                 {
                     mno.getIP(dqinx, dizhi, seed,jubing, waicengjubing, out ip);
                     if (ip != null && !"".Equals(ip) && ip.IndexOf("请") < 0 && !"1".Equals(ip))
                     {
+                        //保存当前ip 看看碰到几次
+                        bool yiyong = false;
+                        zhanghao.saveipfirst(dqinx, ip, out yiyong);
+                        if (yiyong) {
+                            WriteLog.WriteLogFile(dqinx + "", "ip:" + ip + "这个ip今天已经被用过");
+                            continue;
+                        }
                         t = zhanghao.panduanIpKeYong(dqinx, youxibaocun, ip);
                         if (t)
                         {
@@ -577,6 +594,9 @@ namespace wlxm
                         }
                     }
                 }
+                js = MyFuncUtil.GetTimestamp();
+                WriteLog.WriteTeDingLog(dqinx + "", "模拟器" + dqinx + "检测ip耗时" + MyFuncUtil.SecondToHour(js - ks1));
+                ks1 = MyFuncUtil.GetTimestamp();
                 string name = "";
                 //zhanghao.generateNameAndPas(dqinx, 7, out name, out pwd);
                 apkName = myyouxi.Find(f => f.Youxiname == "九游注册").Apkname;
@@ -587,7 +607,10 @@ namespace wlxm
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "打开app" + apkName + "失败");
                     Thread.Sleep(20000);
                     continue;
-                } 
+                }
+                js = MyFuncUtil.GetTimestamp();
+                WriteLog.WriteTeDingLog(dqinx + "", "模拟器" + dqinx + "启动app耗时" + MyFuncUtil.SecondToHour(js - ks1));
+                ks1 = MyFuncUtil.GetTimestamp();
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "开始尝试登录主线");
                 JiuYouZhuCe yq = new JiuYouZhuCe(dm, dqinx, jubing);
                 int xuanqu = -1, dengji = -1;
@@ -604,6 +627,9 @@ namespace wlxm
                 //yq.zhuxian_zhuceyong(name);
                 //yq.quitdq(name);
                 //Thread.Sleep(1000 * 60*60);//停住1小时
+                js = MyFuncUtil.GetTimestamp();
+                WriteLog.WriteTeDingLog(dqinx + "", "模拟器" + dqinx + "操作注册耗时" + MyFuncUtil.SecondToHour(js - ks1));
+                ks1 = MyFuncUtil.GetTimestamp();
                 //zhanghao.tuichusaveNameAndPas(name,dqinx, youxi,WriteLog.getMachineName(), -1, -1, -1);
                 cishu++;
                 // MyLdcmd.myReboot(dqinx);
@@ -619,7 +645,7 @@ namespace wlxm
                     continue;
                 }             
                 //zhanghao.zhiweidengluzhongN(dqinx, "yiquan", name, WriteLog.getMachineName());
-                var js = MyFuncUtil.GetTimestamp();
+                js = MyFuncUtil.GetTimestamp();
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环" + cishu + "次数");
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "循环1次耗时" + MyFuncUtil.SecondToHour(js - ks));
             }

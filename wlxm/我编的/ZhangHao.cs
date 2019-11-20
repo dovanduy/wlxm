@@ -497,6 +497,50 @@ namespace MyUtil
             return rs;
         }
 
+        public void saveipfirst(int dqinx, string ip,out bool yiyong)
+        {
+            SqlHelp sqh = SqlHelp.GetInstance();
+            DataTable dt = sqh.getAll("select shiyong from ipqk where rq='"
+
+                    + DateTime.Now.ToString("yyyy-MM-dd") + "'and ip='" + ip + "'");
+            yiyong = false;
+            if (dt.Rows.Count > 0)
+            {
+                yiyong = true;
+                int ox = (int)dt.Rows[0][0];
+                WriteLog.WriteLogFile(dqinx + "", "这个ip今天已经用过" + ip + "，" + ox + "次,又碰到了");
+                lock (obj)
+                {
+                    try
+                    {
+                        sqh.update("update ipqk set shiyong=" + (ox + 1) + " where ip='" + ip + "' and rq='" + DateTime.Now.ToString("yyyy-MM-dd") + "'");
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw ex;
+                    }
+                }
+            }
+            else
+            {
+                lock (obj)
+                {
+                    try
+                    {
+                        sqh.update("insert into ipqk (rq,pcname,ip,shiyong) values("+
+                        "'" + DateTime.Now.ToString("yyyy-MM-dd") + "','"
+                            + WriteLog.getMachineName() + "','" + ip + "',"+1+" )");
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw ex;
+                    }
+                }
+            }
+        }
+
         public void gxYunXingQk(string youxi)
         {
             //得到运行情况后存入表
