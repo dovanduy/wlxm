@@ -694,15 +694,19 @@ namespace fuzhu
                 {
                     if (shumima == 0)
                     {
-                        WriteLog.WriteLogFile(this._dqinx + "", d3.Name);
-                        mf.mytap_duokai(this._jubing, d3.Zhidingx, d3.Zhidingy);
-                        shumima = 1;
-                        //zhanghao.shuruqianhuitui(mf, this._dqinx, this._jubing);
-                        mf.mydelay(2000, 4000);
-                        mf.SendString(this._jubing, pwd);
-                        mf.mydelay(2000, 4000);
-                        mf.mytap_duokai(this._jubing, 267, 508);
-                        mf.mydelay(2000, 4000);
+                        d3 = youf.CreateYouXiSanDian(apknamebaocun).findFuHeSandianByName("特殊注册-输入密码2");
+                        if (mf.mohuByLeiBool_duokai(d3.Sd))
+                        {
+                            WriteLog.WriteLogFile(this._dqinx + "", d3.Name);
+                            mf.mytap_duokai(this._jubing, d3.Zhidingx, d3.Zhidingy);
+                            shumima = 1;
+                            //zhanghao.shuruqianhuitui(mf, this._dqinx, this._jubing);
+                            mf.mydelay(2000, 4000);
+                            mf.SendString(this._jubing, pwd);
+                            mf.mydelay(2000, 4000);
+                            mf.mytap_duokai(this._jubing, 267, 508);
+                            mf.mydelay(2000, 4000);
+                        }
                     }
                 }
                 d3 = youf.CreateYouXiSanDian(apknamebaocun).findFuHeSandianByName("特殊注册-输入完密码");

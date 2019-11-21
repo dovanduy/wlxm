@@ -96,6 +96,15 @@ namespace fuzhu
             _list_yqfhsandian.Add(guanbifhx);
 
             guanbisdx = new SanDian(new int[3, 3] {
+	{  129,  514, 0xfb8f16},
+	{   53,  724, 0x3bd7bb},
+	{   57,  880, 0x42dabf},
+});
+            guanbifhx = new FuHeSanDian("注册-错碰后先关", guanbisdx, 178, 601);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
 	{  396,  370, 0x3b87fe},
 	{  503,  902, 0xf74c31},
 	{  485,  922, 0xcccccc},
@@ -182,6 +191,15 @@ namespace fuzhu
 	{  108,  431, 0x86868c},
 });
             guanbifhx = new FuHeSanDian("特殊注册-输入密码", guanbisdx, 322, 432);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
+	{  108,  432, 0x86868c},
+	{  112,  421, 0x75757a},
+	{  101,  423, 0x76767b},
+});
+            guanbifhx = new FuHeSanDian("特殊注册-输入密码2", guanbisdx, -1, -1,"监控小锁");
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 
