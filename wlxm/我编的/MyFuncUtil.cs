@@ -379,25 +379,31 @@ namespace MyUtil
             //隔30秒检测是否安装成功
             long ksjs = MyFuncUtil.GetTimestamp();
             long ks = MyFuncUtil.GetTimestamp();
+            long ks2 = MyFuncUtil.GetTimestamp();
             bool luren = false;
             int yici = 0;
+            int zhuang = 0;
             while (true)
             {
                 if (yici == 0) {
                     yici = 1;
                     WriteLog.WriteLogFile(dqinx + "", "开头要检测安装一次" + apppackage);
                     luren = MyLdcmd.jingjieisok(dqinx, apppackage);
+                    if (!luren) {
+                        WriteLog.WriteLogFile(dqinx + "", "开头不成功,安装一次" + apppackage);
+                        myinstall();
+                    }
                 }
                 long js = MyFuncUtil.GetTimestamp();
                 if ((js - ks) > 30 * 1000)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "30s检测安装一次"+ apppackage);
                     luren = MyLdcmd.jingjieisok(dqinx, apppackage);
                     ks = MyFuncUtil.GetTimestamp();
+                    WriteLog.WriteLogFile(dqinx + "", "30s检测安装一次" + apppackage+"检测结果:"+luren);
                 }
-                if ((js - ksjs) > 10 * 60 * 1000)
+                if ((js - ksjs) >  4* 60 * 1000)
                 {
-                    WriteLog.WriteLogFile(dqinx + "", "10分钟了,安装app没成功"+ apppackage);
+                    WriteLog.WriteLogFile(dqinx + "", "4分钟了,安装app没成功"+ apppackage);
                     break;
                 }
                 if (luren)
@@ -406,10 +412,12 @@ namespace MyUtil
                     t = true;
                     break;
                 }
-                if (!luren)
+                if (zhuang<2 && !luren && (js - ks2) > 60* 1000 )
                 {
                     WriteLog.WriteLogFile(dqinx + "", "准备安装app，restore或者install");
                     myinstall();
+                    ks2 = MyFuncUtil.GetTimestamp();
+                    zhuang++;
                 }
             }
             return t;

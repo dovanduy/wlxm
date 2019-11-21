@@ -525,7 +525,7 @@ namespace MyUtil
             return rt;
         }
 
-        public void getIP(int dqinx, string dizhi, string seed, int jubing, int waicengjubing, out string ip)
+        public void getIP(int dqinx, string dizhi, string seed,int jubing, int waicengjubing, out string ip)
         {
             WriteLog.WriteLogFile(dqinx + "", "获取IP,jubing:" + jubing + ",waicengjubing:" + waicengjubing);
             ip = "";
@@ -560,11 +560,13 @@ namespace MyUtil
                         Thread.Sleep(20000);
                         return;
                     }*/
-                    Thread.Sleep(30*1000);
+                    Thread.Sleep(3000);
                 });
                 if (t == false)
                 {
+                    
                     return;
+                    
                 }
                 //窗口已打开 获取句柄
                 if (jubing <= 0)
