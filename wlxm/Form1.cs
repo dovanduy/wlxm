@@ -293,9 +293,10 @@ namespace wlxm
             //apkName = myyouxi.Find(f => f.Youxiname == "九游注册").Apkname;
             //YouXiFactory yxf = new YouXiFactory();
             //int i = mno.QiDongWanChengGetZhiDingDian(dqin apkName, mf, jubing, yxf.CreateYouXiSanDian("jiuyouzhuce"), "注册-打开九游后第一界面");
-            BaiDuShiTu bdt = new BaiDuShiTu();
-            int getyzm = bdt.qushufrombaidu(mf, dqinx, jubing, 148, 378, 407, 428);
-            MyFuncUtil.mylogandxianshi("结束"+getyzm);
+            //BaiDuShiTu bdt = new BaiDuShiTu();
+            //int getyzm = bdt.qushufrombaidu(mf, dqinx, jubing, 148, 378, 407, 428);
+            tmpBool = MyLdcmd.jingjieisok(dqinx, "package:com.ddm.iptools");
+            MyFuncUtil.mylogandxianshi("结束" + tmpBool);
         }
 
         private void lrzh_Click(object sender, EventArgs e)
@@ -315,7 +316,7 @@ namespace wlxm
             }
             else
             {
-                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9,};//,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
+                yunxingIndex = new int[] { 1, };// 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
             }
             string a_b = "d";
             string dizhi = null;
@@ -547,7 +548,40 @@ namespace wlxm
                     jubing = -1;//句柄要重新取
                     waicengjubing = -1;*/
                     //continue;
-                }                
+                }
+                string ip = "请稍候";
+                ZhangHao zhanghao = new ZhangHao();
+                //if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
+                {
+                    mno.getIP(dqinx, dizhi, seed, jubing, waicengjubing, out ip);
+                    if (ip != null && !"".Equals(ip) && ip.IndexOf("请") < 0 && !"1".Equals(ip))
+                    {
+                        //保存当前ip 看看碰到几次
+                        bool yiyong = false;
+                        zhanghao.saveipfirst(dqinx, ip, out yiyong);
+                        if (yiyong)
+                        {
+                            WriteLog.WriteLogFile(dqinx + "", "ip:" + ip + "这个ip今天已经被用过");
+                            continue;
+                        }
+                        t = zhanghao.panduanIpKeYong(dqinx, youxibaocun, ip);
+                        if (t)
+                        {
+                            WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "ip已被占");
+                            //MyLdcmd.myReboot(dqinx);
+                            temp = mno.myQuit(dqinx, dizhi);
+                            Thread.Sleep(1000 * 60 * 4);
+                            ipbeizhan++;
+                            jubing = -1;//句柄要重新取
+                            waicengjubing = -1;
+                            continue;
+                        }
+                    }
+                }
+                js = MyFuncUtil.GetTimestamp();
+                WriteLog.WriteTeDingLog(dqinx + "", "模拟器" + dqinx + "检测ip耗时" + MyFuncUtil.SecondToHour(js - ks1));
+                ks1 = MyFuncUtil.GetTimestamp();
+
                 //窗口已打开 获取句柄
                 if (jubing <= 0)
                 {
@@ -566,37 +600,7 @@ namespace wlxm
                     Thread.Sleep(20000);
                     continue;
                 }
-                string ip = "请稍候";
-                ZhangHao zhanghao = new ZhangHao();               
-                //if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
-                {
-                    mno.getIP(dqinx, dizhi, seed,jubing, waicengjubing, out ip);
-                    if (ip != null && !"".Equals(ip) && ip.IndexOf("请") < 0 && !"1".Equals(ip))
-                    {
-                        //保存当前ip 看看碰到几次
-                        bool yiyong = false;
-                        zhanghao.saveipfirst(dqinx, ip, out yiyong);
-                        if (yiyong) {
-                            WriteLog.WriteLogFile(dqinx + "", "ip:" + ip + "这个ip今天已经被用过");
-                            continue;
-                        }
-                        t = zhanghao.panduanIpKeYong(dqinx, youxibaocun, ip);
-                        if (t)
-                        {
-                            WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "ip已被占");
-                            //MyLdcmd.myReboot(dqinx);
-                            temp = mno.myQuit(dqinx, dizhi);                             
-                            Thread.Sleep(1000 * 60 * 4);
-                            ipbeizhan++;
-                            jubing = -1;//句柄要重新取
-                            waicengjubing = -1;
-                            continue;
-                        }
-                    }
-                }
-                js = MyFuncUtil.GetTimestamp();
-                WriteLog.WriteTeDingLog(dqinx + "", "模拟器" + dqinx + "检测ip耗时" + MyFuncUtil.SecondToHour(js - ks1));
-                ks1 = MyFuncUtil.GetTimestamp();
+                
                 string name = "";
                 //zhanghao.generateNameAndPas(dqinx, 7, out name, out pwd);
                 apkName = myyouxi.Find(f => f.Youxiname == "九游注册").Apkname;
