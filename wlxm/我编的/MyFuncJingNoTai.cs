@@ -591,7 +591,7 @@ namespace MyUtil
                     Thread.Sleep(20000);
                     return;
                 }
-                dm.SetClipboard("请");
+                //dm.SetClipboard("请");
                 //apkName = dict["IPtool"];
                 string apkName = "com.ddm.iptools/com.ddm.iptools.ui.MainActivity";
                 //int i = MyFuncUtil.QiDongWanChengLurenzhanghao("d", dqinx, apkName);
@@ -604,7 +604,7 @@ namespace MyUtil
                     return;
                 } 
                 string yiqu = "";                
-                bool t2 = PanDuan_QidongByYiQuDian_IP(dqinx, 1000 * 60*5, dm, jubing, out yiqu);
+                bool t2 = PanDuan_QidongByYiQuDian_IP(dqinx, 1000 * 60, dm, jubing, out yiqu);
                 if (t2)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器发现已取点" + yiqu);

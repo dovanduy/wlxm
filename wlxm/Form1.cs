@@ -295,8 +295,9 @@ namespace wlxm
             //int i = mno.QiDongWanChengGetZhiDingDian(dqin apkName, mf, jubing, yxf.CreateYouXiSanDian("jiuyouzhuce"), "注册-打开九游后第一界面");
             //BaiDuShiTu bdt = new BaiDuShiTu();
             //int getyzm = bdt.qushufrombaidu(mf, dqinx, jubing, 148, 378, 407, 428);
-            tmpBool = MyLdcmd.jingjieisok(dqinx, "package:com.ddm.iptools");
-            MyFuncUtil.mylogandxianshi("结束" + tmpBool);
+            string yiqu = "";
+            bool t2 = mno.PanDuan_QidongByYiQuDian_IP(dqinx, 1000 * 60 * 5, mf, jubing, out yiqu);
+            MyFuncUtil.mylogandxianshi("结束" + yiqu);
         }
 
         private void lrzh_Click(object sender, EventArgs e)
