@@ -633,11 +633,11 @@ namespace wlxm
                 WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "开始尝试登录主线");
                 JiuYouZhuCe yq = new JiuYouZhuCe(dm, dqinx, jubing);
                 int xuanqu = -1, dengji = -1;
-                tmpBool = yq.zhuce(youxibaocun,10, out dengji, out xuanqu, ref name);
+                tmpBool = yq.zhuce(youxibaocun,4, out dengji, out xuanqu, ref name);
                 if (!tmpBool)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "注册环节出错");
-                    Thread.Sleep(1000 * 60 * 3);
+                    Thread.Sleep(1000 * 2);
                     chongqi = 1;
                     continue;
                 }

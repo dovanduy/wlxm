@@ -40,6 +40,7 @@ namespace wlxm
         {
             WriteLog.WriteErrorFile("","IsTerminating : " + e.IsTerminating.ToString());
             WriteLog.WriteErrorFile("",e.ExceptionObject.ToString());
+            Application.Exit();
             while (true)
             {//循环处理，否则应用程序将会退出
                 if (glExitApp)
@@ -61,7 +62,7 @@ namespace wlxm
             WriteLog.WriteErrorFile("","调用堆栈：\n" + e.Exception.StackTrace.Trim());
             WriteLog.WriteErrorFile("","触发方法：" + e.Exception.TargetSite);
             WriteLog.WriteErrorFile("",e.Exception.ToString());
-            CmdStartCTIProc(Application.ExecutablePath, "cmd params");//放到捕获事件的处理代码后，重启程序，需要时加上重启的参数
+            //CmdStartCTIProc(Application.ExecutablePath, "cmd params");//放到捕获事件的处理代码后，重启程序，需要时加上重启的参数
             //throw new NotImplementedException();
         }
 
