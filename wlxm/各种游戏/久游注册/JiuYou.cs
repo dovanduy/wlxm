@@ -742,7 +742,7 @@ namespace fuzhu
                     //WriteLog.WriteLogFile(this._dqinx + "", d3.Name+"退出本次程序");
                    // break;
                     BaiDuShiTu bdt = new BaiDuShiTu();
-                    string getyzm = bdt.quwenzifromyanzhengma(mf, this._dqinx, this._jubing, "X6006", 0, 0, 539, 483);
+                    string getyzm = bdt.quwenzifromyanzhengma(mf, this._dqinx, this._jubing, "X6006", 75, 209, 539, 483);
                     string[] zbshuzu = getyzm.Split('|');
                     if (zbshuzu != null && zbshuzu.Length > 0)
                     {
@@ -751,7 +751,7 @@ namespace fuzhu
                             string[] zba = zb.Split(',');
                             if (zba != null && zba.Length == 2)
                             {
-                                mf.mytap_duokai(this._jubing, int.Parse(zba[0]), int.Parse(zba[1]));
+                                mf.mytap_duokai(this._jubing, int.Parse(zba[0])+75, int.Parse(zba[1])+209);
                                 mf.mydelay(1000, 2000);
                             }
                         }

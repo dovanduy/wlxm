@@ -295,9 +295,23 @@ namespace wlxm
             //int i = mno.QiDongWanChengGetZhiDingDian(dqin apkName, mf, jubing, yxf.CreateYouXiSanDian("jiuyouzhuce"), "注册-打开九游后第一界面");
             //BaiDuShiTu bdt = new BaiDuShiTu();
             //int getyzm = bdt.qushufrombaidu(mf, dqinx, jubing, 148, 378, 407, 428);
-            string yiqu = "";
-            bool t2 = mno.PanDuan_QidongByYiQuDian_IP(dqinx, 1000 * 60 * 5, mf, jubing, out yiqu);
-            MyFuncUtil.mylogandxianshi("结束" + yiqu);
+            
+            BaiDuShiTu bdt = new BaiDuShiTu();
+            string getyzm = bdt.quwenzifromyanzhengma(mf, dqinx, jubing, "X6006", 75, 209, 539, 483);
+            string[] zbshuzu = getyzm.Split('|');
+            if (zbshuzu != null && zbshuzu.Length > 0)
+            {
+                foreach (string zb in zbshuzu)
+                {
+                    string[] zba = zb.Split(',');
+                    if (zba != null && zba.Length == 2)
+                    {
+                        mf.mytap_duokai(jubing, int.Parse(zba[0]) + 75, int.Parse(zba[1]) + 209);
+                        mf.mydelay(1000, 2000);
+                    }
+                }
+            }
+            MyFuncUtil.mylogandxianshi("结束");
         }
 
         private void lrzh_Click(object sender, EventArgs e)
