@@ -316,7 +316,7 @@ namespace wlxm
             }
             else
             {
-                yunxingIndex = new int[] { 1, };// 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
+                yunxingIndex = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, };// 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
             }
             string a_b = "d";
             string dizhi = null;

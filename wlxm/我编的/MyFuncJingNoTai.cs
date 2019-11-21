@@ -564,8 +564,12 @@ namespace MyUtil
                 });
                 if (t == false)
                 {
-                    
-                    return;
+                    Thread.Sleep(1000*60*2);
+                    bool luren = MyLdcmd.jingjieisok(dqinx, packagename);
+                    if (!luren)
+                    {
+                        return;
+                    }
                     
                 }
                 //窗口已打开 获取句柄

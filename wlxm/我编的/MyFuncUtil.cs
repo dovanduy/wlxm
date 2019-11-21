@@ -412,7 +412,7 @@ namespace MyUtil
                     t = true;
                     break;
                 }
-                if (zhuang<2 && !luren && (js - ks2) > 60* 1000 )
+                if (zhuang<1 && !luren && (js - ks2) > 60* 1000 )
                 {
                     WriteLog.WriteLogFile(dqinx + "", "准备安装app，restore或者install");
                     myinstall();
