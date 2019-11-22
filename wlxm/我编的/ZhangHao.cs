@@ -540,8 +540,11 @@ namespace MyUtil
                 }
             }
         }
-
-        public void gxYunXingQk(string youxi)
+        /// <summary>
+        /// 更新运行情况表
+        /// </summary>
+        /// <param name="youxi"></param>
+        public void gxYunXingQk()
         {
             //得到运行情况后存入表
             WriteLog.WriteLogFile("", "得到运行情况后存入表");
@@ -564,7 +567,7 @@ namespace MyUtil
                         "sum(case when z.zuanshi>3000  then 1 else 0 end)  zuanshidayu3000,"+
                         "sum(case when z.qiangzhequan>0  then 1 else 0 end)  qiangzhedayu0,"+
                         "sum(case when z.xgsj>=convert(varchar(10),getdate(),120) then 1 else 0 end)  zxiugai" +
-                        " from zhanghao z where youxi='"+youxi+"'";
+                        " from zhanghao z";
 
                     DataTable dt = sqh.getAll(selsql);
                     int a = dt.Rows.Count;
@@ -610,6 +613,58 @@ namespace MyUtil
                 }
             }
         }
+        /// <summary>
+        /// 得到运行情况
+        /// </summary>
+        /// <param name="youxi"></param>
+        public List<YunXingQK> getYunXingQk()
+        {
+            //得到运行情况后存入表
+            WriteLog.WriteLogFile("", "得到运行情况后显示在前台");
+            SqlHelp sqh = SqlHelp.GetInstance();
+            List<YunXingQK> rs = new List<YunXingQK>();
+            try
+            {
+                string selsql = "select top 10 a.* from yunxingqk a order by a.xh desc";
+                DataTable dt = sqh.getAll(selsql);
+                int a = dt.Rows.Count;
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++) {
+                        YunXingQK jqqk = new YunXingQK();
+                        jqqk.Xh = (int)dt.Rows[i][0];
+                        Dictionary<string, JiQiYunXing> dict = new Dictionary<string, JiQiYunXing>();
+                        JiQiYunXing jq1 = new JiQiYunXing();
+                        jqqk.Zongxiugai = (int)dt.Rows[i][1];
+                        jq1.Chuchan = (int)dt.Rows[i][2];
+                        dict.Add("hao1", jq1);
+                        JiQiYunXing jq2 = new JiQiYunXing();
+                        jq2.Xiugai = (int)dt.Rows[i][3];
+                        jq2.Chuchan = (int)dt.Rows[i][4];
+                        dict.Add("hao2", jq2);
+                        JiQiYunXing jq3 = new JiQiYunXing();
+                        jq3.Xiugai = (int)dt.Rows[i][5];
+                        jq3.Chuchan = (int)dt.Rows[i][6];
+                        dict.Add("hao3", jq3);
+                        JiQiYunXing zk = new JiQiYunXing();
+                        zk.Xiugai = (int)dt.Rows[i][7];
+                        zk.Chuchan = (int)dt.Rows[i][8];
+                        dict.Add("zk", zk);
+                        jqqk.Jqyx = dict;
+                        jqqk.Xgsj = (DateTime)dt.Rows[i][13];                        
+                        rs.Add(jqqk);
+                    } 
+                }                
+            }
+            catch (Exception ex)
+            {
+                WriteLog.WriteLogFile("", "得到运行情况失败");
+                throw ex;
+            }
+            return rs;
+            
+        }
+        
 
         public DateTime getYunXingQkLasttime()
         {

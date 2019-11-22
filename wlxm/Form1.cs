@@ -62,6 +62,8 @@ namespace wlxm
         private Thread thread;
         private delegate void changeText(string result);
         private delegate void getduokaiqi();
+        //更新运行情况
+        private delegate void gengxinweituo(List<YunXingQK> rs);
 
         private Thread zidongthread;
         /// <summary>
@@ -147,10 +149,30 @@ namespace wlxm
                 this.label1.Text = myy.Version.ToString();
                 this.label17.Text = myy.Zidong;
             }
-            //ZhangHao zh = new ZhangHao();
+            
             //List<ZhangHaoEntity> myzhanghaolist=zh.getZhangHaoList("yiquan");
             //this.dataGridView1.DataSource = myzhanghaolist;
+
+            //搞运行情况 显示在tab2
+            
         }
+
+        private void gengxinyunxing1() {
+            ZhangHao zh = new ZhangHao();
+            List<YunXingQK> dqyunxing = zh.getYunXingQk();
+            if (dqyunxing != null && dqyunxing.Count > 0)
+            {
+                foreach (YunXingQK one in dqyunxing) {
+                    int index = this.dataGridView1.Rows.Add();
+                    this.dataGridView1.Rows[index].Cells[0].Value = one.Zongxiugai;
+                    this.dataGridView1.Rows[index].Cells[1].Value = one.Jqyx["hao1"].Xiugai;
+                    this.dataGridView1.Rows[index].Cells[2].Value = one.Jqyx["hao2"].Xiugai;
+                    this.dataGridView1.Rows[index].Cells[3].Value = one.Jqyx["hao3"].Xiugai;
+                    this.dataGridView1.Rows[index].Cells[4].Value = one.Xgsj;
+                }
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -162,10 +184,12 @@ namespace wlxm
 
         private void foo()
         {
-
             var ks = MyFuncUtil.GetTimestamp();
             var ks_gxyunxing = MyFuncUtil.GetTimestamp();
             var ks_cqyunxing = MyFuncUtil.GetTimestamp();
+            var ks_shhuozhe = MyFuncUtil.GetTimestamp();
+            var ks_gengxinqk = MyFuncUtil.GetTimestamp();
+            int gengxinqk = 0;
             var i = 1;
             var yici = 0;
             string zidong = "";            
@@ -174,7 +198,7 @@ namespace wlxm
                 Thread.Sleep(1000);
                 var js = MyFuncUtil.GetTimestamp();
                 i++;
-                int daojishi = 60*3;
+                int daojishi = 60*2;
                 //MyFuncUtil.SecondToHour(+i + (js - ks) / 1000+" "
                 CalcFinished("程序已运行:" + MyFuncUtil.SecondToHour(js - ks) + zidong);
                 this.label2.ForeColor = Color.Red;
@@ -216,7 +240,7 @@ namespace wlxm
                     if (span.Hours >= 1)
                     {
                         //WriteLog.WriteLogFile("", "与上次统计相比,间隔 " + span.Minutes + "分钟");
-                        zh.gxYunXingQk("yiquan");
+                        zh.gxYunXingQk();
                     }
                 }
 
@@ -228,9 +252,54 @@ namespace wlxm
                     bool t = zh.panDuanChongQi(WriteLog.getMachineName());
                     if (t)
                     {
-                        WriteLog.WriteLogFile("", "当前需要重启" + DateTime.Now);
+                        WriteLog.WriteErrorFile("", "当前需要重启" + DateTime.Now);
                         //myDm dm = new myDm();
                         //dm.ExitOs(2);
+                        Application.Exit();
+                    }
+                }
+
+                //定时查看wlsh是否开着
+                if ((js - ks_shhuozhe) > 1000 * 60 * 20) {
+
+                    bool t = false;
+                    string appname = "wlsh";
+                    int a = 0;
+                    Process[] processes = Process.GetProcessesByName(appname);
+                    foreach (Process process in processes)
+                    {
+                        if (a == 0 && process.ProcessName == appname)
+                        {
+                            t = true;
+                            a = 1;
+                            break;
+                        }
+                    }
+                    if (!t)
+                    {
+                        string appNamec = @"C:\Sh_setup\wlsh.exe";
+                        if (System.IO.File.Exists(@"C:\Sh_setup\wlsh.exe"))
+                        {
+                            WriteLog.WriteLogFile("","wlsh找到文件位置");
+                            Process p = new Process();
+                            p.StartInfo.FileName = appNamec;
+                            //启动程序
+                            p.Start();
+                            WriteLog.WriteLogFile("","结束打开wlsh");
+                        }
+
+                    }
+                    ks_shhuozhe = MyFuncUtil.GetTimestamp();
+                }
+
+                if ((gengxinqk==0 && (js - ks_gengxinqk) > 1000 )||(js - ks_gengxinqk) > 1000 * 60*65)
+                {
+                    gengxinqk = 1;
+                    ZhangHao zh = new ZhangHao();
+                    List<YunXingQK> dqyunxing = zh.getYunXingQk();
+                    if (dqyunxing != null && dqyunxing.Count > 0)
+                    {
+                        gengxinyunxingweituo(dqyunxing);
                     }
                 }
             }
@@ -248,6 +317,52 @@ namespace wlxm
             else
             {
                 this.label2.Text = result.ToString();
+            }
+        }
+
+        private void gengxinyunxingweituo(List<YunXingQK> rs)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new gengxinweituo(gengxinyunxingweituo), rs);
+            }
+            else
+            {
+                int chayijia = 0;
+                foreach (YunXingQK one in rs){
+                    int xiaoshichanchu1 = 0, xiaoshichanchu2 = 0, xiaoshichanchu3 = 0, xiaoshichanchu4 = 0, xiaoshichanchu5 = 0;
+                    if(chayijia+1<rs.Count){
+                        xiaoshichanchu1= rs[chayijia].Zongxiugai - rs[chayijia+1].Zongxiugai;
+                        xiaoshichanchu2 = rs[chayijia].Jqyx["zk"].Xiugai - rs[chayijia+1].Jqyx["zk"].Xiugai;
+                        xiaoshichanchu3 = rs[chayijia].Jqyx["hao1"].Xiugai - rs[chayijia+1].Jqyx["hao1"].Xiugai;
+                        xiaoshichanchu4 = rs[chayijia].Jqyx["hao2"].Xiugai - rs[chayijia+1].Jqyx["hao2"].Xiugai;
+                        xiaoshichanchu5 = rs[chayijia].Jqyx["hao2"].Xiugai - rs[chayijia+1].Jqyx["hao3"].Xiugai;
+                    }                    
+                    int index = this.dataGridView1.Rows.Add();                    
+                    this.dataGridView1.Rows[index].Cells[2].Value = xiaoshichanchu1;
+                    this.dataGridView1.Rows[index].Cells[2].Style.ForeColor = Color.Red;
+                    this.dataGridView1.Rows[index].Cells[2].Style.Font= new Font("微软雅黑", 16, FontStyle.Bold);
+                    this.dataGridView1.Rows[index].Cells[3].Value = xiaoshichanchu2;
+                    this.dataGridView1.Rows[index].Cells[3].Style.ForeColor = Color.Red;
+                    this.dataGridView1.Rows[index].Cells[3].Style.Font = new Font("微软雅黑", 16, FontStyle.Bold);
+                    this.dataGridView1.Rows[index].Cells[4].Value = xiaoshichanchu3;
+                    this.dataGridView1.Rows[index].Cells[4].Style.ForeColor = Color.Red;
+                    this.dataGridView1.Rows[index].Cells[4].Style.Font = new Font("微软雅黑", 16, FontStyle.Bold);
+                    this.dataGridView1.Rows[index].Cells[5].Value = xiaoshichanchu4;
+                    this.dataGridView1.Rows[index].Cells[5].Style.ForeColor = Color.Red;
+                    this.dataGridView1.Rows[index].Cells[5].Style.Font = new Font("微软雅黑", 16, FontStyle.Bold);
+                    this.dataGridView1.Rows[index].Cells[6].Value = xiaoshichanchu5;
+                    this.dataGridView1.Rows[index].Cells[6].Style.ForeColor = Color.Red;
+                    this.dataGridView1.Rows[index].Cells[6].Style.Font = new Font("微软雅黑", 16, FontStyle.Bold);
+                    this.dataGridView1.Rows[index].Cells[7].Value = one.Zongxiugai;
+                    this.dataGridView1.Rows[index].Cells[8].Value = one.Jqyx["zk"].Xiugai;
+                    this.dataGridView1.Rows[index].Cells[9].Value = one.Jqyx["hao1"].Xiugai;
+                    this.dataGridView1.Rows[index].Cells[10].Value = one.Jqyx["hao2"].Xiugai;
+                    this.dataGridView1.Rows[index].Cells[11].Value = one.Jqyx["hao3"].Xiugai;
+                    this.dataGridView1.Rows[index].Cells[1].Value = one.Xgsj;
+                    this.dataGridView1.Rows[index].Cells[0].Value = one.Xh;
+                    chayijia++;
+                }
             }
         }
 
@@ -568,7 +683,7 @@ namespace wlxm
                 ZhangHao zhanghao = new ZhangHao();
                 //if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
                 {
-                    mno.getIP(dqinx, dizhi, seed, jubing, waicengjubing, out ip);
+                    //mno.getIP(dqinx, dizhi, seed, jubing, waicengjubing, out ip);
                     if (ip != null && !"".Equals(ip) && ip.IndexOf("请") < 0 && !"1".Equals(ip))
                     {
                         //保存当前ip 看看碰到几次
@@ -1338,6 +1453,16 @@ namespace wlxm
             if (myy != null) {
                 this.label1.Text = myy.Version.ToString();
                 this.label17.Text = myy.Zidong;
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ZhangHao zh = new ZhangHao();
+            List<YunXingQK> dqyunxing = zh.getYunXingQk();
+            if (dqyunxing != null && dqyunxing.Count > 0)
+            {
+                gengxinyunxingweituo(dqyunxing);
             }
         }
 
