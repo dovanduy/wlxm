@@ -336,7 +336,7 @@ namespace wlxm
                         xiaoshichanchu2 = rs[chayijia].Jqyx["zk"].Xiugai - rs[chayijia+1].Jqyx["zk"].Xiugai;
                         xiaoshichanchu3 = rs[chayijia].Jqyx["hao1"].Xiugai - rs[chayijia+1].Jqyx["hao1"].Xiugai;
                         xiaoshichanchu4 = rs[chayijia].Jqyx["hao2"].Xiugai - rs[chayijia+1].Jqyx["hao2"].Xiugai;
-                        xiaoshichanchu5 = rs[chayijia].Jqyx["hao2"].Xiugai - rs[chayijia+1].Jqyx["hao3"].Xiugai;
+                        xiaoshichanchu5 = rs[chayijia].Jqyx["hao3"].Xiugai - rs[chayijia+1].Jqyx["hao3"].Xiugai;
                     }                    
                     int index = this.dataGridView1.Rows.Add();                    
                     this.dataGridView1.Rows[index].Cells[2].Value = xiaoshichanchu1;
