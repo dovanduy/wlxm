@@ -107,7 +107,7 @@ namespace wlxm
             dict.Add("境界", "com.wk.jingjie.ewan/cn.ewan.supersdk.activity.SplashActivity");
             dict.Add("境界官方","com.ourpalm.bleach.gw/com.ourpalm.gamesdk.MainActivity");
             dict.Add("IPtool", "com.ddm.iptools/com.ddm.iptools.ui.MainActivity");
-            this.label3.Text = "当前游戏:" + fuzhuyouxi;
+            this.label3.Text = "机器名字:"+WriteLog.getMachineName()+"，当前游戏:" + fuzhuyouxi;
             this.label3.ForeColor = Color.Red;
             string a_b = "";
             if (WriteLog.getMachineName().ToLower().Equals("wlzhongkong"))
@@ -292,7 +292,7 @@ namespace wlxm
                     ks_shhuozhe = MyFuncUtil.GetTimestamp();
                 }
 
-                if ((gengxinqk==0 && (js - ks_gengxinqk) > 1000 )||(js - ks_gengxinqk) > 1000 * 60*65)
+                if ((gengxinqk==0 && (js - ks_gengxinqk) > 1000*20 )||(js - ks_gengxinqk) > 1000 * 60*65)
                 {
                     gengxinqk = 1;
                     ZhangHao zh = new ZhangHao();
@@ -328,13 +328,14 @@ namespace wlxm
             }
             else
             {
+                this.dataGridView1.Rows.Clear();
                 int chayijia = 0;
                 foreach (YunXingQK one in rs){
                     int xiaoshichanchu1 = 0, xiaoshichanchu2 = 0, xiaoshichanchu3 = 0, xiaoshichanchu4 = 0, xiaoshichanchu5 = 0;
                     if(chayijia+1<rs.Count){
                         xiaoshichanchu1= rs[chayijia].Zongxiugai - rs[chayijia+1].Zongxiugai;
                         xiaoshichanchu2 = rs[chayijia].Jqyx["zk"].Xiugai - rs[chayijia+1].Jqyx["zk"].Xiugai;
-                        xiaoshichanchu3 = rs[chayijia].Jqyx["hao1"].Xiugai - rs[chayijia+1].Jqyx["hao1"].Xiugai;
+                        xiaoshichanchu3 = rs[chayijia].Jqyx["hao1"].Chuchan - rs[chayijia + 1].Jqyx["hao1"].Chuchan;
                         xiaoshichanchu4 = rs[chayijia].Jqyx["hao2"].Xiugai - rs[chayijia+1].Jqyx["hao2"].Xiugai;
                         xiaoshichanchu5 = rs[chayijia].Jqyx["hao3"].Xiugai - rs[chayijia+1].Jqyx["hao3"].Xiugai;
                     }                    
@@ -356,7 +357,7 @@ namespace wlxm
                     this.dataGridView1.Rows[index].Cells[6].Style.Font = new Font("微软雅黑", 16, FontStyle.Bold);
                     this.dataGridView1.Rows[index].Cells[7].Value = one.Zongxiugai;
                     this.dataGridView1.Rows[index].Cells[8].Value = one.Jqyx["zk"].Xiugai;
-                    this.dataGridView1.Rows[index].Cells[9].Value = one.Jqyx["hao1"].Xiugai;
+                    this.dataGridView1.Rows[index].Cells[9].Value = one.Jqyx["hao1"].Chuchan;
                     this.dataGridView1.Rows[index].Cells[10].Value = one.Jqyx["hao2"].Xiugai;
                     this.dataGridView1.Rows[index].Cells[11].Value = one.Jqyx["hao3"].Xiugai;
                     this.dataGridView1.Rows[index].Cells[1].Value = one.Xgsj;

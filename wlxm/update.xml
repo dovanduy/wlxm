@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Update>
   <Soft Name="ExceTransforCsv">
-    <Verson>1.0.4.13</Verson>
+    <Verson>1.0.4.15</Verson>
     <DownLoad>http://192.168.4.44/Debug.rar</DownLoad>
   </Soft>
 </Update>
