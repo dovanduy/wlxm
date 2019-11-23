@@ -109,7 +109,7 @@ namespace MyUtil
                 mf.myKeyPressChar(jubing, "back");
                 mf.mydelay(2, 5);
             }            
-            mf.mydelay(800, 1600);
+            mf.mydelay(800,1200);
         }
 
         public void shuruchar(myDm mf, int dqinx, int jubing, string str)

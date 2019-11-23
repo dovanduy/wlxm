@@ -81,7 +81,7 @@ namespace MyUtil
             mf.captureBmpFeiXianDing(jubing, @"d:\mypic_save\", filename, x1, y1, x2, y2);
             if (mf.IsFileExist(@"d:\mypic_save\" + filename) == 1)
             {
-                WriteLog.WriteLogFile(dqinx + "", "截图保存成功,再取文字");
+                WriteLog.WriteLogFile(dqinx + "", "截图保存成功,再取文字" + filename);
                 string r = wenzishibie(dqinx, @"d:\mypic_save\" + filename);
                 if (r != null && r != "")
                 {
@@ -180,7 +180,7 @@ namespace MyUtil
             mf.captureBmpFeiXianDing(jubing, @"d:\mypic_save\", filename, x1, y1, x2, y2);
             if (mf.IsFileExist(@"d:\mypic_save\" + filename) == 1)
             {
-                WriteLog.WriteLogFile(dqinx + "", "截图保存成功,再取验证码");
+                WriteLog.WriteLogFile(dqinx + "", "截图保存成功,再取验证码" + filename);
                 YanZhengMa yzm = new YanZhengMa();
                 string getyzm = yzm.getYanZhengMa(@"d:\mypic_save\" + filename,datileixing);
                 if (getyzm != null && getyzm != "")

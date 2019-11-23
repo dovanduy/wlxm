@@ -306,7 +306,28 @@ namespace xDM
             mydm.LeftUp();
             mydelay(10, 120);
         }
-
+        /// <summary>
+        /// 鼠标左键点击 x y坐标
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void mytapbijiao_duokai(int x, int y, int yanse, int pianyix = 0, int pianyiy = 0)
+        {
+            bool t = myGetColorWuJuYouYanSe_duokai(x, y, yanse);
+            if (!t)
+            {
+                return;
+            }
+            int x1 = MyFuncUtil.suijishu(-2, 2);
+            int y1 = MyFuncUtil.suijishu(-2, 2);
+            mydelay(50, 80);
+            mydm.MoveTo(x + x1 + pianyix, y + y1 + pianyiy);
+            mydelay(60, 120);
+            mydm.LeftDown();
+            mydelay(10, 50);
+            mydm.LeftUp();
+            mydelay(10, 120);
+        }
         /// <summary>
         /// 鼠标左键点击 x y坐标
         /// </summary>
@@ -611,6 +632,14 @@ namespace xDM
                 WriteLog.WriteLogFile("", "myGetColorWuJuYouYanSe出边界了..");
                 return false;
             }
+            return tmpcolor.ToLower().Equals(tmpcolor2.ToLower());
+        }
+        public bool myGetColorWuJuYouYanSe_duokai(int x, int y, int yanse)
+        {
+
+
+            string tmpcolor = mydm.GetColor(x, y);
+            string tmpcolor2 = yanse.ToString("X");
             return tmpcolor.ToLower().Equals(tmpcolor2.ToLower());
         }
 

@@ -700,8 +700,8 @@ namespace fuzhu
                             WriteLog.WriteLogFile(this._dqinx + "", d3.Name);
                             mf.mytap_duokai(this._jubing, d3.Zhidingx, d3.Zhidingy);
                             shumima = 1;
-                            //zhanghao.shuruqianhuitui(mf, this._dqinx, this._jubing);
-                            mf.mydelay(2000, 4000);
+                            zhanghao.shuruqianhuitui(mf, this._dqinx, this._jubing);
+                            mf.mydelay(1000, 2000);
                             mf.SendString(this._jubing, pwd);
                             mf.mydelay(2000, 4000);
                             mf.mytap_duokai(this._jubing, 267, 508);
@@ -741,23 +741,32 @@ namespace fuzhu
                 {
                     //WriteLog.WriteLogFile(this._dqinx + "", d3.Name+"退出本次程序");
                    // break;
-                    BaiDuShiTu bdt = new BaiDuShiTu();
-                    string getyzm = bdt.quwenzifromyanzhengma(mf, this._dqinx, this._jubing, "X6006", 75, 209, 539, 483);
-                    string[] zbshuzu = getyzm.Split('|');
-                    if (zbshuzu != null && zbshuzu.Length > 0)
-                    {
-                        foreach (string zb in zbshuzu)
-                        {
-                            string[] zba = zb.Split(',');
-                            if (zba != null && zba.Length == 2)
-                            {
-                                mf.mytap_duokai(this._jubing, int.Parse(zba[0])+75, int.Parse(zba[1])+209);
-                                mf.mydelay(1000, 2000);
-                            }
-                        }
+                    if (wenziyanzheng > 0) {
+                        WriteLog.WriteLogFile(this._dqinx + "", "第二次点击先刷新");
+                        mf.mytapbijiao_duokai(101, 454, 0xf9f9f9);
+                        mf.mydelay(4000, 5000);
                     }
-                    wenziyanzheng++;
-                    shumima = 0;
+                    FuHeSanDian d4 = youf.CreateYouXiSanDian(apknamebaocun).findFuHeSandianByName("特殊注册-搞验证2刷新中");
+                    if (mf.mohuByLeiBool_duokai(d3.Sd) && !mf.mohuByLeiBool_duokai(d4.Sd))
+                    {
+                        BaiDuShiTu bdt = new BaiDuShiTu();
+                        string getyzm = bdt.quwenzifromyanzhengma(mf, this._dqinx, this._jubing, "X6006", 75, 209, 539, 483);
+                        string[] zbshuzu = getyzm.Split('|');
+                        if (zbshuzu != null && zbshuzu.Length > 0)
+                        {
+                            foreach (string zb in zbshuzu)
+                            {
+                                string[] zba = zb.Split(',');
+                                if (zba != null && zba.Length == 2)
+                                {
+                                    mf.mytap_duokai(this._jubing, int.Parse(zba[0]) + 75, int.Parse(zba[1]) + 209);
+                                    mf.mydelay(1000, 2000);
+                                }
+                            }
+                            wenziyanzheng++;
+                        }
+                        shumima = 0;
+                    }
                 }
 
                  d3 = youf.CreateYouXiSanDian(apknamebaocun).findFuHeSandianByName("特殊注册-搞验证2");

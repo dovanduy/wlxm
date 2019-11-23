@@ -213,6 +213,15 @@ namespace fuzhu
             _list_yqfhsandian.Add(guanbifhx);
 
             guanbisdx = new SanDian(new int[3, 3] {
+	{  387,  253, 0xf9f9f9},
+	{  130,  253, 0xf9f9f9},
+	{  390,  410, 0xf9f9f9},
+});
+            guanbifhx = new FuHeSanDian("特殊注册-搞验证2刷新中", guanbisdx);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
 	{   92,  459, 0x777777},
 	{  533,  118, 0xf67b29},
 	{  534,   42, 0xf67b29},
