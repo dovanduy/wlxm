@@ -11,7 +11,7 @@ namespace SH_MyUtil
 {
     public class ShouHu
     {
-        public static int BanBenHao =9;
+        public static int BanBenHao =10;
         private static readonly object obj = new object();
         public void wohaihuozhe() {
             WriteLog.WriteLogFile("生命的迹象 "+MyFuncUtil.suijishu(1,100));
@@ -170,6 +170,7 @@ namespace SH_MyUtil
             long ks4 = my.GetTimestamp();
             long ks5 = my.GetTimestamp();
             long ks6 = my.GetTimestamp();
+            long ks7 = my.GetTimestamp();
             int duokai = 0;
             int ksgx = 0;
             int ksck = 0;
@@ -225,8 +226,8 @@ namespace SH_MyUtil
                     ShouHu s = new ShouHu();
                     s.wohaihuozhe();
                 }
-                //长时间没有数则重启 1号机之外的机器 3个小时
-                if (!MyFuncUtil.getMachineName().ToUpper().Equals("1HAO") && (js - ks2) > 1000 * 60 * 180)
+                //长时间没有数则重启 1号机之外的机器1个半小时
+                if (!MyFuncUtil.getMachineName().ToUpper().Equals("1HAO") && (js - ks2) > 1000 * 60 * 90)
                 {
                     ks2 = my.GetTimestamp();
                     ShouHu s = new ShouHu();
@@ -352,7 +353,46 @@ namespace SH_MyUtil
                     UpdateCaoZuo sh = new UpdateCaoZuo();
                     sh.updateWlxm();
                 }
-
+                if ((js - ks7) > 1000 * 60 *45)
+                {
+                    ks7 = my.GetTimestamp();
+                    ShouHu s = new ShouHu();
+                    bool t = s.panDuanChongQi(MyFuncUtil.getMachineName());
+                    if (t)
+                    {
+                        MyFuncUtil.killProcess("wlxm");
+                        System.Threading.Thread.Sleep(1000 * 50);
+                        string appname = "wlxm";
+                        bool t1 = false;
+                        Process[] processes = Process.GetProcessesByName(appname);
+                        int a = 0;
+                        foreach (Process process in processes)
+                        {
+                            if (a==0 && process.ProcessName == appname)
+                            {
+                                t1 = true;
+                                a = 1;
+                                break;
+                            }
+                        }
+                        if (!t1)
+                        {
+                            string appNamec = System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe";
+                            WriteLog.WriteLogFile("wlxm位置" + System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe");
+                            if (System.IO.File.Exists(System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe"))
+                            {
+                                WriteLog.WriteLogFile("wlxm找到文件位置");
+                                Process p = new Process();
+                                p.StartInfo.FileName = appNamec;
+                                //启动程序
+                                p.Start();
+                                ks2 = my.GetTimestamp();//关机项重新计时
+                                WriteLog.WriteLogFile("结束打开wlxm");
+                            }
+                        }
+                    }
+                 
+                }
 
 
             }

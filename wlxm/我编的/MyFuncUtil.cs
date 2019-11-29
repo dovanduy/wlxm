@@ -115,6 +115,11 @@ namespace MyUtil
             {
                 Directory.CreateDirectory(@"d:\lunengpic\");
             }
+
+            if (!Directory.Exists(@"d:\zhanghao_save\"))//如果不存在就创建file文件夹　　             　　              
+            {
+                Directory.CreateDirectory(@"d:\zhanghao_save\");
+            }
             
             if (a.ToLower().Equals("d"))
             {

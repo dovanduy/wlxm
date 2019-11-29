@@ -51,9 +51,9 @@ namespace MyUtil
 
         public string getYanZhengMa(string path,string datileixing)
         {
-            SetRebate("3974|FC03811C1639B4FB");
+            SetRebate("4600|01FE85EAC115FE87");
             StringBuilder sb = new StringBuilder(512);
-            var ans = SendFile("renzhida|0FFD4CA59A44C9E1", datileixing, path, 300, 0, "", sb);//@"c:\mypic_save\2_653355203.bmp" //X3004
+            var ans = SendFile("rzdanzhuo|B3DA446EB9AF6B25", datileixing, path, 300, 0, "", sb);//@"c:\mypic_save\2_653355203.bmp" //X3004
 
             var TID = sb.ToString();
             StringBuilder Reply = new StringBuilder(512);

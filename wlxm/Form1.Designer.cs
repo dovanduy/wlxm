@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label24 = new System.Windows.Forms.Label();
             this.jietujiese = new System.Windows.Forms.Button();
             this.guanbixiancheng = new System.Windows.Forms.Button();
             this.chongfusandian = new System.Windows.Forms.Button();
@@ -44,7 +45,26 @@
             this.moniqichushihua = new System.Windows.Forms.Button();
             this.quanliucheng = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label27 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.button7 = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.xh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gxsj = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rixiaoshi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.richan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.zk = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hao1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hao2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hao3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.button11 = new System.Windows.Forms.Button();
@@ -80,20 +100,7 @@
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.xh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gxsj = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rixiaoshi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.richan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.zk = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hao1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hao2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hao3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button4 = new System.Windows.Forms.Button();
+            this.label28 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -134,10 +141,22 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(5);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(5);
-            this.tabPage1.Size = new System.Drawing.Size(1303, 764);
+            this.tabPage1.Size = new System.Drawing.Size(1842, 764);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("宋体", 14F);
+            this.label24.ForeColor = System.Drawing.Color.DarkSalmon;
+            this.label24.Location = new System.Drawing.Point(630, 313);
+            this.label24.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(79, 19);
+            this.label24.TabIndex = 20;
+            this.label24.Text = "label24";
             // 
             // jietujiese
             // 
@@ -283,6 +302,13 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label28);
+            this.tabPage2.Controls.Add(this.label27);
+            this.tabPage2.Controls.Add(this.textBox2);
+            this.tabPage2.Controls.Add(this.label26);
+            this.tabPage2.Controls.Add(this.button7);
+            this.tabPage2.Controls.Add(this.label25);
+            this.tabPage2.Controls.Add(this.comboBox5);
             this.tabPage2.Controls.Add(this.button4);
             this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
@@ -293,6 +319,76 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("宋体", 20F);
+            this.label27.ForeColor = System.Drawing.Color.Tomato;
+            this.label27.Location = new System.Drawing.Point(1411, 249);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(120, 27);
+            this.label27.TabIndex = 6;
+            this.label27.Text = "导出数量";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("宋体", 20F);
+            this.textBox2.Location = new System.Drawing.Point(1537, 249);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 38);
+            this.textBox2.TabIndex = 5;
+            this.textBox2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox2_MouseClick);
+            // 
+            // label26
+            // 
+            this.label26.ForeColor = System.Drawing.Color.Red;
+            this.label26.Location = new System.Drawing.Point(1421, 369);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(344, 400);
+            this.label26.TabIndex = 4;
+            this.label26.Text = "备注";
+            // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("宋体", 16F);
+            this.button7.Location = new System.Drawing.Point(1649, 247);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(94, 40);
+            this.button7.TabIndex = 3;
+            this.button7.Text = "导出";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("宋体", 20F);
+            this.label25.ForeColor = System.Drawing.Color.Tomato;
+            this.label25.Location = new System.Drawing.Point(1411, 171);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(120, 27);
+            this.label25.TabIndex = 2;
+            this.label25.Text = "选择游戏";
+            // 
+            // comboBox5
+            // 
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Location = new System.Drawing.Point(1543, 171);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(150, 27);
+            this.comboBox5.TabIndex = 0;
+            this.comboBox5.SelectedIndexChanged += new System.EventHandler(this.comboBox5_SelectedIndexChanged);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(1411, 46);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(190, 44);
+            this.button4.TabIndex = 1;
+            this.button4.Text = "更新完成情况";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // dataGridView1
             // 
@@ -317,6 +413,68 @@
             this.dataGridView1.Size = new System.Drawing.Size(1370, 708);
             this.dataGridView1.TabIndex = 0;
             // 
+            // xh
+            // 
+            this.xh.HeaderText = "序号";
+            this.xh.Name = "xh";
+            this.xh.Width = 75;
+            // 
+            // gxsj
+            // 
+            this.gxsj.HeaderText = "更新时间";
+            this.gxsj.Name = "gxsj";
+            this.gxsj.Width = 250;
+            // 
+            // rixiaoshi
+            // 
+            this.rixiaoshi.HeaderText = "1小时累计";
+            this.rixiaoshi.Name = "rixiaoshi";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "中控1小时";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "1号1小时";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "2号1小时";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "3号1小时";
+            this.Column4.Name = "Column4";
+            // 
+            // richan
+            // 
+            this.richan.HeaderText = "日产出";
+            this.richan.Name = "richan";
+            // 
+            // zk
+            // 
+            this.zk.HeaderText = "中控产出";
+            this.zk.Name = "zk";
+            // 
+            // hao1
+            // 
+            this.hao1.HeaderText = "1号产出";
+            this.hao1.Name = "hao1";
+            // 
+            // hao2
+            // 
+            this.hao2.HeaderText = "2号产出";
+            this.hao2.Name = "hao2";
+            // 
+            // hao3
+            // 
+            this.hao3.HeaderText = "3号产出";
+            this.hao3.Name = "hao3";
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.tableLayoutPanel1);
@@ -324,7 +482,7 @@
             this.tabPage3.Margin = new System.Windows.Forms.Padding(5);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(5);
-            this.tabPage3.Size = new System.Drawing.Size(1303, 764);
+            this.tabPage3.Size = new System.Drawing.Size(1842, 764);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -766,89 +924,16 @@
             this.label23.Text = "版本...";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label24
+            // label28
             // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("宋体", 14F);
-            this.label24.ForeColor = System.Drawing.Color.DarkSalmon;
-            this.label24.Location = new System.Drawing.Point(630, 313);
-            this.label24.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(79, 19);
-            this.label24.TabIndex = 20;
-            this.label24.Text = "label24";
-            // 
-            // xh
-            // 
-            this.xh.HeaderText = "序号";
-            this.xh.Name = "xh";
-            this.xh.Width = 75;
-            // 
-            // gxsj
-            // 
-            this.gxsj.HeaderText = "更新时间";
-            this.gxsj.Name = "gxsj";
-            this.gxsj.Width = 250;
-            // 
-            // rixiaoshi
-            // 
-            this.rixiaoshi.HeaderText = "1小时累计";
-            this.rixiaoshi.Name = "rixiaoshi";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "中控1小时";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "1号1小时";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "2号1小时";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "3号1小时";
-            this.Column4.Name = "Column4";
-            // 
-            // richan
-            // 
-            this.richan.HeaderText = "日产出";
-            this.richan.Name = "richan";
-            // 
-            // zk
-            // 
-            this.zk.HeaderText = "中控产出";
-            this.zk.Name = "zk";
-            // 
-            // hao1
-            // 
-            this.hao1.HeaderText = "1号产出";
-            this.hao1.Name = "hao1";
-            // 
-            // hao2
-            // 
-            this.hao2.HeaderText = "2号产出";
-            this.hao2.Name = "hao2";
-            // 
-            // hao3
-            // 
-            this.hao3.HeaderText = "3号产出";
-            this.hao3.Name = "hao3";
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(1406, 186);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(126, 44);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "更新";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.label28.AutoSize = true;
+            this.label28.ForeColor = System.Drawing.Color.Maroon;
+            this.label28.Location = new System.Drawing.Point(1428, 308);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(79, 19);
+            this.label28.TabIndex = 7;
+            this.label28.Text = "label28";
+            this.label28.Visible = false;
             // 
             // Form1
             // 
@@ -864,6 +949,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -939,6 +1025,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn hao2;
         private System.Windows.Forms.DataGridViewTextBoxColumn hao3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label28;
     }
 }
 

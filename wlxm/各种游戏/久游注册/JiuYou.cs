@@ -735,7 +735,6 @@ namespace fuzhu
                         shumima = 0;
                     }
                 }
-
                 d3 = youf.CreateYouXiSanDian(apknamebaocun).findFuHeSandianByName("特殊注册-搞验证2");
                 if (wenziyanzheng < 2 && gaoyanzheng == 0 && mf.mohuByLeiBool_duokai(d3.Sd))
                 {
@@ -768,13 +767,12 @@ namespace fuzhu
                         shumima = 0;
                     }
                 }
-
-                 d3 = youf.CreateYouXiSanDian(apknamebaocun).findFuHeSandianByName("特殊注册-搞验证2");
-                 if (wenziyanzheng >= 2 && shumima == 1 && gaoyanzheng == 0 && mf.mohuByLeiBool_duokai(d3.Sd))
-                 {
-                     WriteLog.WriteLogFile(this._dqinx + "", d3.Name+"退出本次程序多次搞特殊验证");
-                     break;
-                 }
+                d3 = youf.CreateYouXiSanDian(apknamebaocun).findFuHeSandianByName("特殊注册-搞验证2");
+                if (wenziyanzheng >= 2 &&  gaoyanzheng == 0 && mf.mohuByLeiBool_duokai(d3.Sd))
+                {
+                    WriteLog.WriteLogFile(this._dqinx + "", d3.Name+"退出本次程序多次搞特殊验证");
+                    break;
+                }
 
                 d3 = youf.CreateYouXiSanDian(apknamebaocun).findFuHeSandianByName("特殊注册-搞成功存账号");
                 if (mf.mohuByLeiBool_duokai(d3.Sd))

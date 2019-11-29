@@ -83,7 +83,73 @@ namespace MyUtil
                 LogWriteLock.ExitWriteLock();
             }
         }
+        /// <summary>
+        /// 写入导出的账号信息到指定文件夹
+        /// </summary>
+        /// <param name="input"></param>
+        public static void WriteZhangHao(string dir,string filename, string youxi="", string zhanghao="", string pwd="", string zuanshi = "", string qiangzhequan = "", string xuanqu = "")
+        {
+            
+            //string fname = dir +  youxi +"_"+ MyFuncUtil.GetTimestamp().ToString() + ".txt";
+            if (!Directory.Exists(dir))//如果不存在就创建file文件夹　　             　　              
+            {
+                Directory.CreateDirectory(dir);
+            }
 
+            if (!File.Exists(filename))
+            {
+                //不存在文件
+                File.Create(filename).Dispose();//创建该文件
+            }
+
+            /**/
+            ///判断文件是否存在以及是否大于2K
+            /* if (finfo.Length > 1024 * 1024 * 10)
+            {
+            /**/
+            //文件超过10MB则重命名
+            /* File.Move(fname, Directory.GetCurrentDirectory() + DateTime.Now.TimeOfDay + "\\LogFile.txt");
+            //删除该文件
+            //finfo.Delete();
+            }*/
+            try
+            {
+                LogWriteLock.EnterWriteLock();
+                using (StreamWriter log = new StreamWriter(filename, true))
+                {
+                    //FileStream fs = new FileStream(url, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);FileMode.Append
+
+                    ///设置写数据流的起始位置为文件流的末尾
+                    log.BaseStream.Seek(0, SeekOrigin.End);
+
+                    ///写入“Log Entry : ”
+                    if (youxi != "")
+                    {
+                        log.Write(youxi);
+                    }
+                    if (zhanghao != "" && pwd != "")
+                    {
+                        log.Write("账号:" + zhanghao + ",密码:" + pwd);
+                    }
+                    if (zuanshi != "" && qiangzhequan != "" && xuanqu!="" && zuanshi != "-1" && qiangzhequan != "-1" && xuanqu!="-1") {
+                        log.Write(",选区:" + xuanqu + ",钻石:" + zuanshi + ",强者券" + qiangzhequan);
+                    }
+                    ///写入当前主机名 模拟器名字并换行
+                    //log.Write("{0} {1} \t", getMachineName(), moniqi);
+                    ///写入当前系统时间并换行
+                    log.Write(System.Environment.NewLine);                   
+                    //清空缓冲区
+                    log.Flush();
+                    //关闭流
+                    log.Close();
+                }
+            }
+            catch (Exception) { }
+            finally
+            {
+                LogWriteLock.ExitWriteLock();
+            }
+        }
 
         /// <summary>
         /// 写入特定的日志文件
@@ -231,7 +297,7 @@ namespace MyUtil
         /// 写入账号信息文件
         /// </summary>
         /// <param name="input"></param>
-        public static void WriteZhangHaoFile(int dqinx, string username,string password,string yxbz)
+        private static void WriteZhangHaoFile(int dqinx, string username,string password,string yxbz)
         {
             string dir = "C:\\mylog\\";
             ///指定日志文件的目录
