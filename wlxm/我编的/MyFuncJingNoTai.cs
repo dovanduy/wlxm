@@ -136,7 +136,7 @@ namespace MyUtil
             int yiquanw = 578;
             int yiquany = 1028;
             x = ((index-1) % 4) * (dqwidth / 4);
-            y = (index / 4) * (dqheight / 4);
+            y = ((index-1) / 4) * (dqheight / 4);
             WriteLog.WriteLogFile(index + "", index + "x:" + x + ",y:" + y);
             SetWindowPos(p, p2, x, y, yiquanw, yiquany, SWP_SHOWWINDOW);
         }
@@ -201,11 +201,14 @@ namespace MyUtil
             return productGuid;
         }
 
-        public bool myQuit(int index, string dizhi)
+        public bool myQuit(int index, string dizhi,int jubing)
         {
             var res = false;
-            WriteLog.WriteLogFile(index+"","准备获取句柄，在myquit处");
-            int jubing = MyLdcmd.getDqmoniqiWaiCengJuBingByIndex(index, dizhi);
+            if (jubing <= 0)
+            {
+                WriteLog.WriteLogFile(index + "", "准备获取句柄，在myquit处");
+                jubing = MyLdcmd.getDqmoniqiWaiCengJuBingByIndex(index, dizhi);
+            }
             IntPtr p = new IntPtr(jubing);
             PostMessage(p, WM_CLOSE, 0, 0);
             Thread.Sleep(5000);

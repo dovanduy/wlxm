@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="各种游戏\MyYouXi.cs" />
     <Compile Include="各种游戏\YouXiFactory.cs" />
     <Compile Include="各种游戏\久游注册\JiuYou.cs" />
     <Compile Include="各种游戏\久游注册\JiuYou_DuoDian.cs" />
@@ -74,6 +75,11 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="我编的\Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
     <Compile Include="我编的\YanZhengMa.cs" />
     <Compile Include="旧文件\Form2.cs">
@@ -127,6 +133,10 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="我编的\Resource1.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="旧文件\Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
@@ -157,10 +167,14 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\duihao.jfif" />
+    <None Include="Resources\falt.jfif" />
     <Content Include="update.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="我编的\图片\duihao.jfif" />
+    <Content Include="我编的\图片\falt.jfif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

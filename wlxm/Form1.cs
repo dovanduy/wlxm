@@ -63,7 +63,7 @@ namespace wlxm
         private delegate void changeText(string result);
         private delegate void getduokaiqi();
         //更新运行情况
-        private delegate void gengxinweituo(List<YunXingQK> rs);
+        private delegate void gengxinweituo();//Object[] rs
         //可导出的最大数
         private delegate void daochuzuida();
 
@@ -99,6 +99,8 @@ namespace wlxm
         /// 多个游戏的保存
         /// </summary>
         private List<YouXiEntity> myyouxi = new List<YouXiEntity>();
+
+        private string[] PCNAMES = new string[] { "1HAO", "2HAO", "3HAO", "WLZHONGKONG" };
 
         
 
@@ -312,6 +314,7 @@ namespace wlxm
                 int daojishi = 60*2;
                 //MyFuncUtil.SecondToHour(+i + (js - ks) / 1000+" "
                 CalcFinished("程序已运行:" + MyFuncUtil.SecondToHour(js - ks) + zidong);
+                //gengxinyunxingweituo(new Object[] { "", "", "" });
                 this.label2.ForeColor = Color.Red;
                 if (quanjubutton == 0 && yici == 0 && (js - ks) > 1000 * 10 && (js - ks) <= 1000 * daojishi)
                 {
@@ -340,18 +343,20 @@ namespace wlxm
                     }
                 }
                 //每隔一小时由zk更新一次 测试时 每隔1分钟
-                if ((WriteLog.getMachineName().ToUpper().Equals("WLZHONGKONG") || WriteLog.getMachineName().ToUpper().Equals("2HAO")) && (js - ks_gxyunxing) > 1000 * 60 * 20)
+                if ((WriteLog.getMachineName().ToUpper().Equals("WLZHONGKONG") || WriteLog.getMachineName().ToUpper().Equals("2HAO") || WriteLog.getMachineName().ToUpper().Equals("1HAO")
+                    || WriteLog.getMachineName().ToUpper().Equals("3HAO"))
+                    && (js - ks_gxyunxing) > 1000 * 60 * 20)
                 {
                     WriteLog.WriteLogFile("", "准备更新运行情况");
                     ks_gxyunxing = MyFuncUtil.GetTimestamp();
                     ZhangHao zh = new ZhangHao();
-                    DateTime dt=zh.getYunXingQkLasttime();
+                    DateTime dt = zh.getYunXingUpdateLasttime();
                     TimeSpan span = DateTime.Now.Subtract(dt);
                     //WriteLog.WriteLogFile("", "准备更新与上次统计相比,间隔 " + span.Minutes + "分钟");
                     if (span.Hours >= 1)
                     {
                         //WriteLog.WriteLogFile("", "与上次统计相比,间隔 " + span.Minutes + "分钟");
-                        zh.gxYunXingQk();
+                        zh.updateYunXingQk(PCNAMES);
                     }
                 }
 
@@ -404,16 +409,11 @@ namespace wlxm
                     ks_shhuozhe = MyFuncUtil.GetTimestamp();
                 }
 
-                if ((gengxinqk == 0 && (js - ks_gengxinqk) > 1000 * 60) || (WriteLog.getMachineName().ToUpper().Equals("WLZHONGKONG")
-                    && (js - ks_gengxinqk) > 1000 * 60*65))
+                if (WriteLog.getMachineName().ToUpper().Equals("WLZHONGKONG") && ((gengxinqk == 0 && (js - ks_gengxinqk) > 1000 *120 )
+                    || (js - ks_gengxinqk) > 1000 * 60*65))
                 {
-                    gengxinqk = 1;
-                    ZhangHao zh = new ZhangHao();
-                    List<YunXingQK> dqyunxing = zh.getYunXingQk();
-                    if (dqyunxing != null && dqyunxing.Count > 0)
-                    {
-                        gengxinyunxingweituo(dqyunxing);
-                    }
+                                          
+                    gengxinyunxingweituo();
                     ks_gengxinqk = MyFuncUtil.GetTimestamp();
                 }
 
@@ -461,127 +461,178 @@ namespace wlxm
             }
         }
 
-        private void gengxinyunxingweituo(List<YunXingQK> rs)
+        private void gengxinyunxingweituo()
         {
             if (this.InvokeRequired)
             {
-                this.BeginInvoke(new gengxinweituo(gengxinyunxingweituo), rs);
+                this.BeginInvoke(new gengxinweituo(gengxinyunxingweituo));
             }
             else
             {
+                ZhangHao zh = new ZhangHao();
+                List<YunXingQK> dqyunxing = zh.getUpdateQk();
+                List<Object[]> r = zh.getPcYiMai("jiuyouzhuce");
+                DateTime sd = zh.getYunXingUpdateLasttime();
+                WriteLog.WriteLogFile("", "开搞1");
                 this.dataGridView1.Rows.Clear();
                 this.dataGridView1.Columns.Clear();
-                int chayijia = 0;
-
+               // int chayijia = 0;
+                this.label29.Text = "最后一次更新时间" + sd.Year + "-" + sd.Month + "-" + sd.Day + ":" + sd.Hour + ":" + sd.Minute + ":" + sd.Second;
+                this.label29.Visible = true;  
+                
                 DataGridViewTextBoxColumn acCode1 = new DataGridViewTextBoxColumn();
-                acCode1.Name = "xuhao";
-                acCode1.DataPropertyName = "xuhao";
-                acCode1.HeaderText = "序号";
+                acCode1.Name = "pcname";
+                acCode1.DataPropertyName = "pcname";
+                acCode1.HeaderText = "机器名";
                 this.dataGridView1.Columns.Add(acCode1);
 
                 acCode1 = new DataGridViewTextBoxColumn();
-                acCode1.Name = "gengxin";
-                acCode1.DataPropertyName = "gengxin";
-                acCode1.HeaderText = "更新时间";
-                acCode1.Width = 250;
+                acCode1.Name = "isok";
+                acCode1.DataPropertyName = "isok";
+                acCode1.HeaderText = "正常";
+                acCode1.Width = 80;
                 this.dataGridView1.Columns.Add(acCode1);
 
                 acCode1 = new DataGridViewTextBoxColumn();
-                acCode1.Name = "xiaoshileiji";
-                acCode1.DataPropertyName = "xiaoshileiji";
-                acCode1.HeaderText = "1小时累计";
+                acCode1.Name = "timespan";
+                acCode1.DataPropertyName = "timespan";
+                acCode1.HeaderText = "持续时间";
                 this.dataGridView1.Columns.Add(acCode1);
 
                 acCode1 = new DataGridViewTextBoxColumn();
-                acCode1.Name = "zk1xiaoshi";
-                acCode1.DataPropertyName = "zk1xiaoshi";
-                acCode1.HeaderText = "中控1小时"; 
+                acCode1.Name = "onehour";
+                acCode1.DataPropertyName = "onehour";
+                acCode1.HeaderText = "1小时"; 
                 this.dataGridView1.Columns.Add(acCode1);
 
                 acCode1 = new DataGridViewTextBoxColumn();                
-                acCode1.Name = "hao1xiaoshi";
-                acCode1.DataPropertyName = "hao1xiaoshi";
-                acCode1.HeaderText = "1号1小时";
+                acCode1.Name = "threehour";
+                acCode1.DataPropertyName = "threehour";
+                acCode1.HeaderText = "3小时";
                 this.dataGridView1.Columns.Add(acCode1);
 
                 acCode1 = new DataGridViewTextBoxColumn();
-                acCode1.Name = "hao2xiaoshi";
-                acCode1.DataPropertyName = "hao2xiaoshi";
-                acCode1.HeaderText = "2号1小时";
+                acCode1.Name = "oenday";
+                acCode1.DataPropertyName = "oenday";
+                acCode1.HeaderText = "1天";
                 this.dataGridView1.Columns.Add(acCode1);
 
                 acCode1 = new DataGridViewTextBoxColumn();
-                acCode1.Name = "hao3xiaoshi";
-                acCode1.DataPropertyName = "hao3xiaoshi";
-                acCode1.HeaderText = "3号1小时";
+                acCode1.Name = "threeday";
+                acCode1.DataPropertyName = "threeday";
+                acCode1.HeaderText = "3天";
                 this.dataGridView1.Columns.Add(acCode1);
 
                 acCode1 = new DataGridViewTextBoxColumn();
-                acCode1.Name = "rileiji";
-                acCode1.DataPropertyName = "rileiji";
-                acCode1.HeaderText = "日累计";
+                acCode1.Name = "yimai";
+                acCode1.DataPropertyName = "yimai";
+                acCode1.HeaderText = "已卖出";
                 this.dataGridView1.Columns.Add(acCode1);
-
-                acCode1 = new DataGridViewTextBoxColumn();
-                acCode1.Name = "rizk";
-                acCode1.DataPropertyName = "rizk";
-                acCode1.HeaderText = "中控日累计";
-                this.dataGridView1.Columns.Add(acCode1);
-
-                acCode1 = new DataGridViewTextBoxColumn();
-                acCode1.Name = "ri1hao";
-                acCode1.DataPropertyName = "ri1hao";
-                acCode1.HeaderText = "1号日累计";
-                this.dataGridView1.Columns.Add(acCode1);
-
-                acCode1 = new DataGridViewTextBoxColumn();
-                acCode1.Name = "ri2hao";
-                acCode1.DataPropertyName = "ri2hao";
-                acCode1.HeaderText = "2号日累计";
-                this.dataGridView1.Columns.Add(acCode1);
-
-                acCode1 = new DataGridViewTextBoxColumn();
-                acCode1.Name = "ri3hao";
-                acCode1.DataPropertyName = "ri3hao";
-                acCode1.HeaderText = "3号日累计";
-                this.dataGridView1.Columns.Add(acCode1);
-
-                foreach (YunXingQK one in rs){
-                    int xiaoshichanchu1 = 0, xiaoshichanchu2 = 0, xiaoshichanchu3 = 0, xiaoshichanchu4 = 0, xiaoshichanchu5 = 0;
-                    if(chayijia+1<rs.Count){
-                        xiaoshichanchu1= rs[chayijia].Zongxiugai - rs[chayijia+1].Zongxiugai;
-                        xiaoshichanchu2 = rs[chayijia].Jqyx["zk"].Xiugai - rs[chayijia+1].Jqyx["zk"].Xiugai;
-                        xiaoshichanchu3 = rs[chayijia].Jqyx["hao1"].Chuchan - rs[chayijia + 1].Jqyx["hao1"].Chuchan;
-                        xiaoshichanchu4 = rs[chayijia].Jqyx["hao2"].Xiugai - rs[chayijia+1].Jqyx["hao2"].Xiugai;
-                        xiaoshichanchu5 = rs[chayijia].Jqyx["hao3"].Xiugai - rs[chayijia+1].Jqyx["hao3"].Xiugai;
-                    }                    
-                    int index = this.dataGridView1.Rows.Add();                    
-                    this.dataGridView1.Rows[index].Cells[2].Value = xiaoshichanchu1;
-                    this.dataGridView1.Rows[index].Cells[2].Style.ForeColor = Color.Red;
-                    this.dataGridView1.Rows[index].Cells[2].Style.Font= new Font("微软雅黑", 16, FontStyle.Bold);
-                    this.dataGridView1.Rows[index].Cells[3].Value = xiaoshichanchu2;
-                    this.dataGridView1.Rows[index].Cells[3].Style.ForeColor = Color.Red;
-                    this.dataGridView1.Rows[index].Cells[3].Style.Font = new Font("微软雅黑", 16, FontStyle.Bold);
-                    this.dataGridView1.Rows[index].Cells[4].Value = xiaoshichanchu3;
-                    this.dataGridView1.Rows[index].Cells[4].Style.ForeColor = Color.Red;
-                    this.dataGridView1.Rows[index].Cells[4].Style.Font = new Font("微软雅黑", 16, FontStyle.Bold);
-                    this.dataGridView1.Rows[index].Cells[5].Value = xiaoshichanchu4;
-                    this.dataGridView1.Rows[index].Cells[5].Style.ForeColor = Color.Red;
-                    this.dataGridView1.Rows[index].Cells[5].Style.Font = new Font("微软雅黑", 16, FontStyle.Bold);
-                    this.dataGridView1.Rows[index].Cells[6].Value = xiaoshichanchu5;
-                    this.dataGridView1.Rows[index].Cells[6].Style.ForeColor = Color.Red;
-                    this.dataGridView1.Rows[index].Cells[6].Style.Font = new Font("微软雅黑", 16, FontStyle.Bold);
-                    this.dataGridView1.Rows[index].Cells[7].Value = one.Zongxiugai;
-                    this.dataGridView1.Rows[index].Cells[8].Value = one.Jqyx["zk"].Xiugai;
-                    this.dataGridView1.Rows[index].Cells[9].Value = one.Jqyx["hao1"].Chuchan;
-                    this.dataGridView1.Rows[index].Cells[10].Value = one.Jqyx["hao2"].Xiugai;
-                    this.dataGridView1.Rows[index].Cells[11].Value = one.Jqyx["hao3"].Xiugai;
-                    this.dataGridView1.Rows[index].Cells[1].Value = one.Xgsj;
-                    this.dataGridView1.Rows[index].Cells[0].Value = one.Xh;
-                    chayijia++;
+                //WriteLog.WriteLogFile("", "开搞2");
+                Dictionary<string, List<Object[]>> mypc = new Dictionary<string, List<Object[]>>();
+                List<YunXingQK> rs1 = dqyunxing;
+                for (int i = 0; i < PCNAMES.Length; i++)
+                {
+                    List<Object[]> pctimeshuliang = new List<Object[]>();
+                    foreach (YunXingQK one in rs1)
+                    {
+                        Dictionary<DateTime, int> timeshuliang = new Dictionary<DateTime, int>();                       
+                        string[] all = one.Pcall.Split('|');
+                        pctimeshuliang.Add(new Object[] { one.Xgsj, int.Parse(all[i]) });
+                    }
+                    mypc.Add(PCNAMES[i], pctimeshuliang);
                 }
+                //WriteLog.WriteLogFile("", "开搞3");
+                List<Object[]> rs2 = r;
+                //分机器搞
+                int heji1 = 0, heji2 = 0, heji3 = 0, heji4 = 0, heji5 = 0;
+                foreach (string pc in PCNAMES) {
+                    int index = this.dataGridView1.Rows.Add();
+                    this.dataGridView1.Rows[index].Cells[0].Value = pc;
+                    List<Object[]> pctimeshuliang = mypc[pc];
+                    this.dataGridView1.Rows[index].Cells[1].Value = "正常";
+                    this.dataGridView1.Rows[index].Cells[1].Style.ForeColor = Color.Green;
+                    this.dataGridView1.Rows[index].Cells[1].Style.Font = new Font("微软雅黑", 16, FontStyle.Bold);
+                    this.dataGridView1.Rows[index].Cells[2].Style.ForeColor = Color.Green;
+                    this.dataGridView1.Rows[index].Cells[2].Style.Font = new Font("微软雅黑", 16, FontStyle.Bold);
+                    List<int> zhengch = new List<int>();
+                    List<int> zhengch2= new List<int>();
+                    int yirikaitou = 0;
+                    for (int i = 0; i < pctimeshuliang.Count; i++) {
+                        int chaju = (int)pctimeshuliang[i][1];
+                        int chaju2 = (int)pctimeshuliang[i][1];
+                        if ((i - 1) > 0 ) {
+                            DateTime t1 = (DateTime)pctimeshuliang[i][0];
+                            DateTime t2 = (DateTime)pctimeshuliang[i-1][0];
+                            if (t1.Day.Equals(t2.Day))
+                            {
+                                chaju = (int)pctimeshuliang[i][1] - (int)pctimeshuliang[i - 1][1];
+                            }
+                            chaju2 = (int)pctimeshuliang[i][1];
+                        }
+                        zhengch.Add(chaju);
+                        zhengch2.Add(chaju2);
+                    }
+                    if (zhengch != null && zhengch.Count > 0) {
+                        if (zhengch[0]==0) {
+                            this.dataGridView1.Rows[index].Cells[1].Value = "有错";
+                            this.dataGridView1.Rows[index].Cells[1].Style.ForeColor = Color.Black;
+                            int chixu = zhengch.FindIndex(a => a > 0);
+                            this.dataGridView1.Rows[index].Cells[2].Value = chixu+"小时";
+                            this.dataGridView1.Rows[index].Cells[2].Style.ForeColor = Color.Black;
+                        }
+                        if (zhengch[0] != 0)
+                        {
+                            int chixu = zhengch.FindIndex(a => a == 0);
+                            if (chixu == -1) {
+                                chixu = zhengch.Count;
+                            }
+                            this.dataGridView1.Rows[index].Cells[2].Value = chixu + "小时";
+                        }
+                        this.dataGridView1.Rows[index].Cells[3].Value = zhengch[0];
+                        heji1 = heji1 + zhengch[0];
+                        
+                        int rs3 = 0;
+                        for (int i = 0; i < zhengch.Count&& i<3; i++)
+                        {
+                            rs3 = rs3 + zhengch[i];
+                        }
+                        this.dataGridView1.Rows[index].Cells[4].Value = rs3;
+                        heji2 = heji2 + rs3;
+                        
+                        rs3=0;
+                        for (int i = 0; i < zhengch.Count && i<24; i++)
+                        {
+                            rs3 = rs3 + zhengch[i];
+                        }
+                        heji3 = heji3 + rs3;
+                        this.dataGridView1.Rows[index].Cells[5].Value = rs3;
+                        
+                        rs3 = 0;
+                        for (int i = 0; i < zhengch2.Count && i<72; i++)
+                        {
+                            rs3 = rs3 + zhengch[i];
+                        }
+                        heji4 = heji4 + rs3;
+                        this.dataGridView1.Rows[index].Cells[6].Value = rs3;
+                        
+                    }
+                    foreach (Object[] ob in rs2) {
+                        if(ob[0].ToString().Equals(pc)){
+                            this.dataGridView1.Rows[index].Cells[7].Value =  ob[1];
+                            heji5 = heji5 + (int)ob[1];
+                        }
+                    }
+                }
+                //WriteLog.WriteLogFile("", "开搞4");
+                int index2 = this.dataGridView1.Rows.Add();
+                this.dataGridView1.Rows[index2].Cells[0].Value = "合计";
+                this.dataGridView1.Rows[index2].Cells[3].Value = heji1;
+                this.dataGridView1.Rows[index2].Cells[4].Value = heji2;
+                this.dataGridView1.Rows[index2].Cells[5].Value = heji3;
+                this.dataGridView1.Rows[index2].Cells[6].Value = heji4;
+                this.dataGridView1.Rows[index2].Cells[7].Value = heji5;
             }
-            
         }
         
         private void duokaiqi()
@@ -627,7 +678,13 @@ namespace wlxm
             //int i = mno.QiDongWanChengGetZhiDingDian(dqin apkName, mf, jubing, yxf.CreateYouXiSanDian("jiuyouzhuce"), "注册-打开九游后第一界面");
             //BaiDuShiTu bdt = new BaiDuShiTu();
             //int getyzm = bdt.qushufrombaidu(mf, dqinx, jubing, 148, 378, 407, 428);
-            MyFuncUtil.zaiciguanbi();
+            FuHeSanDian d3 = JiuYou_SanDian.GetObject().findFuHeSandianByName("特殊注册-打开九游后先关广告6");
+            if (mf.mohuByLeiBool_duokai(d3.Sd) && ((mf.mohu_duokai(305, 695, 0xffffff) != 1 && mf.mohu_duokai(383, 456, 0xffffff) != 1) || (mf.mohu_duokai(323, 692, 0xffffff) != 1 && mf.mohu_duokai(208, 694, 0xffffff) != 1))
+                && (mf.mohu_duokai(272, 75, 0xf67d29) != 1) && (mf.mohu_duokai(534, 80, 0xf67d29) != 1))
+            {
+                WriteLog.WriteLogFile(dqinx + "", d3.Name);
+                //mf.mytap_duokai(jubing, d3.Zhidingx, d3.Zhidingy);
+            }
             //zhanghao.gxYunXingQk();
             //WriteLog.WriteZhangHao(@"d:\123", "aa", "bb", "cc");
             MyFuncUtil.mylogandxianshi("结束");
@@ -909,7 +966,7 @@ namespace wlxm
                         {
                             WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "ip已被占");
                             //MyLdcmd.myReboot(dqinx);
-                            temp = mno.myQuit(dqinx, dizhi);
+                            temp = mno.myQuit(dqinx, dizhi, waicengjubing);
                             Thread.Sleep(1000 * 60 * 4);
                             ipbeizhan++;
                             jubing = -1;//句柄要重新取
@@ -987,7 +1044,7 @@ namespace wlxm
                 // MyLdcmd.myReboot(dqinx);
                 WriteLog.WriteLogFile(dqinx + "", "睡3s");
                 Thread.Sleep(1000 * 3);
-                temp = mno.myQuit(dqinx, dizhi);
+                temp = mno.myQuit(dqinx, dizhi, waicengjubing);
                 if (!temp)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
@@ -1060,7 +1117,7 @@ namespace wlxm
                 t = MyFuncUtil.lureninstallOk(dqinx, "package:com.playcrab.kos.gw", () =>
                 {
                     WriteLog.WriteLogFile(dqinx + "", "安装app没成功");
-                    temp = mno.myQuit(dqinx, dizhi);
+                    temp = mno.myQuit(dqinx, dizhi, waicengjubing);
                     if (!temp)
                     {
                         WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
@@ -1087,7 +1144,7 @@ namespace wlxm
                 if (t == false)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "安装app没成功");
-                    temp = mno.myQuit(dqinx, dizhi);
+                    temp = mno.myQuit(dqinx, dizhi, jubing);
                     if (!temp)
                     {
                         WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
@@ -1262,7 +1319,7 @@ namespace wlxm
                 if (!cqcg)
                 {
                     WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "重启失败,强关");
-                    temp = mno.myQuit(dqinx, dizhi);
+                    temp = mno.myQuit(dqinx, dizhi, waicengjubing);
                     if (!temp)
                     {
                         WriteLog.WriteLogFile(dqinx + "", "模拟器" + dqinx + "关闭失败");
@@ -1676,12 +1733,15 @@ namespace wlxm
 
         private void button4_Click(object sender, EventArgs e)
         {
-            ZhangHao zh = new ZhangHao();
-            List<YunXingQK> dqyunxing = zh.getYunXingQk();
-            if (dqyunxing != null && dqyunxing.Count > 0)
+            /*ZhangHao zh = new ZhangHao();
+            List<YunXingQK> dqyunxing = zh.getUpdateQk();
+            List<Object[]> r = zh.getPcYiMai("jiuyouzhuce");
+            DateTime sd = zh.getYunXingUpdateLasttime();
+            if (dqyunxing != null && dqyunxing.Count > 0 && r != null && r.Count > 0)
             {
-                gengxinyunxingweituo(dqyunxing);
-            }
+                gengxinyunxingweituo(new Object[]{dqyunxing,r,sd});
+            }*/
+            gengxinyunxingweituo();
         }
 
         

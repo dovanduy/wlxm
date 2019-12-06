@@ -64,5 +64,13 @@ namespace Entity
             get { return _zongxiugai; }
             set { _zongxiugai = value; }
         }
+
+        private string _pcall;
+
+        public string Pcall
+        {
+            get { return _pcall; }
+            set { _pcall = value; }
+        }
     }
 }

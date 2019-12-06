@@ -659,6 +659,16 @@ namespace fuzhu
             pwdlist.Add("333555");
             pwdlist.Add("333888");
             pwdlist.Add("222555");
+            pwdlist.Add("222111");
+            pwdlist.Add("222333");
+            pwdlist.Add("444555");
+            pwdlist.Add("666555");
+            pwdlist.Add("777555");
+            pwdlist.Add("999555");
+            pwdlist.Add("999111");
+            pwdlist.Add("999222");
+            pwdlist.Add("999333");
+            pwdlist.Add("999444");
             string pwd = zhanghao.getJiuYouPwdFromList(this._dqinx, pwdlist, apknamebaocun);
             while (true)
             {
@@ -715,6 +725,15 @@ namespace fuzhu
                     WriteLog.WriteLogFile(this._dqinx + "", d3.Name);
                     mf.mytap_duokai(this._jubing, d3.Zhidingx, d3.Zhidingy);
                 }
+
+                d3 = youf.CreateYouXiSanDian(apknamebaocun).findFuHeSandianByName("特殊注册-打开九游后先关广告6");
+                if (mf.mohuByLeiBool_duokai(d3.Sd) && ((mf.mohu_duokai(305, 695, 0xffffff) != 1 && mf.mohu_duokai(383, 456, 0xffffff) != 1) || (mf.mohu_duokai(323, 692, 0xffffff) != 1 && mf.mohu_duokai(208, 694, 0xffffff) != 1))
+                    && (mf.mohu_duokai(272, 75, 0xf67d29) != 1) && (mf.mohu_duokai(534, 80, 0xf67d29) != 1))
+                {
+                    WriteLog.WriteLogFile(this._dqinx + "", d3.Name);
+                    mf.mytap_duokai(this._jubing, d3.Zhidingx, d3.Zhidingy);
+                }
+
 
                 d3 = youf.CreateYouXiSanDian(apknamebaocun).findFuHeSandianByName("特殊注册-搞验证");
                 if (gaoyanzheng == 0 && mf.mohuByLeiBool_duokai(d3.Sd) && (mf.myFindColorWuJubingBool(338, 363, 461, 425, 0x0108f9) || mf.myFindColorWuJubingBool(338, 363, 461, 425, 0x2f32e6)))

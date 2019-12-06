@@ -45,6 +45,8 @@
             this.moniqichushihua = new System.Windows.Forms.Button();
             this.quanliucheng = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
@@ -53,18 +55,14 @@
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.xh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gxsj = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rixiaoshi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.richan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.zk = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hao1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hao2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hao3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pcname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isok = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timspan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.onehour = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.threehour = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oneday = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.threeday = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sold = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.button11 = new System.Windows.Forms.Button();
@@ -100,7 +98,6 @@
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -118,7 +115,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1850, 797);
+            this.tabControl1.Size = new System.Drawing.Size(1467, 797);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -141,7 +138,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(5);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(5);
-            this.tabPage1.Size = new System.Drawing.Size(1842, 764);
+            this.tabPage1.Size = new System.Drawing.Size(1459, 764);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -302,6 +299,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label29);
             this.tabPage2.Controls.Add(this.label28);
             this.tabPage2.Controls.Add(this.label27);
             this.tabPage2.Controls.Add(this.textBox2);
@@ -315,17 +313,40 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(5);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(5);
-            this.tabPage2.Size = new System.Drawing.Size(1842, 764);
+            this.tabPage2.Size = new System.Drawing.Size(1459, 764);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("仿宋", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label29.ForeColor = System.Drawing.Color.Chocolate;
+            this.label29.Location = new System.Drawing.Point(1029, 27);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(87, 21);
+            this.label29.TabIndex = 8;
+            this.label29.Text = "label29";
+            this.label29.Visible = false;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.ForeColor = System.Drawing.Color.Maroon;
+            this.label28.Location = new System.Drawing.Point(1106, 293);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(79, 19);
+            this.label28.TabIndex = 7;
+            this.label28.Text = "label28";
+            this.label28.Visible = false;
             // 
             // label27
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("宋体", 20F);
             this.label27.ForeColor = System.Drawing.Color.Tomato;
-            this.label27.Location = new System.Drawing.Point(1411, 249);
+            this.label27.Location = new System.Drawing.Point(1089, 234);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(120, 27);
             this.label27.TabIndex = 6;
@@ -334,7 +355,7 @@
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("宋体", 20F);
-            this.textBox2.Location = new System.Drawing.Point(1537, 249);
+            this.textBox2.Location = new System.Drawing.Point(1215, 234);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 38);
             this.textBox2.TabIndex = 5;
@@ -343,7 +364,7 @@
             // label26
             // 
             this.label26.ForeColor = System.Drawing.Color.Red;
-            this.label26.Location = new System.Drawing.Point(1421, 369);
+            this.label26.Location = new System.Drawing.Point(1099, 354);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(344, 400);
             this.label26.TabIndex = 4;
@@ -352,7 +373,7 @@
             // button7
             // 
             this.button7.Font = new System.Drawing.Font("宋体", 16F);
-            this.button7.Location = new System.Drawing.Point(1649, 247);
+            this.button7.Location = new System.Drawing.Point(1327, 232);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(94, 40);
             this.button7.TabIndex = 3;
@@ -365,7 +386,7 @@
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("宋体", 20F);
             this.label25.ForeColor = System.Drawing.Color.Tomato;
-            this.label25.Location = new System.Drawing.Point(1411, 171);
+            this.label25.Location = new System.Drawing.Point(1089, 156);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(120, 27);
             this.label25.TabIndex = 2;
@@ -374,7 +395,7 @@
             // comboBox5
             // 
             this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(1543, 171);
+            this.comboBox5.Location = new System.Drawing.Point(1221, 156);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(150, 27);
             this.comboBox5.TabIndex = 0;
@@ -382,7 +403,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(1411, 46);
+            this.button4.Location = new System.Drawing.Point(1094, 66);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(190, 44);
             this.button4.TabIndex = 1;
@@ -394,86 +415,61 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.xh,
-            this.gxsj,
-            this.rixiaoshi,
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.richan,
-            this.zk,
-            this.hao1,
-            this.hao2,
-            this.hao3});
-            this.dataGridView1.Location = new System.Drawing.Point(10, 46);
+            this.pcname,
+            this.isok,
+            this.timspan,
+            this.onehour,
+            this.threehour,
+            this.oneday,
+            this.threeday,
+            this.sold});
+            this.dataGridView1.Location = new System.Drawing.Point(10, 5);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(5);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1370, 708);
+            this.dataGridView1.Size = new System.Drawing.Size(1000, 708);
             this.dataGridView1.TabIndex = 0;
             // 
-            // xh
+            // pcname
             // 
-            this.xh.HeaderText = "序号";
-            this.xh.Name = "xh";
-            this.xh.Width = 75;
+            this.pcname.HeaderText = "机器名";
+            this.pcname.Name = "pcname";
             // 
-            // gxsj
+            // isok
             // 
-            this.gxsj.HeaderText = "更新时间";
-            this.gxsj.Name = "gxsj";
-            this.gxsj.Width = 250;
+            this.isok.HeaderText = "正常";
+            this.isok.Name = "isok";
             // 
-            // rixiaoshi
+            // timspan
             // 
-            this.rixiaoshi.HeaderText = "1小时累计";
-            this.rixiaoshi.Name = "rixiaoshi";
+            this.timspan.HeaderText = "持续时间";
+            this.timspan.Name = "timspan";
+            this.timspan.Width = 120;
             // 
-            // Column1
+            // onehour
             // 
-            this.Column1.HeaderText = "中控1小时";
-            this.Column1.Name = "Column1";
+            this.onehour.HeaderText = "1小时";
+            this.onehour.Name = "onehour";
             // 
-            // Column2
+            // threehour
             // 
-            this.Column2.HeaderText = "1号1小时";
-            this.Column2.Name = "Column2";
+            this.threehour.HeaderText = "3小时";
+            this.threehour.Name = "threehour";
             // 
-            // Column3
+            // oneday
             // 
-            this.Column3.HeaderText = "2号1小时";
-            this.Column3.Name = "Column3";
+            this.oneday.HeaderText = "1天";
+            this.oneday.Name = "oneday";
             // 
-            // Column4
+            // threeday
             // 
-            this.Column4.HeaderText = "3号1小时";
-            this.Column4.Name = "Column4";
+            this.threeday.HeaderText = "3天";
+            this.threeday.Name = "threeday";
             // 
-            // richan
+            // sold
             // 
-            this.richan.HeaderText = "日产出";
-            this.richan.Name = "richan";
-            // 
-            // zk
-            // 
-            this.zk.HeaderText = "中控产出";
-            this.zk.Name = "zk";
-            // 
-            // hao1
-            // 
-            this.hao1.HeaderText = "1号产出";
-            this.hao1.Name = "hao1";
-            // 
-            // hao2
-            // 
-            this.hao2.HeaderText = "2号产出";
-            this.hao2.Name = "hao2";
-            // 
-            // hao3
-            // 
-            this.hao3.HeaderText = "3号产出";
-            this.hao3.Name = "hao3";
+            this.sold.HeaderText = "已卖出";
+            this.sold.Name = "sold";
             // 
             // tabPage3
             // 
@@ -482,7 +478,7 @@
             this.tabPage3.Margin = new System.Windows.Forms.Padding(5);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(5);
-            this.tabPage3.Size = new System.Drawing.Size(1842, 764);
+            this.tabPage3.Size = new System.Drawing.Size(1855, 764);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -924,22 +920,11 @@
             this.label23.Text = "版本...";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.ForeColor = System.Drawing.Color.Maroon;
-            this.label28.Location = new System.Drawing.Point(1428, 308);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(79, 19);
-            this.label28.TabIndex = 7;
-            this.label28.Text = "label28";
-            this.label28.Visible = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1864, 797);
+            this.ClientSize = new System.Drawing.Size(1466, 797);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(5);
@@ -1012,18 +997,6 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.DataGridViewTextBoxColumn xh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gxsj;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rixiaoshi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn richan;
-        private System.Windows.Forms.DataGridViewTextBoxColumn zk;
-        private System.Windows.Forms.DataGridViewTextBoxColumn hao1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn hao2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn hao3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Button button7;
@@ -1032,6 +1005,15 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pcname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn isok;
+        private System.Windows.Forms.DataGridViewTextBoxColumn timspan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn onehour;
+        private System.Windows.Forms.DataGridViewTextBoxColumn threehour;
+        private System.Windows.Forms.DataGridViewTextBoxColumn oneday;
+        private System.Windows.Forms.DataGridViewTextBoxColumn threeday;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sold;
+        private System.Windows.Forms.Label label29;
     }
 }
 

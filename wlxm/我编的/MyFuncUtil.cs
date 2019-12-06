@@ -129,7 +129,12 @@ namespace MyUtil
                 }
             }
         }
-
+        public static int getDayStiff(DateTime d1, DateTime d2) {
+            DateTime d3 = Convert.ToDateTime(string.Format("{0}-{1}-{2}", d1.Year, d1.Month, d1.Day));
+            DateTime d4 = Convert.ToDateTime(string.Format("{0}-{1}-{2}", d2.Year, d2.Month, d2.Day));
+            int days = (d4 - d3).Days;
+            return days;
+        }
         public static void myxinxitishi(String a)
         {
             //Form2 frmShowWarning = Form2.getInstance();//Form1为要弹出的窗体（提示框），

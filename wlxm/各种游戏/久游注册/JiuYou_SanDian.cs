@@ -113,6 +113,15 @@ namespace fuzhu
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
 
+            guanbisdx = new SanDian(new int[3, 3]{
+	{  270,  842, 0xffffff},
+	{  295,  844, 0xffffff},
+	{  267,  868, 0xffffff},
+});
+            guanbifhx = new FuHeSanDian("特殊注册-打开九游后先关广告6", guanbisdx, 268, 842, "另外一个广告");
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
             guanbisdx = new SanDian(new int[3, 3] {
 	{  129,  514, 0xfb8f16},
 	{   53,  724, 0x3bd7bb},
@@ -121,6 +130,34 @@ namespace fuzhu
             guanbifhx = new FuHeSanDian("注册-错碰后先关", guanbisdx, 178, 601);
             _list_yqsandian.Add(guanbisdx);
             _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
+	{   21,   70, 0xffffff},
+	{  148,  921, 0xf67b29},
+	{  434,  914, 0xf67b29},
+});
+            guanbifhx = new FuHeSanDian("注册-错碰后先关1", guanbisdx, 28, 68);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{   21,   70, 0xffffff},
+	{  193,   73, 0xf67d29},
+	{  387,   75, 0xf67d29},
+});
+            guanbifhx = new FuHeSanDian("注册-错碰后先关2", guanbisdx, 28, 68);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3]{
+	{   21,   69, 0xffffff},
+	{  204,   63, 0xf67d29},
+	{  532,   77, 0xf67d29},
+});
+            guanbifhx = new FuHeSanDian("注册-错碰后先关3", guanbisdx, 28, 68);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
 
             guanbisdx = new SanDian(new int[3, 3] {
 	{  396,  370, 0x3b87fe},

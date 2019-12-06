@@ -11,12 +11,12 @@ namespace SH_MyUtil
 {
     public class ShouHu
     {
-        public static int BanBenHao =10;
+        public static int BanBenHao =11;
         private static readonly object obj = new object();
         public void wohaihuozhe() {
             WriteLog.WriteLogFile("生命的迹象 "+MyFuncUtil.suijishu(1,100));
         }
-
+        private string[] PCNAMES = new string[] { "1HAO", "2HAO", "3HAO", "WLZHONGKONG" };
         public bool panDuanChongQi(string pcname)
         {
             SqlHelp sqh = SqlHelp.GetInstance();
@@ -70,6 +70,55 @@ namespace SH_MyUtil
             }
         }
 
+        public bool panDuanChongQiByUpdate(string pcname, string[] pcnames)
+        {
+            SqlHelp sqh = SqlHelp.GetInstance();
+            lock (obj)
+            {
+                try
+                {
+                    int r = 0;
+                    for (int i = 0; i < pcnames.Length; i++)
+                    {
+                        if (pcname.ToUpper().Equals(pcnames[i].ToUpper()))
+                        {
+                            r = i;
+                        }
+                    }
+                    int r1 = 0;
+                    string sqlsel = "select xh,pcxiugai from jiankong where xh in( select max(xh) zd from jiankong)";
+                    DataTable dt = sqh.getAll(sqlsel);
+                    if (dt.Rows.Count > 0)
+                    {
+                        string quan = (string)dt.Rows[0][1];
+                        string[] quanzu = quan.Split('|');
+                        r1 = int.Parse(quanzu[r]);
+                        WriteLog.WriteLogFile("r1:" + r1);
+                    }
+                    int r2 = -1;
+                    sqlsel = "select xh,pcxiugai from jiankong where xh in( select max(xh)-1 zd from jiankong)";
+                    dt = sqh.getAll(sqlsel);
+                    if (dt.Rows.Count > 0)
+                    {
+                        string quan = (string)dt.Rows[0][1];
+                        string[] quanzu = quan.Split('|');
+                        r2 = int.Parse(quanzu[r]);
+                        WriteLog.WriteLogFile("r2:" + r2);
+                    }
+                    if (r1 == r2)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+            }
+        }
+
         public DateTime getYunXingQkLasttime()
         {
             SqlHelp sqh = SqlHelp.GetInstance();
@@ -91,7 +140,7 @@ namespace SH_MyUtil
                 }
             }
         }
-        public void gxYunXingQk(string youxi)
+        public void gxYunXingQk1(string youxi)
         {
             //得到运行情况后存入表
             WriteLog.WriteLogFile("得到运行情况后存入表");
@@ -171,6 +220,7 @@ namespace SH_MyUtil
             long ks5 = my.GetTimestamp();
             long ks6 = my.GetTimestamp();
             long ks7 = my.GetTimestamp();
+            long ks8 = my.GetTimestamp();
             int duokai = 0;
             int ksgx = 0;
             int ksck = 0;
@@ -259,8 +309,8 @@ namespace SH_MyUtil
                     //WriteLog.WriteLogFile("准备更新与上次统计相比,间隔 " + span.Minutes + "分钟");
                     if (span.Hours >= 1)
                     {
-                        WriteLog.WriteLogFile("与上次统计相比,间隔 " + span.Minutes + "分钟");
-                        gxYunXingQk("jingjieguanfang");
+                        //WriteLog.WriteLogFile("与上次统计相比,间隔 " + span.Minutes + "分钟");
+                        //gxYunXingQk("jingjieguanfang");
                     }
                 }
                 //检测wlxm
@@ -283,6 +333,7 @@ namespace SH_MyUtil
                     }
                     if (!t)
                     {
+                        ks8 = MyFuncUtil.GetTimestamp();
                         string appNamec = System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe";
                         WriteLog.WriteLogFile("wlxm位置" + System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe");
                         if (System.IO.File.Exists(System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe"))
@@ -341,9 +392,9 @@ namespace SH_MyUtil
                     if (!MyFuncUtil.getMachineName().ToLower().Equals("wlzhongkong") && duokai>1)
                     {
                         WriteLog.WriteLogFile("dnmultiplayer不存在了");
-                        WriteLog.WriteLogFile("重启啦!!!");
-                        System.Diagnostics.Process.Start("shutdown.exe", "-r -f -t 15");
-                        WriteLog.WriteLogFile("结束打开dnmultiplayer");
+                        //WriteLog.WriteLogFile("重启啦!!!");
+                        //System.Diagnostics.Process.Start("shutdown.exe", "-r -f -t 15");
+                        //WriteLog.WriteLogFile("结束打开dnmultiplayer");
                     }
                 }
                 //检测wlxm
@@ -360,6 +411,7 @@ namespace SH_MyUtil
                     bool t = s.panDuanChongQi(MyFuncUtil.getMachineName());
                     if (t)
                     {
+                        ks8 = MyFuncUtil.GetTimestamp();
                         MyFuncUtil.killProcess("wlxm");
                         System.Threading.Thread.Sleep(1000 * 50);
                         string appname = "wlxm";
@@ -392,6 +444,63 @@ namespace SH_MyUtil
                         }
                     }
                  
+                }
+
+                if ((js - ks8) > 1000 * 60 * 20)
+                {
+                    ks8 = MyFuncUtil.GetTimestamp();
+                    string dir = "C:\\mylog\\" + DateTime.Now.Year +
+                    DateTime.Now.Month +
+                    DateTime.Now.Day + "\\";
+                    if (System.IO.Directory.Exists(dir))//文件夹是否存在          　　              
+                    {
+                        System.IO.FileInfo[] fis = new System.IO.DirectoryInfo(dir).GetFiles();
+                        int isalive = 0;
+                        if (fis != null && fis.Count() > 0)
+                        {
+                            for (int i1 = 0; i1 < fis.Length; i1++)
+                            {
+                                TimeSpan span = DateTime.Now.Subtract(fis[i1].LastWriteTime);
+                                if (span.TotalMinutes > 30)
+                                {
+                                    isalive++;
+                                }
+                            }
+                        }
+                        if (isalive > 5)
+                        {
+                            WriteLog.WriteLogFile("超过5个模拟器长时间不更新了");
+                            MyFuncUtil.killProcess("wlxm");
+                            string appname = "wlxm";
+                            Process[] processes = Process.GetProcessesByName(appname);
+                            int a = 0;
+                            bool t1 = false;
+                            foreach (Process process in processes)
+                            {
+                                if (a == 0 && process.ProcessName == appname)
+                                {
+                                    t1 = true;
+                                    a = 1;
+                                    break;
+                                }
+                            }
+                            if (!t1)
+                            {
+                                string appNamec = System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe";
+                                WriteLog.WriteLogFile("wlxm位置" + System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe");
+                                if (System.IO.File.Exists(System.Windows.Forms.Application.StartupPath + "\\program\\wlxm.exe"))
+                                {
+                                    WriteLog.WriteLogFile("wlxm找到文件位置");
+                                    Process p = new Process();
+                                    p.StartInfo.FileName = appNamec;
+                                    //启动程序
+                                    p.Start();
+                                    ks2 = my.GetTimestamp();//关机项重新计时
+                                    WriteLog.WriteLogFile("结束打开wlxm");
+                                }
+                            }
+                        }
+                    }
                 }
 
 
