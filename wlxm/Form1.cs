@@ -67,6 +67,10 @@ namespace wlxm
         //可导出的最大数
         private delegate void daochuzuida();
 
+        //滚动显示
+        private delegate void delInfoList(string text);
+
+
         private int intdaochuzuida = 0;
         private Thread zidongthread;
         /// <summary>
@@ -285,6 +289,28 @@ namespace wlxm
             }
         }
 
+        private void SetrichTextBox(string value)
+        {
+            if (this.InvokeRequired)//其它线程调用
+            {
+                delInfoList d = new delInfoList(SetrichTextBox);
+                this.BeginInvoke(d, value);
+                //richTextBox1.Invoke(d, value);
+            }
+            else//本线程调用
+            {
+                if (richTextBox1.Lines.Length > 100)
+                { 
+                    richTextBox1.Clear();
+                }
+                //richTextBox1.Focus(); //让文本框获取焦点 
+                richTextBox1.Select(richTextBox1.TextLength, 0);//设置光标的位置到文本尾
+                richTextBox1.ScrollToCaret();//滚动到控件光标处 
+                richTextBox1.AppendText(value);//添加内容
+            }
+        }
+
+
         public Form1()
         {
             InitializeComponent();
@@ -305,9 +331,19 @@ namespace wlxm
             int gengxinqk = 0;
             var i = 1;
             var yici = 0;
-            string zidong = "";            
+            string zidong = "";
+            string tempaxx = "";
             while (true)
             {
+                string axx = MyFuncUtil.getXinXiTiShi();
+                if (axx != null && !"".Equals(axx))
+                {
+                    if (!tempaxx.Equals(axx))
+                    {
+                        tempaxx = axx;
+                        SetrichTextBox(DateTime.Now.ToString() + "  "+axx + "\n");
+                    }
+                }
                 Thread.Sleep(1000);
                 var js = MyFuncUtil.GetTimestamp();
                 i++;
@@ -412,12 +448,13 @@ namespace wlxm
                 if (WriteLog.getMachineName().ToUpper().Equals("WLZHONGKONG") && ((gengxinqk == 0 && (js - ks_gengxinqk) > 1000 *120 )
                     || (js - ks_gengxinqk) > 1000 * 60*65))
                 {
-                                          
-                    gengxinyunxingweituo();
+                    gengxinqk = 1;                    
+                    //gengxinyunxingweituo();
                     ks_gengxinqk = MyFuncUtil.GetTimestamp();
                 }
 
                 if ((js - ks_wenjiangengxin) > 1000 * 60 * 20) {
+                    WriteLog.WriteLogFile("", "检测记录文件的时间更新");
                     ks_wenjiangengxin = MyFuncUtil.GetTimestamp();
                     string dir = "C:\\mylog\\" + DateTime.Now.Year +
                     DateTime.Now.Month +
@@ -559,19 +596,29 @@ namespace wlxm
                     List<int> zhengch2= new List<int>();
                     int yirikaitou = 0;
                     for (int i = 0; i < pctimeshuliang.Count; i++) {
-                        int chaju = (int)pctimeshuliang[i][1];
-                        int chaju2 = (int)pctimeshuliang[i][1];
-                        if ((i - 1) > 0 ) {
-                            DateTime t1 = (DateTime)pctimeshuliang[i][0];
-                            DateTime t2 = (DateTime)pctimeshuliang[i-1][0];
-                            if (t1.Day.Equals(t2.Day))
-                            {
-                                chaju = (int)pctimeshuliang[i][1] - (int)pctimeshuliang[i - 1][1];
-                            }
-                            chaju2 = (int)pctimeshuliang[i][1];
+                        if (pctimeshuliang.Count == 1)
+                        {
+                            int chaju3 = (int)pctimeshuliang[i][1];
+                            zhengch.Add(chaju3);
+                            zhengch2.Add(chaju3);
                         }
-                        zhengch.Add(chaju);
-                        zhengch2.Add(chaju2);
+                        else
+                        {
+                            if ((i - 1) >= 0)
+                            {
+                                int chaju = 0;
+                                DateTime t1 = (DateTime)pctimeshuliang[i][0];
+                                DateTime t2 = (DateTime)pctimeshuliang[i - 1][0];
+                                bool tt1 = t1.Day.Equals(t2.Day);
+                                if (t1.Day.Equals(t2.Day))
+                                {
+                                    chaju = (int)pctimeshuliang[i-1][1] - (int)pctimeshuliang[i][1];
+                                }
+                                int chaju2 = (int)pctimeshuliang[i][1];
+                                zhengch.Add(chaju);
+                                zhengch2.Add(chaju2);
+                            }
+                        }
                     }
                     if (zhengch != null && zhengch.Count > 0) {
                         if (zhengch[0]==0) {

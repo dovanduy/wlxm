@@ -508,9 +508,19 @@ namespace MyUtil
             int r = getJiuYouZhangHaoCount(dqinx, youxi);
             string rs = "999999";
             int inx = r / 3000;
-            if (inx < pwdlist.Count) {
+            List<string> pwdlist2 = pwdlist;
+            if (inx > pwdlist.Count)
+            {
+                for (int i = 0; i < 100; i++) {
+                    pwdlist.AddRange(pwdlist2);
+                    if (inx < pwdlist.Count)
+                    { break; }
+                }
+            }
+            if (inx < pwdlist.Count)
+            {
                 rs = pwdlist[inx];
-            }            
+            }           
             return rs;
         }
 

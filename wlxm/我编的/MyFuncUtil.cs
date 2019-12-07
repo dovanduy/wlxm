@@ -38,6 +38,7 @@ namespace MyUtil
         public const int SWP_NOMOVE = 2; 
         public const int HWND_TOP = 0;
         public const int SWP_SHOWWINDOW = 40;
+        public const int SWP_NOACTIVATE = 10;
         public const int SWP_NOSIZE = 1;
         private static ReaderWriterLockSlim LogWriteLock = new ReaderWriterLockSlim();
         /// <summary>
@@ -135,7 +136,7 @@ namespace MyUtil
             int days = (d4 - d3).Days;
             return days;
         }
-        public static void myxinxitishi(String a)
+        public static string myxinxitishi(String a)
         {
             //Form2 frmShowWarning = Form2.getInstance();//Form1为要弹出的窗体（提示框），
             
@@ -147,19 +148,46 @@ namespace MyUtil
                // frmShowWarning.Location = new Point(p.X, p.Y - i);
                 //Thread.Sleep(10);//将线程沉睡时间调的越小升起的越快
             }
+            //ParameterizedThreadStart threadStart = new ParameterizedThreadStart(xxtishi);//通过ThreadStart委托告诉子线程执行什么方法　
+            //Thread thread = new Thread(threadStart);
+            //thread.Start(a);
+            return a;
+        }
+        private static string xinxitishi;
+        public static void setXinXiTiShi(string p)
+        {
+            xinxitishi = p ;
+        }
+        public static string getXinXiTiShi()
+        {
+            if (xinxitishi != null && !"".Equals(xinxitishi))
+            {
+                if (xinxitishi.Length > 30)
+                {
+                    xinxitishi = xinxitishi.Substring(0, 30);
+                }
+                return xinxitishi;
+            }
+            return null;
+        }
+        private void xxt() {
+            
+        }
+        private static void xxtishi(object ab) {
+            string a = (string)ab;
             myDm dm = new myDm();
             int width = dm.GetScreenWidth();
             int height = dm.GetScreenHeight();
             int foobar = dm.CreateFoobarRect(0, width - 210, height - 210, 200, 200);
-            if (a.Length > 200) {
-                a=a.Substring(0,200);
+            if (a.Length > 200)
+            {
+                a = a.Substring(0, 200);
             }
-            var dm_ret = dm.FoobarPrintText(foobar,a , "ff0000");
+            var dm_ret = dm.FoobarPrintText(foobar, a, "ff0000");
             dm.FoobarUpdate(foobar);
             dm.mydelay(1000, 3000);
             dm_ret = dm.FoobarClose(foobar);
         }
-
         
 
         public static void mylogandxianshi(String a)
@@ -1315,5 +1343,7 @@ namespace MyUtil
                 }
             }
         }
+
+        
     }
 }

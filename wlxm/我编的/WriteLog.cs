@@ -18,7 +18,8 @@ namespace MyUtil
         /// <param name="input"></param>
         public static void WriteLogFile(string moniqi,string input)
         {
-            MyFuncUtil.myxinxitishi(moniqi+" "+input);
+            //MyFuncUtil.myxinxitishi(moniqi+" "+input);
+            MyFuncUtil.setXinXiTiShi(moniqi+" "+input);
             string dir = "C:\\mylog\\" + DateTime.Now.Year+
                     DateTime.Now.Month +
                     DateTime.Now.Day+"\\";
