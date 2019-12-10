@@ -36,6 +36,7 @@ namespace wlsh
         {
             WriteLog.WriteErrorFile("IsTerminating : " + e.IsTerminating.ToString());
             WriteLog.WriteErrorFile(e.ExceptionObject.ToString());
+            Application.Exit();
             while (true)
             {//循环处理，否则应用程序将会退出
                 if (glExitApp)

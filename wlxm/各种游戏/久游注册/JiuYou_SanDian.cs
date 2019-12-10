@@ -214,6 +214,15 @@ namespace fuzhu
             _list_yqfhsandian.Add(guanbifhx);
 
             guanbisdx = new SanDian(new int[3, 3] {
+	{  327,  535, 0x07988b},
+	{  433,  532, 0x009688},
+	{  269,  843, 0x666666},
+});
+            guanbifhx = new FuHeSanDian("注册-无响应选等待2", guanbisdx, 337, 557);
+            _list_yqsandian.Add(guanbisdx);
+            _list_yqfhsandian.Add(guanbifhx);
+
+            guanbisdx = new SanDian(new int[3, 3] {
 	{  110,   76, 0xffffff},
 	{  490,  378, 0x555555},
 	{  489,  576, 0x555555},

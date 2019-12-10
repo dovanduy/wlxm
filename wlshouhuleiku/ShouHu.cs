@@ -11,7 +11,7 @@ namespace SH_MyUtil
 {
     public class ShouHu
     {
-        public static int BanBenHao =11;
+        public static int BanBenHao =13;
         private static readonly object obj = new object();
         public void wohaihuozhe() {
             WriteLog.WriteLogFile("生命的迹象 "+MyFuncUtil.suijishu(1,100));
@@ -221,6 +221,7 @@ namespace SH_MyUtil
             long ks6 = my.GetTimestamp();
             long ks7 = my.GetTimestamp();
             long ks8 = my.GetTimestamp();
+            long ks9 = my.GetTimestamp();
             int duokai = 0;
             int ksgx = 0;
             int ksck = 0;
@@ -282,6 +283,7 @@ namespace SH_MyUtil
                     ks2 = my.GetTimestamp();
                     ShouHu s = new ShouHu();
                     bool t = s.panDuanChongQi(MyFuncUtil.getMachineName());
+                    t = false;
                     if (!MyFuncUtil.getMachineName().ToLower().Equals("wlzhongkong") && t)
                     {
                         WriteLog.WriteLogFile("重启啦!!!");
@@ -294,6 +296,7 @@ namespace SH_MyUtil
                     ks2 = my.GetTimestamp();
                     ShouHu s = new ShouHu();
                     bool t = s.panDuanChongQi(MyFuncUtil.getMachineName());
+                    t = false;
                     if (!MyFuncUtil.getMachineName().ToLower().Equals("wlzhongkong") && t)
                     {
                         WriteLog.WriteLogFile("重启啦!!!");
@@ -409,6 +412,7 @@ namespace SH_MyUtil
                     ks7 = my.GetTimestamp();
                     ShouHu s = new ShouHu();
                     bool t = s.panDuanChongQi(MyFuncUtil.getMachineName());
+                    t = false;
                     if (t)
                     {
                         ks8 = MyFuncUtil.GetTimestamp();
@@ -497,6 +501,63 @@ namespace SH_MyUtil
                                     p.Start();
                                     ks2 = my.GetTimestamp();//关机项重新计时
                                     WriteLog.WriteLogFile("结束打开wlxm");
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if ((js - ks9) > 1000 * 60 * 20)
+                {
+                    ks9 = MyFuncUtil.GetTimestamp();
+                    string dir = "d:\\mylog\\" + DateTime.Now.Year +
+                    DateTime.Now.Month +
+                    DateTime.Now.Day + "\\";
+                    if (System.IO.Directory.Exists(dir))//文件夹是否存在          　　              
+                    {
+                        System.IO.FileInfo[] fis = new System.IO.DirectoryInfo(dir).GetFiles();
+                        int isalive = 0;
+                        if (fis != null && fis.Count() > 0)
+                        {
+                            for (int i1 = 0; i1 < fis.Length; i1++)
+                            {
+                                TimeSpan span = DateTime.Now.Subtract(fis[i1].LastWriteTime);
+                                if (span.TotalMinutes > 30)
+                                {
+                                    isalive++;
+                                }
+                            }
+                        }
+                        if (isalive > 0)
+                        {
+                            WriteLog.WriteLogFile("wlsh长时间不更新了");
+                            MyFuncUtil.killProcess("wlsh");
+                            string appname = "wlsh";
+                            Process[] processes = Process.GetProcessesByName(appname);
+                            int a = 0;
+                            bool t1 = false;
+                            foreach (Process process in processes)
+                            {
+                                if (a == 0 && process.ProcessName == appname)
+                                {
+                                    t1 = true;
+                                    a = 1;
+                                    break;
+                                }
+                            }
+                            if (!t1)
+                            {
+                                string appNamec = System.Windows.Forms.Application.StartupPath + "\\wlsh.exe";
+                                WriteLog.WriteLogFile("wlsh位置" + System.Windows.Forms.Application.StartupPath + "\\wlsh.exe");
+                                if (System.IO.File.Exists(System.Windows.Forms.Application.StartupPath + "\\wlsh.exe"))
+                                {
+                                    WriteLog.WriteLogFile("wlsh找到文件位置");
+                                    Process p = new Process();
+                                    p.StartInfo.FileName = appNamec;
+                                    //启动程序
+                                    p.Start();
+                                    ks2 = my.GetTimestamp();//关机项重新计时
+                                    WriteLog.WriteLogFile("结束打开wlsh");
                                 }
                             }
                         }

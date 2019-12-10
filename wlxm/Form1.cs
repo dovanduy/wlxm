@@ -303,7 +303,10 @@ namespace wlxm
                 { 
                     richTextBox1.Clear();
                 }
-                //richTextBox1.Focus(); //让文本框获取焦点 
+                //richTextBox1.Focus(); //让文本框获取焦点
+                if (richTextBox1.IsDisposed) {
+                    return;
+                }
                 richTextBox1.Select(richTextBox1.TextLength, 0);//设置光标的位置到文本尾
                 richTextBox1.ScrollToCaret();//滚动到控件光标处 
                 richTextBox1.AppendText(value);//添加内容
